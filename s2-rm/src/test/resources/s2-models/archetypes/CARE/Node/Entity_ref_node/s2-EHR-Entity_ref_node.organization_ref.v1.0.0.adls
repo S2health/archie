@@ -1,0 +1,81 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5)
+	s2-EHR-Entity_ref_node.organization_ref.v1.0.0
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Reference to an organization instance">
+			use = <"Use to refer to an organization.">
+			keywords = <"demographics", "organization">
+		>
+	>
+
+definition
+	Entity_ref_node[id1]  matches {
+		items matches {
+			Info_node[id2] occurrences matches {0..1} matches {	-- Name
+				value matches {
+					Plain_text[id102] 
+				}
+			}
+			Info_node[id3] matches {	
+				value matches {
+					Plain_text[id103] 
+				}
+			}
+			Info_node[id4] matches {
+				value matches {
+					Rwe_id_ref[id104] 
+				}
+			}
+			Info_node[id5] matches {
+				value matches {
+					Plain_text[id105]
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Organization ref">
+				description = <"Reference to an organization">
+			>
+			["id2"] = <
+				text = <"Name">
+				description = <"The unstructured name for the Organization.">
+			>
+			["id3"] = <
+				text = <"Physical address">
+				description = <"Unstructured physical address.">
+			>
+			["id4"] = <
+				text = <"Identifier">
+				description = <"Identifier associated with the organization.">
+			>
+			["id5"] = <
+				text = <"Comms address">
+				description = <"-">
+			>
+		>
+	>

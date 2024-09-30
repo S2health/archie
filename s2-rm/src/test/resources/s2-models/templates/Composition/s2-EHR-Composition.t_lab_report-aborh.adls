@@ -1,0 +1,60 @@
+template (adl_version=2.0.6; rm_release=0.8.5)
+	s2-EHR-Composition.t_lab_report-ABO-Rh.v1.0.0
+
+specialize
+	s2-EHR-Composition.t_lab_report-generic.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Nathan Davis <nathan.davis@graphitehealth.io">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2024 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"ABO-Rh result report">
+		>
+	>
+
+definition
+	Composition[id1.1.1] matches {	-- ABO Rh lab result report
+		/content[id0.1.1]/data matches {
+			use_archetype Info_node[id0.90.1, s2-EHR-Info_node.ABOGroupTypePtBldNomLabObs.v1] 
+			use_archetype Info_node[id0.90.2, s2-EHR-Info_node.RhTypePtBldNomLabObs.v1]
+			use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"ABO Rh lab report">
+				description = <"-">
+			>
+			["id0.1.1"] = <
+				text = <"ABO Rh lab panel">
+				description = <"-">
+			>
+			["id0.90.1"] = <
+				text = <"ABO group type in blood">
+				description = <"-">
+			>
+			["id0.90.2"] = <
+				text = <"Rh type in blood">
+				description = <"-">
+			>
+		>
+	>
+
+	term_bindings = <
+		["loinc"] = <
+			["id0.1.1"] = <http://loinc.org/34530-6>
+		>
+	>

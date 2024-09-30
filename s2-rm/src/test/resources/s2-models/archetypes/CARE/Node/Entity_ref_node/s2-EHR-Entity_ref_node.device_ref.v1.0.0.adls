@@ -1,0 +1,97 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=1bd4f4b3-a3e6-41b1-ad1e-3530ac1caa12)
+    s2-EHR-Entity_ref_node.device_ref.v1.0.0
+
+language
+    original_language = <[ISO_639-1::en]>
+
+description
+    original_author = <
+        ["name"] = <"Graphite Health">
+        ["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+        ["email"] = <"models@s2.org">
+        ["date"] = <"$today (date is disabled during testing)">
+    >
+    custodian_namespace = <"io.graphitehealth">
+    custodian_organisation = <"Graphite Health <http://graphitehealth.io>">
+    copyright = <"Copyright (c) 2024 Graphite Health">
+    licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+    lifecycle_state = <"unmanaged">
+    ip_acknowledgements = <
+        ["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+        ["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+        ["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2">
+    >
+    details = <
+        ["en"] = <
+            language = <[ISO_639-1::en]>
+            purpose = <"Reference to a medical device instance">
+            keywords = <"device", "machine", "implant", "appliance", "catheter", "prosthesis", "aid", "biomedical", "instrument", "equipment", "meter", "monitor", "software">
+            use = <"Use to refer to a medical device. May include thumbnail details.">
+        >
+    >
+    
+definition
+    Entity_ref_node[id1] matches {    -- Medical device
+		value matches {
+			Coded_text[id10] matches {
+				term matches {
+					Terminology_term[id110] matches {
+						concept matches {[ac1]}		-- Lab test device
+					}
+				}
+			}
+		}
+        items matches {
+            Info_node[id2] matches {    -- Device name
+                value matches {
+                    Text[id29]
+                }
+            }
+            Info_node[id4] occurrences matches {0..1} matches {    -- Type
+                value matches {
+                    Text[id30]
+                }
+            }
+            Info_node[id5] occurrences matches {0..1} matches {    -- Manufacturer
+                value matches {
+                    Text[id33]
+                }
+            }
+        }
+    }
+
+terminology
+    term_definitions = <
+        ["en"] = <
+            ["id1"] = <
+                text = <"Medical device reference">
+                description = <"-">
+            >
+            ["id2"] = <
+                text = <"Device name">
+                description = <"Identification of the medical device, preferably by a common name, a formal fully descriptive name or, if required, by class or category of device.">
+            >
+            ["id4"] = <
+                text = <"Type">
+                description = <"The category or kind of device.">
+            >
+            ["id5"] = <
+                text = <"Manufacturer">
+                description = <"Name of manufacturer.">
+            >
+            ["ac1"] = <
+                text = <"Device type">
+                description = <"Type of device">
+            >
+        >
+    >
+    term_bindings = <
+	["loinc"] = <
+		["id2"] = <http://loinc.org/74720-4>
+		["id5"] = <http://loinc.org/74719-6>
+		["id4"] = <http://loinc.org/66464-9>
+	>
+	["s2"] = <
+		["ac1"] = <http://s2health.org/id/s2.LabDevice>
+	>
+    >

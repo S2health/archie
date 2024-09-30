@@ -27,25 +27,29 @@ definition
 		content matches {
 			Lab_result[id0.1] matches {	-- Lab panel result
 				data matches {
-					use_archetype Node[id0.90, s2-EHR-Node.lab_analyte.v0] 
+					use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] 
 				}
 				qualifiers matches {
-					Node[id0.10] matches {	-- Device
+
+					use_archetype Entity_ref_node[id0.10, s2-EHR-Entity_ref_node.device_ref.v1] 
+
+					Info_node[id0.11] matches {	-- Method
 						value matches {
-							Coded_text[id0.101] 
+							Coded_text[id0.102]  matches {
+								term matches {
+									Terminology_term[id1102] matches {
+										concept matches {[ac0.2]}
+									}
+								}
+							}
 						}
 					}
-					Node[id0.11] matches {	-- Method
-						value matches {
-							Coded_text[id0.102] 
-						}
-					}
-					Node[id0.1060] occurrences matches {0..1} matches {	-- Clinical interpretation
+					Info_node[id0.1060] occurrences matches {0..1} matches {	-- Clinical interpretation
 						value matches {
 							Text[id0.1065] 
 						}
 					}
-					use_archetype Node[id0.20, s2-EHR-Node.t_lab_report-generic-org.v1] 
+					use_archetype Entity_ref_node[id0.20, s2-EHR-Entity_ref_node.lab_organization_ref.v1] 
 				}
 			}
 		}
@@ -78,6 +82,10 @@ terminology
 				text = <"Performing laboratory">
 				description = <"-">
 			>
+			["ac0.2"] = <
+				text = <"Lab test method">
+				description = <"-">
+			>
 			["id0.1060"] = <
 				text = <"Clinical interpretation">
 				description = <"Single word, phrase or brief description that represents the clinical meaning and significance of the blood pressure measurement.">
@@ -85,109 +93,14 @@ terminology
 		>
 	>
 
--------------------------------------------------------------
-template_overlay
-	s2-EHR-Node.t_lab_report-generic-org.v1.0.0
-
-specialize
-	s2-EHR-Node.organization.v1
-
-definition
-	Node[id1.1] matches {
-		/items matches {
-			Node[id5] occurrences matches {0}
-			use_archetype Node[id6, s2-EHR-Node.t_lab_report-generic-address.v1] 
-			use_archetype Node[id23, s2-EHR-Node.t_lab_report-generic-elec_comm.v1] 
-			use_archetype Node[id3, s2-EHR-Node.t_lab_report-generic-person.v1] 
-			use_archetype Node[id22, s2-EHR-Node.organization.v1] occurrences matches {0}
-			allow_archetype Node[id18]occurrences matches {0}
-			Node[id20] occurrences matches {0} 
-		}
-	}
-
-terminology
-	term_definitions = <
-		["en"] = <
-			["id1.1"] = <
-				text = <"Simplified organization">
-				description = <"Simplified organization">
-			>
+	term_bindings = <
+		["loinc"] = <
+			["id0.10"] = <http://loinc.org/74720-4>
+			["id0.11"] = <http://loinc.org/106191-0>
+			["id0.1060"] = <http://loinc.org/64110-0>
+		>
+		["s2"] = <
+			["ac0.2"] = <http://s2health.org/id/s2.LabTestMethod>
 		>
 	>
-
--------------------------------------------------------------
-template_overlay
-	s2-EHR-Node.t_lab_report-generic-address.v1.0.0
-
-specialize
-	s2-EHR-Node.address.v1
-
-definition
-	Node[id1.1] matches {
-		value matches {
-			Plain_text[id0.1] 
-		}
-		/items existence matches {0} 
-	}
-
-terminology
-	term_definitions = <
-		["en"] = <
-			["id1.1"] = <
-				text = <"Simplified address">
-				description = <"Simplified address">
-			>
-		>
-	>
-
--------------------------------------------------------------
-template_overlay
-	s2-EHR-Node.t_lab_report-generic-elec_comm.v1.0.0
-
-specialize
-	s2-EHR-Node.electronic_communication.v1
-
-definition
-	Node[id1.1] matches {	
-		value matches {
-			Plain_text[id0.1] 
-		}
-		/items existence matches {0} 
-	}
-
-terminology
-	term_definitions = <
-		["en"] = <
-			["id1.1"] = <
-				text = <"Simplified electronic communication">
-				description = <"Simplified electronic communication">
-			>
-		>
-	>
-
--------------------------------------------------------------
-template_overlay
-	s2-EHR-Node.t_lab_report-generic-person.v1.0.0
-
-specialize
-	s2-EHR-Node.person.v1
-
-definition
-	Node[id1.1] matches {	
-		value matches {
-			Plain_text[id0.1] 
-		}
-		/items existence matches {0} 
-	}
-
-terminology
-	term_definitions = <
-		["en"] = <
-			["id1.1"] = <
-				text = <"Simplified contact person">
-				description = <"Simplified contact person">
-			>
-		>
-	>
-
 

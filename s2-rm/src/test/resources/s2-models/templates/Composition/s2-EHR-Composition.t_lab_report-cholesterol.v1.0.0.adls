@@ -25,14 +25,14 @@ description
 definition
 	Composition[id1.1.1] matches {	-- CBC lab result report
 		/content[id0.1.1]/data matches {
-			use_archetype Node[id0.90.1, s2-EHR-Node.CholesterolInHDLMCncPtSerPlasQnLabObs.v1]  
-			use_archetype Node[id0.90.2, s2-EHR-Node.CholesterolInLDLMCncPtSerPlasQnLabObs.v1]
-			use_archetype Node[id0.90.3, s2-EHR-Node.TriglycerideMCncPtSerPlasQnLabObs.v1] 
-			use_archetype Node[id0.90.4, s2-EHR-Node.CholesterolinVLDLMCncPtSerPlasQnLabObs.v1] 
-			use_archetype Node[id0.90.5, s2-EHR-Node.CholesterolMCncPtSerPlasQnLabObs.v1] 
-			use_archetype Node[id0.90.6, s2-EHR-Node.CholesterolInLDLCholesterolInHDLMRtoPtSerPlasQnLabObs.v1] 
-			use_archetype Node[id0.90.7, s2-EHR-Node.CholesteroltotalCholesterolinHDLMRtoPtSerPlasQnLabObs.v1] 
-			use_archetype Node[id0.90, s2-EHR-Node.lab_analyte.v0] occurrences matches {0} 
+			use_archetype Info_node[id0.90.1, s2-EHR-Info_node.CholesterolInHDLMCncPtSerPlasQnLabObs.v1]  
+			use_archetype Info_node[id0.90.2, s2-EHR-Info_node.CholesterolInLDLMCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.3, s2-EHR-Info_node.TriglycerideMCncPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.4, s2-EHR-Info_node.CholesterolinVLDLMCncPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.5, s2-EHR-Info_node.CholesterolMCncPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.6, s2-EHR-Info_node.CholesterolInLDLCholesterolInHDLMRtoPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.7, s2-EHR-Info_node.CholesteroltotalCholesterolinHDLMRtoPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] occurrences matches {0} 
 		}
 	}
 
@@ -80,6 +80,6 @@ terminology
 
 	term_bindings = <
 		["loinc"] = <
-			["id0.1.1"] = <http://loinc.org/100898-6>
+			["id0.1.1"] = <http://loinc.org/24331-1>
 		>
 	>

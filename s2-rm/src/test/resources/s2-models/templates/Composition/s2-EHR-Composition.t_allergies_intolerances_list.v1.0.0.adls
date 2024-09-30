@@ -52,7 +52,7 @@ definition
 	Assessment[id1.1] matches {
 		name matches {"{{SUBSTANCE name}}"}
 		/data matches {
-			Node[id3] occurrences matches {0..1} matches {
+			Info_node[id3] occurrences matches {0..1} matches {
 				name matches {"Substance"}
 				value matches {
 					Coded_text[id135] matches {
@@ -64,14 +64,14 @@ definition
 					}
 				}
 			}
-			Node[id131] occurrences matches {0} 
-			Node[id64] occurrences matches {0} 
-			Node[id121] occurrences matches {0} 
-			Node[id118] occurrences matches {0} 
-			Node[id134] occurrences matches {0} 
-			Node[id59] occurrences matches {0} 
-			use_archetype Node[id130, s2-EHR-Node.adverse_reaction_event.v1] occurrences matches {0} 
-			Node[id0.1] occurrences matches {0..1} matches {
+			Info_node[id131] occurrences matches {0} 
+			Info_node[id64] occurrences matches {0} 
+			Info_node[id121] occurrences matches {0} 
+			Info_node[id118] occurrences matches {0} 
+			Info_node[id134] occurrences matches {0} 
+			Info_node[id59] occurrences matches {0} 
+			use_archetype Info_node[id130, s2-EHR-Info_node.adverse_reaction_event.v1] occurrences matches {0} 
+			Info_node[id0.1] occurrences matches {0..1} matches {
 				name matches {"Substance reaction"}
 				value matches {
 					Coded_text[id240] matches {
@@ -85,8 +85,8 @@ definition
 			}
 		}
 		/qualifiers matches {
-			Node[id48] occurrences matches {0} 
-			allow_archetype Node[id129] occurrences matches {0} 
+			Info_node[id48] occurrences matches {0} 
+			allow_archetype Info_node[id129] occurrences matches {0} 
 		}
 	}
 

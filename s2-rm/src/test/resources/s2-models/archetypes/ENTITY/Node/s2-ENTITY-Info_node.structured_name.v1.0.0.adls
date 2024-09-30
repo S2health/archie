@@ -1,0 +1,93 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=e9731d65-5925-4c1a-8655-3c1c893d3dd8)
+	s2-ENTITY-Info_node.structured_name.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.structured_name.v1.0.1, copyright 2021 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about the structured name of an individual.">
+			use = <"Use to record details about the structured name of an individual.">
+		>
+	>
+
+definition
+	Info_node[id1] matches {	-- Structured name of a person
+		items matches {
+			Info_node[id2] matches {	-- Title
+				value matches {
+					Text[id8] 
+				}
+			}
+			Info_node[id3] matches {	-- Given name
+				value matches {
+					Text[id9] 
+				}
+			}
+			Info_node[id6] matches {	-- Family name
+				value matches {
+					Text[id10] 
+				}
+			}
+			Info_node[id7] matches {	-- Suffix
+				value matches {
+					Text[id11] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Structured name of a person">
+				description = <"Discrete components of an individual's name.">
+			>
+			["id2"] = <
+				text = <"Title">
+				description = <"One or more honorific form(s) of address commencing a name.">
+			>
+			["id3"] = <
+				text = <"Given name">
+				description = <"One or more unique name(s) used to identify an individual within a family group.">
+			>
+			["id6"] = <
+				text = <"Family name">
+				description = <"One or more name(s) that an individual has in common with a family group.">
+			>
+			["id7"] = <
+				text = <"Suffix">
+				description = <"One or more term(s) placed after all other name components, usually to differentiate an individual from a family member with identical Given and Family name components.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/97845-2>
+			["id2"] = <http://loinc.org/97849-4>
+			["id3"] = <http://loinc.org/97848-6>
+			["id6"] = <http://loinc.org/97847-8>
+			["id7"] = <http://loinc.org/97850-2>
+		>
+	>
+

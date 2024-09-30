@@ -24,9 +24,8 @@ description
 
 definition
 	Order[id1.1] matches {	-- Basic medication order
-		name matches {"{{medication_name}}"}
 		/activities[id2]/description matches {
-			Node[id71] matches {
+			Info_node[id71] matches {
 				name matches {"Medication name"}
 				value matches {
 					Coded_text[id181.1] matches {
@@ -38,7 +37,7 @@ definition
 					}
 				}
 			}
-			Node[id92] matches {
+			Info_node[id92] matches {
 				value matches {
 					Coded_text[id182.1] matches {
 						term matches {
@@ -49,7 +48,7 @@ definition
 					}
 				}
 			}
-			Node[id93] matches {
+			Info_node[id93] matches {
 				value matches {
 					Coded_text[id183.1] matches {
 						term matches {
@@ -60,8 +59,7 @@ definition
 					}
 				}
 			}
-			allow_archetype Node[id94] occurrences matches {0} 
-			Node[id95] matches {
+			Info_node[id95] matches {
 				value matches {
 					Coded_text[id184.1] matches {
 						term matches {
@@ -72,46 +70,43 @@ definition
 					}
 				}
 			}
-			use_archetype Node[id96, s2-EHR-Node.device.v1] occurrences matches {0} 
-			use_archetype Node[id144, s2-EHR-Node.t_medication-1.v1] 
-			Node[id48] occurrences matches {0} 
-			Node[id174] occurrences matches {0} 
-			Node[id175] occurrences matches {0} 
-			use_archetype Node[id178, s2-EHR-Node.therapeutic_direction.v1] occurrences matches {0} 
-			Node[id63] occurrences matches {0} 
-			Node[id45] occurrences matches {0} 
-			Node[id108] occurrences matches {0} 
-			Node[id10] occurrences matches {0} 
-			Node[id19] occurrences matches {0} 
-			Node[id149] occurrences matches {0} 
-			Node[id180] occurrences matches {0} 
-			Node[id114] occurrences matches {0..1} matches {
+			use_archetype Entity_ref_node[id96, s2-EHR-Entity_ref_node.device_ref.v1] occurrences matches {0} 
+			use_archetype Info_node[id144, s2-EHR-Info_node.t_medication-1.v1] 
+			Info_node[id48] occurrences matches {0} 
+			Info_node[id174] occurrences matches {0} 
+			Info_node[id175] occurrences matches {0} 
+			use_archetype Info_node[id178, s2-EHR-Info_node.therapeutic_direction.v1] occurrences matches {0} 
+			Info_node[id63] occurrences matches {0} 
+			Info_node[id45] occurrences matches {0} 
+			Info_node[id108] occurrences matches {0} 
+			Info_node[id10] occurrences matches {0} 
+			Info_node[id19] occurrences matches {0} 
+			Info_node[id149] occurrences matches {0} 
+			Info_node[id180] occurrences matches {0} 
+			Info_node[id114] occurrences matches {0..1} matches {
 				items matches {
-					Node[id14] occurrences matches {0} 
-					Node[id12] occurrences matches {0} 
-					Node[id17] occurrences matches {0} 
-					Node[id61] occurrences matches {0} 
-					Node[id51] occurrences matches {0} 
-					use_archetype Node[id113, s2-EHR-Node.medication_order_summary.v0] occurrences matches {0} 
+					Info_node[id14] occurrences matches {0} 
+					Info_node[id12] occurrences matches {0} 
+					Info_node[id17] occurrences matches {0} 
+					Info_node[id61] occurrences matches {0} 
+					Info_node[id51] occurrences matches {0} 
+					use_archetype Info_node[id113, s2-EHR-Info_node.medication_order_summary.v0] occurrences matches {0} 
 				}
 			}
-			Node[id130] occurrences matches {0..1} matches {
+			Info_node[id130] occurrences matches {0..1} matches {
 				items matches {
-					Node[id107] occurrences matches {0} 
-					use_archetype Node[id66, s2-EHR-Node.t_medication_supply_amount-1.v1] 
-					Node[id133] occurrences matches {0} 
-					Node[id155] occurrences matches {0} 
-					Node[id140] occurrences matches {0} 
-					Node[id156] occurrences matches {0} 
-					Node[id162] occurrences matches {0} 
-					allow_archetype Node[id171] occurrences matches {0} 
+					Info_node[id107] occurrences matches {0} 
+					use_archetype Info_node[id66, s2-EHR-Info_node.t_medication_supply_amount-1.v1] 
+					Info_node[id133] occurrences matches {0} 
+					Info_node[id155] occurrences matches {0} 
+					Info_node[id140] occurrences matches {0} 
+					Info_node[id156] occurrences matches {0} 
+					Info_node[id162] occurrences matches {0} 
+					allow_archetype Info_node[id171] occurrences matches {0} 
 				}
 			}
-			use_archetype Node[id70, s2-EHR-Node.t_medication_auth-1.v1] 
-			allow_archetype Node[id167] occurrences matches {0} 
-		}
-		/qualifiers matches {
-			allow_archetype Node[id9] occurrences matches {0} 
+			use_archetype Info_node[id70, s2-EHR-Info_node.t_medication_auth-1.v1] 
+			allow_archetype Info_node[id167] occurrences matches {0} 
 		}
 	}
 
@@ -154,21 +149,21 @@ terminology
 
 -------------------------------------------------------------
 template_overlay
-	s2-EHR-Node.t_medication_auth-1.v1.0.0
+	s2-EHR-Info_node.t_medication_auth-1.v1.0.0
 
 specialize
-	s2-EHR-Node.medication_authorisation.v0
+	s2-EHR-Info_node.medication_authorisation.v0
 
 
 definition
-	Node[id1.1] matches {	-- Basic medication authorisation
+	Info_node[id1.1] matches {	-- Basic medication authorisation
 		/items matches {
-			Node[id74] occurrences matches {0} 
-			Node[id79] occurrences matches {0} 
-			Node[id80] occurrences matches {0} 
-			Node[id47] occurrences matches {0} 
-			Node[id73] occurrences matches {0} 
-			Node[id81] occurrences matches {0} 
+			Info_node[id74] occurrences matches {0} 
+			Info_node[id79] occurrences matches {0} 
+			Info_node[id80] occurrences matches {0} 
+			Info_node[id47] occurrences matches {0} 
+			Info_node[id73] occurrences matches {0} 
+			Info_node[id81] occurrences matches {0} 
 		}
 	}
 
@@ -184,16 +179,16 @@ terminology
 
 -------------------------------------------------------------
 template_overlay
-	s2-EHR-Node.t_medication-1.v1.0.0
+	s2-EHR-Info_node.t_medication-1.v1.0.0
 
 specialize
-	s2-EHR-Node.medication.v3
+	s2-EHR-Info_node.medication.v3
 
 
 definition
-	Node[id1.1] matches {	-- Medication
+	Info_node[id1.1] matches {	-- Medication
 		/items matches {
-			Node[id133] matches {
+			Info_node[id133] matches {
 				value matches {
 					Coded_text[id159.1] matches {
 						term matches {
@@ -204,7 +199,7 @@ definition
 					}
 				}
 			}
-			Node[id72] matches {
+			Info_node[id72] matches {
 				value matches {
 					Coded_text[id160.1] matches {
 						term matches {
@@ -215,16 +210,16 @@ definition
 					}
 				}
 			}
-			Node[id143] occurrences matches {0} 
-			Node[id152] occurrences matches {0} 
-			Node[id151] occurrences matches {0} 
-			Node[id4] occurrences matches {0} 
-			use_archetype Node[id139, s2-EHR-Node.medication.v3] occurrences matches {0} 
-			Node[id140] occurrences matches {0} 
-			Node[id149] occurrences matches {0} 
-			Node[id128] occurrences matches {0} 
-			Node[id134] occurrences matches {0} 
-			allow_archetype Node[id142] occurrences matches {0} 
+			Info_node[id143] occurrences matches {0} 
+			Info_node[id152] occurrences matches {0} 
+			Info_node[id151] occurrences matches {0} 
+			Info_node[id4] occurrences matches {0} 
+			use_archetype Info_node[id139, s2-EHR-Info_node.medication.v3] occurrences matches {0} 
+			Info_node[id140] occurrences matches {0} 
+			Info_node[id149] occurrences matches {0} 
+			Info_node[id128] occurrences matches {0} 
+			Info_node[id134] occurrences matches {0} 
+			allow_archetype Info_node[id142] occurrences matches {0} 
 		}
 	}
 
@@ -254,21 +249,21 @@ terminology
 
 -------------------------------------------------------------
 template_overlay
-	s2-EHR-Node.t_medication_supply_amount-1.v1.0.0
+	s2-EHR-Info_node.t_medication_supply_amount-1.v1.0.0
 
 specialize
-	s2-EHR-Node.medication_supply_amount.v0
+	s2-EHR-Info_node.medication_supply_amount.v0
 
 
 definition
-	Node[id1.1] matches {	-- Medication supply amount
+	Info_node[id1.1] matches {	-- Medication supply amount
 		/items matches {
-			Node[id162] occurrences matches {0} 
-			Node[id148] occurrences matches {0} 
-			Node[id159] occurrences matches {0} 
-			Node[id160] occurrences matches {0} 
-			Node[id161] occurrences matches {0} 
-			Node[id143] occurrences matches {0} 
+			Info_node[id162] occurrences matches {0} 
+			Info_node[id148] occurrences matches {0} 
+			Info_node[id159] occurrences matches {0} 
+			Info_node[id160] occurrences matches {0} 
+			Info_node[id161] occurrences matches {0} 
+			Info_node[id143] occurrences matches {0} 
 		}
 	}
 

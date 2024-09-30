@@ -1,0 +1,99 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=9f7dbe3a-4e64-4c02-8d1a-402f7b0f57ce)
+	s2-ENTITY-Party_relationship.patient.v1.0.0
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health">
+		["organisation"] = <"S2 Health <http://www.S2Health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-07-26">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2023 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.person.v1.0.2">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record details about a patient.">
+			use = <"Use to record details of a patient.">
+			keywords = <"patient", "demographics">
+		>
+	>
+
+definition
+	Party_relationship[id1] matches {	-- Person
+		other_details matches {
+			Info_node[id2] occurrences matches {0..1} matches {
+				items matches {
+					Info_node[id22] occurrences matches {0..1} matches {
+						value matches {
+							Plain_text[id122] 
+						}
+					}
+					Info_node[id23] occurrences matches {0..1} matches {
+						value matches {
+							Plain_text[id123] 
+						}
+					}
+					Info_node[id24] occurrences matches {0..1} matches {
+						value matches {
+							Plain_text[id124] 
+						}
+					}
+				}
+			}
+			Info_node[id3] occurrences matches {0..1} matches {	
+				value matches {
+					Plain_text[id103] 
+				}
+				items matches {
+					Entity_ref_node[id104] occurrences matches {0..1} 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Patient">
+				description = <"An individual patient.">
+			>
+			["id2"] = <
+				text = <"Insurance details">
+				description = <"-">
+			>
+			["id22"] = <
+				text = <"Insurance organization">
+				description = <"-">
+			>
+			["id23"] = <
+				text = <"Insurance group id">
+				description = <"-">
+			>
+			["id24"] = <
+				text = <"Insurance member id">
+				description = <"-">
+			>
+			["id3"] = <
+				text = <"Contacts">
+				description = <"Related parties relevant to care of the subject e.g. family etc">
+			>
+			["id104"] = <
+				text = <"Contact ref">
+				description = <"-">
+			>
+		>
+	>
+

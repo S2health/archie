@@ -32,9 +32,9 @@ definition
 			use_archetype Direct_observation[id0.3, s2-EHR-Direct_observation.t_vital_signs-weight.v1] occurrences matches {0..1}
 			use_archetype Direct_observation[id0.4, s2-EHR-Direct_observation.height.v2] occurrences matches {0..1}
 			use_archetype Direct_observation[id0.5, s2-EHR-Direct_observation.body_mass_index.v2] occurrences matches {0..1}
-			use_archetype Direct_observation[id0.6, s2-EHR-Direct_observation.t_vital_signs-pulse_ox.v1.0.0] occurrences matches {0..1}
-			use_archetype Direct_Observation[id0.7, s2-EHR-Direct_observation.body_temperature.v2] occurrences matches {0..1}
-			use_archetype Direct_Observation[id0.8, s2-EHR-Direct_observation.respiratory_rate.v1] occurrences matches {0..1}
+			use_archetype Direct_observation[id0.6, s2-EHR-Direct_observation.t_vital_signs-pulse_ox.v1] occurrences matches {0..1}
+			use_archetype Direct_observation[id0.7, s2-EHR-Direct_observation.body_temperature.v2] occurrences matches {0..1}
+			use_archetype Direct_observation[id0.8, s2-EHR-Direct_observation.respiratory_rate.v1] occurrences matches {0..1}
 		}
 	}
 
@@ -91,23 +91,23 @@ template_overlay
 	s2-EHR-Direct_observation.t_vital_signs-bp.v1.0.0
 
 specialize
-	s2-EHR-Direct_observation.blood_pressure.v2
+	s2-EHR-Direct_observation.blood_pressure.v3
 
 definition
 	Direct_observation[id1.1] matches {
 		/data matches {
-			Node[id1008] occurrences matches {0} 
+			Info_node[id1008] occurrences matches {0} 
 		}
 		/state matches {
-			Node[id1044] occurrences matches {0} 
-			Node[id1053] occurrences matches {0} 
-			Node[id1006] occurrences matches {0} 
+			Info_node[id1044] occurrences matches {0} 
+			Info_node[id1053] occurrences matches {0} 
+			Info_node[id1006] occurrences matches {0} 
 		}
 		/qualifiers matches {
-			Node[id1011] occurrences matches {0} 
-			Node[id15] occurrences matches {0} 
-			Node[id1036] occurrences matches {0} 
-			use_archetype Node[id1058, s2-EHR-Node.anatomical_location.v1] occurrences matches {0} 
+			Info_node[id1011] occurrences matches {0} 
+			Info_node[id15] occurrences matches {0} 
+			Info_node[id1036] occurrences matches {0} 
+			use_archetype Info_node[id1058, s2-EHR-Info_node.anatomical_location.v1] occurrences matches {0} 
 		}
 		data_series existence matches {0}
 		state_series existence matches {0}
@@ -133,16 +133,16 @@ specialize
 definition
 	Direct_observation[id1.1] matches {	-- BP as used in vital signs panel
 		/data matches {
-			Node[id1060] occurrences matches {0} 
+			Info_node[id1060] occurrences matches {0} 
 		}
 		/state matches {
-			Node[id9] occurrences matches {0} 
-			Node[id1053] occurrences matches {0} 
-			Node[id1006] occurrences matches {0} 
+			Info_node[id9] occurrences matches {0} 
+			Info_node[id1053] occurrences matches {0} 
+			Info_node[id1006] occurrences matches {0} 
 		}
 		/qualifiers matches {
-			Node[id1036] occurrences matches {0} 
-			Node[id15] occurrences matches {0} 
+			Info_node[id1036] occurrences matches {0} 
+			Info_node[id15] occurrences matches {0} 
 		}
 		data_series existence matches {0} 
 		state_series existence matches {0} 
@@ -191,14 +191,14 @@ specialize
 definition
 	Direct_observation[id1.1] matches {	
 		/data matches {
-			Node[id45] occurrences matches {0} 
-			Node[id46] occurrences matches {0} 
-			Node[id47] occurrences matches {0} 
-			use_archetype Node[id55, s2-EHR-Node.waveform.v0] occurrences matches {0} 
-			use_archetype Node[id61, s2-EHR-Node.media_file.v1] occurrences matches {0} 
+			Info_node[id45] occurrences matches {0} 
+			Info_node[id46] occurrences matches {0} 
+			Info_node[id47] occurrences matches {0} 
+			use_archetype Info_node[id55, s2-EHR-Info_node.waveform.v0] occurrences matches {0} 
+			use_archetype Info_node[id61, s2-EHR-Info_node.media_file.v2] occurrences matches {0} 
 		}
 		/state matches {
-			Node[id17] occurrences matches {0} 
+			Info_node[id17] occurrences matches {0} 
 		}
 		qualifiers existence matches {0} 
 		data_series existence matches {0} 

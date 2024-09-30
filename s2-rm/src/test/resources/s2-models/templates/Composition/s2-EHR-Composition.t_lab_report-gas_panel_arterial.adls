@@ -1,0 +1,129 @@
+template (adl_version=2.0.6; rm_release=0.8.5)
+	s2-EHR-Composition.t_lab_report-gas_panel_arterial.v1.0.0
+
+specialize
+	s2-EHR-Composition.t_lab_report-generic.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Nathan Davis <nathan.davis@graphitehealth.io">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2024 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Gas panel arterial blood lab result report">
+		>
+	>
+
+definition
+	Composition[id1.1.1] matches {	-- Gas panel arterial blood lab result report
+		/content[id0.1.1]/data matches {
+			use_archetype Info_node[id0.90.1, s2-EHR-Info_node.PHLsCncPtBldAQnLabObs.v1] 
+			use_archetype Info_node[id0.90.2, s2-EHR-Info_node.PHAdjustedToPatientsActualTemperatureLsCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.3, s2-EHR-Info_node.CarbonDioxidePPresPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.4, s2-EHR-Info_node.CarbonDioxideAdjustedToPatientsActualTemperaturePPresPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.5, s2-EHR-Info_node.OxygenPPresPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.6, s2-EHR-Info_node.OxygenadjustedtopatientsactualtemperaturePPresPtBldAQnLabObs.v1]
+            use_archetype Info_node[id0.90.7, s2-EHR-Info_node.OxygenContentSCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.8, s2-EHR-Info_node.BicarbonateSCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.9, s2-EHR-Info_node.CarbondioxideSCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.10, s2-EHR-Info_node.BaseExcessSCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.11, s2-EHR-Info_node.BasedeficitSCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.12, s2-EHR-Info_node.OxygensaturationMFrPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.13, s2-EHR-Info_node.HemoglobinMCncPtBldAQnLabObs.v1]
+			use_archetype Info_node[id0.90.14, s2-EHR-Info_node.percent_oxygen.v1]
+			use_archetype Info_node[id0.90.15, s2-EHR-Info_node.inhaled_oxygen_flow_rate.v1]
+			use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Gas panel, arterial blood, lab result report">
+				description = <"-">
+			>
+			["id0.1.1"] = <
+				text = <"Gas panel - Arterial blood">
+				description = <"-">
+			>
+			["id0.90.1"] = <
+				text = <"pH of Arterial blood">
+				description = <"-">
+			>
+			["id0.90.2"] = <
+				text = <"pH of Arterial blood adjusted to patient's actual temperature">
+				description = <"-">
+			>
+			["id0.90.3"] = <
+				text = <"Carbon dioxide [Partial pressure] in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.4"] = <
+				text = <"Carbon dioxide [Partial pressure] adjusted to patient's actual temperature in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.5"] = <
+				text = <"Oxygen [Partial pressure] in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.6"] = <
+				text = <"Oxygen [Partial pressure] adjusted to patient's actual temperature in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.7"] = <
+				text = <"Oxygen content in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.8"] = <
+				text = <"Bicarbonate [Moles/volume] in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.9"] = <
+				text = <"Carbon dioxide, total [Moles/volume] in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.10"] = <
+				text = <"Base excess in Arterial blood by calculation">
+				description = <"-">
+			>
+			["id0.90.11"] = <
+				text = <"Base deficit in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.12"] = <
+				text = <"Oxygen saturation in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.13"] = <
+				text = <"Hemoglobin [Mass/volume] in Arterial blood">
+				description = <"-">
+			>
+			["id0.90.14"] = <
+				text = <"Inhaled oxygen concentration">
+				description = <"-">
+			>
+			["id0.90.15"] = <
+				text = <"Inhaled oxygen flow rate">
+				description = <"-">
+			>
+			["id0.90.16"] = <
+				text = <"Body temperature">
+				description = <"-">
+			>
+		>
+	>
+
+	term_bindings = <
+		["loinc"] = <
+			["id0.1.1"] = <http://loinc.org/24336-0>
+		>
+	>

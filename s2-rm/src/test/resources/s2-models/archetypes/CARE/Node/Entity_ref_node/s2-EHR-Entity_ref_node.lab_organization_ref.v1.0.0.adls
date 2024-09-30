@@ -1,0 +1,61 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5)
+	s2-EHR-Entity_ref_node.lab_organization_ref.v1.0.0
+
+specialize
+	s2-EHR-Entity_ref_node.organization_ref.v1
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Reference to a lab organization instance">
+			use = <"Use to refer to an organization.">
+			keywords = <"demographics", "organization">
+		>
+	>
+
+definition
+	Entity_ref_node[id1.1]  matches {
+		/items matches {
+			Info_node[id3] occurrences matches {0..1} 
+			Info_node[id4] occurrences matches {0..1}
+			Info_node[id5] occurrences matches {0..1}
+			Info_node[id0.1] occurrences matches {0..1} matches {
+				value matches {
+					Plain_text[id106]
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Lab organization ref">
+				description = <"Reference to a lab organization">
+			>
+			["id0.1"] = <
+				text = <"Contact person">
+				description = <"-">
+			>
+		>
+	>
+

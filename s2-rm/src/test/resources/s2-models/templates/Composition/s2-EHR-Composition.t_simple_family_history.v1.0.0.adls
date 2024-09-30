@@ -51,22 +51,22 @@ specialize
 definition
 	Assessment[id1.1] matches {
 		/data matches {
-			Node[id29] matches {	-- Per problem
+			Info_node[id29] matches {	-- Per problem
 				items matches {
-					use_archetype Node[id60, s2-EHR-Node.family_prevalence.v1]  occurrences matches {0}
+					use_archetype Info_node[id60, s2-EHR-Info_node.family_prevalence.v1]  occurrences matches {0}
 				}
 			}
-			Node[id4] matches {	-- Per family member
+			Info_node[id4] matches {	-- Per family member
 				items matches {
-					Node[id21] occurrences matches {0} 
-					use_archetype Node[id49, s2-EHR-Node.person.v1] occurrences matches {0}
-					Node[id25] occurrences matches {0}
+					Info_node[id21] occurrences matches {0} 
+					use_archetype Entity_ref_node[id49, s2-EHR-Entity_ref_node.person_ref.v1] occurrences matches {0}
+					Info_node[id25] occurrences matches {0}
  				}
 			}
-			use_archetype Node[id54, s2-EHR-Node.media_file.v1]  occurrences matches {0}
+			use_archetype Info_node[id54, s2-EHR-Info_node.media_file.v2]  occurrences matches {0}
 		}
 		/qualifiers matches {
-			allow_archetype Node[id46] occurrences matches {0}
+			allow_archetype Info_node[id46] occurrences matches {0}
 		}
 	}
 

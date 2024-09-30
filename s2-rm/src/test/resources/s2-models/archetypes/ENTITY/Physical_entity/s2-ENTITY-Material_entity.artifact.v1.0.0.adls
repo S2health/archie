@@ -1,0 +1,146 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=9b8a7428-5658-44bc-bf39-4dff87931702)
+	s2-ENTITY-Material_entity.artifact.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2, copyright 2010 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2 from <https://ckm.openehr.org>">
+		["tool"] = <"s2 convert openehr">
+		["date"] = <"2024-08-09">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record the details of a medical device used in the provision of healthcare.">
+			use = <"Use to record the details of an individual medical device used in the provision of healthcare.">
+			keywords = <"device", "machine", "implant", "appliance", "catheter", "prosthesis", "aid", "biomedical", "instrument", "equipment", "meter", "monitor", "software">
+		>
+	>
+
+definition
+	Material_entity[id1] matches {	-- Medical device
+		kind matches {
+			use_archetype Artifact_kind[id2, s2-ENTITY-Artifact_kind.device_general.v1]
+		}
+		individual_attributes matches {
+			Info_node[id22] occurrences matches {0..1} matches {	-- Unique device identifier (UDI)
+				value matches {
+					Rwe_id_ref[id32] 
+				}
+			}
+			Info_node[id6] occurrences matches {0..1} matches {	-- Date of manufacture
+				value matches {
+					Date_time_value[id34] 
+				}
+			}
+			Info_node[id21] occurrences matches {0..1} matches {	-- Serial number
+				value matches {
+					Text[id35] 
+				}
+			}
+			Info_node[id26] occurrences matches {0..1} matches {	-- Software version
+				value matches {
+					Text[id39] 
+				}
+			}
+			Info_node[id8] occurrences matches {0..1} matches {	-- Date of expiry
+				value matches {
+					Date_time_value[id40] 
+				}
+			}
+			Info_node[id25] matches {	-- Other identifier
+				value matches {
+					Rwe_id_ref[id41] 
+				}
+			}
+		}
+		lot_information matches {
+			Info_node[id7] occurrences matches {0..1} matches {	-- Batch/Lot number
+				value matches {
+					Text[id38] 
+				}
+			}
+		}
+		use_details matches {
+			Info_node[id9] occurrences matches {0..1} matches {	-- Comment
+				value matches {
+					Text[id42] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Medical device">
+				description = <"-">
+			>
+			["id21"] = <
+				text = <"Serial number">
+				description = <"Number assigned by the manufacturer which can be found on the device, and should be specific to each device., its label, or accompanying packaging.">
+			>
+			["id22"] = <
+				text = <"Unique device identifier (UDI)">
+				description = <"A numeric or alphanumeric string that is associated with this device within a given system.">
+			>
+			["id25"] = <
+				text = <"Other identifier">
+				description = <"Unspecified identifier, which can be further specified in a template or at run time.">
+			>
+			["id26"] = <
+				text = <"Software version">
+				description = <"Identification of the version of software being used in the medical device.">
+			>
+			["id6"] = <
+				text = <"Date of manufacture">
+				description = <"Date the device was manufactured.">
+			>
+			["id7"] = <
+				text = <"Batch/Lot number">
+				description = <"The number assigned by the manufacturer which identifies a group of items manufactured at the same time, usually found on the label or packaging material.">
+			>
+			["id8"] = <
+				text = <"Date of expiry">
+				description = <"Date after which the device/product is no longer fit for use, usually found on the device itself or printed on the accompanying packaging.">
+			>
+			["id9"] = <
+				text = <"Comment">
+				description = <"Additional narrative about the device not captured in other fields.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/82307-0>
+			["id21"] = <http://loinc.org/74715-4>
+			["id22"] = <http://loinc.org/74711-3>
+			["id7"] = <http://loinc.org/74714-7>
+			["id26"] = <http://loinc.org/55081-4>
+			["id8"] = <http://loinc.org/74712-1>
+			["id25"] = <http://loinc.org/104960-0>
+			["id6"] = <http://loinc.org/104926-1>
+			["id9"] = <http://loinc.org/106173-8>
+		>
+	>
+
