@@ -23,6 +23,7 @@ import org.s2.rm.base.data_types.text.PlainText;
 import org.s2.rm.base.data_types.text.Text;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
+import org.s2.rm.base.patterns.data_structures.InfoNode;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rminfo.S2RmInfoLookup;
 
@@ -80,7 +81,7 @@ public class S2RmObjectValidatorTest {
 
     @Test
     public void testEmptyNodeWithoutArchetype() {
-        Node node = new Node();
+        Node node = new InfoNode();
 
         node.setValue(new PlainText("something"));
 
@@ -94,10 +95,10 @@ public class S2RmObjectValidatorTest {
 
     @Test
     public void testNodeWithoutArchetype() {
-        Node node = new Node();
+        Node node = new InfoNode();
         node.setName("test cluster");
         node.setArchetypeNodeId("id12");
-        Node element = new Node();
+        Node element = new InfoNode();
         element.setValue(new PlainText("hi!"));
         node.setItems(Lists.newArrayList(element));
 
@@ -111,10 +112,10 @@ public class S2RmObjectValidatorTest {
 
     @Test
     public void testValidNodeWithoutArchetype() {
-        Node node1 = new Node();
+        Node node1 = new InfoNode();
         node1.setName("test cluster");
         node1.setArchetypeNodeId("id12");
-        Node node2 = new Node();
+        Node node2 = new InfoNode();
         node2.setName("test element");
         node2.setValue(new PlainText("value"));
         node2.setArchetypeNodeId("id15");
@@ -130,7 +131,7 @@ public class S2RmObjectValidatorTest {
     @Test
     public void skipInvariantValidation(){
         //create element with every required field filled, that does not pass invariant
-        Node node = new Node();
+        Node node = new InfoNode();
         node.setArchetypeNodeId("id5");
         node.setName("name");
 
@@ -145,7 +146,7 @@ public class S2RmObjectValidatorTest {
 
     @Test
     public void testNestedEmptyNodeWithoutArchetype() {
-        Node node = new Node();
+        Node node = new InfoNode();
 
         List<RMObjectValidationMessage> validate = validator.validate(node);
         assertFalse(validate.isEmpty());

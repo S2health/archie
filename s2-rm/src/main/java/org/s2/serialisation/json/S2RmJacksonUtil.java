@@ -13,7 +13,7 @@ import com.nedap.archie.aom.primitives.CTemporal;
 import com.nedap.archie.json.*;
 import com.nedap.archie.rules.Operator;
 import com.nedap.archie.rules.OperatorKind;
-import org.s2.rm.base.model_support.archetyped.Pathable;
+import org.s2.rm.base.patterns.archetyped.Pathable;
 import org.s2.rm.base.model_support.identification.ArchetypeId;
 import org.s2.rminfo.S2RmInfoLookup;
 
