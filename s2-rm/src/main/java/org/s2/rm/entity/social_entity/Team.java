@@ -3,15 +3,16 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Team
 * BMM ancestors: Aggregate_agent
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Team", propOrder = {
@@ -30,8 +31,8 @@ public class Team extends AggregateAgent {
 
   public Team() {}
 
-  public Team(List<PartyIdentity> identities, String archetypeNodeId, String name) {
-    super(identities, archetypeNodeId, name);
+  public Team(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
+    super(identities, domainType, archetypeNodeId, name);
   }
 
   @Override
@@ -41,11 +42,14 @@ public class Team extends AggregateAgent {
     Team otherAsTeam = (Team) other;
     return Objects.equals(getPersonas(), otherAsTeam.getPersonas()) &&
       Objects.equals(getLanguages(), otherAsTeam.getLanguages()) &&
-      Objects.equals(getLegalStatus(), otherAsTeam.getLegalStatus()) &&
+      Objects.equals(getIdentifiers(), otherAsTeam.getIdentifiers()) &&
       Objects.equals(getIdentities(), otherAsTeam.getIdentities()) &&
-      Objects.equals(getContacts(), otherAsTeam.getContacts()) &&
+      Objects.equals(getLocationAddresses(), otherAsTeam.getLocationAddresses()) &&
+      Objects.equals(getCommsAddresses(), otherAsTeam.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsTeam.getAccountabilityTypes()) &&
-      Objects.equals(getDescription(), otherAsTeam.getDescription()) &&
+      Objects.equals(getDomainType(), otherAsTeam.getDomainType()) &&
+      Objects.equals(getRelationships(), otherAsTeam.getRelationships()) &&
+      Objects.equals(getOtherDetails(), otherAsTeam.getOtherDetails()) &&
       Objects.equals(uid, otherAsTeam.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsTeam.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsTeam.getName()) &&

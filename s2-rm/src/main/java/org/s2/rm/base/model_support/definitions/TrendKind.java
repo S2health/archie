@@ -1,18 +1,17 @@
 package org.s2.rm.base.model_support.definitions;
 
-import org.s2.util.enumerations.EnumerationVarString;
-
+import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
 * BMM name: Trend_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Trend_kind", propOrder = {"value"})
-public class TrendKind extends EnumerationVarString {
+public class TrendKind extends RMObject {
   /**
   * Enumeration value.
   */

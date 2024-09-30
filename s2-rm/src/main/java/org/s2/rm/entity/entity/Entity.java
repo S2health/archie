@@ -3,39 +3,73 @@ package org.s2.rm.entity.entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.model_support.archetyped.Locatable;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
+import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Entity
 * BMM ancestors: Locatable
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity", propOrder = {
-  "description"
+  "domainType",
+  "relationships",
+  "otherDetails"
 })
 public abstract class Entity extends Locatable {
   /**
-  * BMM name: description | BMM type: {@code List<Node>}
+  * BMM name: domain_type | BMM type: Terminology_term
+  * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
+  */
+  @XmlElement(name = "domain_type")
+  private TerminologyTerm domainType;
+
+  /**
+  * BMM name: relationships | BMM type: {@code List<Entity_relationship_group>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
-  @XmlElement(name = "description")
-  private @Nullable List<Node> description;
+  @XmlElement(name = "relationships")
+  private @Nullable List<EntityRelationshipGroup> relationships;
+
+  /**
+  * BMM name: other_details | BMM type: {@code List<Node>}
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
+  */
+  @XmlElement(name = "other_details")
+  private @Nullable List<Node> otherDetails;
 
   public Entity() {}
 
-  public Entity(String archetypeNodeId, String name) {
+  public Entity(TerminologyTerm domainType, String archetypeNodeId, String name) {
     super(archetypeNodeId, name);
+    this.domainType = domainType;
   }
 
-  public @Nullable List<Node> getDescription() {
-    return description;
+  public TerminologyTerm getDomainType() {
+    return domainType;
   }
 
-  public void setDescription(@Nullable List<Node> description) {
-    this.description = description;
+  public void setDomainType(TerminologyTerm domainType) {
+    this.domainType = domainType;
+  }
+
+  public @Nullable List<EntityRelationshipGroup> getRelationships() {
+    return relationships;
+  }
+
+  public void setRelationships(@Nullable List<EntityRelationshipGroup> relationships) {
+    this.relationships = relationships;
+  }
+
+  public @Nullable List<Node> getOtherDetails() {
+    return otherDetails;
+  }
+
+  public void setOtherDetails(@Nullable List<Node> otherDetails) {
+    this.otherDetails = otherDetails;
   }
 
   @Override

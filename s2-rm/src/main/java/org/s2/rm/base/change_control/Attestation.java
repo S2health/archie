@@ -6,13 +6,13 @@ import javax.xml.bind.annotation.*;
 import org.s2.rm.base.data_types.encapsulated.Multimedia;
 import org.s2.rm.base.foundation_types.primitive_types.Uri;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
-import org.s2.rm.base.patterns.participation.PartyProxy;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 
 /**
 * BMM name: Attestation
 * BMM ancestors: Audit_details
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Attestation", propOrder = {
@@ -60,7 +60,7 @@ public class Attestation extends AuditDetails {
 
   public Attestation() {}
 
-  public Attestation(AttestationReason reason, boolean isPending, String systemId, RmDateTime timeCommitted, AuditChangeType changeType, PartyProxy committer) {
+  public Attestation(AttestationReason reason, boolean isPending, String systemId, RmDateTime timeCommitted, AuditChangeType changeType, EntityRefNode committer) {
     super(systemId, timeCommitted, changeType, committer);
     this.reason = reason;
     this.isPending = isPending;

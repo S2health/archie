@@ -3,15 +3,16 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Org_unit
 * BMM ancestors: Org_entity
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Org_unit", propOrder = {
@@ -30,8 +31,8 @@ public class OrgUnit extends OrgEntity {
 
   public OrgUnit() {}
 
-  public OrgUnit(List<PartyIdentity> identities, String archetypeNodeId, String name) {
-    super(identities, archetypeNodeId, name);
+  public OrgUnit(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
+    super(identities, domainType, archetypeNodeId, name);
   }
 
   @Override
@@ -41,11 +42,14 @@ public class OrgUnit extends OrgEntity {
     OrgUnit otherAsOrgUnit = (OrgUnit) other;
     return Objects.equals(getPersonas(), otherAsOrgUnit.getPersonas()) &&
       Objects.equals(getLanguages(), otherAsOrgUnit.getLanguages()) &&
-      Objects.equals(getLegalStatus(), otherAsOrgUnit.getLegalStatus()) &&
+      Objects.equals(getIdentifiers(), otherAsOrgUnit.getIdentifiers()) &&
       Objects.equals(getIdentities(), otherAsOrgUnit.getIdentities()) &&
-      Objects.equals(getContacts(), otherAsOrgUnit.getContacts()) &&
+      Objects.equals(getLocationAddresses(), otherAsOrgUnit.getLocationAddresses()) &&
+      Objects.equals(getCommsAddresses(), otherAsOrgUnit.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsOrgUnit.getAccountabilityTypes()) &&
-      Objects.equals(getDescription(), otherAsOrgUnit.getDescription()) &&
+      Objects.equals(getDomainType(), otherAsOrgUnit.getDomainType()) &&
+      Objects.equals(getRelationships(), otherAsOrgUnit.getRelationships()) &&
+      Objects.equals(getOtherDetails(), otherAsOrgUnit.getOtherDetails()) &&
       Objects.equals(uid, otherAsOrgUnit.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsOrgUnit.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsOrgUnit.getName()) &&

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.*;
 * BMM name: Locatable_ref
 * BMM ancestors: Object_ref
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Locatable_ref", propOrder = {

@@ -5,17 +5,17 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
-import org.s2.rm.base.model_support.archetyped.InfoItem;
-import org.s2.rm.base.model_support.archetyped.Link;
 import org.s2.rm.base.model_support.identification.Uuid;
-import org.s2.rm.base.patterns.participation.PartyProxy;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.InfoItem;
+import org.s2.rm.base.patterns.archetyped.Link;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 
 /**
 * BMM name: Composition
 * BMM ancestors: Info_item
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Composition", propOrder = {
@@ -60,11 +60,11 @@ public class Composition extends InfoItem {
   private TerminologyTerm category;
 
   /**
-  * BMM name: author | BMM type: Party_proxy
+  * BMM name: author | BMM type: Entity_ref_node
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
   */
   @XmlElement(name = "author")
-  private PartyProxy author;
+  private EntityRefNode author;
 
   /**
   * BMM name: context | BMM type: Event_context
@@ -82,7 +82,7 @@ public class Composition extends InfoItem {
 
   public Composition() {}
 
-  public Composition(Uuid uid, TerminologyCode language, TerminologyCode territory, TerminologyTerm category, PartyProxy author, String archetypeNodeId, String name) {
+  public Composition(Uuid uid, TerminologyCode language, TerminologyCode territory, TerminologyTerm category, EntityRefNode author, String archetypeNodeId, String name) {
     super(archetypeNodeId, name);
     this.uid = uid;
     this.language = language;
@@ -151,11 +151,11 @@ public class Composition extends InfoItem {
     this.category = category;
   }
 
-  public PartyProxy getAuthor() {
+  public EntityRefNode getAuthor() {
     return author;
   }
 
-  public void setAuthor(PartyProxy author) {
+  public void setAuthor(EntityRefNode author) {
     this.author = author;
   }
 

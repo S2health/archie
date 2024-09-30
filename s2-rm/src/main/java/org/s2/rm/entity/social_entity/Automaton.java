@@ -3,15 +3,16 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Automaton
 * BMM ancestors: Individual_agent
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Automaton", propOrder = {
@@ -30,8 +31,8 @@ public class Automaton extends IndividualAgent {
 
   public Automaton() {}
 
-  public Automaton(List<PartyIdentity> identities, String archetypeNodeId, String name) {
-    super(identities, archetypeNodeId, name);
+  public Automaton(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
+    super(identities, domainType, archetypeNodeId, name);
   }
 
   @Override
@@ -41,11 +42,14 @@ public class Automaton extends IndividualAgent {
     Automaton otherAsAutomaton = (Automaton) other;
     return Objects.equals(getPersonas(), otherAsAutomaton.getPersonas()) &&
       Objects.equals(getLanguages(), otherAsAutomaton.getLanguages()) &&
-      Objects.equals(getLegalStatus(), otherAsAutomaton.getLegalStatus()) &&
+      Objects.equals(getIdentifiers(), otherAsAutomaton.getIdentifiers()) &&
       Objects.equals(getIdentities(), otherAsAutomaton.getIdentities()) &&
-      Objects.equals(getContacts(), otherAsAutomaton.getContacts()) &&
+      Objects.equals(getLocationAddresses(), otherAsAutomaton.getLocationAddresses()) &&
+      Objects.equals(getCommsAddresses(), otherAsAutomaton.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsAutomaton.getAccountabilityTypes()) &&
-      Objects.equals(getDescription(), otherAsAutomaton.getDescription()) &&
+      Objects.equals(getDomainType(), otherAsAutomaton.getDomainType()) &&
+      Objects.equals(getRelationships(), otherAsAutomaton.getRelationships()) &&
+      Objects.equals(getOtherDetails(), otherAsAutomaton.getOtherDetails()) &&
       Objects.equals(uid, otherAsAutomaton.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsAutomaton.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsAutomaton.getName()) &&

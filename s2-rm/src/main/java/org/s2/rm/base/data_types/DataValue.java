@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 /**
 * BMM name: Data_value
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Data_value")

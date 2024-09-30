@@ -1,18 +1,17 @@
 package org.s2.rm.base.change_control;
 
-import org.s2.util.enumerations.EnumerationVarString;
-
+import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
 * BMM name: Audit_change_type
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Audit_change_type", propOrder = {"value"})
-public class AuditChangeType extends EnumerationVarString {
+public class AuditChangeType extends RMObject {
   /**
   * Enumeration value.
   */

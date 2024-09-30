@@ -7,15 +7,15 @@ import org.s2.rm.base.foundation_types.primitive_types.Uri;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.participation.PartyProxy;
 
 /**
 * Abstract Entry subtype corresponding to any type of Entry in the clinical care cycle.
 * BMM name: Care_entry
 * BMM ancestors: Entry
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Care_entry", propOrder = {
@@ -39,7 +39,7 @@ public abstract class CareEntry extends Entry {
 
   public CareEntry() {}
 
-  public CareEntry(Uuid uid, RmDateTime time, TerminologyCode language, PartyProxy subject, String archetypeNodeId, String name) {
+  public CareEntry(Uuid uid, RmDateTime time, TerminologyCode language, EntityRefNode subject, String archetypeNodeId, String name) {
     super(uid, time, language, subject, archetypeNodeId, name);
   }
 

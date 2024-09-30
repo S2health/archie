@@ -5,14 +5,14 @@ import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
-import org.s2.rm.base.patterns.participation.PartyProxy;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 
 /**
 * Entry type for billable and/or ordered acts
 * BMM name: Care_act_entry
 * BMM ancestors: Care_entry
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Care_act_entry", propOrder = {
@@ -28,7 +28,7 @@ public abstract class CareActEntry extends CareEntry {
 
   public CareActEntry() {}
 
-  public CareActEntry(Uuid uid, RmDateTime time, TerminologyCode language, PartyProxy subject, String archetypeNodeId, String name) {
+  public CareActEntry(Uuid uid, RmDateTime time, TerminologyCode language, EntityRefNode subject, String archetypeNodeId, String name) {
     super(uid, time, language, subject, archetypeNodeId, name);
   }
 

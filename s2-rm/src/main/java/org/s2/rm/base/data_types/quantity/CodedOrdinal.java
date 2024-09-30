@@ -8,7 +8,7 @@ import org.s2.rm.base.data_types.text.CodedText;
 * BMM name: Coded_ordinal
 * BMM ancestors: Ordered_value
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Coded_ordinal", propOrder = {

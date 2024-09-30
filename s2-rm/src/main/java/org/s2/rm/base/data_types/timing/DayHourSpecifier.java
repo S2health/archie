@@ -9,7 +9,7 @@ import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 * BMM name: Day_hour_specifier
 * BMM ancestors: Occurrence_times_specifier
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Day_hour_specifier", propOrder = {

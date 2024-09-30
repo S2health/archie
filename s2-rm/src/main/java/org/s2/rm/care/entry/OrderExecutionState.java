@@ -1,18 +1,17 @@
 package org.s2.rm.care.entry;
 
-import org.s2.util.enumerations.EnumerationVarString;
-
+import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
 * BMM name: Order_execution_state
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Order_execution_state", propOrder = {"value"})
-public class OrderExecutionState extends EnumerationVarString {
+public class OrderExecutionState extends RMObject {
   /**
   * Enumeration value.
   */

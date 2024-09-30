@@ -10,7 +10,7 @@ import org.s2.rm.base.foundation_types.time.RmDate;
 /**
 * BMM name: Occurrence_pattern
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Occurrence_pattern", propOrder = {

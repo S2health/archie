@@ -4,17 +4,18 @@ import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.interval.Interval;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDate;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Persona
 * BMM ancestors: Party
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Persona", propOrder = {
@@ -57,8 +58,8 @@ public class Persona extends Party {
 
   public Persona() {}
 
-  public Persona(ObjectRef performer, List<PartyIdentity> identities, String archetypeNodeId, String name) {
-    super(identities, archetypeNodeId, name);
+  public Persona(ObjectRef performer, List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
+    super(identities, domainType, archetypeNodeId, name);
     this.performer = performer;
   }
 
@@ -67,11 +68,14 @@ public class Persona extends Party {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     Persona otherAsPersona = (Persona) other;
-    return Objects.equals(getLegalStatus(), otherAsPersona.getLegalStatus()) &&
+    return Objects.equals(getIdentifiers(), otherAsPersona.getIdentifiers()) &&
       Objects.equals(getIdentities(), otherAsPersona.getIdentities()) &&
-      Objects.equals(getContacts(), otherAsPersona.getContacts()) &&
+      Objects.equals(getLocationAddresses(), otherAsPersona.getLocationAddresses()) &&
+      Objects.equals(getCommsAddresses(), otherAsPersona.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsPersona.getAccountabilityTypes()) &&
-      Objects.equals(getDescription(), otherAsPersona.getDescription()) &&
+      Objects.equals(getDomainType(), otherAsPersona.getDomainType()) &&
+      Objects.equals(getRelationships(), otherAsPersona.getRelationships()) &&
+      Objects.equals(getOtherDetails(), otherAsPersona.getOtherDetails()) &&
       Objects.equals(uid, otherAsPersona.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsPersona.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPersona.getName()) &&

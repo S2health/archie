@@ -11,7 +11,7 @@ import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 * BMM name: Reference_range
 * BMM generic parameters: {@code Reference_range<V Measurable>}
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Reference_range", propOrder = {

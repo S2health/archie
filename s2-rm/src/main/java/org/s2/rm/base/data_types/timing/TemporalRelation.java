@@ -1,19 +1,17 @@
 package org.s2.rm.base.data_types.timing;
 
 import com.nedap.archie.base.RMObject;
-import org.s2.util.enumerations.EnumerationVarInteger;
-
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
 * BMM name: Temporal_relation
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Temporal_relation", propOrder = {"value"})
-public class TemporalRelation extends EnumerationVarInteger {
+public class TemporalRelation extends RMObject {
   /**
   * Enumeration value.
   */

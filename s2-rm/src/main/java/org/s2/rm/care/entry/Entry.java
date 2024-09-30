@@ -7,15 +7,15 @@ import org.s2.rm.base.data_types.text.Text;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.participation.Participation;
-import org.s2.rm.base.patterns.participation.PartyProxy;
 import org.s2.rm.care.composition.ContentItem;
 
 /**
 * BMM name: Entry
 * BMM ancestors: Content_item
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entry", propOrder = {
@@ -53,11 +53,11 @@ public abstract class Entry extends ContentItem {
   private TerminologyCode language;
 
   /**
-  * BMM name: subject | BMM type: Party_proxy
+  * BMM name: subject | BMM type: Entity_ref_node
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
   */
   @XmlElement(name = "subject")
-  private PartyProxy subject;
+  private EntityRefNode subject;
 
   /**
   * BMM name: reporter | BMM type: Participation
@@ -96,7 +96,7 @@ public abstract class Entry extends ContentItem {
 
   public Entry() {}
 
-  public Entry(Uuid uid, RmDateTime time, TerminologyCode language, PartyProxy subject, String archetypeNodeId, String name) {
+  public Entry(Uuid uid, RmDateTime time, TerminologyCode language, EntityRefNode subject, String archetypeNodeId, String name) {
     super(archetypeNodeId, name);
     this.uid = uid;
     this.time = time;
@@ -128,11 +128,11 @@ public abstract class Entry extends ContentItem {
     this.language = language;
   }
 
-  public PartyProxy getSubject() {
+  public EntityRefNode getSubject() {
     return subject;
   }
 
-  public void setSubject(PartyProxy subject) {
+  public void setSubject(EntityRefNode subject) {
     this.subject = subject;
   }
 

@@ -11,7 +11,7 @@ import org.s2.rm.base.data_types.text.Text;
 * BMM generic parameters: {@code Measured<V Measurable>}
 * BMM ancestors: Ordered_datum
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Measured", propOrder = {
@@ -54,7 +54,7 @@ public class Measured<V extends Measurable> extends OrderedDatum {
   /**
   * BMM name: interpretation | BMM type: Coded_text
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
-  * valueConstraint: s2.MeasuredInterpretation
+  * valueConstraint: s2.QuantitativeInterpretation
   */
   @XmlElement(name = "interpretation")
   private @Nullable CodedText interpretation;

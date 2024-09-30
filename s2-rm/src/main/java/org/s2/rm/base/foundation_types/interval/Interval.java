@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.*;
 * Type defining an interval of any ordered type.
 * BMM name: Interval
 * BMM generic parameters: {@code Interval<T Comparable>}
-* isAbstract: false | isPrimitiveType: true | isOverride: false
-* BMM schema: S2RM 0.8.0
+* isAbstract: false | isPrimitiveType: false | isOverride: false
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Interval", propOrder = {

@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.*;
 /**
 * BMM name: Multiplicity_interval
 * BMM ancestors: {@code Interval<Integer>}
-* isAbstract: false | isPrimitiveType: true | isOverride: false
-* BMM schema: S2RM 0.8.0
+* isAbstract: false | isPrimitiveType: false | isOverride: false
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Multiplicity_interval")

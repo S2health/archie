@@ -3,17 +3,17 @@ package org.s2.rm.care.ehr;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
-import org.s2.rm.base.model_support.archetyped.Locatable;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Folder
 * BMM ancestors: Locatable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Folder", propOrder = {

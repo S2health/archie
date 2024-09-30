@@ -8,7 +8,7 @@ import org.s2.rm.base.foundation_types.time.RmDuration;
 * BMM name: Duration_value
 * BMM ancestors: Temporal_value
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Duration_value", propOrder = {

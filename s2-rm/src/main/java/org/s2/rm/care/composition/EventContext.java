@@ -5,18 +5,18 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
-import org.s2.rm.base.model_support.archetyped.FeederAudit;
-import org.s2.rm.base.model_support.archetyped.Locatable;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.base.patterns.participation.Participation;
-import org.s2.rm.base.patterns.participation.PartyIdentified;
 
 /**
 * BMM name: Event_context
 * BMM ancestors: Locatable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Event_context", propOrder = {
@@ -27,15 +27,16 @@ import org.s2.rm.base.patterns.participation.PartyIdentified;
   "participations",
   "location",
   "setting",
+  "encounter",
   "otherContext"
 })
 public class EventContext extends Locatable {
   /**
-  * BMM name: health_care_facility | BMM type: Party_identified
+  * BMM name: health_care_facility | BMM type: Entity_ref_node
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "health_care_facility")
-  private @Nullable PartyIdentified healthCareFacility;
+  private @Nullable EntityRefNode healthCareFacility;
 
   /**
   * BMM name: start_time | BMM type: Date_time
@@ -72,6 +73,13 @@ public class EventContext extends Locatable {
   */
   @XmlElement(name = "setting")
   private @Nullable TerminologyTerm setting;
+
+  /**
+  * BMM name: encounter | BMM type: Entity_ref_node
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
+  */
+  @XmlElement(name = "encounter")
+  private @Nullable EntityRefNode encounter;
 
   /**
   * BMM name: other_context | BMM type: {@code List<Node>}
@@ -113,22 +121,23 @@ public class EventContext extends Locatable {
       Objects.equals(participations, otherAsEventContext.participations) &&
       Objects.equals(location, otherAsEventContext.location) &&
       Objects.equals(setting, otherAsEventContext.setting) &&
+      Objects.equals(encounter, otherAsEventContext.encounter) &&
       Objects.equals(otherContext, otherAsEventContext.otherContext);
   }
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid, healthCareFacility, startTime, endTime, location, setting);
+    int result = Objects.hash(super.hashCode(), uid, healthCareFacility, startTime, endTime, location, setting, encounter);
     result = participations == null ? 0 : 31 * result + participations.hashCode();
     result = otherContext == null ? 0 : 31 * result + otherContext.hashCode();
     return result;
   }
 
-  public @Nullable PartyIdentified getHealthCareFacility() {
+  public @Nullable EntityRefNode getHealthCareFacility() {
     return healthCareFacility;
   }
 
-  public void setHealthCareFacility(@Nullable PartyIdentified healthCareFacility) {
+  public void setHealthCareFacility(@Nullable EntityRefNode healthCareFacility) {
     this.healthCareFacility = healthCareFacility;
   }
 
@@ -170,6 +179,14 @@ public class EventContext extends Locatable {
 
   public void setSetting(@Nullable TerminologyTerm setting) {
     this.setting = setting;
+  }
+
+  public @Nullable EntityRefNode getEncounter() {
+    return encounter;
+  }
+
+  public void setEncounter(@Nullable EntityRefNode encounter) {
+    this.encounter = encounter;
   }
 
   public @Nullable List<Node> getOtherContext() {

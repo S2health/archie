@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 * BMM name: Date_time
 * BMM ancestors: Temporal
 * isAbstract: false | isPrimitiveType: true | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Date_time")

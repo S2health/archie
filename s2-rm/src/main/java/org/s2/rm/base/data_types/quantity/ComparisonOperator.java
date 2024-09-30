@@ -1,19 +1,17 @@
 package org.s2.rm.base.data_types.quantity;
 
 import com.nedap.archie.base.RMObject;
-import org.s2.util.enumerations.EnumerationVarString;
-
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
 * BMM name: Comparison_operator
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Comparison_operator", propOrder = {"value"})
-public class ComparisonOperator extends EnumerationVarString {
+public class ComparisonOperator extends RMObject {
   /**
   * Enumeration value.
   */

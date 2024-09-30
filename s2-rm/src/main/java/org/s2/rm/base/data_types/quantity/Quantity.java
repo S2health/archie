@@ -9,7 +9,7 @@ import org.s2.rm.base.data_types.text.CodedText;
 * BMM name: Quantity
 * BMM ancestors: Measurable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Quantity", propOrder = {

@@ -3,27 +3,29 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 
 /**
 * BMM name: Party
 * BMM ancestors: Social_entity
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Party", propOrder = {
-  "legalStatus",
+  "identifiers",
   "identities",
-  "contacts",
+  "locationAddresses",
+  "commsAddresses",
   "accountabilityTypes"
 })
 public abstract class Party extends SocialEntity {
   /**
-  * BMM name: legal_status | BMM type: String
+  * BMM name: identifiers | BMM type: {@code List<Id_use>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
-  @XmlElement(name = "legal_status")
-  private @Nullable String legalStatus;
+  @XmlElement(name = "identifiers")
+  private @Nullable List<IdUse> identifiers;
 
   /**
   * BMM name: identities | BMM type: {@code List<Party_identity>}
@@ -33,11 +35,18 @@ public abstract class Party extends SocialEntity {
   private List<PartyIdentity> identities;
 
   /**
-  * BMM name: contacts | BMM type: {@code Set<Contact>}
+  * BMM name: location_addresses | BMM type: {@code List<Location_address_use>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
-  @XmlElement(name = "contacts")
-  private @Nullable Set<Contact> contacts;
+  @XmlElement(name = "location_addresses")
+  private @Nullable List<LocationAddressUse> locationAddresses;
+
+  /**
+  * BMM name: comms_addresses | BMM type: {@code List<Comms_address_use>}
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
+  */
+  @XmlElement(name = "comms_addresses")
+  private @Nullable List<CommsAddressUse> commsAddresses;
 
   /**
   * BMM name: accountability_types | BMM type: {@code List<Accountability>}
@@ -48,17 +57,17 @@ public abstract class Party extends SocialEntity {
 
   public Party() {}
 
-  public Party(List<PartyIdentity> identities, String archetypeNodeId, String name) {
-    super(archetypeNodeId, name);
+  public Party(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
+    super(domainType, archetypeNodeId, name);
     this.identities = identities;
   }
 
-  public @Nullable String getLegalStatus() {
-    return legalStatus;
+  public @Nullable List<IdUse> getIdentifiers() {
+    return identifiers;
   }
 
-  public void setLegalStatus(@Nullable String legalStatus) {
-    this.legalStatus = legalStatus;
+  public void setIdentifiers(@Nullable List<IdUse> identifiers) {
+    this.identifiers = identifiers;
   }
 
   public List<PartyIdentity> getIdentities() {
@@ -69,12 +78,20 @@ public abstract class Party extends SocialEntity {
     this.identities = identities;
   }
 
-  public @Nullable Set<Contact> getContacts() {
-    return contacts;
+  public @Nullable List<LocationAddressUse> getLocationAddresses() {
+    return locationAddresses;
   }
 
-  public void setContacts(@Nullable Set<Contact> contacts) {
-    this.contacts = contacts;
+  public void setLocationAddresses(@Nullable List<LocationAddressUse> locationAddresses) {
+    this.locationAddresses = locationAddresses;
+  }
+
+  public @Nullable List<CommsAddressUse> getCommsAddresses() {
+    return commsAddresses;
+  }
+
+  public void setCommsAddresses(@Nullable List<CommsAddressUse> commsAddresses) {
+    this.commsAddresses = commsAddresses;
   }
 
   public @Nullable List<Accountability> getAccountabilityTypes() {

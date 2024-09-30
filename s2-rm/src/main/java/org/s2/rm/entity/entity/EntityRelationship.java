@@ -6,31 +6,31 @@ import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.interval.Interval;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDate;
-import org.s2.rm.base.model_support.archetyped.Locatable;
 import org.s2.rm.base.model_support.identification.ObjectRef;
+import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Entity_relationship
 * BMM ancestors: Locatable
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_relationship", propOrder = {
-  "type",
+  "domainType",
   "source",
   "target",
-  "description",
+  "otherDetails",
   "timeValidity"
 })
 public abstract class EntityRelationship extends Locatable {
   /**
-  * BMM name: type | BMM type: Terminology_term
+  * BMM name: domain_type | BMM type: Terminology_term
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
   */
-  @XmlElement(name = "type")
-  private TerminologyTerm type;
+  @XmlElement(name = "domain_type")
+  private TerminologyTerm domainType;
 
   /**
   * BMM name: source | BMM type: Object_ref
@@ -47,11 +47,11 @@ public abstract class EntityRelationship extends Locatable {
   private ObjectRef target;
 
   /**
-  * BMM name: description | BMM type: {@code List<Node>}
+  * BMM name: other_details | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
-  @XmlElement(name = "description")
-  private @Nullable List<Node> description;
+  @XmlElement(name = "other_details")
+  private @Nullable List<Node> otherDetails;
 
   /**
   * BMM name: time_validity | BMM type: {@code Interval<Date>}
@@ -62,19 +62,19 @@ public abstract class EntityRelationship extends Locatable {
 
   public EntityRelationship() {}
 
-  public EntityRelationship(TerminologyTerm type, ObjectRef source, ObjectRef target, String archetypeNodeId, String name) {
+  public EntityRelationship(TerminologyTerm domainType, ObjectRef source, ObjectRef target, String archetypeNodeId, String name) {
     super(archetypeNodeId, name);
-    this.type = type;
+    this.domainType = domainType;
     this.source = source;
     this.target = target;
   }
 
-  public TerminologyTerm getType() {
-    return type;
+  public TerminologyTerm getDomainType() {
+    return domainType;
   }
 
-  public void setType(TerminologyTerm type) {
-    this.type = type;
+  public void setDomainType(TerminologyTerm domainType) {
+    this.domainType = domainType;
   }
 
   public ObjectRef getSource() {
@@ -93,12 +93,12 @@ public abstract class EntityRelationship extends Locatable {
     this.target = target;
   }
 
-  public @Nullable List<Node> getDescription() {
-    return description;
+  public @Nullable List<Node> getOtherDetails() {
+    return otherDetails;
   }
 
-  public void setDescription(@Nullable List<Node> description) {
-    this.description = description;
+  public void setOtherDetails(@Nullable List<Node> otherDetails) {
+    this.otherDetails = otherDetails;
   }
 
   public @Nullable Interval<RmDate> getTimeValidity() {

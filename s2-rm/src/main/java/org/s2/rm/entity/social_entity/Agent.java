@@ -9,7 +9,7 @@ import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 * BMM name: Agent
 * BMM ancestors: Party
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Agent", propOrder = {
@@ -25,16 +25,16 @@ public abstract class Agent extends Party {
   private @Nullable List<Persona> personas;
 
   /**
-  * BMM name: languages | BMM type: {@code List<Terminology_term>}
+  * BMM name: languages | BMM type: {@code List<Language_capability>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "languages")
-  private @Nullable List<TerminologyTerm> languages;
+  private @Nullable List<LanguageCapability> languages;
 
   public Agent() {}
 
-  public Agent(List<PartyIdentity> identities, String archetypeNodeId, String name) {
-    super(identities, archetypeNodeId, name);
+  public Agent(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
+    super(identities, domainType, archetypeNodeId, name);
   }
 
   public @Nullable List<Persona> getPersonas() {
@@ -45,11 +45,11 @@ public abstract class Agent extends Party {
     this.personas = personas;
   }
 
-  public @Nullable List<TerminologyTerm> getLanguages() {
+  public @Nullable List<LanguageCapability> getLanguages() {
     return languages;
   }
 
-  public void setLanguages(@Nullable List<TerminologyTerm> languages) {
+  public void setLanguages(@Nullable List<LanguageCapability> languages) {
     this.languages = languages;
   }
 

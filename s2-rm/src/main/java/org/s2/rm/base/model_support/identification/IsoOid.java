@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 * BMM name: Iso_oid
 * BMM ancestors: Primitive_id
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Iso_oid")

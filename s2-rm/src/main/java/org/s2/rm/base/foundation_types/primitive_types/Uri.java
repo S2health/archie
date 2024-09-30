@@ -1,7 +1,5 @@
 package org.s2.rm.base.foundation_types.primitive_types;
 
-import com.nedap.archie.base.RMObject;
-
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
@@ -9,7 +7,7 @@ import javax.xml.bind.annotation.*;
 * BMM name: Uri
 * BMM ancestors: String
 * isAbstract: false | isPrimitiveType: true | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Uri")

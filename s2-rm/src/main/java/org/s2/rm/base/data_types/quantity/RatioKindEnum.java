@@ -5,9 +5,9 @@ import org.s2.util.enumerations.*;
 /**
 * BMM name: Ratio_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
-public class RatioKindEnum extends EnumerationTypeInteger {
+public class RatioKindEnum extends EnumerationInteger {
   static String[] _itemNames = {"rational_fraction", "fraction", "ratio"};
   static Integer[] _itemValues = {};
 

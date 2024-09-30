@@ -1,18 +1,17 @@
 package org.s2.rm.base.change_control;
 
-import org.s2.util.enumerations.EnumerationVarString;
-
+import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
 /**
 * BMM name: Version_lifecycle_state
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Version_lifecycle_state", propOrder = {"value"})
-public class VersionLifecycleState extends EnumerationVarString {
+public class VersionLifecycleState extends RMObject {
   /**
   * Enumeration value.
   */

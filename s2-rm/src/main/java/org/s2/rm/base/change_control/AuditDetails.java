@@ -6,12 +6,12 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
-import org.s2.rm.base.patterns.participation.PartyProxy;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 
 /**
 * BMM name: Audit_details
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Audit_details", propOrder = {
@@ -51,15 +51,15 @@ public class AuditDetails extends RMObject {
   private @Nullable TerminologyTerm description;
 
   /**
-  * BMM name: committer | BMM type: Party_proxy
+  * BMM name: committer | BMM type: Entity_ref_node
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
   */
   @XmlElement(name = "committer")
-  private PartyProxy committer;
+  private EntityRefNode committer;
 
   public AuditDetails() {}
 
-  public AuditDetails(String systemId, RmDateTime timeCommitted, AuditChangeType changeType, PartyProxy committer) {
+  public AuditDetails(String systemId, RmDateTime timeCommitted, AuditChangeType changeType, EntityRefNode committer) {
     this.systemId = systemId;
     this.timeCommitted = timeCommitted;
     this.changeType = changeType;
@@ -115,11 +115,11 @@ public class AuditDetails extends RMObject {
     this.description = description;
   }
 
-  public PartyProxy getCommitter() {
+  public EntityRefNode getCommitter() {
     return committer;
   }
 
-  public void setCommitter(PartyProxy committer) {
+  public void setCommitter(EntityRefNode committer) {
     this.committer = committer;
   }
 

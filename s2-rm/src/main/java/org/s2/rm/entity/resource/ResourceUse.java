@@ -1,17 +1,18 @@
 package org.s2.rm.entity.resource;
 
+import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.foundation_types.time.RmDuration;
-import org.s2.rm.base.model_support.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Resource_use
 * BMM ancestors: Locatable
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.0
+* BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Resource_use", propOrder = {
@@ -36,18 +37,18 @@ public abstract class ResourceUse extends Locatable {
   private @Nullable RmDuration duration;
 
   /**
-  * BMM name: cost_data | BMM type: Node
+  * BMM name: cost_data | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "cost_data")
-  private @Nullable Node costData;
+  private @Nullable List<Node> costData;
 
   /**
-  * BMM name: description | BMM type: Node
+  * BMM name: description | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "description")
-  private @Nullable Node description;
+  private @Nullable List<Node> description;
 
   public ResourceUse() {}
 
@@ -72,19 +73,19 @@ public abstract class ResourceUse extends Locatable {
     this.duration = duration;
   }
 
-  public @Nullable Node getCostData() {
+  public @Nullable List<Node> getCostData() {
     return costData;
   }
 
-  public void setCostData(@Nullable Node costData) {
+  public void setCostData(@Nullable List<Node> costData) {
     this.costData = costData;
   }
 
-  public @Nullable Node getDescription() {
+  public @Nullable List<Node> getDescription() {
     return description;
   }
 
-  public void setDescription(@Nullable Node description) {
+  public void setDescription(@Nullable List<Node> description) {
     this.description = description;
   }
 
