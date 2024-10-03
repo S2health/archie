@@ -1,7 +1,6 @@
 package org.s2.archie.archetypevalidator;
 
 import com.nedap.archie.adlparser.ADLParser;
-import com.nedap.archie.antlr.errors.ANTLRParserErrors;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.archetypevalidator.ArchetypeValidator;
 import com.nedap.archie.archetypevalidator.ValidationMessage;
@@ -14,11 +13,7 @@ import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
 import org.s2.rminfo.S2RmInfoLookup;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
