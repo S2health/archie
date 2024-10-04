@@ -42,7 +42,7 @@ public class ComplexArchetypeValidatorTestS2 {
 
     @Test
     public void testNodeArchetype() {
-        Archetype archetype = repository.getArchetype("s2-EHR-Node.adverse_reaction_event.v1.0.0");
+        Archetype archetype = repository.getArchetype("s2-EHR-Info_node.adverse_reaction_event.v1.0.0");
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         assertEquals(5, messages.size());
@@ -53,7 +53,15 @@ public class ComplexArchetypeValidatorTestS2 {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.0");
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
-        assertEquals(1, messages.size());
+        assertEquals(0, messages.size());
+    }
+
+    @Test
+    public void testObservationArchetype() {
+        Archetype archetype = repository.getArchetype("s2-EHR-Direct_observation.blood_pressure.v3.0.0");
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
+        List<ValidationMessage> messages = validationResult.getErrors();
+        assertEquals(32, messages.size());
     }
 
 
