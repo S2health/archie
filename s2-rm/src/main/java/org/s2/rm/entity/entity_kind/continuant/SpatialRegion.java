@@ -11,6 +11,17 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Spatial_region")
 public abstract class SpatialRegion extends PhysicalEntityKind {
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
+
   public SpatialRegion() {}
 
   public SpatialRegion(String archetypeNodeId, String name) {

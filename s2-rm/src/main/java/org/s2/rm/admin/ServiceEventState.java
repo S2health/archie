@@ -1,8 +1,8 @@
 package org.s2.rm.admin;
 
-import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
+import org.s2.util.enumerations.*;
 
 /**
 * BMM name: Service_event_state
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Service_event_state", propOrder = {"value"})
-public class ServiceEventState extends RMObject {
+public class ServiceEventState extends EnumerationVarString {
   /**
   * Enumeration value.
   */

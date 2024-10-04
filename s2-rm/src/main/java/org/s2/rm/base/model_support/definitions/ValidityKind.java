@@ -1,8 +1,8 @@
 package org.s2.rm.base.model_support.definitions;
 
-import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
+import org.s2.util.enumerations.*;
 
 /**
 * BMM name: Validity_kind
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Validity_kind", propOrder = {"value"})
-public class ValidityKind extends RMObject {
+public class ValidityKind extends EnumerationVarString {
   /**
   * Enumeration value.
   */

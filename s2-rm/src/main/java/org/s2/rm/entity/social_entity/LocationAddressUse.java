@@ -15,7 +15,6 @@ import org.s2.rm.base.patterns.data_structures.Node;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Location_address_use", propOrder = {
-  "uid",
   "description"
 })
 public class LocationAddressUse extends AddressUse {
@@ -33,8 +32,9 @@ public class LocationAddressUse extends AddressUse {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public LocationAddressUse() {}
 
@@ -50,7 +50,7 @@ public class LocationAddressUse extends AddressUse {
     return Objects.equals(getAddressType(), otherAsLocationAddressUse.getAddressType()) &&
       Objects.equals(getPurposes(), otherAsLocationAddressUse.getPurposes()) &&
       Objects.equals(getTimeValidity(), otherAsLocationAddressUse.getTimeValidity()) &&
-      Objects.equals(uid, otherAsLocationAddressUse.uid) &&
+      Objects.equals(getUid(), otherAsLocationAddressUse.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsLocationAddressUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsLocationAddressUse.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsLocationAddressUse.getArchetypeDetails()) &&
@@ -60,7 +60,7 @@ public class LocationAddressUse extends AddressUse {
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid);
+    int result = Objects.hash(super.hashCode());
     result = description == null ? 0 : 31 * result + description.hashCode();
     return result;
   }
@@ -71,14 +71,6 @@ public class LocationAddressUse extends AddressUse {
 
   public void setDescription(@Nullable List<Node> description) {
     this.description = description;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.ObjectRef;
+import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.Locatable;
 
 /**
@@ -15,6 +16,7 @@ import org.s2.rm.base.patterns.archetyped.Locatable;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_relationship_group", propOrder = {
+  "uid",
   "domainType",
   "members"
 })
@@ -32,6 +34,16 @@ public abstract class EntityRelationshipGroup extends Locatable {
   */
   @XmlElement(name = "members")
   private @Nullable List<ObjectRef> members;
+
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "uid")
+  private @Nullable Uuid uid;
 
   public EntityRelationshipGroup() {}
 
@@ -54,6 +66,14 @@ public abstract class EntityRelationshipGroup extends Locatable {
 
   public void setMembers(@Nullable List<ObjectRef> members) {
     this.members = members;
+  }
+
+  public @Nullable Uuid getUid() {
+    return uid;
+  }
+
+  public void setUid(@Nullable Uuid uid) {
+    this.uid = uid;
   }
 
   @Override

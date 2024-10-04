@@ -1,8 +1,8 @@
 package org.s2.rm.care.entry;
 
-import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
+import org.s2.util.enumerations.*;
 
 /**
 * BMM name: Order_execution_state
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Order_execution_state", propOrder = {"value"})
-public class OrderExecutionState extends RMObject {
+public class OrderExecutionState extends EnumerationVarString {
   /**
   * Enumeration value.
   */

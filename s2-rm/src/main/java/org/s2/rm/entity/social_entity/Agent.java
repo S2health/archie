@@ -31,6 +31,17 @@ public abstract class Agent extends Party {
   @XmlElement(name = "languages")
   private @Nullable List<LanguageCapability> languages;
 
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
+
   public Agent() {}
 
   public Agent(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {

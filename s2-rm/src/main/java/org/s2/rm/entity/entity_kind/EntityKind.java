@@ -3,6 +3,7 @@ package org.s2.rm.entity.entity_kind;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
+import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
@@ -14,6 +15,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_kind", propOrder = {
+  "uid",
   "items"
 })
 public abstract class EntityKind extends Locatable {
@@ -23,6 +25,16 @@ public abstract class EntityKind extends Locatable {
   */
   @XmlElement(name = "items")
   private @Nullable List<Node> items;
+
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "uid")
+  private @Nullable Uuid uid;
 
   public EntityKind() {}
 
@@ -36,6 +48,14 @@ public abstract class EntityKind extends Locatable {
 
   public void setItems(@Nullable List<Node> items) {
     this.items = items;
+  }
+
+  public @Nullable Uuid getUid() {
+    return uid;
+  }
+
+  public void setUid(@Nullable Uuid uid) {
+    this.uid = uid;
   }
 
   @Override

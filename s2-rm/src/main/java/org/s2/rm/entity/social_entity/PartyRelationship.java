@@ -18,7 +18,6 @@ import org.s2.rm.entity.entity.EntityRelationship;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Party_relationship", propOrder = {
-  "uid",
   "scoper"
 })
 public class PartyRelationship extends EntityRelationship {
@@ -36,8 +35,9 @@ public class PartyRelationship extends EntityRelationship {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public PartyRelationship() {}
 
@@ -55,7 +55,7 @@ public class PartyRelationship extends EntityRelationship {
       Objects.equals(getTarget(), otherAsPartyRelationship.getTarget()) &&
       Objects.equals(getOtherDetails(), otherAsPartyRelationship.getOtherDetails()) &&
       Objects.equals(getTimeValidity(), otherAsPartyRelationship.getTimeValidity()) &&
-      Objects.equals(uid, otherAsPartyRelationship.uid) &&
+      Objects.equals(getUid(), otherAsPartyRelationship.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsPartyRelationship.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPartyRelationship.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsPartyRelationship.getArchetypeDetails()) &&
@@ -65,7 +65,7 @@ public class PartyRelationship extends EntityRelationship {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, scoper);
+    return Objects.hash(super.hashCode(), scoper);
   }
 
   public @Nullable String getScoper() {
@@ -74,14 +74,6 @@ public class PartyRelationship extends EntityRelationship {
 
   public void setScoper(@Nullable String scoper) {
     this.scoper = scoper;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

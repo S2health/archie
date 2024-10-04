@@ -7,6 +7,7 @@ import org.s2.rm.base.foundation_types.interval.Interval;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDate;
 import org.s2.rm.base.model_support.identification.ObjectRef;
+import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
@@ -18,6 +19,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_relationship", propOrder = {
+  "uid",
   "domainType",
   "source",
   "target",
@@ -59,6 +61,16 @@ public abstract class EntityRelationship extends Locatable {
   */
   @XmlElement(name = "time_validity")
   private @Nullable Interval<RmDate> timeValidity;
+
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "uid")
+  private @Nullable Uuid uid;
 
   public EntityRelationship() {}
 
@@ -107,6 +119,14 @@ public abstract class EntityRelationship extends Locatable {
 
   public void setTimeValidity(@Nullable Interval<RmDate> timeValidity) {
     this.timeValidity = timeValidity;
+  }
+
+  public @Nullable Uuid getUid() {
+    return uid;
+  }
+
+  public void setUid(@Nullable Uuid uid) {
+    this.uid = uid;
   }
 
   @Override

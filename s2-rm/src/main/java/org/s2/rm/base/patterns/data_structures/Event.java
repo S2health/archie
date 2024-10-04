@@ -4,6 +4,7 @@ import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
+import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.Locatable;
 
 /**
@@ -14,6 +15,7 @@ import org.s2.rm.base.patterns.archetyped.Locatable;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Event", propOrder = {
+  "uid",
   "time",
   "items"
 })
@@ -31,6 +33,16 @@ public abstract class Event extends Locatable {
   */
   @XmlElement(name = "items")
   private @Nullable List<Node> items;
+
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "uid")
+  private @Nullable Uuid uid;
 
   public Event() {}
 
@@ -53,6 +65,14 @@ public abstract class Event extends Locatable {
 
   public void setItems(@Nullable List<Node> items) {
     this.items = items;
+  }
+
+  public @Nullable Uuid getUid() {
+    return uid;
+  }
+
+  public void setUid(@Nullable Uuid uid) {
+    this.uid = uid;
   }
 
   @Override

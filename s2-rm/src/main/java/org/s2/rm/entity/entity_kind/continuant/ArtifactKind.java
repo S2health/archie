@@ -1,7 +1,6 @@
 package org.s2.rm.entity.entity_kind.continuant;
 
 import java.util.*;
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
@@ -14,10 +13,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 * BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Artifact_kind", propOrder = {
-  "parts",
-  "uid"
-})
+@XmlType(name = "Artifact_kind")
 public class ArtifactKind extends IndependentObjectKind {
 
   // Properties added from the extended class: ObjectExtensionKind
@@ -26,8 +22,9 @@ public class ArtifactKind extends IndependentObjectKind {
   * BMM name: parts | BMM type: {@code List<Object_extension_kind>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
-  @XmlElement(name = "parts")
-  private @Nullable List<ObjectExtensionKind> parts;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable List<ObjectExtensionKind> parts;
 
 
   // Properties added from the extended class: Locatable
@@ -36,8 +33,9 @@ public class ArtifactKind extends IndependentObjectKind {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public ArtifactKind() {}
 
@@ -50,9 +48,9 @@ public class ArtifactKind extends IndependentObjectKind {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     ArtifactKind otherAsArtifactKind = (ArtifactKind) other;
-    return Objects.equals(parts, otherAsArtifactKind.parts) &&
+    return Objects.equals(getParts(), otherAsArtifactKind.getParts()) &&
       Objects.equals(getItems(), otherAsArtifactKind.getItems()) &&
-      Objects.equals(uid, otherAsArtifactKind.uid) &&
+      Objects.equals(getUid(), otherAsArtifactKind.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsArtifactKind.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsArtifactKind.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsArtifactKind.getArchetypeDetails()) &&
@@ -61,25 +59,7 @@ public class ArtifactKind extends IndependentObjectKind {
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid);
-    result = parts == null ? 0 : 31 * result + parts.hashCode();
-    return result;
-  }
-
-  public @Nullable List<ObjectExtensionKind> getParts() {
-    return parts;
-  }
-
-  public void setParts(@Nullable List<ObjectExtensionKind> parts) {
-    this.parts = parts;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
+    return Objects.hash(super.hashCode());
   }
 
   @Override

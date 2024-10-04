@@ -19,7 +19,6 @@ import org.s2.rm.entity.entity.Entity;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Process", propOrder = {
-  "uid",
   "startTime",
   "endTime",
   "participations"
@@ -53,8 +52,9 @@ public class Process extends Entity {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public Process() {}
 
@@ -70,7 +70,7 @@ public class Process extends Entity {
     return Objects.equals(getDomainType(), otherAsProcess.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsProcess.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsProcess.getOtherDetails()) &&
-      Objects.equals(uid, otherAsProcess.uid) &&
+      Objects.equals(getUid(), otherAsProcess.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsProcess.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsProcess.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsProcess.getArchetypeDetails()) &&
@@ -82,7 +82,7 @@ public class Process extends Entity {
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid, startTime, endTime);
+    int result = Objects.hash(super.hashCode(), startTime, endTime);
     result = participations == null ? 0 : 31 * result + participations.hashCode();
     return result;
   }
@@ -109,14 +109,6 @@ public class Process extends Entity {
 
   public void setParticipations(@Nullable List<Participation> participations) {
     this.participations = participations;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

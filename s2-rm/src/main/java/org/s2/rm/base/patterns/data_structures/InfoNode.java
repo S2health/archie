@@ -16,7 +16,6 @@ import org.s2.rm.base.patterns.archetyped.Link;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Info_node", propOrder = {
-  "uid",
   "originalValue"
 })
 public class InfoNode extends Node {
@@ -34,8 +33,9 @@ public class InfoNode extends Node {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public InfoNode() {}
 
@@ -55,7 +55,7 @@ public class InfoNode extends Node {
       Objects.equals(getCode(), otherAsInfoNode.getCode()) &&
       Objects.equals(getOriginalCode(), otherAsInfoNode.getOriginalCode()) &&
       Objects.equals(getLinks(), otherAsInfoNode.getLinks()) &&
-      Objects.equals(uid, otherAsInfoNode.uid) &&
+      Objects.equals(getUid(), otherAsInfoNode.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsInfoNode.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsInfoNode.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsInfoNode.getArchetypeDetails()) &&
@@ -65,7 +65,7 @@ public class InfoNode extends Node {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, originalValue);
+    return Objects.hash(super.hashCode(), originalValue);
   }
 
   public @Nullable DataValue getOriginalValue() {
@@ -74,14 +74,6 @@ public class InfoNode extends Node {
 
   public void setOriginalValue(@Nullable DataValue originalValue) {
     this.originalValue = originalValue;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

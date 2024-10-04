@@ -15,7 +15,6 @@ import org.s2.rm.base.patterns.archetyped.FeederAudit;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Comms_address_use", propOrder = {
-  "uid",
   "address",
   "addressPlatform"
 })
@@ -41,8 +40,9 @@ public class CommsAddressUse extends AddressUse {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public CommsAddressUse() {}
 
@@ -59,7 +59,7 @@ public class CommsAddressUse extends AddressUse {
     return Objects.equals(getAddressType(), otherAsCommsAddressUse.getAddressType()) &&
       Objects.equals(getPurposes(), otherAsCommsAddressUse.getPurposes()) &&
       Objects.equals(getTimeValidity(), otherAsCommsAddressUse.getTimeValidity()) &&
-      Objects.equals(uid, otherAsCommsAddressUse.uid) &&
+      Objects.equals(getUid(), otherAsCommsAddressUse.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsCommsAddressUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsCommsAddressUse.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsCommsAddressUse.getArchetypeDetails()) &&
@@ -70,7 +70,7 @@ public class CommsAddressUse extends AddressUse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, address, addressPlatform);
+    return Objects.hash(super.hashCode(), address, addressPlatform);
   }
 
   public String getAddress() {
@@ -87,14 +87,6 @@ public class CommsAddressUse extends AddressUse {
 
   public void setAddressPlatform(@Nullable TerminologyTerm addressPlatform) {
     this.addressPlatform = addressPlatform;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

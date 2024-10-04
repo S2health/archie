@@ -19,6 +19,17 @@ public abstract class ObjectExtensionKind extends MaterialEntityKind {
   // Skip the property in the parent class (this one).
   // private @Nullable List<ObjectExtensionKind> parts;
 
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
+
   public ObjectExtensionKind() {}
 
   public ObjectExtensionKind(String archetypeNodeId, String name) {

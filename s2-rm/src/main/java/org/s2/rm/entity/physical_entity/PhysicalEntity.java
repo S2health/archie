@@ -20,7 +20,6 @@ import org.s2.rm.entity.entity_kind.continuant.PhysicalEntityKind;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Physical_entity", propOrder = {
-  "uid",
   "kind",
   "kindRef"
 })
@@ -46,8 +45,9 @@ public class PhysicalEntity<K extends PhysicalEntityKind> extends Entity {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public PhysicalEntity() {}
 
@@ -63,7 +63,7 @@ public class PhysicalEntity<K extends PhysicalEntityKind> extends Entity {
     return Objects.equals(getDomainType(), otherAsPhysicalEntity.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsPhysicalEntity.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsPhysicalEntity.getOtherDetails()) &&
-      Objects.equals(uid, otherAsPhysicalEntity.uid) &&
+      Objects.equals(getUid(), otherAsPhysicalEntity.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsPhysicalEntity.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPhysicalEntity.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsPhysicalEntity.getArchetypeDetails()) &&
@@ -74,7 +74,7 @@ public class PhysicalEntity<K extends PhysicalEntityKind> extends Entity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, kind, kindRef);
+    return Objects.hash(super.hashCode(), kind, kindRef);
   }
 
   public @Nullable K getKind() {
@@ -91,14 +91,6 @@ public class PhysicalEntity<K extends PhysicalEntityKind> extends Entity {
 
   public void setKindRef(@Nullable ObjectRef kindRef) {
     this.kindRef = kindRef;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

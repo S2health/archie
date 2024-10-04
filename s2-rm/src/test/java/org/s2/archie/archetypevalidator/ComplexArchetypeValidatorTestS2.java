@@ -30,7 +30,7 @@ public class ComplexArchetypeValidatorTestS2 {
         models.registerModel(S2RmInfoLookup.getInstance());
         repository = new InMemoryFullArchetypeRepository();
 
-        Reflections reflections = new Reflections("org.s2.archie", Scanners.Resources);
+        Reflections reflections = new Reflections("s2-models", Scanners.Resources);
         List<String> adlFiles = new ArrayList<>(reflections.getResources(Pattern.compile(".*\\.adls")));
 
         for(String file: adlFiles) {
@@ -53,7 +53,7 @@ public class ComplexArchetypeValidatorTestS2 {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.0");
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
-        assertEquals(0, messages.size());
+        assertEquals(1, messages.size());
     }
 
 

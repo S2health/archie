@@ -1,8 +1,8 @@
 package org.s2.rm.base.change_control;
 
-import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
+import org.s2.util.enumerations.*;
 
 /**
 * BMM name: Attestation_reason
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Attestation_reason", propOrder = {"value"})
-public class AttestationReason extends RMObject {
+public class AttestationReason extends EnumerationVarString {
   /**
   * Enumeration value.
   */

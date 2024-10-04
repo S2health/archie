@@ -2,7 +2,6 @@ package org.s2.rm.entity.resource;
 
 import java.math.BigDecimal;
 import java.util.*;
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
@@ -17,7 +16,6 @@ import org.s2.rm.base.patterns.data_structures.Node;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Consumable_use", propOrder = {
-  "uid",
   "amount"
 })
 public class ConsumableUse extends ResourceUse {
@@ -35,8 +33,9 @@ public class ConsumableUse extends ResourceUse {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public ConsumableUse() {}
 
@@ -53,7 +52,7 @@ public class ConsumableUse extends ResourceUse {
       Objects.equals(getDuration(), otherAsConsumableUse.getDuration()) &&
       Objects.equals(getCostData(), otherAsConsumableUse.getCostData()) &&
       Objects.equals(getDescription(), otherAsConsumableUse.getDescription()) &&
-      Objects.equals(uid, otherAsConsumableUse.uid) &&
+      Objects.equals(getUid(), otherAsConsumableUse.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsConsumableUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsConsumableUse.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsConsumableUse.getArchetypeDetails()) &&
@@ -63,7 +62,7 @@ public class ConsumableUse extends ResourceUse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, amount);
+    return Objects.hash(super.hashCode(), amount);
   }
 
   public BigDecimal getAmount() {
@@ -72,14 +71,6 @@ public class ConsumableUse extends ResourceUse {
 
   public void setAmount(BigDecimal amount) {
     this.amount = amount;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

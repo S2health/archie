@@ -16,7 +16,6 @@ import org.s2.rm.base.patterns.archetyped.Link;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_ref_node", propOrder = {
-  "uid",
   "isSelf",
   "entityRef"
 })
@@ -42,8 +41,9 @@ public class EntityRefNode extends Node {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public EntityRefNode() {}
 
@@ -64,7 +64,7 @@ public class EntityRefNode extends Node {
       Objects.equals(getCode(), otherAsEntityRefNode.getCode()) &&
       Objects.equals(getOriginalCode(), otherAsEntityRefNode.getOriginalCode()) &&
       Objects.equals(getLinks(), otherAsEntityRefNode.getLinks()) &&
-      Objects.equals(uid, otherAsEntityRefNode.uid) &&
+      Objects.equals(getUid(), otherAsEntityRefNode.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsEntityRefNode.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsEntityRefNode.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsEntityRefNode.getArchetypeDetails()) &&
@@ -75,7 +75,7 @@ public class EntityRefNode extends Node {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, isSelf, entityRef);
+    return Objects.hash(super.hashCode(), isSelf, entityRef);
   }
 
   public boolean getIsSelf() {
@@ -92,14 +92,6 @@ public class EntityRefNode extends Node {
 
   public void setEntityRef(@Nullable ObjectRef entityRef) {
     this.entityRef = entityRef;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

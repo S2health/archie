@@ -39,6 +39,17 @@ public abstract class InfoItem extends Locatable {
   @XmlElement(name = "links")
   private @Nullable List<Link> links;
 
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
+
   public InfoItem() {}
 
   public InfoItem(String archetypeNodeId, String name) {

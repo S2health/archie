@@ -17,7 +17,6 @@ import org.s2.rm.base.patterns.archetyped.FeederAudit;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Interval_event", propOrder = {
-  "uid",
   "width",
   "sampleCount",
   "sampleFunction"
@@ -51,8 +50,9 @@ public class IntervalEvent extends Event {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public IntervalEvent() {}
 
@@ -68,7 +68,7 @@ public class IntervalEvent extends Event {
     IntervalEvent otherAsIntervalEvent = (IntervalEvent) other;
     return Objects.equals(getTime(), otherAsIntervalEvent.getTime()) &&
       Objects.equals(getItems(), otherAsIntervalEvent.getItems()) &&
-      Objects.equals(uid, otherAsIntervalEvent.uid) &&
+      Objects.equals(getUid(), otherAsIntervalEvent.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsIntervalEvent.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsIntervalEvent.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsIntervalEvent.getArchetypeDetails()) &&
@@ -80,7 +80,7 @@ public class IntervalEvent extends Event {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, width, sampleCount, sampleFunction);
+    return Objects.hash(super.hashCode(), width, sampleCount, sampleFunction);
   }
 
   public RmDuration getWidth() {
@@ -105,14 +105,6 @@ public class IntervalEvent extends Event {
 
   public void setSampleFunction(@Nullable SampleFunctionKind sampleFunction) {
     this.sampleFunction = sampleFunction;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

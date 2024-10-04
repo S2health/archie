@@ -20,7 +20,6 @@ import org.s2.rm.entity.social_entity.IdUse;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Billing_encounter", propOrder = {
-  "uid",
   "identifier",
   "externalIdentifiers",
   "interactionType",
@@ -70,8 +69,9 @@ public class BillingEncounter extends CareProcess {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public BillingEncounter() {}
 
@@ -93,7 +93,7 @@ public class BillingEncounter extends CareProcess {
       Objects.equals(getDomainType(), otherAsBillingEncounter.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsBillingEncounter.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsBillingEncounter.getOtherDetails()) &&
-      Objects.equals(uid, otherAsBillingEncounter.uid) &&
+      Objects.equals(getUid(), otherAsBillingEncounter.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsBillingEncounter.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsBillingEncounter.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsBillingEncounter.getArchetypeDetails()) &&
@@ -107,7 +107,7 @@ public class BillingEncounter extends CareProcess {
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid, identifier, interactionType, lifecycleState);
+    int result = Objects.hash(super.hashCode(), identifier, interactionType, lifecycleState);
     result = externalIdentifiers == null ? 0 : 31 * result + externalIdentifiers.hashCode();
     result = serviceEvents == null ? 0 : 31 * result + serviceEvents.hashCode();
     return result;
@@ -151,14 +151,6 @@ public class BillingEncounter extends CareProcess {
 
   public void setServiceEvents(@Nullable List<ServiceEvent> serviceEvents) {
     this.serviceEvents = serviceEvents;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

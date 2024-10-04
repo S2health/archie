@@ -1,8 +1,8 @@
 package org.s2.rm.base.data_types.quantity;
 
-import com.nedap.archie.base.RMObject;
 import java.util.*;
 import javax.xml.bind.annotation.*;
+import org.s2.util.enumerations.*;
 
 /**
 * BMM name: Ratio_kind
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ratio_kind", propOrder = {"value"})
-public class RatioKind extends RMObject {
+public class RatioKind extends EnumerationVarInteger {
   /**
   * Enumeration value.
   */

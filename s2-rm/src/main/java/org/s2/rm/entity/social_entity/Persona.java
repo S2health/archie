@@ -19,7 +19,6 @@ import org.s2.rm.base.patterns.data_structures.Node;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Persona", propOrder = {
-  "uid",
   "performer",
   "timeValidity",
   "capabilities"
@@ -53,8 +52,9 @@ public class Persona extends Party {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public Persona() {}
 
@@ -76,7 +76,7 @@ public class Persona extends Party {
       Objects.equals(getDomainType(), otherAsPersona.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsPersona.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsPersona.getOtherDetails()) &&
-      Objects.equals(uid, otherAsPersona.uid) &&
+      Objects.equals(getUid(), otherAsPersona.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsPersona.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPersona.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsPersona.getArchetypeDetails()) &&
@@ -88,7 +88,7 @@ public class Persona extends Party {
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid, performer, timeValidity);
+    int result = Objects.hash(super.hashCode(), performer, timeValidity);
     result = capabilities == null ? 0 : 31 * result + capabilities.hashCode();
     return result;
   }
@@ -115,14 +115,6 @@ public class Persona extends Party {
 
   public void setCapabilities(@Nullable List<Capability> capabilities) {
     this.capabilities = capabilities;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

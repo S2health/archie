@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.foundation_types.time.RmDuration;
+import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.Locatable;
 import org.s2.rm.base.patterns.data_structures.Node;
 
@@ -16,6 +17,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Resource_use", propOrder = {
+  "uid",
   "startTime",
   "duration",
   "costData",
@@ -49,6 +51,16 @@ public abstract class ResourceUse extends Locatable {
   */
   @XmlElement(name = "description")
   private @Nullable List<Node> description;
+
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "uid")
+  private @Nullable Uuid uid;
 
   public ResourceUse() {}
 
@@ -87,6 +99,14 @@ public abstract class ResourceUse extends Locatable {
 
   public void setDescription(@Nullable List<Node> description) {
     this.description = description;
+  }
+
+  public @Nullable Uuid getUid() {
+    return uid;
+  }
+
+  public void setUid(@Nullable Uuid uid) {
+    this.uid = uid;
   }
 
   @Override

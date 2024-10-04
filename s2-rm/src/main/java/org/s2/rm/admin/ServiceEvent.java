@@ -19,7 +19,6 @@ import org.s2.rm.entity.occurrent.CareProcess;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Service_event", propOrder = {
-  "uid",
   "lifecycleState",
   "facility"
 })
@@ -45,8 +44,9 @@ public class ServiceEvent extends CareProcess {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public ServiceEvent() {}
 
@@ -67,7 +67,7 @@ public class ServiceEvent extends CareProcess {
       Objects.equals(getDomainType(), otherAsServiceEvent.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsServiceEvent.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsServiceEvent.getOtherDetails()) &&
-      Objects.equals(uid, otherAsServiceEvent.uid) &&
+      Objects.equals(getUid(), otherAsServiceEvent.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsServiceEvent.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsServiceEvent.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsServiceEvent.getArchetypeDetails()) &&
@@ -78,7 +78,7 @@ public class ServiceEvent extends CareProcess {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid, lifecycleState, facility);
+    return Objects.hash(super.hashCode(), lifecycleState, facility);
   }
 
   public @Nullable ServiceEventState getLifecycleState() {
@@ -95,14 +95,6 @@ public class ServiceEvent extends CareProcess {
 
   public void setFacility(@Nullable EntityRefNode facility) {
     this.facility = facility;
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
   }
 
   @Override

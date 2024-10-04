@@ -1,7 +1,6 @@
 package org.s2.rm.entity.resource;
 
 import java.util.*;
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
@@ -15,9 +14,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 * BMM schema: S2RM 0.8.5
 */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Service_use", propOrder = {
-  "uid"
-})
+@XmlType(name = "Service_use")
 public class ServiceUse extends ResourceUse {
 
   // Properties added from the extended class: Locatable
@@ -26,8 +23,9 @@ public class ServiceUse extends ResourceUse {
   * BMM name: uid | BMM type: Uuid
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
-  @XmlElement(name = "uid")
-  private @Nullable Uuid uid;
+  // This property is in at least one descendant where it probably has a different type.
+  // Skip the property in the parent class (this one).
+  // private @Nullable Uuid uid;
 
   public ServiceUse() {}
 
@@ -44,7 +42,7 @@ public class ServiceUse extends ResourceUse {
       Objects.equals(getDuration(), otherAsServiceUse.getDuration()) &&
       Objects.equals(getCostData(), otherAsServiceUse.getCostData()) &&
       Objects.equals(getDescription(), otherAsServiceUse.getDescription()) &&
-      Objects.equals(uid, otherAsServiceUse.uid) &&
+      Objects.equals(getUid(), otherAsServiceUse.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsServiceUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsServiceUse.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsServiceUse.getArchetypeDetails()) &&
@@ -53,15 +51,7 @@ public class ServiceUse extends ResourceUse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), uid);
-  }
-
-  public @Nullable Uuid getUid() {
-    return uid;
-  }
-
-  public void setUid(@Nullable Uuid uid) {
-    this.uid = uid;
+    return Objects.hash(super.hashCode());
   }
 
   @Override

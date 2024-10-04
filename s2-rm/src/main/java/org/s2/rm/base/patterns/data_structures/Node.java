@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.*;
 import org.s2.rm.base.data_types.DataValue;
 import org.s2.rm.base.data_types.text.Text;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
+import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.InfoItem;
 
 /**
@@ -16,6 +17,7 @@ import org.s2.rm.base.patterns.archetyped.InfoItem;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Node", propOrder = {
+  "uid",
   "value",
   "nullFlavor",
   "nullReason",
@@ -50,6 +52,16 @@ public abstract class Node extends InfoItem {
   */
   @XmlElement(name = "items")
   private @Nullable List<Node> items;
+
+
+  // Properties added from the extended class: Locatable
+
+  /**
+  * BMM name: uid | BMM type: Uuid
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "uid")
+  private @Nullable Uuid uid;
 
   public Node() {}
 
@@ -87,6 +99,14 @@ public abstract class Node extends InfoItem {
 
   public void setItems(@Nullable List<Node> items) {
     this.items = items;
+  }
+
+  public @Nullable Uuid getUid() {
+    return uid;
+  }
+
+  public void setUid(@Nullable Uuid uid) {
+    this.uid = uid;
   }
 
   @Override
