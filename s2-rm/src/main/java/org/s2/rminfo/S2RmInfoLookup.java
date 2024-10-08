@@ -28,7 +28,7 @@ import org.s2.rm.base.patterns.archetyped.*;
 import org.s2.rm.base.model_support.definitions.*;
 import org.s2.rm.base.model_support.identification.*;
 import org.s2.rm.base.patterns.data_structures.*;
-import org.s2.rm.base.patterns.participation.*;
+import org.s2.rm.base.patterns.domain_data_structures.*;
 import org.s2.rm.care.composition.*;
 import org.s2.rm.care.ehr.*;
 import org.s2.rm.care.entry.*;
@@ -92,7 +92,6 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         addClass(Accountability.class);
         addClass(Action.class);
         addClass(Activity.class);
-        addClass(Address.class);
         addClass(AddressUse.class);
         addClass(AdminEntry.class);
         addClass(Agent.class);
@@ -176,7 +175,6 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         addClass(LanguageCapability.class);
         addClass(Link.class);
         addClass(Locatable.class);
-        addClass(LocatableRef.class);
         addClass(LocationAddressUse.class);
         addClass(MaterialEntity.class);
         addClass(MaterialEntityKind.class);
@@ -192,7 +190,6 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         addClass(ObjectExtensionKind.class);
         addClass(ObjectId.class);
         addClass(ObjectRef.class);
-        addClass(ObjectVersionId.class);
         addClass(Observation.class);
         addClass(Occurrence.class);
         addClass(OccurrencePattern.class);
@@ -211,12 +208,8 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         addClass(Parsable.class);
         addClass(Participation.class);
         addClass(Party.class);
-        addClass(PartyIdentified.class);
         addClass(PartyIdentity.class);
-        addClass(PartyProxy.class);
-        addClass(PartyRelated.class);
         addClass(PartyRelationship.class);
-        addClass(PartySelf.class);
         addClass(Pathable.class);
         addClass(PeriodSpecifier.class);
         addClass(Person.class);
