@@ -5,12 +5,16 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
+import org.s2.rm.base.patterns.domain_data_structures.CommsAddressUse;
+import org.s2.rm.base.patterns.domain_data_structures.IdUse;
+import org.s2.rm.base.patterns.domain_data_structures.LocationAddressUse;
+import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
 
 /**
 * BMM name: Party
 * BMM ancestors: Social_entity
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Party", propOrder = {

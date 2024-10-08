@@ -1,4 +1,4 @@
-package org.s2.rm.base.patterns.participation;
+package org.s2.rm.base.patterns.data_structures;
 
 import java.util.*;
 import javax.annotation.Nullable;
@@ -9,13 +9,12 @@ import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.archetyped.Locatable;
-import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 
 /**
 * BMM name: Participation
 * BMM ancestors: Locatable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Participation", propOrder = {

@@ -7,7 +7,7 @@ import org.s2.util.enumerations.*;
 /**
 * BMM name: Ratio_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ratio_kind", propOrder = {"value"})

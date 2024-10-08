@@ -1,4 +1,4 @@
-package org.s2.rm.entity.social_entity;
+package org.s2.rm.base.patterns.domain_data_structures;
 
 import java.util.*;
 import javax.annotation.Nullable;
@@ -6,13 +6,14 @@ import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
-import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.InfoItem;
+import org.s2.rm.base.patterns.archetyped.Link;
 
 /**
 * BMM name: Language_capability
-* BMM ancestors: Locatable
+* BMM ancestors: Info_item
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Language_capability", propOrder = {
@@ -20,7 +21,7 @@ import org.s2.rm.base.patterns.archetyped.Locatable;
   "language",
   "preferred"
 })
-public class LanguageCapability extends Locatable {
+public class LanguageCapability extends InfoItem {
   /**
   * BMM name: language | BMM type: Terminology_code
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
@@ -58,7 +59,10 @@ public class LanguageCapability extends Locatable {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     LanguageCapability otherAsLanguageCapability = (LanguageCapability) other;
-    return Objects.equals(uid, otherAsLanguageCapability.uid) &&
+    return Objects.equals(getCode(), otherAsLanguageCapability.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsLanguageCapability.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsLanguageCapability.getLinks()) &&
+      Objects.equals(uid, otherAsLanguageCapability.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsLanguageCapability.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsLanguageCapability.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsLanguageCapability.getArchetypeDetails()) &&

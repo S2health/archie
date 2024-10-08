@@ -11,7 +11,7 @@ import org.s2.rm.base.data_types.text.Text;
 * BMM generic parameters: {@code Measured<V Measurable>}
 * BMM ancestors: Ordered_datum
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Measured", propOrder = {

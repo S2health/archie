@@ -11,7 +11,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 * BMM name: Facility_kind
 * BMM ancestors: Object_aggregate_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Facility_kind", propOrder = {

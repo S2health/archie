@@ -1,4 +1,4 @@
-package org.s2.rm.entity.social_entity;
+package org.s2.rm.base.patterns.domain_data_structures;
 
 import java.util.*;
 import javax.annotation.Nullable;
@@ -8,36 +8,29 @@ import org.s2.rm.base.foundation_types.interval.Interval;
 import org.s2.rm.base.foundation_types.time.RmDate;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
-import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.Link;
+import org.s2.rm.base.patterns.data_structures.InfoNode;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Capability
-* BMM ancestors: Locatable
+* BMM ancestors: Info_node
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Capability", propOrder = {
   "uid",
   "description",
-  "credentials",
   "timeValidity"
 })
-public class Capability extends Locatable {
+public class Capability extends InfoNode {
   /**
   * BMM name: description | BMM type: Text
-  * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
-  */
-  @XmlElement(name = "description")
-  private Text description;
-
-  /**
-  * BMM name: credentials | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
-  @XmlElement(name = "credentials")
-  private @Nullable List<Node> credentials;
+  @XmlElement(name = "description")
+  private @Nullable Text description;
 
   /**
   * BMM name: time_validity | BMM type: {@code Interval<Date>}
@@ -58,9 +51,8 @@ public class Capability extends Locatable {
 
   public Capability() {}
 
-  public Capability(Text description, String archetypeNodeId, String name) {
+  public Capability(String archetypeNodeId, String name) {
     super(archetypeNodeId, name);
-    this.description = description;
   }
 
   @Override
@@ -68,37 +60,34 @@ public class Capability extends Locatable {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     Capability otherAsCapability = (Capability) other;
-    return Objects.equals(uid, otherAsCapability.uid) &&
+    return Objects.equals(getOriginalValue(), otherAsCapability.getOriginalValue()) &&
+      Objects.equals(getValue(), otherAsCapability.getValue()) &&
+      Objects.equals(getNullFlavor(), otherAsCapability.getNullFlavor()) &&
+      Objects.equals(getNullReason(), otherAsCapability.getNullReason()) &&
+      Objects.equals(getItems(), otherAsCapability.getItems()) &&
+      Objects.equals(getCode(), otherAsCapability.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsCapability.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsCapability.getLinks()) &&
+      Objects.equals(uid, otherAsCapability.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsCapability.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsCapability.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsCapability.getArchetypeDetails()) &&
       Objects.equals(getFeederAudit(), otherAsCapability.getFeederAudit()) &&
       Objects.equals(description, otherAsCapability.description) &&
-      Objects.equals(credentials, otherAsCapability.credentials) &&
       Objects.equals(timeValidity, otherAsCapability.timeValidity);
   }
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid, description, timeValidity);
-    result = credentials == null ? 0 : 31 * result + credentials.hashCode();
-    return result;
+    return Objects.hash(super.hashCode(), uid, description, timeValidity);
   }
 
-  public Text getDescription() {
+  public @Nullable Text getDescription() {
     return description;
   }
 
-  public void setDescription(Text description) {
+  public void setDescription(@Nullable Text description) {
     this.description = description;
-  }
-
-  public @Nullable List<Node> getCredentials() {
-    return credentials;
-  }
-
-  public void setCredentials(@Nullable List<Node> credentials) {
-    this.credentials = credentials;
   }
 
   public @Nullable Interval<RmDate> getTimeValidity() {

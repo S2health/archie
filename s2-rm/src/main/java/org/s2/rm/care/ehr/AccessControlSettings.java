@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
 /**
 * BMM name: Access_control_settings
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Access_control_settings")

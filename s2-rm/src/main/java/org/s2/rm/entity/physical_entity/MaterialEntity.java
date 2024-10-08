@@ -8,15 +8,15 @@ import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.data_structures.Node;
+import org.s2.rm.base.patterns.domain_data_structures.IdUse;
 import org.s2.rm.entity.entity_kind.continuant.MaterialEntityKind;
-import org.s2.rm.entity.social_entity.IdUse;
 
 /**
 * BMM name: Material_entity
 * BMM generic parameters: {@code Material_entity<K Material_entity_kind>}
 * BMM ancestors: {@code Physical_entity<K>}
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Material_entity", propOrder = {

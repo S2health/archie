@@ -10,7 +10,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 * BMM name: Fiat_line
 * BMM ancestors: Material_location
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Fiat_line", propOrder = {

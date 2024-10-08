@@ -1,4 +1,4 @@
-package org.s2.rm.entity.social_entity;
+package org.s2.rm.base.patterns.domain_data_structures;
 
 import java.util.*;
 import javax.annotation.Nullable;
@@ -7,29 +7,23 @@ import org.s2.rm.base.data_types.timing.Timing;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
-import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.Link;
+import org.s2.rm.base.patterns.data_structures.InfoNode;
+import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Address_use
-* BMM ancestors: Locatable
+* BMM ancestors: Info_node
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Address_use", propOrder = {
   "uid",
-  "addressType",
   "purposes",
   "timeValidity"
 })
-public class AddressUse extends Locatable {
-  /**
-  * BMM name: address_type | BMM type: Terminology_term
-  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
-  */
-  @XmlElement(name = "address_type")
-  private @Nullable TerminologyTerm addressType;
-
+public class AddressUse extends InfoNode {
   /**
   * BMM name: purposes | BMM type: {@code List<Terminology_term>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
@@ -65,29 +59,28 @@ public class AddressUse extends Locatable {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     AddressUse otherAsAddressUse = (AddressUse) other;
-    return Objects.equals(uid, otherAsAddressUse.uid) &&
+    return Objects.equals(getOriginalValue(), otherAsAddressUse.getOriginalValue()) &&
+      Objects.equals(getValue(), otherAsAddressUse.getValue()) &&
+      Objects.equals(getNullFlavor(), otherAsAddressUse.getNullFlavor()) &&
+      Objects.equals(getNullReason(), otherAsAddressUse.getNullReason()) &&
+      Objects.equals(getItems(), otherAsAddressUse.getItems()) &&
+      Objects.equals(getCode(), otherAsAddressUse.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsAddressUse.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsAddressUse.getLinks()) &&
+      Objects.equals(uid, otherAsAddressUse.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsAddressUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsAddressUse.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsAddressUse.getArchetypeDetails()) &&
       Objects.equals(getFeederAudit(), otherAsAddressUse.getFeederAudit()) &&
-      Objects.equals(addressType, otherAsAddressUse.addressType) &&
       Objects.equals(purposes, otherAsAddressUse.purposes) &&
       Objects.equals(timeValidity, otherAsAddressUse.timeValidity);
   }
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), uid, addressType, timeValidity);
+    int result = Objects.hash(super.hashCode(), uid, timeValidity);
     result = purposes == null ? 0 : 31 * result + purposes.hashCode();
     return result;
-  }
-
-  public @Nullable TerminologyTerm getAddressType() {
-    return addressType;
-  }
-
-  public void setAddressType(@Nullable TerminologyTerm addressType) {
-    this.addressType = addressType;
   }
 
   public @Nullable List<TerminologyTerm> getPurposes() {

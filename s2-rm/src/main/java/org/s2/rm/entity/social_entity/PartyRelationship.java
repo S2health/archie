@@ -14,7 +14,7 @@ import org.s2.rm.entity.entity.EntityRelationship;
 * BMM name: Party_relationship
 * BMM ancestors: Entity_relationship
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Party_relationship", propOrder = {

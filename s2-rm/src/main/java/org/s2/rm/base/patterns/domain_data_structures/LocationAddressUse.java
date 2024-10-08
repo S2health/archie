@@ -1,30 +1,21 @@
-package org.s2.rm.entity.social_entity;
+package org.s2.rm.base.patterns.domain_data_structures;
 
 import java.util.*;
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Location_address_use
 * BMM ancestors: Address_use
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Location_address_use", propOrder = {
-  "description"
-})
+@XmlType(name = "Location_address_use")
 public class LocationAddressUse extends AddressUse {
-  /**
-  * BMM name: description | BMM type: {@code List<Node>}
-  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
-  */
-  @XmlElement(name = "description")
-  private @Nullable List<Node> description;
-
 
   // Properties added from the extended class: Locatable
 
@@ -47,30 +38,26 @@ public class LocationAddressUse extends AddressUse {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     LocationAddressUse otherAsLocationAddressUse = (LocationAddressUse) other;
-    return Objects.equals(getAddressType(), otherAsLocationAddressUse.getAddressType()) &&
-      Objects.equals(getPurposes(), otherAsLocationAddressUse.getPurposes()) &&
+    return Objects.equals(getPurposes(), otherAsLocationAddressUse.getPurposes()) &&
       Objects.equals(getTimeValidity(), otherAsLocationAddressUse.getTimeValidity()) &&
+      Objects.equals(getOriginalValue(), otherAsLocationAddressUse.getOriginalValue()) &&
+      Objects.equals(getValue(), otherAsLocationAddressUse.getValue()) &&
+      Objects.equals(getNullFlavor(), otherAsLocationAddressUse.getNullFlavor()) &&
+      Objects.equals(getNullReason(), otherAsLocationAddressUse.getNullReason()) &&
+      Objects.equals(getItems(), otherAsLocationAddressUse.getItems()) &&
+      Objects.equals(getCode(), otherAsLocationAddressUse.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsLocationAddressUse.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsLocationAddressUse.getLinks()) &&
       Objects.equals(getUid(), otherAsLocationAddressUse.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsLocationAddressUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsLocationAddressUse.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsLocationAddressUse.getArchetypeDetails()) &&
-      Objects.equals(getFeederAudit(), otherAsLocationAddressUse.getFeederAudit()) &&
-      Objects.equals(description, otherAsLocationAddressUse.description);
+      Objects.equals(getFeederAudit(), otherAsLocationAddressUse.getFeederAudit());
   }
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode());
-    result = description == null ? 0 : 31 * result + description.hashCode();
-    return result;
-  }
-
-  public @Nullable List<Node> getDescription() {
-    return description;
-  }
-
-  public void setDescription(@Nullable List<Node> description) {
-    this.description = description;
+    return Objects.hash(super.hashCode());
   }
 
   @Override

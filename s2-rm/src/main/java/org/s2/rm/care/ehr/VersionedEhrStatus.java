@@ -11,7 +11,7 @@ import org.s2.rm.base.model_support.identification.Uuid;
 * BMM name: Versioned_ehr_status
 * BMM ancestors: {@code Versioned_object<Folder>}
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Versioned_ehr_status")

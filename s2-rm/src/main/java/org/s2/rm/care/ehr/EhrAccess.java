@@ -11,7 +11,7 @@ import org.s2.rm.base.patterns.archetyped.Locatable;
 * BMM name: Ehr_access
 * BMM ancestors: Locatable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ehr_access", propOrder = {

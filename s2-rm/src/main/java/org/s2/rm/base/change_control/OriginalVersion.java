@@ -3,15 +3,15 @@ package org.s2.rm.base.change_control;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
+import org.s2.rm.base.model_support.identification.ObjectId;
 import org.s2.rm.base.model_support.identification.ObjectRef;
-import org.s2.rm.base.model_support.identification.ObjectVersionId;
 
 /**
 * BMM name: Original_version
 * BMM generic parameters: {@code Original_version<T Any>}
 * BMM ancestors: {@code Version<T>}
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Original_version", propOrder = {
@@ -24,25 +24,25 @@ import org.s2.rm.base.model_support.identification.ObjectVersionId;
 })
 public class OriginalVersion<T> extends Version<T> {
   /**
-  * BMM name: uid | BMM type: Object_version_id
+  * BMM name: uid | BMM type: Object_id
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 1..1
   */
   @XmlElement(name = "uid")
-  private ObjectVersionId uid;
+  private ObjectId uid;
 
   /**
-  * BMM name: preceding_version_uid | BMM type: Object_version_id
+  * BMM name: preceding_version_uid | BMM type: Object_id
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
   @XmlElement(name = "preceding_version_uid")
-  private @Nullable ObjectVersionId precedingVersionUid;
+  private @Nullable ObjectId precedingVersionUid;
 
   /**
-  * BMM name: other_input_version_uids | BMM type: {@code List<Object_version_id>}
+  * BMM name: other_input_version_uids | BMM type: {@code List<Object_id>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
   */
   @XmlElement(name = "other_input_version_uids")
-  private @Nullable List<ObjectVersionId> otherInputVersionUids;
+  private @Nullable List<ObjectId> otherInputVersionUids;
 
   /**
   * BMM name: attestations | BMM type: {@code List<Attestation>}
@@ -67,7 +67,7 @@ public class OriginalVersion<T> extends Version<T> {
 
   public OriginalVersion() {}
 
-  public OriginalVersion(ObjectVersionId uid, VersionLifecycleState lifecycleState, ObjectRef contribution, AuditDetails commitAudit) {
+  public OriginalVersion(ObjectId uid, VersionLifecycleState lifecycleState, ObjectRef contribution, AuditDetails commitAudit) {
     super(contribution, commitAudit);
     this.uid = uid;
     this.lifecycleState = lifecycleState;
@@ -97,27 +97,27 @@ public class OriginalVersion<T> extends Version<T> {
     return result;
   }
 
-  public ObjectVersionId getUid() {
+  public ObjectId getUid() {
     return uid;
   }
 
-  public void setUid(ObjectVersionId uid) {
+  public void setUid(ObjectId uid) {
     this.uid = uid;
   }
 
-  public @Nullable ObjectVersionId getPrecedingVersionUid() {
+  public @Nullable ObjectId getPrecedingVersionUid() {
     return precedingVersionUid;
   }
 
-  public void setPrecedingVersionUid(@Nullable ObjectVersionId precedingVersionUid) {
+  public void setPrecedingVersionUid(@Nullable ObjectId precedingVersionUid) {
     this.precedingVersionUid = precedingVersionUid;
   }
 
-  public @Nullable List<ObjectVersionId> getOtherInputVersionUids() {
+  public @Nullable List<ObjectId> getOtherInputVersionUids() {
     return otherInputVersionUids;
   }
 
-  public void setOtherInputVersionUids(@Nullable List<ObjectVersionId> otherInputVersionUids) {
+  public void setOtherInputVersionUids(@Nullable List<ObjectId> otherInputVersionUids) {
     this.otherInputVersionUids = otherInputVersionUids;
   }
 

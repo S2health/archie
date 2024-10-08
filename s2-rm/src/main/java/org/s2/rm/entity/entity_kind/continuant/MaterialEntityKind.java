@@ -8,7 +8,7 @@ import org.s2.rm.base.model_support.identification.Uuid;
 * BMM name: Material_entity_kind
 * BMM ancestors: Materially_dependent_entity_kind
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Material_entity_kind", propOrder = {

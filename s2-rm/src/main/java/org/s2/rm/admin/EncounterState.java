@@ -7,7 +7,7 @@ import org.s2.util.enumerations.*;
 /**
 * BMM name: Encounter_state
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Encounter_state", propOrder = {"value"})

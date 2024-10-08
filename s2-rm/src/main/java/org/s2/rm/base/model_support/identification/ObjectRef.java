@@ -8,21 +8,22 @@ import javax.xml.bind.annotation.*;
 /**
 * BMM name: Object_ref
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Object_ref", propOrder = {
+  "id",
   "namespace",
-  "type"
+  "type",
+  "path"
 })
 public class ObjectRef extends RMObject {
   /**
   * BMM name: id | BMM type: Object_id
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
   */
-  // This property is in at least one descendant where it probably has a different type.
-  // Skip the property in the parent class (this one).
-  // private ObjectId id;
+  @XmlElement(name = "id")
+  private ObjectId id;
 
   /**
   * BMM name: namespace | BMM type: String
@@ -38,9 +39,17 @@ public class ObjectRef extends RMObject {
   @XmlElement(name = "type")
   private String type;
 
+  /**
+  * BMM name: path | BMM type: String
+  * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 0..1
+  */
+  @XmlElement(name = "path")
+  private @Nullable String path;
+
   public ObjectRef() {}
 
-  public ObjectRef(String type) {
+  public ObjectRef(ObjectId id, String type) {
+    this.id = id;
     this.type = type;
   }
 
@@ -49,13 +58,23 @@ public class ObjectRef extends RMObject {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     ObjectRef otherAsObjectRef = (ObjectRef) other;
-    return Objects.equals(namespace, otherAsObjectRef.namespace) &&
-      Objects.equals(type, otherAsObjectRef.type);
+    return Objects.equals(id, otherAsObjectRef.id) &&
+      Objects.equals(namespace, otherAsObjectRef.namespace) &&
+      Objects.equals(type, otherAsObjectRef.type) &&
+      Objects.equals(path, otherAsObjectRef.path);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), namespace, type);
+    return Objects.hash(super.hashCode(), id, namespace, type, path);
+  }
+
+  public ObjectId getId() {
+    return id;
+  }
+
+  public void setId(ObjectId id) {
+    this.id = id;
   }
 
   public @Nullable String getNamespace() {
@@ -72,6 +91,14 @@ public class ObjectRef extends RMObject {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public @Nullable String getPath() {
+    return path;
+  }
+
+  public void setPath(@Nullable String path) {
+    this.path = path;
   }
 
   public String bmmClassName() {

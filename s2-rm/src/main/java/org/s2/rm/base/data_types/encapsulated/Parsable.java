@@ -10,7 +10,7 @@ import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 * BMM name: Parsable
 * BMM ancestors: Encapsulated
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Parsable", propOrder = {

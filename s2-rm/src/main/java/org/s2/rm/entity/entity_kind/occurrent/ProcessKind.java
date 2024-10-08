@@ -12,7 +12,7 @@ import org.s2.rm.entity.entity_kind.EntityKind;
 * BMM name: Process_kind
 * BMM ancestors: Entity_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Process_kind", propOrder = {

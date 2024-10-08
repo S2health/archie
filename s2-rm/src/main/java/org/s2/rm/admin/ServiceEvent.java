@@ -8,14 +8,14 @@ import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.participation.Participation;
+import org.s2.rm.base.patterns.data_structures.Participation;
 import org.s2.rm.entity.occurrent.CareProcess;
 
 /**
 * BMM name: Service_event
 * BMM ancestors: Care_process
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Service_event", propOrder = {

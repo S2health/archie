@@ -10,7 +10,7 @@ import org.s2.rm.base.patterns.data_structures.Node;
 * BMM name: Biological_entity_kind
 * BMM ancestors: Independent_object_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Biological_entity_kind")

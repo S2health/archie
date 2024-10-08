@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 * BMM name: Internet_id
 * BMM ancestors: Primitive_id
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Internet_id")

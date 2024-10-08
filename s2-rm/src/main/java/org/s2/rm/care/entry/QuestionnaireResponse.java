@@ -11,14 +11,14 @@ import org.s2.rm.base.patterns.archetyped.FeederAudit;
 import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.participation.Participation;
+import org.s2.rm.base.patterns.data_structures.Participation;
 
 /**
 * Entry subtype used questionnaire responses
 * BMM name: Questionnaire_response
 * BMM ancestors: Observation
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Questionnaire_response", propOrder = {

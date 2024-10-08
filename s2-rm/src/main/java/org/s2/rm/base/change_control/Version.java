@@ -9,7 +9,7 @@ import org.s2.rm.base.model_support.identification.ObjectRef;
 * BMM name: Version
 * BMM generic parameters: {@code Version<T Any>}
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Version", propOrder = {

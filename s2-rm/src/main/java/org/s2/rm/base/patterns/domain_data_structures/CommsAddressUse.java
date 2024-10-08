@@ -1,4 +1,4 @@
-package org.s2.rm.entity.social_entity;
+package org.s2.rm.base.patterns.domain_data_structures;
 
 import java.util.*;
 import javax.annotation.Nullable;
@@ -6,12 +6,14 @@ import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
+import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Comms_address_use
 * BMM ancestors: Address_use
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Comms_address_use", propOrder = {
@@ -56,9 +58,16 @@ public class CommsAddressUse extends AddressUse {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     CommsAddressUse otherAsCommsAddressUse = (CommsAddressUse) other;
-    return Objects.equals(getAddressType(), otherAsCommsAddressUse.getAddressType()) &&
-      Objects.equals(getPurposes(), otherAsCommsAddressUse.getPurposes()) &&
+    return Objects.equals(getPurposes(), otherAsCommsAddressUse.getPurposes()) &&
       Objects.equals(getTimeValidity(), otherAsCommsAddressUse.getTimeValidity()) &&
+      Objects.equals(getOriginalValue(), otherAsCommsAddressUse.getOriginalValue()) &&
+      Objects.equals(getValue(), otherAsCommsAddressUse.getValue()) &&
+      Objects.equals(getNullFlavor(), otherAsCommsAddressUse.getNullFlavor()) &&
+      Objects.equals(getNullReason(), otherAsCommsAddressUse.getNullReason()) &&
+      Objects.equals(getItems(), otherAsCommsAddressUse.getItems()) &&
+      Objects.equals(getCode(), otherAsCommsAddressUse.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsCommsAddressUse.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsCommsAddressUse.getLinks()) &&
       Objects.equals(getUid(), otherAsCommsAddressUse.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsCommsAddressUse.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsCommsAddressUse.getName()) &&

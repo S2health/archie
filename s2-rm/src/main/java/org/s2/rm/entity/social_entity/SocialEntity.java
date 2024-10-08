@@ -8,7 +8,7 @@ import org.s2.rm.entity.entity.Entity;
 * BMM name: Social_entity
 * BMM ancestors: Entity
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Social_entity")

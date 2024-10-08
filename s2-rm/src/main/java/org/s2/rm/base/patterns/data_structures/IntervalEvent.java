@@ -13,7 +13,7 @@ import org.s2.rm.base.patterns.archetyped.FeederAudit;
 * BMM name: Interval_event
 * BMM ancestors: Event
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.5
+* BMM schema: S2RM 0.8.6
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Interval_event", propOrder = {
