@@ -1,8 +1,8 @@
 -- 
 -- 	component:   Graphite Reference Model BMM
 -- 	description: Graphite Reference Model component formal expression. This file is an ODIN serialisation of
---                   the BMM object meta-model classes found at 
---                   https://www.openEHR.org/releases/LANG/latest/p_bmm.html
+--               the BMM object meta-model classes found at 
+--               https://www.openEHR.org/releases/LANG/latest/p_bmm.html
 -- 	keywords:    reference model, meta-model, archetypes
 -- 	author:      Thomas Beale <thomas.beale@graphitehealth.io>
 -- 	support:     https://graphite.atlassian.net/issues/
@@ -21,14 +21,14 @@ bmm_version = <"2.3">
 ------------------------------------------------------
 schema_name = <"base_patterns">
 rm_publisher = <"s2">
-rm_release = <"0.7.5">
+rm_release = <"0.8.6">
 
 ------------------------------------------------------
 -- schema documentation
 ------------------------------------------------------
-schema_revision = <"0.7.5.1">
+schema_revision = <"0.8.6.1">
 schema_lifecycle_state = <"trial">
-schema_description = <"S2 Release 0.7.5 structures schema">
+schema_description = <"S2 Release 0.8.6 structures schema">
 schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 
 ------------------------------------------------------
@@ -36,10 +36,10 @@ schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 ------------------------------------------------------
 includes = <
 	["1"] = <
-		id = <"s2_base_data_types_0.7.5">
+		id = <"s2_base_data_types_0.8.6">
 	>
 	["2"] = <
-		id = <"s2_base_model_support_0.7.5">
+		id = <"s2_base_model_support_0.8.6">
 	>
 >
 
@@ -53,12 +53,13 @@ packages = <
         packages = <
             ["data_structures"] = <
                 name = <"data_structures">
-		        classes = <"Node", "Event", "Point_event", "Interval_event">
+		        classes = <"Node", "Info_node", "Entity_ref_node", "Event", "Point_event", "Interval_event", "Participation">
 		    >
-			["participation"] = <
-				name = <"participation">
-				classes = <"Participation", "Party_proxy", "Party_identified", "Party_related", "Party_self">
-			>
+            ["domain_data_structures"] = <
+                name = <"domain_data_structures">
+		        classes = <"Id_use", "Address_use", "Comms_address_use", "Location_address_use", "Party_identity", "Capability",
+				"Language_capability">
+		    >
 			["archetyped"] = <
 				name = <"archetyped">
 				classes = <"Pathable", "Locatable", "Info_item", "Link", "Archetyped", "Feeder_audit", "Feeder_audit_details">
@@ -81,13 +82,10 @@ class_definitions = <
 	["Node"] = <
 		name = <"Node">
 		ancestors = <"Info_item">
+		is_abstract = <True>
 		properties = <
 			["value"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"value">
-				type = <"Data_value">
-			>
-			["original_value"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"original_value">
 				type = <"Data_value">
 			>
 			["null_flavor"] = (P_BMM_SINGLE_PROPERTY) <
@@ -107,6 +105,33 @@ class_definitions = <
 					container_type = <"List">
 					type = <"Node">
 				>
+			>
+		>
+	>
+
+	["Info_node"] = <
+		name = <"Info_node">
+		ancestors = <"Node">
+		properties = <
+			["original_value"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"original_value">
+				type = <"Data_value">
+			>
+		>
+	>
+
+	["Entity_ref_node"] = <
+		name = <"Entity_ref_node">
+		ancestors = <"Node">
+		properties = <
+			["is_self"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"is_self">
+				type = <"Boolean">
+				is_mandatory = <True>
+			>
+			["entity_ref"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"entity_ref">
+				type = <"Object_ref">
 			>
 		>
 	>
@@ -165,7 +190,7 @@ class_definitions = <
 
 	["Participation"] = <
 		name = <"Participation">
-		ancestors = <"Any">
+		ancestors = <"Locatable">
 		properties = <
 			["function"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"function">
@@ -192,62 +217,10 @@ class_definitions = <
 			>
 			["performer"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"performer">
-				type = <"Party_proxy">
+				type = <"Entity_ref_node">
 				is_mandatory = <True>
 			>
 		>
-	>
-
-	["Party_proxy"] = <
-		name = <"Party_proxy">
-		is_abstract = <True>
-		ancestors = <"Any">
-		properties = <
-			["external_ref"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"external_ref">
-				type = <"Object_ref">
-				is_im_infrastructure = <True>
-			>
-		>
-	>
-
-	["Party_identified"] = <
-		name = <"Party_identified">
-		ancestors = <"Party_proxy">
-		properties = <
-			["name"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"name">
-				type = <"String">
-			>
-			["identifiers"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"identifiers">
-				type_def = <
-					container_type = <"List">
-					type = <"Rwe_id_ref">
-				>
-				is_im_runtime = <True>
-			>
-		>
-	>
-
-	["Party_related"] = <
-		name = <"Party_related">
-		ancestors = <"Party_identified">
-		properties = <
-			["relationship"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"relationship">
-				type_ref = <
-					type = <"Terminology_term">
-					value_constraint = <"s2.Relationship">
-				>
-				is_mandatory = <True>
-			>
-		>
-	>
-
-	["Party_self"] = <
-		name = <"Party_self">
-		ancestors = <"Party_proxy">
 	>
 
 	--
@@ -418,17 +391,17 @@ class_definitions = <
 			>
 			["location"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"location">
-				type = <"Party_identified">
+				type = <"Entity_ref_node">
 				is_im_runtime = <True>
 			>
 			["provider"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"provider">
-				type = <"Party_identified">
+				type = <"Entity_ref_node">
 				is_im_runtime = <True>
 			>
 			["subject"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"subject">
-				type = <"Party_proxy">
+				type = <"Entity_ref_node">
 				is_im_runtime = <True>
 			>
 			["time"] = (P_BMM_SINGLE_PROPERTY) <
@@ -441,13 +414,128 @@ class_definitions = <
 				type = <"String">
 				is_im_runtime = <True>
 			>
-			["other_details"] = (P_BMM_INDEXED_CONTAINER_PROPERTY) <
+			["other_details"] = (P_BMM_GENERIC_PROPERTY) <
 				name = <"other_details">
 				type_def = <
-					container_type = <"Hash">
-					index_type = <"String">
-					type = <"String">
+					root_type = <"Hash">
+					generic_parameters = <"String", "String">
 				>
+			>
+		>
+	>
+
+
+	--
+	--------------------- base.model_support.domain_data_structures ------------------
+	--
+
+	["Id_use"] = <
+		name = <"Id_use">
+		ancestors = <"Info_node">
+		properties = <
+			["tag"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"tag">
+				type = <"Terminology_term">
+			>
+			["original_id"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"original_id">
+				type = <"Rwe_id_ref">
+			>
+		>
+	>
+
+	["Party_identity"] = <
+		name = <"Party_identity">
+		ancestors = <"Info_node">
+		properties = <
+			["purpose"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"purpose">
+				type = <"Terminology_term">
+			>
+			["simple_name"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"simple_name">
+				type = <"String">
+			>
+		>
+	>
+	
+	["Address_use"] = <
+		name = <"Address_use">
+		ancestors = <"Info_node">
+		properties = <
+			["purposes"] = (P_BMM_CONTAINER_PROPERTY) <
+				name = <"purposes">
+				type_def = <
+					container_type = <"List">
+					type = <"Terminology_term">
+				>
+			>
+			["time_validity"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"time_validity">
+				type = <"Timing">
+				is_im_runtime = <True>
+			>
+		>
+	>
+	
+	["Location_address_use"] = <
+		name = <"Location_address_use">
+		ancestors = <"Address_use">
+	>
+	
+	["Comms_address_use"] = <
+		name = <"Comms_address_use">
+		ancestors = <"Address_use">
+		properties = <
+			["address"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"address">
+				type = <"String">
+				is_mandatory = <True>
+			>
+			["address_platform"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"address_platform">
+				type = <"Terminology_term">
+				is_im_runtime = <True>
+			>
+		>
+	>
+
+
+	["Language_capability"] = <
+		name = <"Language_capability">
+		ancestors = <"Info_item">
+		properties = <
+			["language"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"language">
+				type_ref = <	
+					type = <"Terminology_code">
+					value_constraint = <"iso_639-1">
+				>
+				is_mandatory = <True>
+			>
+			["preferred"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"preferred">
+				type = <"Boolean">
+			>
+		>
+	>
+
+
+	["Capability"] = <
+		name = <"Capability">
+		ancestors = <"Info_node">
+		properties = <
+			["description"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"description">
+				type = <"Text">
+			>
+			["time_validity"] = (P_BMM_GENERIC_PROPERTY) <
+				name = <"time_validity">
+				type_def = <
+					root_type = <"Interval">
+					generic_parameters = <"Date">
+				>
+				is_im_runtime = <True>
 			>
 		>
 	>

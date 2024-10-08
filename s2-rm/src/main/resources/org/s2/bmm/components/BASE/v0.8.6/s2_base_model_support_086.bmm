@@ -2,7 +2,7 @@
 -- 	component:   Graphite BMMs
 -- 	description: Graphite BASE Component schema. This file format is based on the BMM specification
 --  				http://www.openEHR.org/releases/BASE/latest/docs/bmm/bmm.html
--- 	keywords:    reference model, meta-model, archetypes
+-- 	keywords:    reference model, meta-model, archetypes 
 -- 	author:      Thomas Beale <thomas.beale@graphitehealth.io>
 -- 	support:     https://graphitehealth.atlassian.net/projects/issues
 -- 	copyright:   Copyright (c) 2023 Graphite Health <https://www.graphitehealth.io>
@@ -20,14 +20,14 @@ bmm_version = <"2.3">
 ------------------------------------------------------
 rm_publisher = <"s2">
 schema_name = <"base_model_support">
-rm_release = <"0.7.5">
+rm_release = <"0.8.6">
 
 ------------------------------------------------------
 -- schema documentation
 ------------------------------------------------------
-schema_revision = <"0.7.5.1">
+schema_revision = <"0.8.6.1">
 schema_lifecycle_state = <"trial">
-schema_description = <"S2 Release 0.7.5 BASE model base types packages">
+schema_description = <"S2 Release 0.8.6 BASE model base types packages">
 schema_author = <"Thomas Beale <thomas.beale@graphite.org>">
 
 ------------------------------------------------------
@@ -35,7 +35,7 @@ schema_author = <"Thomas Beale <thomas.beale@graphite.org>">
 ------------------------------------------------------
 includes = <
 	["1"] = <
-		id = <"s2_base_foundation_types_0.7.5">
+		id = <"s2_base_foundation_types_0.8.6">
 	>
 >
 
@@ -52,9 +52,8 @@ packages = <
 			>
 			["identification"] = <
 				name = <"identification">
-				classes = <"Object_ref", "Object_id", "Primitive_id", "Locatable_ref",
-					"Artifact_id", "Terminology_id", "Archetype_id", "Object_version_id", 
-					"Version_tree_id", "Internet_id", "Uuid", "Iso_oid"
+				classes = <"Object_ref", "Object_id", "Primitive_id", "Artifact_id", "Terminology_id", 
+					"Archetype_id", "Version_tree_id", "Internet_id", "Uuid", "Iso_oid"
 				>
 			>
 		>
@@ -89,18 +88,6 @@ class_definitions = <
 				type = <"String">
 				is_mandatory = <True>
 			>
-		>
-	>
-
-	["Locatable_ref"] = <
-		name = <"Locatable_ref">
-		ancestors = <"Object_ref">
-		properties = <
-			["id"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"id">
-				type = <"Object_version_id">
-				is_mandatory = <True>
-			>
 			["path"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"path">
 				type = <"String">
@@ -111,7 +98,6 @@ class_definitions = <
 
 	["Object_id"] = <
 		name = <"Object_id">
-		is_abstract = <True>
 		ancestors = <"Any">
 		properties = <
 			["value"] = (P_BMM_SINGLE_PROPERTY) <
@@ -145,12 +131,6 @@ class_definitions = <
 		name = <"Archetype_id">
 		ancestors = <"Artifact_id">
 	>
-	
-	["Object_version_id"] = <
-		name = <"Object_version_id">
-		ancestors = <"Object_id">
-	>
-
 	
 	["Version_tree_id"] = <
 		name = <"Version_tree_id">

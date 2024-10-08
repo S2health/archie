@@ -22,16 +22,16 @@ bmm_version = <"2.3">
 ------------------------------------------------------
 rm_publisher = <"s2">
 schema_name = <"entity">
-rm_release = <"0.8.5">
+rm_release = <"0.8.6">
 
 model_name = <"ENTITY">
 
 ------------------------------------------------------
 -- schema documentation
 ------------------------------------------------------
-schema_revision = <"0.8.5.1">
+schema_revision = <"0.8.6.1">
 schema_lifecycle_state = <"development">
-schema_description = <"S2 Release 0.8.5 Entity model schema"> 
+schema_description = <"S2 Release 0.8.6 Entity model schema"> 
 schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 
 ------------------------------------------------------
@@ -39,7 +39,7 @@ schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 ------------------------------------------------------
 includes = <
 	["1"] = <
-		id = <"s2_base_0.8.5">
+		id = <"s2_base_0.8.6">
 	>
 >
 
@@ -78,8 +78,8 @@ packages = <
 			["social_entity"] = <
 				name = <"social_entity">
 				classes = <"Social_entity", "Party", "Persona", "Person", "Organization", "Org_unit", "Org_entity", 
-					"Agent", "Aggregate_agent", "Individual_agent", "Automaton", "Team", "Party_relationship", "Capability", "Language_capability",
-					"Accountability", "Id_use", "Address_use", "Location_address_use", "Comms_address_use", "Address", "Party_identity">
+					"Agent", "Aggregate_agent", "Individual_agent", "Automaton", "Team", "Party_relationship", 
+					"Accountability">
 			>
 			["occurrent"] = <
 				name = <"occurrent">
@@ -243,102 +243,6 @@ class_definitions = <
 		>
 	>
     
-	["Party_identity"] = <
-		name = <"Party_identity">
-		ancestors = <"Locatable">
-		properties = <
-			["simple_name"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"simple_name">
-				type = <"String">
-			>
-			["identity_type"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"identity_type">
-				type = <"Terminology_term">
-			>
-			["use"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"use">
-				type = <"Terminology_term">
-			>
-			["description"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"description">
-				type_def = <
-					container_type = <"List">
-					type = <"Node">
-				>
-				is_mandatory = <True>
-			>
-		>
-	>
-	
-	["Address_use"] = <
-		name = <"Address_use">
-		ancestors = <"Locatable">
-		properties = <
-			["address_type"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"address_type">
-				type = <"Terminology_term">
-			>
-			["purposes"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"purposes">
-				type_def = <
-					container_type = <"List">
-					type = <"Terminology_term">
-				>
-			>
-			["time_validity"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"time_validity">
-				type = <"Timing">
-				is_im_runtime = <True>
-			>
-		>
-	>
-	
-	["Location_address_use"] = <
-		name = <"Location_address_use">
-		ancestors = <"Address_use">
-		properties = <
-			["description"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"description">
-				type_def = <
-					container_type = <"List">
-					type = <"Node">
-				>
-			>
-		>
-	>
-	
-	["Comms_address_use"] = <
-		name = <"Comms_address_use">
-		ancestors = <"Address_use">
-		properties = <
-			["address"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"address">
-				type = <"String">
-				is_mandatory = <True>
-			>
-			["address_platform"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"address_platform">
-				type = <"Terminology_term">
-				is_im_runtime = <True>
-			>
-		>
-	>
-	
-	["Address"] = <
-		name = <"Address">
-		ancestors = <"Locatable">
-		properties = <
-			["description"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"description">
-				type_def = <
-					container_type = <"List">
-					type = <"Node">
-				>
-				cardinality = <|>=1|>
-			>
-		>
-	>
-	
 	["Agent"] = <
 		name = <"Agent">
 		is_abstract = <True>
@@ -358,25 +262,6 @@ class_definitions = <
 					container_type = <"List">
 					type = <"Language_capability">
 				>
-			>
-		>
-	>
-
-	["Language_capability"] = <
-		name = <"Language_capability">
-		ancestors = <"Locatable">
-		properties = <
-			["language"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"language">
-				type_ref = <	
-					type = <"Terminology_code">
-					value_constraint = <"iso_639-1">
-				>
-				is_mandatory = <True>
-			>
-			["preferred"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"preferred">
-				type = <"Boolean">
 			>
 		>
 	>
@@ -453,33 +338,6 @@ class_definitions = <
 		>
 	>
 
-	["Capability"] = <
-		name = <"Capability">
-		ancestors = <"Locatable">
-		properties = <
-			["description"] = (P_BMM_SINGLE_PROPERTY) <
-				name = <"description">
-				type = <"Text">
-				is_mandatory = <True>
-			>
-			["credentials"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"credentials">
-				type_def = <
-					container_type = <"List">
-					type = <"Node">
-				>
-			>
-			["time_validity"] = (P_BMM_GENERIC_PROPERTY) <
-				name = <"time_validity">
-				type_def = <
-					root_type = <"Interval">
-					generic_parameters = <"Date">
-				>
-				is_im_runtime = <True>
-			>
-		>
-	>
-
 	["Party_relationship"] = <
 		name = <"Party_relationship">
 		ancestors = <"Entity_relationship">
@@ -508,18 +366,11 @@ class_definitions = <
 
 	["Id_use"] = <
 		name = <"Id_use">
-		ancestors = <"Locatable">
+		ancestors = <"Info_node">
 		properties = <
 			["original_id"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"original_id">
 				type = <"Rwe_id_ref">
-			>
-			["description"] = (P_BMM_CONTAINER_PROPERTY) <
-				name = <"description">
-				type_def = <
-					container_type = <"List">
-					type = <"Node">
-				>
 			>
 		>
 	>

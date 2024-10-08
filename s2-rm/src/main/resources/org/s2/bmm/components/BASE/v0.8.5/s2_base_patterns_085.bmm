@@ -1,8 +1,8 @@
 -- 
 -- 	component:   Graphite Reference Model BMM
 -- 	description: Graphite Reference Model component formal expression. This file is an ODIN serialisation of
---                   the BMM object meta-model classes found at 
---                   https://www.openEHR.org/releases/LANG/latest/p_bmm.html
+--               the BMM object meta-model classes found at 
+--               https://www.openEHR.org/releases/LANG/latest/p_bmm.html
 -- 	keywords:    reference model, meta-model, archetypes
 -- 	author:      Thomas Beale <thomas.beale@graphitehealth.io>
 -- 	support:     https://graphite.atlassian.net/issues/
@@ -413,12 +413,11 @@ class_definitions = <
 				type = <"String">
 				is_im_runtime = <True>
 			>
-			["other_details"] = (P_BMM_INDEXED_CONTAINER_PROPERTY) <
+			["other_details"] = (P_BMM_GENERIC_PROPERTY) <
 				name = <"other_details">
 				type_def = <
-					container_type = <"Hash">
-					index_type = <"String">
-					type = <"String">
+					root_type = <"Hash">
+					generic_parameters = <"String", "String">
 				>
 			>
 		>

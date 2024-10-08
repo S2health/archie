@@ -1,12 +1,11 @@
 -- 
--- 	component:   Graphite Reference Model BMM
--- 	description: Graphite Reference Model component formal expression. This file is an ODIN serialisation of
---                   the BMM object meta-model classes found at 
---                   https://www.openEHR.org/releases/LANG/latest/p_bmm.html
+-- 	component:   Graphite BMMs
+-- 	description: Graphite BASE Component schema. This file format is based on the BMM specification
+--  				http://www.openEHR.org/releases/BASE/latest/docs/bmm/bmm.html
 -- 	keywords:    reference model, meta-model, archetypes
 -- 	author:      Thomas Beale <thomas.beale@graphitehealth.io>
--- 	support:     https://graphite.atlassian.net/issues/
--- 	copyright:   Copyright (c) 2023- Graphite Health <https://www.graphitehealth.io>
+-- 	support:     https://graphitehealth.atlassian.net/projects/issues
+-- 	copyright:   Copyright (c) 2023 Graphite Health <https://www.graphitehealth.io>
 -- 	license:     Apache 2.0 <http://www.apache.org/licenses/LICENSE-2.0.html>
 -- 
 
@@ -20,27 +19,28 @@ bmm_version = <"2.3">
 -- (schema_id computed as <rm_publisher>_<schema_name>_<rm_release>)
 ------------------------------------------------------
 rm_publisher = <"s2">
-schema_name = <"rm">
-rm_release = <"0.8.0">
+schema_name = <"base">
+rm_release = <"0.8.6">
 
 ------------------------------------------------------
 -- schema documentation
 ------------------------------------------------------
-schema_revision = <"0.8.0.1">
-schema_lifecycle_state = <"development">
-schema_description = <"S2 Release 0.8.0 reference model schema">
+schema_revision = <"0.8.6.1">
+schema_lifecycle_state = <"trial">
+schema_description = <"S2 Release 0.8.6 BASE model foundation and base types packages"> 
 schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 
 ------------------------------------------------------
--- inclusions
+-- includes
 ------------------------------------------------------
 includes = <
 	["1"] = <
-		id = <"s2_entity_0.7.0">
+		id = <"s2_base_resource_0.8.6">
 	>
 	["2"] = <
-		id = <"s2_care_0.7.0">
+		id = <"s2_base_change_control_0.8.6">
 	>
+	["3"] = <
+		id = <"s2_base_patterns_0.8.6">
+	>	
 >
-
-

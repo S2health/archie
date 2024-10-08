@@ -21,14 +21,14 @@ bmm_version = <"2.3">
 ------------------------------------------------------
 rm_publisher = <"s2">
 schema_name = <"care_ehr">
-rm_release = <"0.7.0">
+rm_release = <"0.8.6">
 
 ------------------------------------------------------
 -- schema documentation
 ------------------------------------------------------
-schema_revision = <"0.7.0.1">
+schema_revision = <"0.8.6.1">
 schema_lifecycle_state = <"development">
-schema_description = <"S2 CARE Release 0.7.0 EHR schema">
+schema_description = <"S2 CARE Release 0.8.6 EHR schema">
 schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 
 ------------------------------------------------------
@@ -36,7 +36,7 @@ schema_author = <"Thomas Beale <thomas.beale@graphitehealth.io>">
 ------------------------------------------------------
 includes = <
 	["1"] = <
-		id = <"s2_base_0.7.5">
+		id = <"s2_base_0.8.6">
 	>
 >
 
@@ -155,7 +155,7 @@ class_definitions = <
 		properties = <
 			["subject"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"subject">
-				type = <"Party_self">
+				type = <"Entity_ref_node">
 				is_mandatory = <True>
 			>
 			["is_queryable"] = (P_BMM_SINGLE_PROPERTY) <
@@ -218,7 +218,7 @@ class_definitions = <
 			>
 			["author"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"author">
-				type = <"Party_proxy">
+				type = <"Entity_ref_node">
 				is_mandatory = <True>
 			>
 			["context"] = (P_BMM_SINGLE_PROPERTY) <
@@ -242,7 +242,7 @@ class_definitions = <
 		properties = <
 			["health_care_facility"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"health_care_facility">
-				type = <"Party_identified">
+				type = <"Entity_ref_node">
 			>
 			["start_time"] = (P_BMM_SINGLE_PROPERTY) <
 				name = <"start_time">
@@ -271,6 +271,10 @@ class_definitions = <
 					type = <"Terminology_term">
 					value_constraint = <"s2.Setting">
 				>
+			>
+			["encounter"] = (P_BMM_SINGLE_PROPERTY) <
+				name = <"encounter">
+				type = <"Entity_ref_node">
 			>
 			["other_context"] = (P_BMM_CONTAINER_PROPERTY) <
 				name = <"other_context">
