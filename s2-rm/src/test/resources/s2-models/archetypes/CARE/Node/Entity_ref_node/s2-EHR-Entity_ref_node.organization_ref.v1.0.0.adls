@@ -2,7 +2,7 @@ archetype (adl_version=2.1.0; rm_release=0.8.5)
 	s2-EHR-Entity_ref_node.organization_ref.v1.0.0
 
 language
-	original_language = <[ISO_639-1::en]>
+	original_language = <[iso_639-1::en]>
 
 description
 	lifecycle_state = <"unmanaged">
@@ -17,7 +17,6 @@ description
 	ip_acknowledgements = <
 		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
 		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
-		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2">
 	>
 	details = <
 		["en"] = <
@@ -36,21 +35,14 @@ definition
 					Plain_text[id102] 
 				}
 			}
-			Info_node[id3] matches {	
-				value matches {
-					Plain_text[id103] 
-				}
-			}
-			Info_node[id4] matches {
+			Info_node[id4] occurrences matches {0..1} matches {
 				value matches {
 					Rwe_id_ref[id104] 
 				}
 			}
-			Info_node[id5] matches {
-				value matches {
-					Plain_text[id105]
-				}
-			}
+
+			use_archetype Info_node[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
+			use_archetype Info_node[id5, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
 		}
 	}
 

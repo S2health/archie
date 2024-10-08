@@ -1,5 +1,5 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=e9731d65-5925-4c1a-8655-3c1c893d3dd8)
-	s2-ENTITY-Info_node.structured_name.v1.0.0
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=e9731d65-5925-4c1a-8655-3c1c893d3dd8)
+	s2-ENTITY-Party_identity.person_structured_name.v1.0.0
 
 language
 	original_language = <[iso_639-1::en]>
@@ -26,12 +26,14 @@ description
 		["en"] = <
 			language = <[iso_639-1::en]>
 			purpose = <"To record details about the structured name of an individual.">
-			use = <"Use to record details about the structured name of an individual.">
 		>
 	>
 
 definition
-	Info_node[id1] matches {	-- Structured name of a person
+	Party_identity[id1] matches {	-- Structured name of a person
+		value matches {
+			Plain_text[id20]
+		}
 		items matches {
 			Info_node[id2] matches {	-- Title
 				value matches {

@@ -1,4 +1,4 @@
-archetype (adl_version=2.0.6; rm_release=0.8.5)
+archetype (adl_version=2.0.6; rm_release=0.8.5; uid=d237406f-7ea2-46de-8c0f-d36c2fbdbb93)
 	s2-EHR-Composition.medication_list.v1.0.0
 
 language
@@ -33,6 +33,9 @@ definition
 				concept matches {[at2]}
 				description matches {"persistent"}
 			}
+		}
+		author matches {
+			use_archetype Entity_ref_node[id21, s2-EHR-Entity_ref_node.healthcare_professional_ref.v1] 
 		}
 	}
 

@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=fdff5851-463b-4545-8f05-487a34123cea)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=fdff5851-463b-4545-8f05-487a34123cea)
 	s2-ENTITY-Comms_address_use.comms_address_use_general.v1.0.0
 
 language
@@ -32,20 +32,24 @@ description
 
 definition
 	Comms_address_use[id1] matches {	-- Electronic communication
-		address_type matches {
-			Terminology_term[id2] matches {
-				concept matches {[ac1]}
+		value matches {
+			Coded_text[id101] matches {
+				term matches {
+					Terminology_term[id1001] matches {
+						concept matches {[ac1]}
+					}
+				}
 			}
 		}
 		address matches {/([0-9+()]+|((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?))/}
 		address_platform matches {
 			Terminology_term[id3] matches {
-				concept matches {[ac2]}
+				concept matches {[ac3]}
 			}
 		}
 		purposes matches {
 			Terminology_term[id4] matches {
-				concept matches {[ac3]}
+				concept matches {[ac4]}
 			}
 		}
 	}
@@ -65,11 +69,11 @@ terminology
 				text = <"Communications type, e.g. email, phone (landline), phone (mobile), chat">
 				description = <"Communications type, e.g. email, phone (landline), phone (mobile), chat">
 			>
-			["ac2"] = <
+			["ac3"] = <
 				text = <"Address platform, e.g. whatsapp, instagram etc">
 				description = <"Address platform, e.g. whatsapp, instagram etc">
 			>
-			["ac3"] = <
+			["ac4"] = <
 				text = <"Purpose, e.g. business, private">
 				description = <"">
 			>
@@ -78,7 +82,7 @@ terminology
 	term_bindings = <
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.CommsSystemType>
-			["ac2"] = <http://s2health.org/id/s2.CommsSystemPlatform>
-			["ac3"] = <http://s2health.org/id/s2.CommsPurpose>
+			["ac3"] = <http://s2health.org/id/s2.CommsSystemPlatform>
+			["ac4"] = <http://s2health.org/id/s2.CommsPurpose>
 		>
 	>

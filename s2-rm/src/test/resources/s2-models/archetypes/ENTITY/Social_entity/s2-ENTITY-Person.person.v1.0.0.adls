@@ -45,16 +45,7 @@ definition
 			use_archetype Location_address_use[id6, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
 		}
 		identities matches {
-			Party_identity[id7] matches {	-- Person identity
-				use matches {
-					Terminology_term[id4] matches {
-						concept matches {[ac1]}		-- Use of identity
-					}
-				}
-				description matches {
-					use_archetype Info_node[id3, s2-ENTITY-Info_node.structured_name.v1] 
-				}
-			}
+			use_archetype Party_identity[id7, s2-ENTITY-Party_identity.person_structured_name.v1]
 		}
 		other_details matches {
 			Info_node[id8] occurrences matches {0..1} matches {	-- Date of birth

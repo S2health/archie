@@ -1,11 +1,11 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5)
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=965be061-2464-4322-96e5-9fe4f8cb86cb)
 	s2-EHR-Entity_ref_node.lab_organization_ref.v1.0.0
 
 specialize
 	s2-EHR-Entity_ref_node.organization_ref.v1
 
 language
-	original_language = <[ISO_639-1::en]>
+	original_language = <[iso_639-1::en]>
 
 description
 	lifecycle_state = <"unmanaged">
@@ -34,9 +34,6 @@ description
 definition
 	Entity_ref_node[id1.1]  matches {
 		/items matches {
-			Info_node[id3] occurrences matches {0..1} 
-			Info_node[id4] occurrences matches {0..1}
-			Info_node[id5] occurrences matches {0..1}
 			Info_node[id0.1] occurrences matches {0..1} matches {
 				value matches {
 					Plain_text[id106]

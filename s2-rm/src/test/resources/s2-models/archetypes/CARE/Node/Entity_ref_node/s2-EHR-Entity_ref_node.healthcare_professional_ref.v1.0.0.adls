@@ -1,0 +1,63 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=5fb2a3b8-5d92-4b30-9788-f04f44f1ef6f)
+	s2-EHR-Entity_ref_node.healthcare_professional_ref.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Reference to a healthcare professional">
+		>
+	>
+
+definition
+	Entity_ref_node[id1] matches {	-- Reference to an HCP
+		items matches {
+			Info_node[id2] occurrences matches {0..1} matches {	-- Name
+				value matches {
+					Plain_text[id102] 
+				}
+			}
+			Info_node[id3] matches {	-- Professional capacity
+				value matches {
+					Plain_text[id103] 
+				}
+			}
+			Info_node[id4] matches {	-- Professional registration
+				value matches {
+					Rwe_id_ref[id104] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Healthcare professional">
+				description = <"Reference to a healthcare professional">
+			>
+			["id2"] = <
+				text = <"Name">
+				description = <"The unstructured name for the individual.">
+			>
+			["id3"] = <
+				text = <"Professional capacity">
+				description = <"Professional capacity.">
+			>
+			["id4"] = <
+				text = <"Professional registration">
+				description = <"Professional registration">
+			>
+		>
+	>

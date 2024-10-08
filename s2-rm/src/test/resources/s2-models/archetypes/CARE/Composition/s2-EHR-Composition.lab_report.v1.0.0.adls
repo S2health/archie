@@ -1,4 +1,4 @@
-archetype (adl_version=2.0.6; rm_release=0.8.5)
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=bf2c9acf-e431-4cef-8958-0af57dc9ab84 )
 	s2-EHR-Composition.lab_report.v1.0.0
 
 language
@@ -36,7 +36,9 @@ definition
 		}
 		context matches {
 			Event_context[id2] occurrences matches {1} matches {
-				health_care_facility existence matches {1} 
+				health_care_facility existence matches {1}  matches {
+					use_archetype Entity_ref_node[id18, s2-EHR-Entity_ref_node.lab_organization_ref.v1] 
+				}
 				other_context matches {
 					Info_node[id3] occurrences matches {1} matches {	-- Report identifier
 						value matches {
@@ -48,14 +50,20 @@ definition
 							Coded_text[id10] matches {
 								term matches {
 									Terminology_term[id110] matches {
-										concept matches {[ac1]}
+										concept matches {[ac1]}		-- Lab report status
 									}
 								}
 							}
 						}
 					}
 				}
+				encounter matches {
+					use_archetype Entity_ref_node[id20, s2-EHR-Entity_ref_node.encounter_ref.v1] 
+				}
 			}
+		}
+		author matches {
+			use_archetype Entity_ref_node[id21, s2-EHR-Entity_ref_node.healthcare_professional_ref.v1] 
 		}
 	}
 
@@ -81,6 +89,18 @@ terminology
 			["id5"] = <
 				text = <"Result">
 				description = <"-">
+			>
+			["id18"] = <
+				text = <"Laboratory organization">
+				description = <"Laboratory organization">
+			>
+			["id20"] = <
+				text = <"Billing encounter">
+				description = <"Associated billing encounter">
+			>
+			["id21"] = <
+				text = <"Author">
+				description = <"Authoring healthcare professional">
 			>
 			["ac1"] = <
 				text = <"Lab report status">
@@ -108,3 +128,4 @@ terminology
 			["ac1"] = <http://s2health.org/id/s2.LabResultStatus>
 		>
 	>
+

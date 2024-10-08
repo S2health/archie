@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=9f7dbe3a-4e64-4c02-8d1a-402f7b0f57ce)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=9f7dbe3a-4e64-4c02-8d1a-402f7b0f57ce)
 	s2-ENTITY-Party_relationship.patient.v1.0.0
 
 language
@@ -52,14 +52,7 @@ definition
 					}
 				}
 			}
-			Info_node[id3] occurrences matches {0..1} matches {	
-				value matches {
-					Plain_text[id103] 
-				}
-				items matches {
-					Entity_ref_node[id104] occurrences matches {0..1} 
-				}
-			}
+			use_archetype Info_node[id3, s2-ENTITY-Info_node.patient_contact.v1]
 		}
 	}
 
