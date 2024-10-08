@@ -233,7 +233,6 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         addClass(QuestionnaireResponse.class);
         addClass(Range.class);
         addClass(Ratio.class);
-        addClass(RatioKind.class);
         addClass(ReferenceRange.class);
         addClass(ResourceAnnotations.class);
         addClass(ResourceDescription.class);
@@ -252,13 +251,11 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         addClass(StateTransition.class);
         addClass(SubstanceKind.class);
         addClass(Team.class);
-        addClass(TemporalRelation.class);
         addClass(TemporalValue.class);
         addClass(TerminologyCode.class);
         addClass(TerminologyId.class);
         addClass(TerminologyTerm.class);
         addClass(Text.class);
-        addClass(TextFormatTypes.class);
         addClass(TimeValue.class);
         addClass(Timing.class);
         addClass(TranslationDetails.class);
