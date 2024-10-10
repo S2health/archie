@@ -54,7 +54,16 @@ import java.util.*;
 
 public class S2RmInfoLookup extends ReflectionModelInfoLookup {
 
-    public static final String RM_VERSION = "0.8.0";
+    public static final String RM_VERSION = "0.8.6";
+
+    @Override
+    public Collection<RMPackageId> getId() {
+        List<RMPackageId> result = new ArrayList<>();
+        result.add(new RMPackageId("s2", "EHR"));
+        result.add(new RMPackageId("s2", "ENTITY"));
+        result.add(new RMPackageId("s2", "ADMIN"));
+        return result;
+    }
 
     private static S2RmInfoLookup instance;
 
@@ -347,7 +356,7 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         if(rmObject instanceof RMObject) {
             return ((RMObject) rmObject).clone();
         }
-        throw new IllegalArgumentException("The ArchieRMInfoLookup can only clone openehr reference model objects");
+        throw new IllegalArgumentException("The ArchieRMInfoLookup can only clone s2 reference model objects");
     }
 
     /**
@@ -407,13 +416,6 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
 
     }
 
-    @Override
-    public Collection<RMPackageId> getId() {
-        List<RMPackageId> result = new ArrayList<>();
-        result.add(new RMPackageId("s2", "EHR"));
-        result.add(new RMPackageId("s2", "ENTITY"));
-        return result;
-    }
 
 }
 
