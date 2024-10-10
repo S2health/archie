@@ -1,0 +1,99 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=c615d9f9-902f-425c-9a2f-d16ea828a768)
+	s2-ENTITY-Info_node.patient_contact.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"A patient contact, including familial, social, legal and professional. This archetype includes a selection of thumbnail data for each contact of interest. The primary contact data will potentially be in the form of a Person or other Entity instance, connected to the principal via a Party_relationship. Where this is the case, this reference object may include a reference to the latter Entity.">
+			use = <"Patient contact information.">
+			keywords = <"demographics", "patient", "contact">
+		>
+	>
+
+definition
+	Info_node[id1]  matches {
+		value matches {
+			Coded_text[id101] matches {
+				term matches {
+					Terminology_term[id1101] matches {
+						concept matches {[ac1]}
+					}
+				}
+			}
+		}
+		items matches {
+			Info_node[id2] matches {
+				value matches {
+					Coded_text[id102] matches {
+						term matches {
+							Terminology_term[id1102] matches {
+								concept matches {[ac2]}
+							}
+						}
+					}
+				}
+			}
+			use_archetype Info_node[id3,s2-ENTITY-Party_identity.person_structured_name.v1] occurrences matches {0..1}
+			use_archetype Info_node[id4, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
+			use_archetype Info_node[id5, s2-ENTITY-Location_address_use.location_address_use_general.v1]
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Reference to a Patient contact">
+				description = <"Reference to a patient contact, including familial, social, legal and professional.">
+			>
+			["id2"] = <
+				text = <"Functional role">
+				description = <"Functional role of contact, e.g. next-of-kin, legal guardian, advocate, interpreter etc.">
+			>
+			["id3"] = <
+				text = <"Name">
+				description = <"Name of the individual.">
+			>
+			["id4"] = <
+				text = <"Comms addresses">
+				description = <"Communications addresses for the contact.">
+			>
+			["id5"] = <
+				text = <"Location addresses">
+				description = <"Location addresses for the contact">
+			>
+			["ac1"] = <
+				text = <"Relationship type">
+				description = <"Type of relationship, i.e. familial or other social.">
+			>
+			["ac2"] = <
+				text = <"Patient contact role">
+				description = <"Functional roles performable by a patient contact.">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.SubjectRelationship>
+			["ac2"] = <http://s2health.org/id/s2.RelatedPersonRole>
+		>
+	>
+

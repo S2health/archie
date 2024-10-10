@@ -11,7 +11,7 @@ import com.nedap.archie.rules.*;
 import com.nedap.archie.serializer.adl.ADLArchetypeSerializer;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehr.referencemodels.BuiltinReferenceModels;
+import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +31,7 @@ public class RulesFlattenerTest {
 
     @Before
     public void setup() throws Exception {
-        models = BuiltinReferenceModels.getAvailableModelInfoLookups();
+        models = AllMetaModelsInitialiser.getNativeRms();
 
         withRules = new ADLParser().parse(FlattenerTest.class.getResourceAsStream("openEHR-EHR-OBSERVATION.with_rules.v1.adls"));
         specializedRules = new ADLParser().parse(FlattenerTest.class.getResourceAsStream("openEHR-EHR-OBSERVATION.specialized_rules.v1.adls"));
@@ -47,7 +47,7 @@ public class RulesFlattenerTest {
 
     @Test
     public void specializedRules() throws ADLParseException {
-        Archetype flattened = flattener.flatten(specializedRules);
+        Archetype flattened = flattener.flatten(specializedRules, 0);
         assertEquals(5, flattened.getRules().getRules().size()); //three original rules, one overwritten, one added
 
         ExpressionVariable systolic = (ExpressionVariable) flattened.getRules().getRules().get(0);
@@ -73,7 +73,7 @@ public class RulesFlattenerTest {
 
     @Test
     public void flattenedRules() throws Exception {
-        Archetype flattened = flattener.flatten(containingRules);
+        Archetype flattened = flattener.flatten(containingRules, 0);
 
         CObject systolicCObject = flattened.itemAtPath("/content[id5]/data/events/data/items[id5]");
         assertEquals("systolic", systolicCObject.getTerm().getText());

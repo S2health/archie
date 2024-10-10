@@ -1,0 +1,68 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=97038e53-acec-4381-bc1c-891d9b3c5d58)
+	s2-ENTITY-Organization.organization.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	original_namespace = <"org.openehr">
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.organisation.v1.0.1, copyright 2021 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about an organization.">
+			use = <"Use to record details of an organization.">
+			keywords = <"organisation", "organization", "provider", "carer", "network", "group">
+		>
+	>
+
+definition
+	Organization[id1] matches {	-- Organization
+		comms_addresses matches {
+			use_archetype Comms_address_use[id2, s2-ENTITY-Comms_address_use.comms_address_use_general.v1]
+		}
+		location_addresses matches {
+			use_archetype Location_address_use[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1]
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Organization">
+				description = <"An entity comprising one or more people and having a particular purpose.">
+			>
+			["id2"] = <
+				text = <"Communications addresses">
+				description = <"Communications addresses">
+			>
+			["id3"] = <
+				text = <"Physical adresses">
+				description = <"Physical location addresses">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/90055-5>
+			["id3"] = <http://loinc.org/90052-2>
+		>
+	>
+

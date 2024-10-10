@@ -1,0 +1,99 @@
+archetype (adl_version=2.1.0; rm_release=0.8.5; uid=928a3428-5458-44bc-bf39-4dff87131702)
+	s2-ENTITY-Artifact_kind.imaging_device.v1.0.0
+
+specialize
+	s2-ENTITY-Artifact_kind.medical_device.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2, copyright 2010 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record the general details of a type of device used in healthcare.">
+			keywords = <"device", "machine", "implant", "appliance", "catheter", "prosthesis", "aid", "biomedical", "instrument", "equipment", "meter", "monitor", "software">
+		>
+	>
+	other_contributors = <"openEHR CKM community", ...>
+
+definition
+	Artifact_kind[id1.1.1] matches {	-- Medical device description
+		items matches {
+			Info_node[id0.0.12] occurrences matches {0..1} matches {	-- Sampling frequency
+				value matches {
+					Text[id0.0.38] 
+					Quantity[id0.0.39] 
+				}
+			}
+			Info_node[id0.0.13] occurrences matches {0..1} matches {	-- Range
+				value matches {
+					Text[id0.0.40] 
+					Range<Quantity>[id0.0.41] matches {
+						upper matches {
+							Quantity[id0.0.42] 
+						}
+						lower matches {
+							Quantity[id0.0.43] 
+						}
+					}
+				}
+			}
+			Info_node[id0.0.14] occurrences matches {0..1} matches {	-- Accuracy
+				value matches {
+					Text[id0.0.44] 
+					Quantity[id0.0.45] 
+				}
+			}
+			Info_node[id0.0.15] occurrences matches {0..1} matches {	-- Resolution
+				value matches {
+					Text[id0.0.46] 
+					Quantity[id0.0.47] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Medical device description">
+				description = <"-">
+			>
+			["id0.0.12"] = <
+				text = <"Sampling frequency">
+				description = <"The sampling frequency limits of the device.">
+			>
+			["id0.0.13"] = <
+				text = <"Range">
+				description = <"The range limits of the device.">
+			>
+			["id0.0.14"] = <
+				text = <"Accuracy">
+				description = <"The accuracy limits of the device.">
+			>
+			["id0.0.15"] = <
+				text = <"Resolution">
+				description = <"The resolution limits of the device.">
+			>
+		>
+	>
+
