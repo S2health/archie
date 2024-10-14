@@ -11,6 +11,7 @@ import com.nedap.archie.rm.datastructures.ItemTree;
 import com.nedap.archie.rm.datavalues.DvBoolean;
 import com.nedap.archie.rm.datavalues.DvText;
 import com.nedap.archie.rminfo.ArchieRMInfoLookup;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.testutil.TestUtil;
 import org.junit.After;
 import org.junit.Before;
@@ -190,8 +191,26 @@ public class FixableAssertionsCheckerTest {
 
     }
 
+    @Test
+    public void constructArchetypeSlot() throws Exception {
+        archetype = parser.parse(ParsedRulesEvaluationTest.class.getResourceAsStream("construct_archetype_slot.adls"));
+        RuleEvaluation<Locatable> ruleEvaluation = getRuleEvaluation();
+
+        // Construct the rmObject, containing an empty ArchetypeSlot
+        Locatable root = rmObjectCreator.create(archetype.getDefinition());
+
+        // Evaluate the rmObject and its rules.
+        EvaluationResult evaluate = ruleEvaluation.evaluate(root, archetype.getRules().getRules());
+
+        // Assert the evaluation result, it should contain the element that has to be set to a specific value.
+        assertEquals(1, evaluate.getSetPathValues().size());
+        assertEquals(
+                "/openEHR-EHR-CLUSTER\\.some_archetype_option_a.v(\\d+\\.\\d+\\.\\d+)/",
+                evaluate.getSetPathValues().get("/data[id2]/events[id3]/data[id4]/items[id14]/items[id19]/archetype_details/archetype_id/value").getValue());
+    }
+
     private RuleEvaluation<Locatable> getRuleEvaluation() {
-        return new RuleEvaluation<>(ArchieRMInfoLookup.getInstance(), archetype);
+        return new RuleEvaluation<>(ArchieRMInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), archetype);
     }
 
 }
