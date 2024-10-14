@@ -64,5 +64,19 @@ public class ComplexArchetypeValidatorTestS2 {
         assertEquals(32, messages.size());
     }
 
+    @Test
+    public void testAdminArchetype() {
+        Archetype archetype = repository.getArchetype("s2-ADMIN-Billing_encounter.encounter_general.v1.0.0");
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
+        List<ValidationMessage> messages = validationResult.getErrors();
+        assertEquals(8, messages.size());
+    }
 
+    @Test
+    public void testEntityArchetype() {
+        Archetype archetype = repository.getArchetype("s2-ENTITY-Substance_kind.medication.v1.0.0");
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
+        List<ValidationMessage> messages = validationResult.getErrors();
+        assertEquals(6, messages.size());
+    }
 }
