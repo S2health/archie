@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=3f7fbe34-4e64-4c02-8d1a-402f7b0f57ce)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=3f7fbe34-4e64-4c02-8d1a-402f7b0f57ce)
 	s2-ENTITY-Person.person.v1.0.0
 
 language
@@ -45,7 +45,7 @@ definition
 			use_archetype Location_address_use[id6, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
 		}
 		identities matches {
-			use_archetype Party_identity[id7, s2-ENTITY-Party_identity.person_structured_name.v1]
+			use_archetype Party_identity[id7, s2-ENTITY-Party_identity.person_structured_name.v1] 
 		}
 		other_details matches {
 			Info_node[id8] occurrences matches {0..1} matches {	-- Date of birth
@@ -53,7 +53,7 @@ definition
 					Date_value[id108] 
 				}
 			}
-			Info_node[id9] occurrences matches {0..1} matches {
+			Info_node[id9] occurrences matches {0..1} matches {	-- Place of birth
 				value matches {
 					Plain_text[id109] 
 				}
@@ -204,6 +204,8 @@ terminology
 			["id6"] = <http://loinc.org/99953-2>
 			["id1"] = <http://loinc.org/104976-6>
 			["id2"] = <http://loinc.org/104902-2>
+			["id8"] = <http://loinc.org/21112-8>
+			["id9"] = <http://loinc.org/21842-0>
 		>
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.PersonIdentityUse>

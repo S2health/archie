@@ -1,4 +1,4 @@
-template (adl_version=2.0.6; rm_release=0.8.5)
+template (adl_version=2.1.0; rm_release=0.8.6)
 	s2-EHR-Composition.t_medication_list.v1.0.0
 
 specialize
@@ -61,11 +61,9 @@ definition
 	Section[id1.1] matches {
 		/items matches {
 			use_archetype Order[id2.1, s2-EHR-Order.medication_order.v4] occurrences matches {0..1}
-			allow_archetype Order[id2] closed
 			Section[id3] matches {
 				items matches {
 					use_archetype Action[id4.1, s2-EHR-Action.medication.v1]
-					allow_archetype Action[id4] closed
 				}
 			}
 		}

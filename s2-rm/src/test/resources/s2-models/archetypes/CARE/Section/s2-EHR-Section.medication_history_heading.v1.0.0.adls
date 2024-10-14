@@ -1,4 +1,4 @@
-archetype (adl_version=2.0.6; rm_release=0.8.5)
+archetype (adl_version=2.1.0; rm_release=0.8.6)
 	s2-EHR-Section.medication_history_heading.v1.0.0
 
 language
@@ -20,12 +20,12 @@ description
 	>
 
 definition
-	Section[id1] matches {	-- -
+	Section[id1] matches {	-- Medication history
 		items matches {
-			use_archetype  Order[id2, s2-EHR-Order.medication_order.v4]
+			use_archetype Order[id2, s2-EHR-Order.medication_order.v4] 
 			Section[id3] occurrences matches {1} matches {	-- Action history
 				items matches {
-					use_archetype Action[id4, s2-EHR-Action.medication.v1]
+					use_archetype Action[id4, s2-EHR-Action.medication.v1] 
 				}
 			}
 		}
@@ -52,3 +52,12 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/a591c089-6982-ef11-8870-6045bdc71c8b>
+			["id2"] = <http://loinc.org/57833-6>
+			["id3"] = <http://loinc.org/11492282-6982-ef11-8870-6045bdc71c8b>
+			["id4"] = <http://loinc.org/14f2d87b-6982-ef11-8870-6045bdc71c8b>
+		>
+	>
+

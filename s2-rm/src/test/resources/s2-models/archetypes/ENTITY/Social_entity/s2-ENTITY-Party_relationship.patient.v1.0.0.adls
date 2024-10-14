@@ -31,28 +31,28 @@ description
 	>
 
 definition
-	Party_relationship[id1] matches {	-- Person
+	Party_relationship[id1] matches {	-- Patient
 		other_details matches {
-			Info_node[id2] occurrences matches {0..1} matches {
+			Info_node[id2] occurrences matches {0..1} matches {	-- Insurance details
 				items matches {
-					Info_node[id22] occurrences matches {0..1} matches {
+					Info_node[id22] occurrences matches {0..1} matches {	-- Insurance organization
 						value matches {
 							Plain_text[id122] 
 						}
 					}
-					Info_node[id23] occurrences matches {0..1} matches {
+					Info_node[id23] occurrences matches {0..1} matches {	-- Insurance group id
 						value matches {
 							Plain_text[id123] 
 						}
 					}
-					Info_node[id24] occurrences matches {0..1} matches {
+					Info_node[id24] occurrences matches {0..1} matches {	-- Insurance member id
 						value matches {
 							Plain_text[id124] 
 						}
 					}
 				}
 			}
-			use_archetype Info_node[id3, s2-ENTITY-Info_node.patient_contact.v1]
+			use_archetype Info_node[id3, s2-ENTITY-Info_node.patient_contact.v1] 
 		}
 	}
 
@@ -87,6 +87,16 @@ terminology
 				text = <"Contact ref">
 				description = <"-">
 			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/79191-3>
+			["id2"] = <http://loinc.org/7db499d1-7482-ef11-8870-6045bdc71c8b>
+			["id22"] = <http://loinc.org/ab0804c3-7482-ef11-8870-6045bdc71c8b>
+			["id23"] = <http://loinc.org/89061-6>
+			["id24"] = <http://loinc.org/b4788aca-7482-ef11-8870-6045bdc71c8b>
+			["id3"] = <http://loinc.org/95727-4>
 		>
 	>
 

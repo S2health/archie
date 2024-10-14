@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; generated; uid=c29758c9-970e-4661-a297-097d62d0bf55)
+archetype (adl_version=2.1.0; rm_release=0.8.6; generated; uid=c29758c9-970e-4661-a297-097d62d0bf55)
 	s2-EHR-Assessment.problem_diagnosis.v1.3.1
 
 language
@@ -72,7 +72,7 @@ description
             Not to be used for the explicit recording of an absence (or negative presence) of a problem or diagnosis, for example ‘No known problem or diagnoses’ or ‘No known diabetes’. Use the EVALUATION.exclusion-problem_diagnosis archetype to express a positive statement about exclusion of a problem or diagnosis.">
 		>
 	>
-	other_contributors = <"openEHR CKM community">
+	other_contributors = <"openEHR CKM community", ...>
 
 definition
 	Assessment[id1] matches {	-- Problem/Diagnosis
@@ -92,7 +92,7 @@ definition
 					Text[id83] 
 				}
 			}
-			use_archetype Info_node[id13, s2-EHR-Info_node.anatomical_location.v1]
+			use_archetype Info_node[id13, s2-EHR-Info_node.anatomical_location.v1] 
 			Info_node[id79] matches {	-- Cause
 				value matches {
 					Text[id85] 
@@ -288,7 +288,7 @@ terminology
 			["id70"] = <http://loinc.org/106173-8>
 			["id71"] = <http://loinc.org/106177-9>
 			["id44"] = <http://loinc.org/46696-1>
-			["id80"] = <http://loinc.org/22689c4b-eb6e-ef11-8870-6045bdc71c8b>
+			["id80"] = <http://loinc.org/a30eb7ea-6682-ef11-8870-6045bdc71c8b>
 		>
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.ConditionSeverity>

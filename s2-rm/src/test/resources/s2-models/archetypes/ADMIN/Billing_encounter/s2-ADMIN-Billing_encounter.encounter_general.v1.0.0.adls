@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=29731165-5925-4c1a-8655-3c1c493d3dd8)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=29731165-5925-4c1a-8655-3c1c493d3dd8)
 	s2-ADMIN-Billing_encounter.encounter_general.v1.0.0
 
 language
@@ -29,130 +29,135 @@ description
 	>
 
 definition
-	Billing_encounter[id1] matches {
+	Billing_encounter[id1] matches {	-- Billing encounter
 		other_details matches {
-			Info_node[id2] occurrences matches {0..1} matches {	
+			Info_node[id2] occurrences matches {0..1} matches {	-- Priority
 				value matches {
-					Coded_text[id102]  matches {
+					Coded_text[id102] matches {
 						term matches {
 							Terminology_term[id1002] matches {
-								concept matches {[ac2]}
+								concept matches {[ac2]}		-- Encounter priorities
 							}
 						}
 					}
 				}
 			}
-			Info_node[id3] occurrences matches {0..1} matches {
+			Info_node[id3] occurrences matches {0..1} matches {	-- Planned start time
 				value matches {
 					Date_time_value[id103] 
 				}
 			}
-			Info_node[id4] occurrences matches {0..1} matches {
+			Info_node[id4] occurrences matches {0..1} matches {	-- Planned end time
 				value matches {
 					Date_time_value[id104] 
 				}
 			}
-			Info_node[id5] occurrences matches {0..1} matches {	
+			Info_node[id5] occurrences matches {0..1} matches {	-- Duration
 				value matches {
 					Duration_value[id105] 
 				}
 			}
-			Info_node[id6] occurrences matches {0..1} matches {
+			Info_node[id6] occurrences matches {0..1} matches {	-- Reason for encounter
 				value matches {
 					Coded_text[id106] matches {
 						term matches {
 							Terminology_term[id1006] matches {
-								concept matches {[ac6]}
+								concept matches {[ac6]}		-- Reasons for encounter
 							}
 						}
 					}
 				}
 			}
-			Info_node[id7] occurrences matches {0..1} matches {
+			Info_node[id7] occurrences matches {0..1} matches {	-- Health service type
 				value matches {
 					Coded_text[id107] matches {
 						term matches {
 							Terminology_term[id1007] matches {
-								concept matches {[ac7]}
+								concept matches {[ac7]}		-- Health service types
 							}
 						}
 					}
 				}
 			}
-			Info_node[id8] occurrences matches {0..1} matches {
+			Info_node[id8] occurrences matches {0..1} matches {	-- Incoming referral id
 				value matches {
 					Rwe_id_ref[id108] 
 				}
 			}
-			Info_node[id9] occurrences matches {0..1} matches {
+			Info_node[id9] occurrences matches {0..1} matches {	-- Readmission flag
 				value matches {
 					Boolean_value[id109] 
 				}
 			}
-			Info_node[id17] occurrences matches {0..1} matches {
+			Info_node[id17] occurrences matches {0..1} matches {	-- Chief complaint
 				value matches {
 					Coded_text[id117] matches {
 						term matches {
 							Terminology_term[id1017] matches {
-								concept matches {[ac17]}
+								concept matches {[ac17]}		-- Chief complaints
 							}
 						}
 					}
 				}
 			}
-			Info_node[id18] occurrences matches {0..1} matches {
+			Info_node[id18] occurrences matches {0..1} matches {	-- Discharge diagnosis
 				value matches {
 					Coded_text[id118] matches {
 						term matches {
 							Terminology_term[id1018] matches {
-								concept matches {[ac18]}
+								concept matches {[ac18]}		-- Discharge diagnoses
 							}
 						}
 					}
 				}
 			}
-			Info_node[id19] occurrences matches {0..1} matches {
+			Info_node[id19] occurrences matches {0..1} matches {	-- Discharge disposition
 				value matches {
 					Coded_text[id119] matches {
 						term matches {
 							Terminology_term[id1019] matches {
-								concept matches {[ac19]}
+								concept matches {[ac19]}		-- Discharge dispositions
 							}
 						}
 					}
 				}
 			}
-			Info_node[id20] occurrences matches {0..1} matches {
+			Info_node[id20] occurrences matches {0..1} matches {	-- Admit medications list
 				value matches {
 					Coded_text[id120] matches {
 						term matches {
 							Terminology_term[id1020] matches {
-								concept matches {[ac20]}
+								concept matches {[ac20]}		-- Admit medications
 							}
 						}
 					}
 				}
 			}
-			Info_node[id21] occurrences matches {0..1} matches {
+			Info_node[id21] occurrences matches {0..1} matches {	-- Discharge orders
 				value matches {
 					Coded_text[id121] matches {
 						term matches {
 							Terminology_term[id1021] matches {
-								concept matches {[ac21]}
+								concept matches {[ac21]}		-- Discharge orders
 							}
 						}
 					}
 				}
 			}
-			Info_node[id22] occurrences matches {0..1} matches {
+			Info_node[id22] occurrences matches {0..1} matches {	-- Encounter purpose narrative
 				value matches {
-					Plain_text[id122]
+					Plain_text[id122] 
 				}
 			}
-			Info_node[id23] occurrences matches {0..1} matches {
+			Info_node[id23] occurrences matches {0..1} matches {	-- Discharge instructions
 				value matches {
-					Plain_text[id123]
+					Plain_text[id123] 
 				}
+			}
+		}
+		interaction_type matches {
+			Terminology_term[id1022] matches {
+				concept matches {[ac10]}
 			}
 		}
 	}
@@ -240,6 +245,10 @@ terminology
 				text = <"Chief complaints">
 				description = <"-">
 			>
+			["ac10"] = <
+				text = <"Interaction type">
+				description = <"-">
+			>
 			["ac18"] = <
 				text = <"Discharge diagnoses">
 				description = <"-">
@@ -277,4 +286,12 @@ terminology
 			["id22"] = <http://loinc.org/104915-4>
 			["id23"] = <http://loinc.org/74213-0>
 		>
+		["s2"] = <
+			["ac6"] = <http://s2health.org/id/s2.EncounterReason>
+			["ac10"] = <http://s2health.org/id/s2.InteractionType>
+			["ac17"] = <http://s2health.org/id/s2.ChiefComplaint>
+			["ac19"] = <http://s2health.org/id/s2.DischargeDisposition>
+			["ac18"] = <http://s2health.org/id/s2.DischargeDiagnosis>
+		>
 	>
+

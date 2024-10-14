@@ -1,0 +1,115 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=1de66765-9e18-4dc1-97b1-5bb2b62c9869)
+	s2-ENTITY-Entity_ref_node.medication_type_ref.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health">
+		["organisation"] = <"S2 Health <http://www.s2Health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-07-26">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.medication.v2.0.1">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Refer to a kind of medication.">
+		>
+	>
+
+definition
+	Entity_ref_node[id1] occurrences matches {0..1} matches {	-- Medication details
+		items matches {
+			Info_node[id133] occurrences matches {0..1} matches {	-- Name
+				value matches {
+					Coded_text[id159] matches {
+						term matches {
+							Terminology_term[id1159] matches {
+								concept matches {[ac1]}		-- Medication name
+							}
+						}
+					}
+				}
+			}
+			Info_node[id72] matches {	-- Form
+				value matches {
+					Coded_text[id160] matches {
+						term matches {
+							Terminology_term[id1602] matches {
+								concept matches {[ac2]}		-- Medication form
+							}
+						}
+					}
+				}
+			}
+			Info_node[id153] occurrences matches {0..1} matches {	-- Strength (formulation)
+				value matches {
+					Proportion[id163] 
+				}
+			}
+			Info_node[id152] occurrences matches {0..1} matches {	-- Manufacturer
+				value matches {
+					Text[id166] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Medication">
+				description = <"Reference to a medication or component of a medication, including strength, form and details of any specific constituents.">
+			>
+			["id133"] = <
+				text = <"Name">
+				description = <"The name of the medication or medication component.">
+			>
+			["id152"] = <
+				text = <"Manufacturer">
+				description = <"The manufacturer of the medication or medication component.">
+			>
+			["id153"] = <
+				text = <"Strength (formulation)">
+				description = <"The strength of the medication or medication component, expressed as a proportion.">
+			>
+			["id72"] = <
+				text = <"Form">
+				description = <"The formulation or presentation of the medication or medication component.">
+			>
+			["ac1"] = <
+				text = <"Medication name">
+				description = <"Medication name">
+			>
+			["ac2"] = <
+				text = <"Medication form">
+				description = <"Medication form">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id133"] = <http://loinc.org/74058-9>
+			["id152"] = <http://loinc.org/74719-6>
+			["id72"] = <http://loinc.org/74055-5>
+			["id153"] = <http://loinc.org/6a8a94b8-624f-ef11-886e-6045bdc71c8b>
+			["id1"] = <http://loinc.org/540c1425-7282-ef11-8870-6045bdc71c8b>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.RxNormActive>
+			["ac2"] = <http://s2health.org/id/s2.DoseForm>
+		>
+	>
+

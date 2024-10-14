@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; generated; uid=f3fbec37-c2e9-4acf-bdba-2c7b534e28d8)
+archetype (adl_version=2.1.0; rm_release=0.8.6; generated; uid=f3fbec37-c2e9-4acf-bdba-2c7b534e28d8)
 	s2-EHR-Direct_observation.body_weight.v2.1.6
 
 language
@@ -53,7 +53,7 @@ definition
 				value matches {
 					Measured<Quantity>[id44] matches {
 						value matches {
-							Quantity[id35] matches {	-- Weight (kg)
+							Quantity[id35] matches {
 								magnitude matches {|0.0..1000.0|}
 								units matches {
 									Coded_text[id37] matches {
@@ -66,12 +66,12 @@ definition
 								}
 							}
 						}
-					}	
+					}
 				}
 				original_value matches {
 					Measured<Quantity>[id45] matches {
 						value matches {
-							Quantity[id38] matches {	-- Weight ([lb_av])
+							Quantity[id38] matches {
 								magnitude matches {|0.0..2000.0|}
 								units matches {
 									Coded_text[id40] matches {
@@ -87,7 +87,7 @@ definition
 					}
 					Measured<Quantity>[id46] matches {
 						value matches {
-							Quantity[id41] matches {	-- Weight (g)
+							Quantity[id41] matches {
 								magnitude matches {|0.0..1000000.0|}
 								units matches {
 									Coded_text[id43] matches {
@@ -234,6 +234,7 @@ terminology
 			["id21"] = <http://loinc.org/74720-4>
 			["id25"] = <http://loinc.org/106173-8>
 			["id26"] = <http://loinc.org/106176-1>
+			["id27"] = <http://loinc.org/8339-4>
 		>
 		["openehr"] = <
 			["at29"] = <http://openehr.org/id/124>

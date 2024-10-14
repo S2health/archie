@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=c153b01d-ef8d-401a-8a64-8bb881493e6a)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=c153b01d-ef8d-401a-8a64-8bb881493e6a)
 	s2-EHR-Order.medication_order.v4.0.0
 
 language
@@ -69,7 +69,7 @@ description
             Not to be used to record the order for insertion of implants or medical devices such as pacemakers and defibrillators. Use the Order.procedure for this purpose.">
 		>
 	>
-	other_contributors = <"Morten Aas, Oslo Universitetssykehus, Norway", "Tomas Alme, DIPS, Norway", "Ole Andreas Bjordal, Webmed, Norway", "Erling Are Hole, Helse Bergen, Norway", "Vebjørn Arntzen, Oslo University Hospital, Norway (openEHR Editor)", "Koray Atalag, University of Auckland, New Zealand", "Silje Ljosland Bakke, Helse Vest IKT AS, Norway (openEHR Editor)", "Marcus Baw, openGPSoC / BawMedical Ltd, United Kingdom", "John Bennett, NEHTA, Australia", "Kristian Berg, Universitetssykehuset Nord Norge, Norway (Nasjonal IKT redaktør)", "SumanBhusan Bhattacharyya, Sudisa Consultancy Services, India", "Sharmila Biswas, Australia", "Lars Bitsch-Larsen, Haukeland University hospital, Norway", "Laila Bruun, Oslo universitetssykehus HF, Norway", "Bjørn Christensen, Helse Bergen HF, Norway", "Stephen Chu, NEHTA, Australia (Editor)", "Matthew Cordell, NEHTA, Australia", "Lisbeth Dahlhaug, Helse Midt - Norge IT, Norway", "Inderjit Daphu, Helse Bergen, Norway", "Gail Easterbrook, Flinders Medical Centre, Australia", "Gunn Elin Blakkisrud, DIPS ASA, Norway", "Stig Erik Hegrestad, Helse Førde, Norway", "David Evans, Queensland Health, Australia", "Samuel Frade, Marand, Portugal", "Hildegard Franke, freshEHR Clinical Informatics Ltd., United Kingdom", "Sarah Gaunt, NEHTA, Australia", "Heather Grain, Llewelyn Grain Informatics, Australia", "Cecilie Graver, Oslo universitetssykehus HF, Norway", "Trina Gregory, cpc, Australia", "Bjørn Grøva, Diretoratet for e-helse, Norway", "Robert Hausam, Hausam Consulting LLC, United States", "Sam Heard, Ocean Informatics, Australia (Editor)", "Kristian Heldal, Telemark Hospital Trust, Norway", "Annette Hole Sjøborg, DIPS ASA, Norway", "Hilde Hollås, DIPS ASA, Norway", "Roar Holm, Helse Vest IKT A/S, Norway", "Evelyn Hovenga, EJSH Consulting, Australia", "Gunnar Jårvik, Nasjonal IKT HF, Norway", "Mary Kelaher, NEHTA, Australia", "Nils Kolstrup, Skansen Legekontor og Nasjonalt Senter for samhandling og telemedisin, Norway", "Ole Kristian Losvik, Losol AS, Norway", "Robert L'egan, NEHTA, Australia", "Russell Leftwich, Russell B Leftwich MD, United States", "Fest Legemiddelverket, Statens Legemiddelverk, Norway", "Øygunn Leite Kallevik, Helse Bergen, Norway", "Heather Leslie, Atomica Informatics, Australia (openEHR Editor)", "Colin Macfarlane, Elsevier, United Kingdom", "Alan March, Hospital Universitario Austral, Argentina", "Siv Marie Lien, DIPS ASA, Norway", "Susan McIndoe, Royal District Nursing Service, Australia", "David McKillop, NEHTA, Australia", "Ian McNicoll, freshEHR Clinical Informatics, United Kingdom (openEHR Editor)", "Chris Mitchell, RACGP, Australia", "Lars Morgan Karlsen, DIPS ASA, Norway", "Stewart Morrison, NEHTA, Australia", "Bjørn Næss, DIPS ASA, Norway", "Andrej Orel, Marand d.o.o., Slovenia", "Anne Pauline Anderssen, Helse Nord RHF, Norway", "Martin Paulson, Sykehuset i Vestfold, Norway", "Chris Pearce, Melbourne East GP Network, Australia", "Kristian Pedersen, Nordlandssykehuset HF, Norway", "Rune Pedersen, Universitetssykehuset i Nord Norge, Norway", "Vladimir Pizzo, Hospital Sírio Libanês, Brazil", "Camilla Preeston, Royal Australian College of General Practitioners, Australia", "Margaret Prichard, NEHTA, Australia", "Cathy Richardson, NEHTA, Australia", "Robyn Richards, NEHTA - Clinical Terminology, Australia", "Tanja Riise, Nasjonal IKT HF, Norway", "Anoop Shah, University College London, United Kingdom", "Line Silsand, Universitetssykehuset i Nord-Norge, Norway", "Raymond Simkus, Brookswood Family Practice, Canada", "Iztok Stotl, UKCLJ, Slovenia", "John Taylor, NEHTA, Australia", "Nyree Taylor, Ocean Informatics, Australia", "Tesfay Teame, Folkehelseinstituttet, Norway", "Richard Townley-O'Neill, Australian Digital Health Agency, Australia", "John Tore Valand, Helse Bergen, Norway (openEHR Editor)", "Ines Vaz, UFN, Portugal", "Nils Widnes, Helse-Bergen, Norway", "Kylie Young, The Royal Australian College of General Practitioners, Australia">
+	other_contributors = <"openEHR CKM community">
 
 definition
 	Order[id1] matches {	-- Medication order
@@ -81,7 +81,7 @@ definition
 							Text[id181] 
 						}
 					}
-					use_archetype Info_node[id144, s2-EHR-Info_node.medication.v3] occurrences matches {0..1} 
+					use_archetype Entity_ref_node[id144, s2-ENTITY-Entity_ref_node.medication_type_ref.v1] occurrences matches {0..1} 
 					Info_node[id92] matches {	-- Route
 						value matches {
 							Text[id182] 
@@ -585,6 +585,13 @@ terminology
 			["id70"] = <http://loinc.org/71573-0>
 			["id94"] = <http://loinc.org/72369-2>
 			["id96"] = <http://loinc.org/82307-0>
+			["id108"] = <http://loinc.org/78fbdb06-6982-ef11-8870-6045bdc71c8b>
+			["id113"] = <http://loinc.org/8fc58633-6982-ef11-8870-6045bdc71c8b>
+			["id114"] = <http://loinc.org/ee02613c-6982-ef11-8870-6045bdc71c8b>
+			["id130"] = <http://loinc.org/fcb29648-6982-ef11-8870-6045bdc71c8b>
+			["id166"] = <http://loinc.org/72d04cf1-6882-ef11-8870-6045bdc71c8b>
+			["id61"] = <http://loinc.org/61b18a29-6982-ef11-8870-6045bdc71c8b>
+			["id63"] = <http://loinc.org/d98767fb-6882-ef11-8870-6045bdc71c8b>
 		>
 	>
 	value_sets = <

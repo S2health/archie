@@ -29,23 +29,23 @@ description
 	>
 
 definition
-	Location_address_use[id1] matches {	-- Address
+	Location_address_use[id1] matches {	-- Address use
 		value matches {
 			Coded_text[id39] matches {
 				term matches {
 					Terminology_term[id34] matches {
-						concept matches {[ac1]}
+						concept matches {[ac1]}		-- Location type
 					}
 				}
 			}
 		}
 		purposes matches {
-			Terminology_term[id14] matches {
-				concept matches {[ac2]}
+			Terminology_term[id14] matches {	-- Purpose
+				concept matches {[ac2]}		-- Purpose
 			}
 		}
 		items matches {
-			use_archetype Info_node[id2, s2-ENTITY-Info_node.structured_address.v1] occurrences matches {0..1}
+			use_archetype Info_node[id2, s2-ENTITY-Info_node.structured_address.v1] occurrences matches {0..1} 
 		}
 	}
 
@@ -77,9 +77,11 @@ terminology
 	term_bindings = <
 		["loinc"] = <
 			["id1"] = <http://loinc.org/99953-2>
+			["id2"] = <http://loinc.org/106181-1>
 		>
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.PhysicalLocationType>
 			["ac2"] = <http://s2health.org/id/s2.PhysicalAddressPurpose>
 		>
 	>
+

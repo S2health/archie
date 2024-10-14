@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=928a7428-5458-44bc-bf39-4dff87931702)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=928a7428-5458-44bc-bf39-4dff87931702)
 	s2-ENTITY-Artifact_kind.medical_device.v1.0.0
 
 specialize
@@ -32,10 +32,10 @@ description
 			keywords = <"device", "machine", "implant", "appliance", "catheter", "prosthesis", "aid", "biomedical", "instrument", "equipment", "meter", "monitor", "software">
 		>
 	>
-	other_contributors = <"openEHR CKM community">
+	other_contributors = <"openEHR CKM community", ...>
 
 definition
-	Artifact_kind[id1.1] 
+	Artifact_kind[id1.1] 	-- Medical device description
 
 terminology
 	term_definitions = <
@@ -46,3 +46,9 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/09732ba3-7482-ef11-8870-6045bdc71c8b>
+		>
+	>
+

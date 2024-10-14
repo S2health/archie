@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=88775b7c-14e0-47ed-95c8-6b9dc96364c5)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=88775b7c-14e0-47ed-95c8-6b9dc96364c5)
 	s2-EHR-Entity_ref_node.person_ref.v1.0.0
 
 language
@@ -29,7 +29,7 @@ description
 	>
 
 definition
-	Entity_ref_node[id1]  matches {
+	Entity_ref_node[id1] matches {	-- Reference to a Person
 		items matches {
 			Info_node[id2] occurrences matches {0..1} matches {	-- Name
 				value matches {
@@ -41,12 +41,12 @@ definition
 					Rwe_id_ref[id104] 
 				}
 			}
-			Info_node[id5] matches {	-- Identifier
+			Info_node[id5] matches {	-- Relationship
 				value matches {
 					Coded_text[id105] matches {
 						term matches {
 							Terminology_term[id1102] matches {
-								concept matches {[ac1]}		-- Biological sex
+								concept matches {[ac1]}		-- Relationship type
 							}
 						}
 					}
@@ -83,6 +83,11 @@ terminology
 	term_bindings = <
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.SubjectRelationship>
+		>
+		["loinc"] = <
+			["id2"] = <http://loinc.org/90d847a8-6c82-ef11-8870-6045bdc71c8b>
+			["id4"] = <http://loinc.org/106193-6>
+			["id5"] = <http://loinc.org/44767-2>
 		>
 	>
 

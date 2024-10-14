@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=97038e53-acec-4381-bc1c-891d9b3c5d58)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=97038e53-acec-4381-bc1c-891d9b3c5d58)
 	s2-ENTITY-Organization.organization.v1.0.0
 
 language
@@ -35,10 +35,10 @@ description
 definition
 	Organization[id1] matches {	-- Organization
 		comms_addresses matches {
-			use_archetype Comms_address_use[id2, s2-ENTITY-Comms_address_use.comms_address_use_general.v1]
+			use_archetype Comms_address_use[id2, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
 		}
 		location_addresses matches {
-			use_archetype Location_address_use[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1]
+			use_archetype Location_address_use[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
 		}
 	}
 
@@ -63,6 +63,7 @@ terminology
 		["loinc"] = <
 			["id1"] = <http://loinc.org/90055-5>
 			["id3"] = <http://loinc.org/90052-2>
+			["id2"] = <http://loinc.org/99953-2>
 		>
 	>
 

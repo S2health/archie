@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=9b857438-5658-44bc-bf39-4dff87931702)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=9b857438-5658-44bc-bf39-4dff87931702)
 	s2-ENTITY-Material_entity.prosthesis.v1.0.0
 
 specialize
@@ -34,7 +34,7 @@ description
 	>
 
 definition
-	Material_entity[id1.1] 
+	Material_entity[id1.1] 	-- Medical device
 
 terminology
 	term_definitions = <
@@ -45,3 +45,9 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/023d3ae2-7382-ef11-8870-6045bdc71c8b>
+		>
+	>
+

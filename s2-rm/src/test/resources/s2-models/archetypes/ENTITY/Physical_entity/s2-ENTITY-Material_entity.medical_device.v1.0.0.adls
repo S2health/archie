@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=1b0ae428-5658-44bc-bf39-4dff87931702)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=1b0ae428-5658-44bc-bf39-4dff87931702)
 	s2-ENTITY-Material_entity.medical_device.v1.0.0
 
 specialize
@@ -44,19 +44,19 @@ definition
 		individual_attributes matches {
 			Info_node[id0.2] matches {	-- Device name
 				value matches {
-					Text[id29] 
+					Text[id0.102]
 				}
 			}
 		}
 		use_details matches {
-			Info_node[id0.23] occurrences matches {0..1} matches {    -- Date last cleaned/sterilized
-      		          	value matches {
-					Date_time_value[id49]
-				}
-      	      		}
-			Info_node[id0.17] occurrences matches {0..1} matches {    -- Date last serviced
+			Info_node[id0.23] occurrences matches {0..1} matches {	-- Date last cleaned/sterilized
 				value matches {
-					Date_time_value[id51]
+					Date_time_value[id0.123]
+				}
+			}
+			Info_node[id0.17] occurrences matches {0..1} matches {	-- Date last serviced
+				value matches {
+					Date_time_value[id0.117]
 				}
 			}
 		}
@@ -73,19 +73,22 @@ terminology
 				text = <"Device name">
 				description = <"Identification of the medical device, preferably by a common name, a formal fully descriptive name or, if required, by class or category of device.">
 			>
-            ["id0.17"] = <
-                text = <"Date last serviced">
-                description = <"The date the device was last serviced.">
-            >
-            ["id0.23"] = <
-                text = <"Date last cleaned/sterilized">
-                description = <"Date the device was last cleaned or sterilized.">
-            >
+			["id0.17"] = <
+				text = <"Date last serviced">
+				description = <"The date the device was last serviced.">
+			>
+			["id0.23"] = <
+				text = <"Date last cleaned/sterilized">
+				description = <"Date the device was last cleaned or sterilized.">
+			>
 		>
 	>
 	term_bindings = <
 		["loinc"] = <
 			["id0.2"] = <http://loinc.org/74720-4>
+			["id0.17"] = <http://loinc.org/f7adc1db-6f82-ef11-8870-6045bdc71c8b>
+			["id0.23"] = <http://loinc.org/478d78bb-6f82-ef11-8870-6045bdc71c8b>
+			["id1.1"] = <http://loinc.org/82307-0>
 		>
 	>
 

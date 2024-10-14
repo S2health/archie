@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=6a33f73f-bc67-4373-9712-1fdd80651eef)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=6a33f73f-bc67-4373-9712-1fdd80651eef)
 	s2-EHR-Info_node.anatomical_location_classical.v1.0.0
 
 specialize
@@ -23,217 +23,218 @@ description
 	>
 
 definition
-    Info_node[id1.1]  matches {    -- Anatomical location
-        items matches {
-           Info_node[id0.2] matches {    -- Body site name
-                value matches {
-                    Text[id0.67]
-                }
-            }
-            Info_node[id0.66] occurrences matches {0..1} matches {    -- Specific site
-                value matches {
-                    Text[id68]
-                }
-            }
-            Info_node[id0.3] occurrences matches {0..1} matches {    -- Laterality
-                value matches {
-                    Coded_text[id0.69] matches {
-                        term matches {
-                            Terminology_term[id0.75] matches {
-                                concept matches {[ac0.1]}    -- Laterality (synthesised)
-                            }
-                        }
-                    }
-                }
-            }
-            Info_node[id0.65] occurrences matches {0..2} matches {    -- Aspect
-                value matches {
-                    Coded_text[id0.70] matches {
-                        term matches {
-                            Terminology_term[id0.76] matches {
-                                concept matches {[ac0.2]}    -- Aspect (synthesised)
-                            }
-                        }
-                    }
-                    Plain_text[id0.71]
-                }
-            }
-            Info_node[id0.56] occurrences matches {0..1} matches {    -- Anatomical Line
-                value matches {
-                    Coded_text[id0.72] matches {
-                        term matches {
-                            Terminology_term[id0.77] matches {
-                                concept matches {[ac0.3]}    -- Anatomical Line (synthesised)
-                            }
-                        }
-                    }
-                    Plain_text[id0.73]
-                }
-            }
-        }
-    }
+	Info_node[id1.1] matches {	-- Anatomical location - classical
+		items matches {
+			Info_node[id0.2] matches {	-- Body site name
+				value matches {
+					Text[id0.67] 
+				}
+			}
+			Info_node[id0.3] occurrences matches {0..1} matches {	-- Laterality
+				value matches {
+					Coded_text[id0.69] matches {
+						term matches {
+							Terminology_term[id0.75] matches {
+								concept matches {[ac0.1]}		-- Laterality (synthesised)
+							}
+						}
+					}
+				}
+			}
+			Info_node[id0.65] occurrences matches {0..2} matches {	-- Aspect
+				value matches {
+					Coded_text[id0.70] matches {
+						term matches {
+							Terminology_term[id0.76] matches {
+								concept matches {[ac0.2]}		-- Aspect (synthesised)
+							}
+						}
+					}
+					Plain_text[id0.71] 
+				}
+			}
+			Info_node[id0.56] occurrences matches {0..1} matches {	-- Anatomical Line
+				value matches {
+					Coded_text[id0.72] matches {
+						term matches {
+							Terminology_term[id0.77] matches {
+								concept matches {[ac0.3]}		-- Anatomical Line (synthesised)
+							}
+						}
+					}
+					Plain_text[id0.73] 
+				}
+			}
+		}
+	}
 
 terminology
-    term_bindings = <
-        ["SNOMED-CT"] = <
-            ["id0.2"] = <http://snomed.info/id/272741003>
-            ["at0.3"] = <http://snomed.info/id/7771000>
-            ["at0.4"] = <http://snomed.info/id/24028007>
-        >
-    >
-    value_sets = <
-        ["ac0.1"] = <
-            id = <"ac0.1">
-            members = <"at0.3", "at0.4">
-        >
-        ["ac0.2"] = <
-            id = <"ac0.2">
-            members = <"at0.67", "at0.68", "at0.69", "at0.70", "at0.71", "at0.72", "at0.73", "at0.74", "at0.80", "at0.81", "at0.75", "at0.76", "at0.82", "at0.77", "at0.78", "at0.79">
-        >
-        ["ac0.3"] = <
-            id = <"ac0.3">
-            members = <"at0.62", "at0.56", "at0.57", "at0.58", "at0.59", "at0.60", "at0.63">
-        >
-    >
-    term_definitions = <
-        ["en"] = <
-            ["ac0.1"] = <
-                text = <"Laterality (synthesised)">
-                description = <"The side of the body on which the identified  body site is located. (synthesised)">
-            >
-            ["ac0.2"] = <
-                text = <"Aspect (synthesised)">
-                description = <"Qualifying detail about the specific aspect of the identified body site. (synthesised)">
-            >
-            ["ac0.3"] = <
-                text = <"Anatomical Line (synthesised)">
-                description = <"Additional detail using theoretical lines drawn through anatomical structures used to provide a consistent reference point on the human body. (synthesised)">
-            >
-            ["at0.3"] = <
-                text = <"Left">
-                description = <"Left side of the body.">
-            >
-            ["at0.4"] = <
-                text = <"Right">
-                description = <"Right side of the body.">
-            >
-            ["at0.56"] = <
-                text = <"Midaxillary line">
-                description = <"Line running vertically down the surface of the body, passing through the apex of the axilla.">
-            >
-            ["at0.57"] = <
-                text = <"Anterior axillary line">
-                description = <"Line running vertically down the surface of the body, passing through the anterior axillary skinfold.">
-            >
-            ["at0.58"] = <
-                text = <"Posterior axillary line">
-                description = <"Line running vertically down the surface of the body, passing through the posterior axillary skinfold.">
-            >
-            ["at0.59"] = <
-                text = <"Mid-clavicular line">
-                description = <"Line running vertically down the surface of the body, parallel to the midline and passing through the midpoint of the clavicle.">
-            >
-            ["at0.60"] = <
-                text = <"Mid-pupillary line">
-                description = <"Line running vertically down the face through the midpoint of the pupil when looking directly forward.">
-            >
-            ["at0.62"] = <
-                text = <"Midline">
-                description = <"Line running vertically which divides the body into left and right portions, passing through the head, spinal cord, and umbilicus. Alternatively it can refer to a line dividing a body part into two equal portions, for example a digit.">
-            >
-            ["at0.63"] = <
-                text = <"Mid-scapular line">
-                description = <"Line running vertically down the posterior surface of the body, parallel to the midline and passing through the inferior point of the scapula.">
-            >
-            ["at0.67"] = <
-                text = <"Medial">
-                description = <"Towards the midline of the body site.">
-            >
-            ["at0.68"] = <
-                text = <"Lateral">
-                description = <"Towards the side, or edge, of the body site.">
-            >
-            ["at0.69"] = <
-                text = <"Superior">
-                description = <"Above the body site, often meaning towards the head.">
-            >
-            ["at0.70"] = <
-                text = <"Inferior">
-                description = <"Below the body site, often meaning towards the feet.">
-            >
-            ["at0.71"] = <
-                text = <"Anterior">
-                description = <"Towards the front, or ventral surface, of  the body site.">
-            >
-            ["at0.72"] = <
-                text = <"Posterior">
-                description = <"Towards the back, or dorsal surface, of the body site.">
-            >
-            ["at0.73"] = <
-                text = <"Proximal">
-                description = <"More central or closer to the point of attachment, and usually describing part of a limb, digit or appendage.">
-            >
-            ["at0.74"] = <
-                text = <"Distal">
-                description = <"More peripheral, or further from the point of attachment, and usually describing part of a limb, digit or appendage.">
-            >
-            ["at0.75"] = <
-                text = <"Palmar">
-                description = <"Towards the palm of the hand.">
-            >
-            ["at0.76"] = <
-                text = <"Plantar">
-                description = <"Towards the sole of the foot.">
-            >
-            ["at0.77"] = <
-                text = <"Mid">
-                description = <"In the middle of the body site.">
-            >
-            ["at0.78"] = <
-                text = <"Oral">
-                description = <"Towards the mouth. Usually used to describe locations within the digestive system.">
-            >
-            ["at0.79"] = <
-                text = <"Anal">
-                description = <"Towards the anus. Usually used to describe locations within the digestive system.">
-            >
-            ["at0.80"] = <
-                text = <"Deep">
-                description = <"Away from the surface of the body site.">
-            >
-            ["at0.81"] = <
-                text = <"Superficial">
-                description = <"Towards the surface of the body site.">
-            >
-            ["at0.82"] = <
-                text = <"Dorsal">
-                description = <"Towards the back of the hand or top of the foot. To be used as opposites of palmar or plantar, not as a synonym of posterior.">
-            >
-            ["id1.1"] = <
-                text = <"Anatomical location - classical">
-                description = <"Location specified in classical anatomy terms.">
-            >
-            ["id0.2"] = <
-                text = <"Body site name">
-                description = <"Identification of a single physical site either on, or within, the human body.">
-            >
-            ["id0.3"] = <
-                text = <"Laterality">
-                description = <"The side of the body on which the identified  body site is located.">
-            >
-            ["id0.56"] = <
-                text = <"Anatomical Line">
-                description = <"Additional detail using theoretical lines drawn through anatomical structures used to provide a consistent reference point on the human body.">
-            >
-            ["id0.65"] = <
-                text = <"Aspect">
-                description = <"Qualifying detail about the specific aspect of the identified body site.">
-            >
-            ["id0.66"] = <
-                text = <"Specific site">
-                description = <"Additional detail using a specific region or a point on, or within, the identified body site.">
-            >
-        >
-    >
-    
+	term_definitions = <
+		["en"] = <
+			["ac0.1"] = <
+				text = <"Laterality (synthesised)">
+				description = <"The side of the body on which the identified  body site is located. (synthesised)">
+			>
+			["ac0.2"] = <
+				text = <"Aspect (synthesised)">
+				description = <"Qualifying detail about the specific aspect of the identified body site. (synthesised)">
+			>
+			["ac0.3"] = <
+				text = <"Anatomical Line (synthesised)">
+				description = <"Additional detail using theoretical lines drawn through anatomical structures used to provide a consistent reference point on the human body. (synthesised)">
+			>
+			["at0.3"] = <
+				text = <"Left">
+				description = <"Left side of the body.">
+			>
+			["at0.4"] = <
+				text = <"Right">
+				description = <"Right side of the body.">
+			>
+			["at0.56"] = <
+				text = <"Midaxillary line">
+				description = <"Line running vertically down the surface of the body, passing through the apex of the axilla.">
+			>
+			["at0.57"] = <
+				text = <"Anterior axillary line">
+				description = <"Line running vertically down the surface of the body, passing through the anterior axillary skinfold.">
+			>
+			["at0.58"] = <
+				text = <"Posterior axillary line">
+				description = <"Line running vertically down the surface of the body, passing through the posterior axillary skinfold.">
+			>
+			["at0.59"] = <
+				text = <"Mid-clavicular line">
+				description = <"Line running vertically down the surface of the body, parallel to the midline and passing through the midpoint of the clavicle.">
+			>
+			["at0.60"] = <
+				text = <"Mid-pupillary line">
+				description = <"Line running vertically down the face through the midpoint of the pupil when looking directly forward.">
+			>
+			["at0.62"] = <
+				text = <"Midline">
+				description = <"Line running vertically which divides the body into left and right portions, passing through the head, spinal cord, and umbilicus. Alternatively it can refer to a line dividing a body part into two equal portions, for example a digit.">
+			>
+			["at0.63"] = <
+				text = <"Mid-scapular line">
+				description = <"Line running vertically down the posterior surface of the body, parallel to the midline and passing through the inferior point of the scapula.">
+			>
+			["at0.67"] = <
+				text = <"Medial">
+				description = <"Towards the midline of the body site.">
+			>
+			["at0.68"] = <
+				text = <"Lateral">
+				description = <"Towards the side, or edge, of the body site.">
+			>
+			["at0.69"] = <
+				text = <"Superior">
+				description = <"Above the body site, often meaning towards the head.">
+			>
+			["at0.70"] = <
+				text = <"Inferior">
+				description = <"Below the body site, often meaning towards the feet.">
+			>
+			["at0.71"] = <
+				text = <"Anterior">
+				description = <"Towards the front, or ventral surface, of  the body site.">
+			>
+			["at0.72"] = <
+				text = <"Posterior">
+				description = <"Towards the back, or dorsal surface, of the body site.">
+			>
+			["at0.73"] = <
+				text = <"Proximal">
+				description = <"More central or closer to the point of attachment, and usually describing part of a limb, digit or appendage.">
+			>
+			["at0.74"] = <
+				text = <"Distal">
+				description = <"More peripheral, or further from the point of attachment, and usually describing part of a limb, digit or appendage.">
+			>
+			["at0.75"] = <
+				text = <"Palmar">
+				description = <"Towards the palm of the hand.">
+			>
+			["at0.76"] = <
+				text = <"Plantar">
+				description = <"Towards the sole of the foot.">
+			>
+			["at0.77"] = <
+				text = <"Mid">
+				description = <"In the middle of the body site.">
+			>
+			["at0.78"] = <
+				text = <"Oral">
+				description = <"Towards the mouth. Usually used to describe locations within the digestive system.">
+			>
+			["at0.79"] = <
+				text = <"Anal">
+				description = <"Towards the anus. Usually used to describe locations within the digestive system.">
+			>
+			["at0.80"] = <
+				text = <"Deep">
+				description = <"Away from the surface of the body site.">
+			>
+			["at0.81"] = <
+				text = <"Superficial">
+				description = <"Towards the surface of the body site.">
+			>
+			["at0.82"] = <
+				text = <"Dorsal">
+				description = <"Towards the back of the hand or top of the foot. To be used as opposites of palmar or plantar, not as a synonym of posterior.">
+			>
+			["id1.1"] = <
+				text = <"Anatomical location - classical">
+				description = <"Location specified in classical anatomy terms.">
+			>
+			["id0.2"] = <
+				text = <"Body site name">
+				description = <"Identification of a single physical site either on, or within, the human body.">
+			>
+			["id0.3"] = <
+				text = <"Laterality">
+				description = <"The side of the body on which the identified  body site is located.">
+			>
+			["id0.56"] = <
+				text = <"Anatomical Line">
+				description = <"Additional detail using theoretical lines drawn through anatomical structures used to provide a consistent reference point on the human body.">
+			>
+			["id0.65"] = <
+				text = <"Aspect">
+				description = <"Qualifying detail about the specific aspect of the identified body site.">
+			>
+			["id0.66"] = <
+				text = <"Specific site">
+				description = <"Additional detail using a specific region or a point on, or within, the identified body site.">
+			>
+		>
+	>
+	term_bindings = <
+		["SNOMED-CT"] = <
+			["at0.3"] = <http://snomed.info/id/7771000>
+			["at0.4"] = <http://snomed.info/id/24028007>
+		>
+		["loinc"] = <
+			["id0.2"] = <http://loinc.org/39111-0>
+			["id0.3"] = <http://loinc.org/63930-2>
+			["id0.56"] = <http://loinc.org/11b1bdca-6c82-ef11-8870-6045bdc71c8b>
+			["id0.65"] = <http://loinc.org/9f59afc2-6c82-ef11-8870-6045bdc71c8b>
+			["id0.66"] = <http://loinc.org/39111-0>
+			["id1.1"] = <http://loinc.org/72369-2>
+		>
+	>
+	value_sets = <
+		["ac0.1"] = <
+			id = <"ac0.1">
+			members = <"at0.3", "at0.4">
+		>
+		["ac0.2"] = <
+			id = <"ac0.2">
+			members = <"at0.67", "at0.68", "at0.69", "at0.70", "at0.71", "at0.72", "at0.73", "at0.74", "at0.80", "at0.81", "at0.75", "at0.76", "at0.82", "at0.77", "at0.78", "at0.79">
+		>
+		["ac0.3"] = <
+			id = <"ac0.3">
+			members = <"at0.62", "at0.56", "at0.57", "at0.58", "at0.59", "at0.60", "at0.63">
+		>
+	>
 

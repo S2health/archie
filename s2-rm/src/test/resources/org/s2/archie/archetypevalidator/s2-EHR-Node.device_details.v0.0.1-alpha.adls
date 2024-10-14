@@ -1,5 +1,5 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; generated; uid=f8b02b73-9bad-4261-8665-da594fcb1702)
-    s2-EHR-Info_node.device_details.v0.0.1-alpha
+archetype (adl_version=2.1.0; rm_release=0.8.0; generated; uid=f8b02b73-9bad-4261-8665-da594fcb1702)
+    s2-EHR-Node.device_details.v0.0.1-alpha
 
 language
     original_language = <[iso_639-1::en]>
@@ -43,9 +43,9 @@ description
     >
     
 definition
-    Info_node[id1] matches {    -- Medical device details
+    Node[id1] matches {    -- Medical device details
         items matches {
-            Info_node[id2] occurrences matches {0..1} matches {    -- Organization identifier
+            Node[id2] occurrences matches {0..1} matches {    -- Organization identifier
                 value matches {
                     Text[id29]
                     Rwe_id_ref[id30] matches {
@@ -53,56 +53,56 @@ definition
                     }
                 }
             }
-            Info_node[id24] occurrences matches {0..1} matches {    -- Owner
+            Node[id24] occurrences matches {0..1} matches {    -- Owner
                 value matches {
                     Text[id31]
                 }
             }
-            Info_node[id25] occurrences matches {0..1} matches {    -- Location
+            Node[id25] occurrences matches {0..1} matches {    -- Location
                 value matches {
                     Text[id32]
                 }
             }
-            Info_node[id26] occurrences matches {0..1} matches {    -- Network address
+            Node[id26] occurrences matches {0..1} matches {    -- Network address
                 value matches {
                     Uri_ref[id33]
                 }
             }
-            allow_archetype Info_node[id27] matches {     -- Contact
+            allow_archetype Node[id27] matches {     -- Contact
                 include
                     archetype_id/value matches {/.*/}
             }
-            allow_archetype Info_node[id19] matches {     -- Serviced by
+            allow_archetype Node[id19] matches {     -- Serviced by
                 include
                     archetype_id/value matches {/.*/}
             }
-            Info_node[id8] occurrences matches {0..1} matches {    -- Part number
+            Node[id8] occurrences matches {0..1} matches {    -- Part number
                 value matches {
                     Text[id34]
                 }
             }
-            Info_node[id3] occurrences matches {0..1} matches {    -- Manufacturer model name
+            Node[id3] occurrences matches {0..1} matches {    -- Manufacturer model name
                 value matches {
                     Text[id35]
                 }
             }
-            Info_node[id9] occurrences matches {0..1} matches {    -- Hardware revision
+            Node[id9] occurrences matches {0..1} matches {    -- Hardware revision
                 value matches {
                     Text[id36]
                 }
             }
-            Info_node[id11] occurrences matches {0..1} matches {    -- Protocol revision
+            Node[id11] occurrences matches {0..1} matches {    -- Protocol revision
                 value matches {
                     Text[id37]
                 }
             }
-            Info_node[id12] occurrences matches {0..1} matches {    -- Sampling frequency
+            Node[id12] occurrences matches {0..1} matches {    -- Sampling frequency
                 value matches {
                     Text[id38]
                     Quantity[id39]
                 }
             }
-            Info_node[id13] occurrences matches {0..1} matches {    -- Range
+            Node[id13] occurrences matches {0..1} matches {    -- Range
                 value matches {
                     Text[id40]
                     Range<Quantity>[id41] matches {
@@ -115,53 +115,53 @@ definition
                     }
                 }
             }
-            Info_node[id14] occurrences matches {0..1} matches {    -- Accuracy
+            Node[id14] occurrences matches {0..1} matches {    -- Accuracy
                 value matches {
                     Text[id44]
                     Quantity[id45]
                 }
             }
-            Info_node[id15] occurrences matches {0..1} matches {    -- Resolution
+            Node[id15] occurrences matches {0..1} matches {    -- Resolution
                 value matches {
                     Text[id46]
                     Quantity[id47]
                 }
             }
-            Info_node[id16] occurrences matches {0..1} matches {    -- Regulatory status
+            Node[id16] occurrences matches {0..1} matches {    -- Regulatory status
                 value matches {
                     Text[id48]
                 }
             }
-            Info_node[id23] occurrences matches {0..1} matches {    -- Date last cleaned/sterilized
+            Node[id23] occurrences matches {0..1} matches {    -- Date last cleaned/sterilized
                 value matches {
                     Date_time_value[id49]
                 }
             }
-            Info_node[id18] occurrences matches {0..1} matches {    -- Date last calibrated
+            Node[id18] occurrences matches {0..1} matches {    -- Date last calibrated
                 value matches {
                     Date_time_value[id50]
                 }
             }
-            Info_node[id17] occurrences matches {0..1} matches {    -- Date last serviced
+            Node[id17] occurrences matches {0..1} matches {    -- Date last serviced
                 value matches {
                     Date_time_value[id51]
                 }
             }
-            Info_node[id20] matches {    -- Formulae
+            Node[id20] matches {    -- Formulae
                 items matches {
-                    Info_node[id21] matches {    -- Formula name
+                    Node[id21] matches {    -- Formula name
                         value matches {
                             Text[id52]
                         }
                     }
-                    Info_node[id22] occurrences matches {0..1} matches {    -- Formula
+                    Node[id22] occurrences matches {0..1} matches {    -- Formula
                         value matches {
                             Text[id53]
                         }
                     }
                 }
             }
-            allow_archetype Info_node[id28] matches {     -- Extension
+            allow_archetype Node[id28] matches {     -- Extension
                 include
                     archetype_id/value matches {/.*/}
             }

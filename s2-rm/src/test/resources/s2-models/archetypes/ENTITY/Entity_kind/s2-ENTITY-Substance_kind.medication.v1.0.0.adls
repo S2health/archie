@@ -1,5 +1,5 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=1de66765-9e18-4dc1-97b1-5bb2b62c9869)
-	s2-EHR-Info_node.medication.v3.0.0
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=6e37337d-02c1-4e91-8e68-39978ca3ca8f)
+	s2-ENTITY-Substance_kind.medication.v1.0.0
 
 language
 	original_language = <[ISO_639-1::en]>
@@ -25,11 +25,11 @@ description
 	conversion_details = <
 		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.medication.v2.0.1 from <https://ckm.openehr.org>">
 		["tool"] = <"graphite_openehr_to_s2_adl">
-		["date"] = <"$nowIso8601 (Iso8601 date and time is disabled during testing)">
+		["date"] = <"2024-07-26">
 	>
 	details = <
 		["en"] = <
-			language = <[ISO_639-1::en]>
+			language = <[iso_639-1::en]>
 			purpose = <"To record details about a medication or component of a medication, including strength, form and details of any specific constituents.">
 			use = <"Use to record details about a medication or component of a medication, including strength, form and details of any specific constituents.
             
@@ -37,26 +37,33 @@ description
             
             This archetype may be redundant in situations where ordering a medication via prescription uses a terminology to identify the medication item. In that case the brand or product name may identify the form and strength of the substance.">
 			keywords = <"medication", "order", "prescribe", "therapy", "substance", "drug", "therapeutic", "therapeutic good", "ad-hoc", "adhoc", "ad hoc", "extemporaneous", "formulation", "medicine">
-			misuse = <"Not to be used for pharmacy stock-control or within medication catalogues.
-            
-            Not to be used to record the intended or administered dose of a medication. Use either the Order.medication_order or the Node.dosage archetypes for this purpose.
-            
-            Not to be used by itself to populate a medication list. Use a relevant medication-related ENTRY archetype such as Order.medication_order or Action.medication for this purpose.">
 		>
 	>
-	other_contributors = <"Morten Aas, Oslo Universitetssykehus, Norway", "Vebjørn Arntzen, Oslo University Hospital, Norway (openEHR Editor)", "Silje Ljosland Bakke, Helse Vest IKT AS, Norway (openEHR Editor)", "John Bennett, NEHTA, Australia", "SB Bhattacharyya, Bhattacharyyas Clinical Records Research & Informatics LLP, India", "Sharmila Biswas, Australia", "Laila Bruun, Oslo universitetssykehus HF, Norway", "Stephen Chu, NEHTA, Australia (Editor)", "Matthew Cordell, NEHTA, Australia", "Duncan Cripps, University Hospitals Plmyouth NHS Trust, United Kingdom", "Lisbeth Dahlhaug, Helse Midt - Norge IT, Norway", "Gail Easterbrook, Flinders Medical Centre, Australia", "Stig Erik Hegrestad, Helse Førde, Norway", "David Evans, Queensland Health, Australia", "Sarah Gaunt, NEHTA, Australia", "Heather Grain, Llewelyn Grain Informatics, Australia", "Trina Gregory, cpc, Australia", "Sam Heard, Ocean Health Systems, Australia", "Hilde Hollås, DIPS AS, Norway", "Roar Holm, Helse Vest IKT A/S, Norway", "Alfred Honore, Haukeland, Norway", "Evelyn Hovenga, EJSH Consulting, Australia", "Lars Ivar Mehlum, Helse Bergen HF, Norway", "Patrícia Ivo, Prefeitura Municipal de Fortaleza, Brazil", "Tom Jarl Jakobsen, Helse Bergen, Norway", "Mary Kelaher, NEHTA, Australia", "Nils Kolstrup, Skansen Legekontor og Nasjonalt Senter for samhandling og telemedisin, Norway", "Harmony Kosola, Alberta Health Services, Canada", "Robert L'egan, NEHTA, Australia", "Mitja Lapajne, Marand, Slovenia", "Anette Larsson, Tieto Sweden AB, Sweden", "Heather Leslie, Atomica Informatics, Australia (openEHR Editor)", "Mark Luciani, Bath and North East Somerset, Swindon and Wiltshire Clinical Commisioning Group, United Kingdom", "Colin Macfarlane, Elsevier, United Kingdom", "Siv Marie Lien, DIPS ASA, Norway", "James McClay, University of Nebraska Medical Center, United States", "Susan McIndoe, Royal District Nursing Service, Australia", "David McKillop, NEHTA, Australia", "Hildegard McNicoll, freshEHR Clinical Informatics Ltd., United Kingdom", "Ian McNicoll, freshEHR Clinical Informatics, United Kingdom (openEHR Editor)", "Chris Mitchell, RACGP, Australia", "Stewart Morrison, NEHTA, Australia", "Andrej Orel, Marand d.o.o., Slovenia", "doug pankoski, Alberta Health Services, Canada", "Chris Pearce, Melbourne East GP Network, Australia", "Vladimir Pizzo, Clínica Parente Pizzo, Finland", "Camilla Preeston, Royal Australian College of General Practitioners, Australia", "Margaret Prichard, NEHTA, Australia", "Cathy Richardson, NEHTA, Australia", "Robyn Richards, NEHTA - Clinical Terminology, Australia", "Jussara Rotzsch, Hospital Alemão Oswaldo Cruz, Brazil", "Martha Schei Hynne, The Norwegian Medicines Agency, Norway", "Jason Scott, Plymouth Hospitals NHS Trust, United Kingdom", "Anoop Shah, University College London, United Kingdom", "Line Silsand, Universitetssykehuset i Nord-Norge, Norway", "Trine Strand, Oslo Universitetssykehus (OUS), Norway", "Norwegian Review Summary, Nasjonal IKT HF, Norway", "Andreas Sundstrom, Capio S:t Gorans Hospital, Sweden", "John Taylor, NEHTA, Australia", "Rowan Thomas, St. Vincent's Hospital Melbourne, Australia", "Richard Townley-O'Neill, NEHTA, Australia (Editor)", "Guri Tømmervåg, DIPS AS, Norway", "Gro-Hilde Ulriksen, Norwegian center for ehealthresearch, Norway", "John Tore Valand, Helse Bergen, Norway (openEHR Editor)", "Pelle Viana Lindén, Capio, Sweden", "Kylie Young, The Royal Australian College of General Practitioners, Australia">
+	other_contributors = <"openEHR CKM community">
 
 definition
-	Info_node[id1] occurrences matches {0..1} matches {	-- Medication details
+	Substance_kind[id1] matches {	-- Medication details
 		items matches {
 			Info_node[id133] occurrences matches {0..1} matches {	-- Name
 				value matches {
-					Text[id159] 
+					Coded_text[id159] matches {
+						term matches {
+							Terminology_term[id1159] matches {
+								concept matches {[ac3]}		-- Medication name
+							}
+						}
+					}
 				}
 			}
 			Info_node[id72] matches {	-- Form
 				value matches {
-					Text[id160] 
+					Coded_text[id160] matches {
+						term matches {
+							Terminology_term[id1602] matches {
+								concept matches {[ac4]}		-- Medication form
+							}
+						}
+					}
 				}
 			}
 			Info_node[id143] occurrences matches {0..1} matches {	-- Category
@@ -97,7 +104,7 @@ definition
 					Date_time_value[id169] 
 				}
 			}
-			use_archetype Info_node[id139, s2-EHR-Info_node.medication.v3] 
+			use_archetype Entity_ref_node[id139, s2-ENTITY-Entity_ref_node.medication_type_ref.v1] 
 			Info_node[id140] occurrences matches {0..1} matches {	-- Amount
 				value matches {
 					Quantity[id170] 
@@ -143,6 +150,14 @@ terminology
 				text = <"Role (synthesised)">
 				description = <"The role of the medication or medication component within a mixture. (synthesised)">
 			>
+			["ac3"] = <
+				text = <"Medication name">
+				description = <"Medication name">
+			>
+			["ac4"] = <
+				text = <"Medication form">
+				description = <"Medication form">
+			>
 			["at1"] = <
 				text = <"Combination product">
 				description = <"The medication or medication component consists of a number of separate products which are pre-packaged by the manufacturer, for example Canesten Combi.">
@@ -176,8 +191,8 @@ terminology
 				description = <"Constituent that is inert in relation to the intended activity of the medicinal product.">
 			>
 			["id1"] = <
-				text = <"Medication details">
-				description = <"Details about a medication or component of a medication, including strength, form and details of any specific constituents.">
+				text = <"Medication description">
+				description = <"Description of a medication or component of a medication, including strength, form and details of any specific constituents.">
 			>
 			["id116"] = <
 				text = <"Strength (concentration)">
@@ -250,15 +265,21 @@ terminology
 			["id116"] = <http://loinc.org/74057-1>
 			["id133"] = <http://loinc.org/74058-9>
 			["id140"] = <http://loinc.org/82767-5>
-			["id143"] = <http://loinc.org/74075-3>
-			["id152"] = <http://loinc.org/8434eda9-3a5b-ef11-886e-6045bdc71c8b>
+			["id143"] = <http://loinc.org/e55abf1c-7282-ef11-8870-6045bdc71c8b>
+			["id152"] = <http://loinc.org/74719-6>
 			["id4"] = <http://loinc.org/74066-2>
 			["id72"] = <http://loinc.org/74055-5>
 			["id153"] = <http://loinc.org/6a8a94b8-624f-ef11-886e-6045bdc71c8b>
-			["id1"] = <http://loinc.org/74078-7>
+			["id1"] = <http://loinc.org/540c1425-7282-ef11-8870-6045bdc71c8b>
 			["id128"] = <http://loinc.org/104723-2>
 			["id134"] = <http://loinc.org/1c814f9b-cbe7-ee11-8869-6045bdc71c8b>
 			["id149"] = <http://loinc.org/104823-0>
+			["id142"] = <http://loinc.org/d78806bb-7182-ef11-8870-6045bdc71c8b>
+			["id151"] = <http://loinc.org/74714-7>
+		>
+		["s2"] = <
+			["ac3"] = <http://s2health.org/id/s2.RxNormActive>
+			["ac4"] = <http://s2health.org/id/s2.DoseForm>
 		>
 	>
 	value_sets = <

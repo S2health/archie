@@ -1,4 +1,4 @@
-template (adl_version=2.1.0; rm_release=0.7.0)
+template (adl_version=2.1.0; rm_release=0.8.6)
 	s2-EHR-Order.t_simple_medication_order.v1.0.0
 
 specialize
@@ -71,7 +71,7 @@ definition
 				}
 			}
 			use_archetype Entity_ref_node[id96, s2-EHR-Entity_ref_node.device_ref.v1] occurrences matches {0} 
-			use_archetype Info_node[id144, s2-EHR-Info_node.t_medication-1.v1] 
+			use_archetype Entity_ref_node[id144, s2-ENTITY-Entity_ref_node.medication_type_ref.v1] 
 			Info_node[id48] occurrences matches {0} 
 			Info_node[id174] occurrences matches {0} 
 			Info_node[id175] occurrences matches {0} 
@@ -174,76 +174,6 @@ terminology
 				text = <"Basic medication authorisation">
 				description = <"Basic medication authorisation">
 			>
-		>
-	>
-
--------------------------------------------------------------
-template_overlay
-	s2-EHR-Info_node.t_medication-1.v1.0.0
-
-specialize
-	s2-EHR-Info_node.medication.v3
-
-
-definition
-	Info_node[id1.1] matches {	-- Medication
-		/items matches {
-			Info_node[id133] matches {
-				value matches {
-					Coded_text[id159.1] matches {
-						term matches {
-							Terminology_term[id0.1] matches {
-								concept matches {[ac0.1]}		-- Medication name
-							}
-						}
-					}
-				}
-			}
-			Info_node[id72] matches {
-				value matches {
-					Coded_text[id160.1] matches {
-						term matches {
-							Terminology_term[id0.2] matches {
-								concept matches {[ac0.2]}		-- Medication form
-							}
-						}
-					}
-				}
-			}
-			Info_node[id143] occurrences matches {0} 
-			Info_node[id152] occurrences matches {0} 
-			Info_node[id151] occurrences matches {0} 
-			Info_node[id4] occurrences matches {0} 
-			use_archetype Info_node[id139, s2-EHR-Info_node.medication.v3] occurrences matches {0} 
-			Info_node[id140] occurrences matches {0} 
-			Info_node[id149] occurrences matches {0} 
-			Info_node[id128] occurrences matches {0} 
-			Info_node[id134] occurrences matches {0} 
-			allow_archetype Info_node[id142] occurrences matches {0} 
-		}
-	}
-
-terminology
-	term_definitions = <
-		["en"] = <
-			["id1.1"] = <
-				text = <"Medication">
-				description = <"Simple medication description">
-			>
-			["ac0.1"] = <
-				text = <"Medication name">
-				description = <"Medication name">
-			>
-			["ac0.2"] = <
-				text = <"Medication form">
-				description = <"Medication form">
-			>
-		>
-	>
-	term_bindings = <
-		["s2"] = <
-			["ac0.1"] = <http://s2health.org/id/s2.RxNormActive>
-			["ac0.2"] = <http://s2health.org/id/s2.DoseForm>
 		>
 	>
 

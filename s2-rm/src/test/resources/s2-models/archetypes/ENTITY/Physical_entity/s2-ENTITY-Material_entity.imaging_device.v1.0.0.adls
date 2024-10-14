@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=db817328-5658-44bc-bf39-4dff87931702)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=db817328-5658-44bc-bf39-4dff87931702)
 	s2-ENTITY-Material_entity.imaging_device.v1.0.0
 
 specialize
@@ -34,9 +34,9 @@ description
 	>
 
 definition
-	Material_entity[id1.1]  matches {
+	Material_entity[id1.1] matches {	-- Imaging device
 		kind matches {
-			use_archetype Artifact_kind[id2, s2-ENTITY-Artifact_kind.imaging_device.v1]
+			use_archetype Artifact_kind[id2, s2-ENTITY-Artifact_kind.imaging_device.v1] 
 		}
 	}
 
@@ -49,3 +49,9 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/91625f5e-7382-ef11-8870-6045bdc71c8b>
+		>
+	>
+

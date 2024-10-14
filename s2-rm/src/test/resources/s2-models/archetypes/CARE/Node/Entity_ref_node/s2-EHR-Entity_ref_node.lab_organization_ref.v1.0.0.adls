@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5; uid=965be061-2464-4322-96e5-9fe4f8cb86cb)
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=965be061-2464-4322-96e5-9fe4f8cb86cb)
 	s2-EHR-Entity_ref_node.lab_organization_ref.v1.0.0
 
 specialize
@@ -32,11 +32,11 @@ description
 	>
 
 definition
-	Entity_ref_node[id1.1]  matches {
+	Entity_ref_node[id1.1] matches {	-- Lab organization ref
 		/items matches {
-			Info_node[id0.1] occurrences matches {0..1} matches {
+			Info_node[id0.1] occurrences matches {0..1} matches {	-- Contact person
 				value matches {
-					Plain_text[id106]
+					Plain_text[id0.2]
 				}
 			}
 		}
@@ -53,6 +53,11 @@ terminology
 				text = <"Contact person">
 				description = <"-">
 			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id0.1"] = <http://loinc.org/90057-1>
 		>
 	>
 

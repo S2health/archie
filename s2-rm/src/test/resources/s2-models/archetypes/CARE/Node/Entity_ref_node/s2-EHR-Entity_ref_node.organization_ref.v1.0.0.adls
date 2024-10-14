@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.5)
+archetype (adl_version=2.1.0; rm_release=0.8.6)
 	s2-EHR-Entity_ref_node.organization_ref.v1.0.0
 
 language
@@ -28,19 +28,18 @@ description
 	>
 
 definition
-	Entity_ref_node[id1]  matches {
+	Entity_ref_node[id1] matches {	-- Organization ref
 		items matches {
 			Info_node[id2] occurrences matches {0..1} matches {	-- Name
 				value matches {
 					Plain_text[id102] 
 				}
 			}
-			Info_node[id4] occurrences matches {0..1} matches {
+			Info_node[id4] occurrences matches {0..1} matches {	-- Identifier
 				value matches {
 					Rwe_id_ref[id104] 
 				}
 			}
-
 			use_archetype Info_node[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
 			use_archetype Info_node[id5, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
 		}
@@ -71,3 +70,12 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id2"] = <http://loinc.org/76469-6>
+			["id3"] = <http://loinc.org/90052-2>
+			["id4"] = <http://loinc.org/76468-8>
+			["id5"] = <http://loinc.org/90054-8>
+		>
+	>
+

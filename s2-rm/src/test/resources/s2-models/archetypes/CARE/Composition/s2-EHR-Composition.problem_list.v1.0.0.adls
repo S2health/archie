@@ -1,4 +1,4 @@
-archetype (adl_version=2.0.6; rm_release=0.8.5)
+archetype (adl_version=2.1.0; rm_release=0.8.6)
 	s2-EHR-Composition.problem_list.v1.0.0
 
 language
@@ -22,7 +22,7 @@ description
 	>
 
 definition
-	Composition[id1]  matches {
+	Composition[id1] matches {	-- Master problem List
 		code matches {
 			Terminology_term[id10] matches {
 				concept matches {[at1]}
@@ -38,14 +38,14 @@ definition
 			use_archetype Entity_ref_node[id21, s2-EHR-Entity_ref_node.healthcare_professional_ref.v1] 
 		}
 		content matches {
-			Section[id2] matches {	-- Problems
+			Section[id2] matches {	-- Principal  problems
 				items matches {
-					use_archetype Section[id3, s2-EHR-Section.problem_list_headings.v1]
+					use_archetype Section[id3, s2-EHR-Section.problem_list_headings.v1] 
 				}
 			}
-			Section[id4] matches {	-- Additional problem
+			Section[id4] matches {	-- Additional problems
 				items matches {
-					use_archetype Section[id5, s2-EHR-Section.problem_list_headings.v1]
+					use_archetype Section[id5, s2-EHR-Section.problem_list_headings.v1] 
 				}
 			}
 		}
@@ -74,6 +74,10 @@ terminology
 				text = <"Additional problem information">
 				description = <"Additional problem information">
 			>
+			["id21"] = <
+				text = <"Author">
+				description = <"Authoring healthcare professional">
+			>
 			["at1"] = <
 				text = <"Problem list - reported">
 				description = <"Is-about code for this Composition: problem list - reported">
@@ -84,11 +88,12 @@ terminology
 			>
 		>
 	>
-
 	term_bindings = <
 		["loinc"] = <
 			["id1"] = <http://loinc.org/11450-4>
 			["at1"] = <http://loinc.org/11450-4>
+			["id2"] = <http://loinc.org/67492-9>
+			["id4"] = <http://loinc.org/66299-9>
 		>
 		["openehr"] = <
 			["at2"] = <http://openehr.org/id/431>
