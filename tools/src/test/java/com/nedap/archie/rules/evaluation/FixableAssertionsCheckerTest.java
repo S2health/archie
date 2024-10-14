@@ -12,6 +12,8 @@ import org.openehr.rm.datastructures.ItemTree;
 import org.openehr.rm.datavalues.DvBoolean;
 import org.openehr.rm.datavalues.DvText;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
+
 import com.nedap.archie.testutil.TestUtil;
 import org.junit.After;
 import org.junit.Before;
@@ -211,7 +213,7 @@ public class FixableAssertionsCheckerTest {
     }
 
     private RuleEvaluation<Locatable> getRuleEvaluation() {
-        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), archetype);
+        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), archetype);
     }
 
 }

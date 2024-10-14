@@ -13,6 +13,7 @@ import org.openehr.rm.support.identification.TerminologyId;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.testutil.DummyOperationalTemplateProvider;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class InvariantTestUtil {
     private static final OperationalTemplateProvider optProvider = new DummyOperationalTemplateProvider("example");
 
     public static void assertValid(Object object) {
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider);
+        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider, new ValidationConfiguration.Builder().build());
         List<RMObjectValidationMessage> messages = validator.validate(object);
         assertTrue("object should be valid, was not: " + messages, messages.isEmpty());
     }
@@ -34,7 +35,7 @@ public class InvariantTestUtil {
     }
 
     public static void assertInvariantInvalid(Object object, String invariantName, String rmTypeName, String path) {
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider);
+        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider, new ValidationConfiguration.Builder().build());
         List<RMObjectValidationMessage> messages = validator.validate(object);
         assertEquals(messages.toString(), 1, messages.size());
         assertEquals("Invariant " + invariantName + " failed on type " + rmTypeName, messages.get(0).getMessage());

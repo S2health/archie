@@ -19,6 +19,7 @@ import org.openehr.rm.datavalues.DvText;
 import org.openehr.rm.datavalues.encapsulated.DvMultimedia;
 import org.openehr.rm.datavalues.quantity.DvCount;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
+
 import com.nedap.archie.rminfo.MetaModels;
 import org.junit.After;
 import org.junit.Test;

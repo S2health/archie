@@ -85,10 +85,12 @@ class OperationalTemplateCreator {
                         }
                         workList.push(child);
                     }
+                    FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, objectsToRemove);
                     attribute.getChildren().removeAll(objectsToRemove);
                 }
 
             }
+            FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, attributesToRemove);
             object.getAttributes().removeAll(attributesToRemove);
         }
     }
@@ -265,8 +267,4 @@ class OperationalTemplateCreator {
     private FlattenerConfiguration getConfig() {
         return flattener.getConfiguration();
     }
-
-
-
-
 }

@@ -100,6 +100,10 @@ public class Flattener implements IAttributeFlattenerSupport {
         return this;
     }
 
+    public Archetype flatten(Archetype toFlatten) {
+        return flatten(toFlatten, 0);
+    }
+
     public Archetype flatten(Archetype toFlatten, int depth) {
         if(parent != null) {
             throw new IllegalStateException("You've used this flattener before - single use instance, please create a new one!");
@@ -253,12 +257,14 @@ public class Flattener implements IAttributeFlattenerSupport {
             CObject object = workList.pop();
             for(CAttribute attribute:object.getAttributes()) {
                 if(attribute.getExistence() != null && attribute.getExistence().getUpper() == 0 && !attribute.getExistence().isUpperUnbounded()) {
-                    //remove children, but do not remove attribute itself to make sure it stays prohibited
+                    // Remove children, but do not remove attribute itself to make sure it stays prohibited
+                    FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, attribute.getChildren());
                     attribute.setChildren(new ArrayList<>());
                 } else {
                     List<CObject> objectsToRemove = new ArrayList<>();
                     for (CObject child : attribute.getChildren()) {
                         if (!child.isAllowed()) {
+                            FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, List.of(child));
                             if(child instanceof CComplexObject) {
                                 ((CComplexObject) child).setAttributes(new ArrayList<>());
                             }
@@ -271,9 +277,7 @@ public class Flattener implements IAttributeFlattenerSupport {
                     }
                     attribute.getChildren().removeAll(objectsToRemove);
                 }
-
             }
-
         }
     }
 

@@ -6,6 +6,7 @@ import org.openehr.rm.support.identification.TerminologyId;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.rmobjectvalidator.invariants.InvariantTestUtil;
 import org.junit.Test;
 
@@ -33,7 +34,8 @@ public class DvParsableInvariantTest {
     public void charSetInvalid() {
         DvParsable value = createValid();
         value.setCharset(new CodePhrase(new TerminologyId("IANA_character-sets"), "UTF-13"));
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), (templateId) -> null);
+
+        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), (templateId) -> null, new ValidationConfiguration.Builder().build());
         List<RMObjectValidationMessage> messages = validator.validate(value);
 
         InvariantTestUtil.assertInvariantInvalid(value, "Charset_valid", "/");

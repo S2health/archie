@@ -12,9 +12,11 @@ import org.openehr.rm.datavalues.quantity.DvQuantity;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rules.PrimitiveType;
 import com.nedap.archie.testutil.TestUtil;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -58,7 +60,7 @@ public class FunctionsTest {
     }
 
     private <T> RuleEvaluation<T> getRuleEvaluation() {
-        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), archetype);
+        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), archetype);
     }
 
     @Test
