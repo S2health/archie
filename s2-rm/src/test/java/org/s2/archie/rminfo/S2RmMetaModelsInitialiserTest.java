@@ -30,9 +30,9 @@ public class S2RmMetaModelsInitialiserTest {
             System.out.println(validation.getLogger().toString());
 
         }
-        assertEquals(24, bmmRepository.getPersistentSchemas().size());
-        assertEquals(24, bmmRepository.getModels().size());
-        assertEquals(24, bmmRepository.getValidModels().size());
+        assertEquals(26, bmmRepository.getPersistentSchemas().size());
+        assertEquals(26, bmmRepository.getModels().size());
+        assertEquals(26, bmmRepository.getValidModels().size());
         assertEquals(0, bmmRepository.getInvalidModels().size());
     }
 
@@ -41,25 +41,25 @@ public class S2RmMetaModelsInitialiserTest {
         MetaModels metaModels = mmInitialiser.getMetaModels();
         Archetype archetype = new Archetype();
         archetype.setArchetypeId(new ArchetypeHRID("s2-EHR-Node.test.v1.0.0"));
-        archetype.setRmRelease("0.7.0");
-        metaModels.selectModel(archetype);
-        assertEquals("s2", metaModels.getSelectedBmmModel().getRmPublisher());
-        assertEquals("EHR", metaModels.getSelectedBmmModel().getModelName());
-        assertEquals("0.7.0", metaModels.getSelectedBmmModel().getRmRelease());
-
-
-        //now override the version to 1.0.4, and assert
-        metaModels.overrideModelVersion("s2", "EHR", "0.8.5");
+        archetype.setRmRelease("0.8.5");
         metaModels.selectModel(archetype);
         assertEquals("s2", metaModels.getSelectedBmmModel().getRmPublisher());
         assertEquals("EHR", metaModels.getSelectedBmmModel().getModelName());
         assertEquals("0.8.5", metaModels.getSelectedBmmModel().getRmRelease());
+
+
+        //now override the version to 1.0.4, and assert
+        metaModels.overrideModelVersion("s2", "EHR", "0.8.6");
+        metaModels.selectModel(archetype);
+        assertEquals("s2", metaModels.getSelectedBmmModel().getRmPublisher());
+        assertEquals("EHR", metaModels.getSelectedBmmModel().getModelName());
+        assertEquals("0.8.6", metaModels.getSelectedBmmModel().getRmRelease());
 
         //remove Override
         metaModels.removeOverridenModelVersion("s2", "EHR");
         metaModels.selectModel(archetype);
         assertEquals("s2", metaModels.getSelectedBmmModel().getRmPublisher());
         assertEquals("EHR", metaModels.getSelectedBmmModel().getModelName());
-        assertEquals("0.7.0", metaModels.getSelectedBmmModel().getRmRelease());
+        assertEquals("0.8.5", metaModels.getSelectedBmmModel().getRmRelease());
     }
 }
