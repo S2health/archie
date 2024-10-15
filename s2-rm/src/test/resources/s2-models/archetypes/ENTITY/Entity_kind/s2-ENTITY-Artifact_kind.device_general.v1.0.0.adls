@@ -1,0 +1,156 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=9b8a7428-5658-44bc-bf39-4dff87931702)
+	s2-ENTITY-Artifact_kind.device_general.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.device.v1.1.2, copyright 2010 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record the general details of a type of device used in healthcare.">
+			keywords = <"device", "machine", "implant", "appliance", "catheter", "prosthesis", "aid", "biomedical", "instrument", "equipment", "meter", "monitor", "software">
+		>
+	>
+	other_contributors = <"openEHR CKM community", ...>
+
+definition
+	Artifact_kind[id1] matches {	-- General device description
+		items matches {
+			Info_node[id4] occurrences matches {0..1} matches {	-- Type
+				value matches {
+					Text[id30] 
+				}
+			}
+			Info_node[id3] occurrences matches {0..1} matches {	-- Description
+				value matches {
+					Text[id31] 
+				}
+			}
+			allow_archetype Info_node[id10] matches {	-- Properties
+				include
+					archetype_id/value matches {/.*/}
+			}
+			Info_node[id5] occurrences matches {0..1} matches {	-- Manufacturer
+				value matches {
+					Text[id33] 
+				}
+			}
+			Info_node[id23] occurrences matches {0..1} matches {	-- Catalogue number
+				value matches {
+					Text[id36] 
+				}
+			}
+			Info_node[id24] occurrences matches {0..1} matches {	-- Model number
+				value matches {
+					Text[id37] 
+				}
+			}
+			Info_node[id26] occurrences matches {0..1} matches {	-- Software version
+				value matches {
+					Text[id39] 
+				}
+			}
+			Info_node[id16] occurrences matches {0..1} matches {	-- Regulatory status
+				value matches {
+					Text[id48] 
+				}
+			}
+			use_archetype Info_node[id28, s2-EHR-Info_node.media_file.v2] 
+			Info_node[id9] occurrences matches {0..1} matches {	-- Comment
+				value matches {
+					Text[id42] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"General device description">
+				description = <"-">
+			>
+			["id10"] = <
+				text = <"Properties">
+				description = <"Further details about specific properties about the medical device.">
+			>
+			["id19"] = <
+				text = <"Components">
+				description = <"Additional structured informations about identified components of the device.">
+			>
+			["id16"] = <
+				text = <"Regulatory status">
+				description = <"Whether device is regulated or otherwise.">
+			>
+			["id20"] = <
+				text = <"Asset management">
+				description = <"Further details about management and maintenance of the device.">
+			>
+			["id23"] = <
+				text = <"Catalogue number">
+				description = <"The exact number assigned by the manufacturer, as it appears in the manufacturer's catalogue, device labeling, or accompanying packaging.">
+			>
+			["id24"] = <
+				text = <"Model number">
+				description = <"The exact model number assigned by the manufacturer and found on the device label or accompanying packaging.">
+			>
+			["id26"] = <
+				text = <"Software version">
+				description = <"Identification of the version of software being used in the medical device.">
+			>
+			["id28"] = <
+				text = <"Multimedia">
+				description = <"Digital representation of the device.">
+			>
+			["id3"] = <
+				text = <"Description">
+				description = <"Narrative description of the medical device.">
+			>
+			["id4"] = <
+				text = <"Type">
+				description = <"The category or kind of device.">
+			>
+			["id5"] = <
+				text = <"Manufacturer">
+				description = <"Name of manufacturer.">
+			>
+			["id9"] = <
+				text = <"Comment">
+				description = <"Additional narrative about the device not captured in other fields.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id24"] = <http://loinc.org/74717-0>
+			["id5"] = <http://loinc.org/74719-6>
+			["id1"] = <http://loinc.org/82307-0>
+			["id26"] = <http://loinc.org/55081-4>
+			["id4"] = <http://loinc.org/66464-9>
+			["id23"] = <http://loinc.org/104927-9>
+			["id3"] = <http://loinc.org/104961-8>
+			["id9"] = <http://loinc.org/106173-8>
+			["id28"] = <http://loinc.org/104973-3>
+			["id16"] = <http://loinc.org/9535eca9-6f82-ef11-8870-6045bdc71c8b>
+		>
+	>
+

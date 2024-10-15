@@ -1,0 +1,260 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=f114b64a-30e8-4646-a6dd-fee53863cc33)
+	s2-EHR-Info_node.anatomical_location_circle.v1.0.1
+
+specialize
+	s2-EHR-Info_node.anatomical_location.v1
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Graphite Health">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+		["email"] = <"models@s2.org">
+		["date"] = <"$today (date is disabled during testing)">
+	>
+	original_namespace = <"org.openehr">
+	custodian_namespace = <"io.graphitehealth">
+	custodian_organisation = <"Graphite Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Heather Leslie, Atomica Informatics, <heather.leslie@atomicainformatics.com>, 2008-11-10">
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomedct"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.anatomical_location_circle.v1.0.1">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.anatomical_location_circle.v1.0.1 from <https://ckm.openehr.org>">
+		["tool"] = <"graphite_openehr_to_s2_adl">
+		["date"] = <"$nowIso8601 (Iso8601 date and time is disabled during testing)">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record structured details about a physical site on or within the human body that is described in terms of the direction, and optionally the distance, of the site from a central landmark.">
+			use = <"Use to record structured details about a physical site on or within the human body that is described in terms of the direction, and optionally the distance, of the site from a central landmark. The direction will be relative to the identified reference direction which may be implied in some examinations - for example, the 12 o'clock in examination of the breast or anus.
+            
+            This archetype is specifically designed to be used within the context of any appropriate ENTRY or Node archetypes which supply the context of the identified body site, or nesting in the 'Alternative Structure' SLOT within the Node.anatomical_location.
+            
+            In the situation where the Node.anatomical_location can only be used to name a large and/or non-specific body part, the use of this archetype within the 'Alternative Structure' SLOT will support recording of a more precise location - for example, a haemorrhoid located at 7 o'clock, where the 12 o'clock reference point is the perineum, or anterior surface of the body, with the patient in the lithotomy position.">
+			keywords = <"location", "site", "anatomical", "relative", "approximate", "anatomic region", "topographic anatomy", "macroscopic anatomy", "macroscopic", "anatomic", "anatomy", "clock", "o'clock", "position", "surface anatomy">
+			misuse = <"Not to be used to specify a simple location of a named physical site in the body, such as left femur or medial aspect of nose. Use the Node.anatomical_location archetype for this purpose.
+            
+            Not to be used to specify a relative location of a physical site in the body, such as a bruise that is 5 cm inferior to the umbilicus. Use the Node.anatomical_location_relative for this purpose.">
+		>
+	>
+	other_contributors = <"Marit Alice Venheim, Helse Vest IKT, Norway", "Tomas Alme, DIPS, Norway", "Erling Are Hole, Helse Bergen, Norway", "Stein Arne Rimehaug, Sunnaas sykehus, Norway", "Vebjørn Arntzen, Oslo University Hospital, Norway (openEHR Editor)", "Koray Atalag, University of Auckland, New Zealand", "Heidi Aursand, Oslo universitetssykehus, Norway", "Silje Ljosland Bakke, Nasjonal IKT HF, Norway (openEHR Editor)", "Nsah Bernard, UCL Institute of Health Informatics, United Kingdom", "SB Bhattacharyya, Sudisa Consultancy Services, India", "Lars Bitsch-Larsen, Haukeland University hospital, Norway", "Greg Burch, Tiny Medical Apps, United Kingdom", "Ady Angelica Castro Acosta, CIBERES-Hospital 12 de Octubre, Spain", "Lisbeth Dahlhaug, Helse Midt - Norge IT, Norway", "Stig Erik Hegrestad, Helse Førde, Norway", "Shahla Foozonkhah, Ocean Informatics, Australia", "Einar Fosse, National Centre for Integrated Care and Telemedicine, Norway", "Sebastian Garde, Ocean Informatics, Germany", "Heather Grain, Llewelyn Grain Informatics, Australia", "Dunmail Hodkinson, Black Pear Software Ltd, UK", "Hilde Hollås, DIPS AS, Norway", "Evelyn Hovenga, EJSH Consulting, Australia", "Tom Jarl Jakobsen, Helse Bergen, Norway", "Brit Jorun Liseth, Haukeland Universitetssykehus, Norway", "Lars Karlsen, DIPS ASA, Norway", "Thomas Kilvær, Universitetssykehuset Nord Norge, Norway", "Shinji Kobayashi, Kyoto University, Japan", "Nils Kolstrup, Skansen Legekontor og Nasjonalt Senter for samhandling og telemedisin, Norway", "Sabine Leh, Helse Bergen, Norway", "Heather Leslie, Atomica Informatics, Australia (openEHR Editor)", "Vesna Levasic, Orthopaedic Hospital Valdoltra, Slovenia", "Neranga Liyanaarachchi, Ministry of Health, Postgraduate Institute of Medicine, Sri Lanka", "Rikard Lovstrom, Swedish Medical Association, Sweden", "Hallvard Lærum, Oslo University Hospital, Norway", "Luis Marco Ruiz, Norwegian Center for Integrated Care and Telemedicine, Norway", "Siv Marie Lien, DIPS ASA, Norway", "Ian McNicoll, freshEHR Clinical Informatics, United Kingdom", "Andrej Orel, Marand d.o.o., Slovenia", "Jayashree Panickar, Karolinska Institute, Sweden", "Ana Pereira, CINTESIS, CUF-Porto, Portugal", "Osmeire Sanzovo, Sanzovo & Chamelette, Brazil", "Line Silsand, Universitetssykehuset i Nord-Norge, Norway", "Trine Strand, Oslo Universitetssykehus (OUS), Norway", "Nyree Taylor, Ocean Informatics, Australia", "Rowan Thomas, St. Vincent's Hospital Melbourne, Australia", "Anders Thurin, SU, Sweden", "Richard Townley-O'Neill, NEHTA, Australia", "Gro-Hilde Ulriksen, Norwegian center for ehealthresearch, Norway", "John Tore Valand, Helse Bergen, Norway (openEHR Editor)", "Dmitri Wall, Irish Skin Foundation, Ireland">
+
+definition
+	Info_node[id1.1] matches {	-- Circular anatomical location
+		items matches {
+			Info_node[id0.66] occurrences matches {0..1} matches {	-- Reference direction
+				value matches {
+					Text[id0.82] 
+				}
+			}
+			Info_node[id0.80] occurrences matches {0..1} matches {	-- Centre landmark
+				value matches {
+					Text[id0.83] 
+				}
+			}
+			Info_node[id0.62] occurrences matches {0..1} matches {	-- Circular direction
+				value matches {
+					Coded_text[id0.84] matches {
+						term matches {
+							Terminology_term[id0.89] matches {
+								concept matches {[ac0.1]}		-- Circular direction (synthesised)
+							}
+						}
+					}
+					Duration_value[id0.85] matches {
+						magnitude matches {|PT0S..PT12H|}
+					}
+					Quantity[id0.86] matches {
+						magnitude matches {|>-360.0..<360.0|}
+						units matches {
+							Coded_text[id0.91] matches {
+								term matches {
+									Terminology_term[id0.90] matches {
+										concept matches {[at0.80]}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			Info_node[id0.81] occurrences matches {0..1} matches {	-- Distance from landmark
+				value matches {
+					Quantity[id0.92] matches {	-- Distance from landmark (cm)
+						magnitude matches {|>=0.0|}
+						units matches {
+							Coded_text[id0.94] matches {
+								term matches {
+									Terminology_term[id0.93] matches {
+										concept matches {[at0.81]}
+									}
+								}
+							}
+						}
+					}
+					Quantity[id0.95] matches {	-- Distance from landmark ([in_i])
+						magnitude matches {|>=0.0|}
+						units matches {
+							Coded_text[id0.97] matches {
+								term matches {
+									Terminology_term[id0.96] matches {
+										concept matches {[at0.82]}
+									}
+								}
+							}
+						}
+					}
+					Quantity[id0.98] matches {	-- Distance from landmark (mm)
+						magnitude matches {|>=0.0|}
+						units matches {
+							Coded_text[id0.100] matches {
+								term matches {
+									Terminology_term[id0.99] matches {
+										concept matches {[at0.83]}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["ac0.1"] = <
+				text = <"Circular direction (synthesised)">
+				description = <"Identification of the angle of the direction to the physical site relative to the reference direction, either as the position of an hour hand on a clockface or number of degrees. (synthesised)">
+			>
+			["at0.67"] = <
+				text = <"One o'clock">
+				description = <"The body site is located at the one o'clock position relative to the identified reference point.">
+			>
+			["at0.68"] = <
+				text = <"Two o'clock">
+				description = <"The body site is located at the two o'clock position relative to the identified reference point.">
+			>
+			["at0.69"] = <
+				text = <"Three o'clock">
+				description = <"The body site is located at the three o'clock position relative to the identified reference point.">
+			>
+			["at0.70"] = <
+				text = <"Four o'clock">
+				description = <"The body site is located at the four o'clock position relative to the identified reference point.">
+			>
+			["at0.71"] = <
+				text = <"Five o'clock">
+				description = <"The body site is located at the five o'clock position relative to the identified reference point.">
+			>
+			["at0.72"] = <
+				text = <"Six o'clock">
+				description = <"The body site is located at the six o'clock position relative to the identified reference point.">
+			>
+			["at0.73"] = <
+				text = <"Seven o'clock">
+				description = <"The body site is located at the seven o'clock position relative to the identified reference point.">
+			>
+			["at0.74"] = <
+				text = <"Eight o'clock">
+				description = <"The body site is located at the eight o'clock position relative to the identified reference point.">
+			>
+			["at0.75"] = <
+				text = <"Nine o'clock">
+				description = <"The body site is located at the nine o'clock position relative to the identified reference point.">
+			>
+			["at0.76"] = <
+				text = <"Ten o'clock">
+				description = <"The body site is located at the ten o'clock position relative to the identified reference point.">
+			>
+			["at0.77"] = <
+				text = <"Eleven o'clock">
+				description = <"The body site is located at the eleven o'clock position relative to the identified reference point.">
+			>
+			["at0.78"] = <
+				text = <"Twelve o'clock">
+				description = <"The body site is located at the twelve o'clock position relative to the identified reference point.">
+			>
+			["at0.79"] = <
+				text = <"(added by post-parse processor)">
+				description = <"(added by post-parse processor)">
+			>
+			["at0.80"] = <
+				text = <"deg">
+				description = <"Degrees unit.">
+			>
+			["at0.81"] = <
+				text = <"cm">
+				description = <"Centimetres length unit">
+			>
+			["at0.82"] = <
+				text = <"in_i">
+				description = <"Inches length unit">
+			>
+			["at0.83"] = <
+				text = <"mm">
+				description = <"mm unit.">
+			>
+			["id1.1"] = <
+				text = <"Circular anatomical location">
+				description = <"A physical site on or within the human body that is described in terms of the direction, and optionally the distance, of the site from a central landmark.">
+			>
+			["id0.62"] = <
+				text = <"Circular direction">
+				description = <"Identification of the angle of the direction to the physical site relative to the reference direction, either as the position of an hour hand on a clockface or number of degrees.">
+			>
+			["id0.66"] = <
+				text = <"Reference direction">
+				description = <"Identification of a single direction which represents the 12 o'clock or 0° position on an imaginary circle superimposed over the body site, as seen by the examiner.">
+			>
+			["id0.80"] = <
+				text = <"Centre landmark">
+				description = <"Identified body site used as a reference point for centre of the imaginary circle.">
+			>
+			["id0.81"] = <
+				text = <"Distance from landmark">
+				description = <"Distance of location from the identified central landmark.">
+			>
+			["id0.92"] = <
+				text = <"Distance from landmark (cm)">
+				description = <"Distance from landmark (cm)">
+			>
+			["id0.95"] = <
+				text = <"Distance from landmark ([in_i])">
+				description = <"Distance from landmark ([in_i])">
+			>
+			["id0.98"] = <
+				text = <"Distance from landmark (mm)">
+				description = <"Distance from landmark (mm)">
+			>
+		>
+	>
+	term_bindings = <
+		["openehr"] = <
+			["at0.79"] = <http://openehr.org/id/122>
+		>
+		["loinc"] = <
+			["id0.62"] = <http://loinc.org/106172-0>
+			["id0.66"] = <http://loinc.org/a4b8b2d9-6c82-ef11-8870-6045bdc71c8b>
+			["id0.80"] = <http://loinc.org/106185-2>
+			["id0.81"] = <http://loinc.org/106179-5>
+			["id1.1"] = <http://loinc.org/0fb2c5e1-6c82-ef11-8870-6045bdc71c8b>
+		>
+	>
+	value_sets = <
+		["ac0.1"] = <
+			id = <"ac0.1">
+			members = <"at0.67", "at0.68", "at0.69", "at0.70", "at0.71", "at0.72", "at0.73", "at0.74", "at0.75", "at0.76", "at0.77", "at0.78">
+		>
+	>
+

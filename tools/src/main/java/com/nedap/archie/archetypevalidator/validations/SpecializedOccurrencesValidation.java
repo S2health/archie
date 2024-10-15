@@ -84,7 +84,10 @@ public class SpecializedOccurrencesValidation extends ValidatingVisitor {
         MultiplicityInterval parentNodeOccurrences = parentCObject.effectiveOccurrences(combinedModels::referenceModelPropMultiplicity);
         MultiplicityInterval childNodeOccurrences = childCObject.effectiveOccurrences(combinedModels::referenceModelPropMultiplicity);
 
-        if(parentCObject.getNodeId().equals(childCObject.getNodeId()) && parentNodeOccurrences.equals(childNodeOccurrences)) {
+        if(parentCObject.getNodeId().equals(childCObject.getNodeId()) &&
+                parentNodeOccurrences == null? childNodeOccurrences == null:
+                parentNodeOccurrences.equals(childNodeOccurrences))
+        {
             //this is the parent node appearing in the flattened child archetype without change in occurrence. That is guaranteed to be valid
             return ConformanceCheckResult.conforms();
         }

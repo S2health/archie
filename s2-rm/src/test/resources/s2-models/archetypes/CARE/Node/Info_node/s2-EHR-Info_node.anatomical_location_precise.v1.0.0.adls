@@ -1,0 +1,122 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=ae980f5c-78d8-4dc9-9c2a-8a75d4614a81)
+	s2-EHR-Info_node.anatomical_location_precise.v1.0.0
+
+specialize
+	s2-EHR-Info_node.anatomical_location.v1
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Graphite Health">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+		["email"] = <"models@s2.org">
+		["date"] = <"$today (date is disabled during testing)">
+	>
+	original_namespace = <"org.openehr">
+	custodian_namespace = <"io.graphitehealth">
+	custodian_organisation = <"Graphite Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Ian McNicoll, FreshEHR Informatics, <ian@freshehr.com>, 2009-06-21">
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomedct"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.anatomical_location_precise.v0.0.1-alpha">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.anatomical_location_precise.v0.0.1-alpha from <https://ckm.openehr.org>">
+		["tool"] = <"graphite_openehr_to_s2_adl">
+		["date"] = <"$nowIso8601 (Iso8601 date and time is disabled during testing)">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record highly detailed anatomical location.">
+			use = <"Use where highly precise localisation information is required, using co-ordinates. This archetype has been designed to support DICOM based coordinate systems for accurate object localisation.
+            
+            Designed to fit within appropriate ENTRY or Node archetypes, especially Node.anatomical_location.">
+			keywords = <"coordinates", "specimen", "DICOM">
+			misuse = <"Not designed to be used as a standalone archetype.">
+		>
+	>
+	other_contributors = <"Heather Leslie, Atomica Informatics, Australia", ...>
+
+definition
+	Info_node[id1.1] matches {	-- Precise anatomical location
+		items matches {
+			Info_node[id0.2] occurrences matches {0..1} matches {	-- Position frame of reference
+				value matches {
+					Text[id0.6] 
+				}
+			}
+			Info_node[id0.3] occurrences matches {0..1} matches {	-- X offset
+				value matches {
+					Quantity[id0.7] 
+					Count[id0.8] matches {
+						magnitude matches {|>=0|}
+					}
+				}
+			}
+			Info_node[id0.4] occurrences matches {0..1} matches {	-- Y offset
+				value matches {
+					Quantity[id0.9] 
+					Count[id0.10] matches {
+						magnitude matches {|>=0|}
+					}
+				}
+			}
+			Info_node[id0.5] occurrences matches {0..1} matches {	-- Z offset
+				value matches {
+					Quantity[id0.11] 
+					Count[id0.12] matches {
+						magnitude matches {|>=0|}
+					}
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["at0.1"] = <
+				text = <"(added by post-parse processor)">
+				description = <"(added by post-parse processor)">
+			>
+			["id1.1"] = <
+				text = <"Precise anatomical location">
+				description = <"Record details about precise anatomical location of a specimen or body part, including coordinates.">
+			>
+			["id0.2"] = <
+				text = <"Position frame of reference">
+				description = <"Description of coordinate system and origin reference point used for localizing the object.">
+			>
+			["id0.3"] = <
+				text = <"X offset">
+				description = <"Location of object (nominal center) relative to the Position Frame Reference. Distance can be given in SI units or pixels. of ({pixel}, UCUM, “Pixels”).">
+			>
+			["id0.4"] = <
+				text = <"Y offset">
+				description = <"Location of object (nominal center) relative to the Position Frame Reference. Distance can be given in SI units or pixels. of ({pixel}, UCUM, “Pixels”).">
+			>
+			["id0.5"] = <
+				text = <"Z offset">
+				description = <"Location of object (nominal center) relative to the Position Frame Reference. Distance can be given in SI units or pixels. of ({pixel}, UCUM, “Pixels”).">
+			>
+		>
+	>
+	term_bindings = <
+		["openehr"] = <
+			["at0.1"] = <http://openehr.org/id/122>
+		>
+		["loinc"] = <
+			["id0.2"] = <http://loinc.org/a8a2a4f7-6c82-ef11-8870-6045bdc71c8b>
+			["id0.3"] = <http://loinc.org/096cef88-6e82-ef11-8870-6045bdc71c8b>
+			["id0.4"] = <http://loinc.org/b3090190-6e82-ef11-8870-6045bdc71c8b>
+			["id1.1"] = <http://loinc.org/109b0e9f-6e82-ef11-8870-6045bdc71c8b>
+		>
+	>
+

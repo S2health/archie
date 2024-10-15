@@ -1,0 +1,63 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6)
+	s2-EHR-Section.medication_history_heading.v1.0.0
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@GraphiteHealth.io>">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"???">
+		>
+	>
+
+definition
+	Section[id1] matches {	-- Medication history
+		items matches {
+			use_archetype Order[id2, s2-EHR-Order.medication_order.v4] 
+			Section[id3] occurrences matches {1} matches {	-- Action history
+				items matches {
+					use_archetype Action[id4, s2-EHR-Action.medication.v1] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Medication history">
+				description = <"History of one medication">
+			>
+			["id2"] = <
+				text = <"Medication order">
+				description = <"The original medication order, if present">
+			>
+			["id3"] = <
+				text = <"Action history">
+				description = <"History of Actions performed to date for this order">
+			>
+			["id4"] = <
+				text = <"Specific action">
+				description = <"-">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/a591c089-6982-ef11-8870-6045bdc71c8b>
+			["id2"] = <http://loinc.org/57833-6>
+			["id3"] = <http://loinc.org/11492282-6982-ef11-8870-6045bdc71c8b>
+			["id4"] = <http://loinc.org/14f2d87b-6982-ef11-8870-6045bdc71c8b>
+		>
+	>
+

@@ -8,9 +8,8 @@ wrapper {
 }
 
 allprojects {
-
   version = '3.11.0'
-  group = 'io.graphitehealth.archie'
+  group = 'org.s2health.archie'
 
   ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
   //archivesBaseName = 'archie'
@@ -31,6 +30,7 @@ apply from: "${gradleScriptDir}/publish-maven.gradle"
 
 subprojects {
   apply plugin: 'java-library'
+  apply plugin: 'java-test-fixtures'
 
  // plugins {
    //   id 'com.github.ben-manes.versions' version '0.13.0'
@@ -68,6 +68,7 @@ subprojects {
 
     implementation "org.reflections:reflections:${reflectionsVersion}"
     implementation 'com.esotericsoftware.kryo:kryo5:5.5.0'
+
 
     implementation('commons-io:commons-io:2.17.0'){
       exclude group: 'commons-logging', module: 'commons-logging'

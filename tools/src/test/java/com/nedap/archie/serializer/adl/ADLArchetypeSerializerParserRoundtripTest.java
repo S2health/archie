@@ -12,7 +12,7 @@ import com.nedap.archie.flattener.SimpleArchetypeRepository;
 import com.nedap.archie.testutil.TestUtil;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openehr.referencemodels.BuiltinReferenceModels;
+import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -140,8 +140,8 @@ public class ADLArchetypeSerializerParserRoundtripTest {
         repository.addArchetype(height);
         repository.addArchetype(heightTemplate);
 
-        Flattener flattener = new Flattener(repository, BuiltinReferenceModels.getMetaModels()).createOperationalTemplate(true);
-        Archetype operationalTemplate = flattener.flatten(bloodPressureComposition);
+        Flattener flattener = new Flattener(repository, AllMetaModelsInitialiser.getMetaModels()).createOperationalTemplate(true);
+        Archetype operationalTemplate = flattener.flatten(bloodPressureComposition, 0);
         Archetype parsed = roundtrip(operationalTemplate);
         TestUtil.assertCObjectEquals(operationalTemplate.getDefinition(), parsed.getDefinition());
     }

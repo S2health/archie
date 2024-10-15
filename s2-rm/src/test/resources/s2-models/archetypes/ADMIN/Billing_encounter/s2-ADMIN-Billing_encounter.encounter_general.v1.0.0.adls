@@ -1,0 +1,297 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=29731165-5925-4c1a-8655-3c1c493d3dd8)
+	s2-ADMIN-Billing_encounter.encounter_general.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Details relevant to any kind of encounter.">
+		>
+	>
+
+definition
+	Billing_encounter[id1] matches {	-- Billing encounter
+		other_details matches {
+			Info_node[id2] occurrences matches {0..1} matches {	-- Priority
+				value matches {
+					Coded_text[id102] matches {
+						term matches {
+							Terminology_term[id1002] matches {
+								concept matches {[ac2]}		-- Encounter priorities
+							}
+						}
+					}
+				}
+			}
+			Info_node[id3] occurrences matches {0..1} matches {	-- Planned start time
+				value matches {
+					Date_time_value[id103] 
+				}
+			}
+			Info_node[id4] occurrences matches {0..1} matches {	-- Planned end time
+				value matches {
+					Date_time_value[id104] 
+				}
+			}
+			Info_node[id5] occurrences matches {0..1} matches {	-- Duration
+				value matches {
+					Duration_value[id105] 
+				}
+			}
+			Info_node[id6] occurrences matches {0..1} matches {	-- Reason for encounter
+				value matches {
+					Coded_text[id106] matches {
+						term matches {
+							Terminology_term[id1006] matches {
+								concept matches {[ac6]}		-- Reasons for encounter
+							}
+						}
+					}
+				}
+			}
+			Info_node[id7] occurrences matches {0..1} matches {	-- Health service type
+				value matches {
+					Coded_text[id107] matches {
+						term matches {
+							Terminology_term[id1007] matches {
+								concept matches {[ac7]}		-- Health service types
+							}
+						}
+					}
+				}
+			}
+			Info_node[id8] occurrences matches {0..1} matches {	-- Incoming referral id
+				value matches {
+					Rwe_id_ref[id108] 
+				}
+			}
+			Info_node[id9] occurrences matches {0..1} matches {	-- Readmission flag
+				value matches {
+					Boolean_value[id109] 
+				}
+			}
+			Info_node[id17] occurrences matches {0..1} matches {	-- Chief complaint
+				value matches {
+					Coded_text[id117] matches {
+						term matches {
+							Terminology_term[id1017] matches {
+								concept matches {[ac17]}		-- Chief complaints
+							}
+						}
+					}
+				}
+			}
+			Info_node[id18] occurrences matches {0..1} matches {	-- Discharge diagnosis
+				value matches {
+					Coded_text[id118] matches {
+						term matches {
+							Terminology_term[id1018] matches {
+								concept matches {[ac18]}		-- Discharge diagnoses
+							}
+						}
+					}
+				}
+			}
+			Info_node[id19] occurrences matches {0..1} matches {	-- Discharge disposition
+				value matches {
+					Coded_text[id119] matches {
+						term matches {
+							Terminology_term[id1019] matches {
+								concept matches {[ac19]}		-- Discharge dispositions
+							}
+						}
+					}
+				}
+			}
+			Info_node[id20] occurrences matches {0..1} matches {	-- Admit medications list
+				value matches {
+					Coded_text[id120] matches {
+						term matches {
+							Terminology_term[id1020] matches {
+								concept matches {[ac20]}		-- Admit medications
+							}
+						}
+					}
+				}
+			}
+			Info_node[id21] occurrences matches {0..1} matches {	-- Discharge orders
+				value matches {
+					Coded_text[id121] matches {
+						term matches {
+							Terminology_term[id1021] matches {
+								concept matches {[ac21]}		-- Discharge orders
+							}
+						}
+					}
+				}
+			}
+			Info_node[id22] occurrences matches {0..1} matches {	-- Encounter purpose narrative
+				value matches {
+					Plain_text[id122] 
+				}
+			}
+			Info_node[id23] occurrences matches {0..1} matches {	-- Discharge instructions
+				value matches {
+					Plain_text[id123] 
+				}
+			}
+		}
+		interaction_type matches {
+			Terminology_term[id1022] matches {
+				concept matches {[ac10]}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Billing encounter">
+				description = <"-">
+			>
+			["id2"] = <
+				text = <"Priority">
+				description = <"Priority of the encounter">
+			>
+			["id3"] = <
+				text = <"Planned start time">
+				description = <"-">
+			>
+			["id4"] = <
+				text = <"Planned end time">
+				description = <"-">
+			>
+			["id5"] = <
+				text = <"Duration">
+				description = <"-">
+			>
+			["id6"] = <
+				text = <"Reason for encounter">
+				description = <"-">
+			>
+			["id7"] = <
+				text = <"Health service type">
+				description = <"-">
+			>
+			["id8"] = <
+				text = <"Incoming referral id">
+				description = <"-">
+			>
+			["id9"] = <
+				text = <"Readmission flag">
+				description = <"-">
+			>
+			["id17"] = <
+				text = <"Chief complaint">
+				description = <"-">
+			>
+			["id18"] = <
+				text = <"Discharge diagnosis">
+				description = <"-">
+			>
+			["id19"] = <
+				text = <"Discharge disposition">
+				description = <"-">
+			>
+			["id20"] = <
+				text = <"Admit medications list">
+				description = <"-">
+			>
+			["id21"] = <
+				text = <"Discharge orders">
+				description = <"-">
+			>
+			["id22"] = <
+				text = <"Encounter purpose narrative">
+				description = <"-">
+			>
+			["id23"] = <
+				text = <"Discharge instructions">
+				description = <"-">
+			>
+			["ac2"] = <
+				text = <"Encounter priorities">
+				description = <"-">
+			>
+			["ac6"] = <
+				text = <"Reasons for encounter">
+				description = <"-">
+			>
+			["ac7"] = <
+				text = <"Health service types">
+				description = <"-">
+			>
+			["ac17"] = <
+				text = <"Chief complaints">
+				description = <"-">
+			>
+			["ac10"] = <
+				text = <"Interaction type">
+				description = <"-">
+			>
+			["ac18"] = <
+				text = <"Discharge diagnoses">
+				description = <"-">
+			>
+			["ac19"] = <
+				text = <"Discharge dispositions">
+				description = <"-">
+			>
+			["ac20"] = <
+				text = <"Admit medications">
+				description = <"-">
+			>
+			["ac21"] = <
+				text = <"Discharge orders">
+				description = <"-">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/a82d501b-5274-ef11-8870-6045bdc71c8b>
+			["id2"] = <http://loinc.org/c8062e25-5274-ef11-8870-6045bdc71c8b>
+			["id3"] = <http://loinc.org/106197-7>
+			["id4"] = <http://loinc.org/106180-3>
+			["id5"] = <http://loinc.org/73980-5>
+			["id6"] = <http://loinc.org/e46b4216-e475-ef11-8870-6045bdc71c8b>
+			["id7"] = <http://loinc.org/42548-8>
+			["id8"] = <http://loinc.org/93ff9f33-5274-ef11-8870-6045bdc71c8b>
+			["id9"] = <http://loinc.org/c385d443-5274-ef11-8870-6045bdc71c8b>
+			["id17"] = <http://loinc.org/8661-1>
+			["id18"] = <http://loinc.org/8651-2>
+			["id19"] = <http://loinc.org/55128-3>
+			["id20"] = <http://loinc.org/9ff0f853-5274-ef11-8870-6045bdc71c8b>
+			["id21"] = <http://loinc.org/52428-0>
+			["id22"] = <http://loinc.org/104915-4>
+			["id23"] = <http://loinc.org/74213-0>
+		>
+		["s2"] = <
+			["ac6"] = <http://s2health.org/id/s2.EncounterReason>
+			["ac10"] = <http://s2health.org/id/s2.InteractionType>
+			["ac17"] = <http://s2health.org/id/s2.ChiefComplaint>
+			["ac19"] = <http://s2health.org/id/s2.DischargeDisposition>
+			["ac18"] = <http://s2health.org/id/s2.DischargeDiagnosis>
+		>
+	>
+

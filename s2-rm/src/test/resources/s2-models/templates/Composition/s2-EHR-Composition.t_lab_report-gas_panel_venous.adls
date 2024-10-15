@@ -1,0 +1,124 @@
+template (adl_version=2.1.0; rm_release=0.8.6; uid=c1b00ccd-22d5-486c-8aee-c249a2a3e81a)
+	s2-EHR-Composition.t_lab_report-gas_panel_venous.v1.0.0
+
+specialize
+	s2-EHR-Composition.t_lab_report-generic.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Nathan Davis <nathan.davis@graphitehealth.io">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2024 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Gas panel venous blood lab result report">
+		>
+	>
+
+definition
+	Composition[id1.1.1] matches {	-- Gas panel Venous blood lab result report
+		/content[id0.1.1]/data matches {
+			use_archetype Info_node[id0.90.1, s2-EHR-Info_node.PHLsCncPtBldVQnLabObs.v1] 
+			use_archetype Info_node[id0.90.2, s2-EHR-Info_node.PHadjustedtopatientsactualtemperatureLsCncPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.3, s2-EHR-Info_node.CarbonDioxidePPresPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.4, s2-EHR-Info_node.CarbondioxideadjustedtopatientsactualtemperaturePPresPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.5, s2-EHR-Info_node.OxygenPPresPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.6, s2-EHR-Info_node.OxygenadjustedtopatientsactualtemperaturePPresPtBldVQnLabObs.v1]
+            use_archetype Info_node[id0.90.7, s2-EHR-Info_node.BicarbonateSCncPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.8, s2-EHR-Info_node.CarbondioxideSCncPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.9, s2-EHR-Info_node.BaseExcessSCncPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.10, s2-EHR-Info_node.BasedeficitSCncPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.11, s2-EHR-Info_node.OxygensaturationMFrPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.12, s2-EHR-Info_node.HemoglobinMCncPtBldVQnLabObs.v1]
+			use_archetype Info_node[id0.90.13, s2-EHR-Info_node.percent_oxygen.v1]
+			use_archetype Info_node[id0.90.14, s2-EHR-Info_node.inhaled_oxygen_flow_rate.v1]
+			use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] occurrences matches {0} 
+		}
+	}
+
+Terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Gas panel, venous blood, lab result report">
+				description = <"-">
+			>
+			["id0.1.1"] = <
+				text = <"Gas panel - Venous blood">
+				description = <"-">
+			>
+			["id0.90.1"] = <
+				text = <"pH of Venous blood">
+				description = <"-">
+			>
+			["id0.90.2"] = <
+				text = <"pH of Venous blood adjusted to patient's actual temperature">
+				description = <"-">
+			>
+			["id0.90.3"] = <
+				text = <"Carbon dioxide [Partial pressure] in Venous blood">
+				description = <"-">
+			>
+			["id0.90.4"] = <
+				text = <"Carbon dioxide [Partial pressure] adjusted to patient's actual temperature in Venous blood">
+				description = <"-">
+			>
+			["id0.90.5"] = <
+				text = <"Oxygen [Partial pressure] in Venous blood">
+				description = <"-">
+			>
+			["id0.90.6"] = <
+				text = <"Oxygen [Partial pressure] adjusted to patient's actual temperature in Venous blood">
+				description = <"-">
+			>
+			["id0.90.7"] = <
+				text = <"Bicarbonate [Moles/volume] in Venous blood">
+				description = <"-">
+			>
+			["id0.90.8"] = <
+				text = <"Carbon dioxide, total [Moles/volume] in Venous blood">
+				description = <"-">
+			>
+			["id0.90.9"] = <
+				text = <"Base excess in Venous blood by calculation">
+				description = <"-">
+			>
+			["id0.90.10"] = <
+				text = <"Base deficit in Venous blood">
+				description = <"-">
+			>
+			["id0.90.11"] = <
+				text = <"Oxygen saturation in Venous blood">
+				description = <"-">
+			>
+			["id0.90.12"] = <
+				text = <"Hemoglobin [Mass/volume] in Venous blood">
+				description = <"-">
+			>
+			["id0.90.13"] = <
+				text = <"Inhaled oxygen concentration">
+				description = <"-">
+			>
+			["id0.90.14"] = <
+				text = <"Inhaled oxygen flow rate">
+				description = <"-">
+			>
+			["id0.90.15"] = <
+				text = <"Body temperature">
+				description = <"-">
+			>
+		>
+	>
+
+	term_bindings = <
+		["loinc"] = <
+            ["id0.1.1"] = <http://loinc.org/24339-4>
+		>
+	>

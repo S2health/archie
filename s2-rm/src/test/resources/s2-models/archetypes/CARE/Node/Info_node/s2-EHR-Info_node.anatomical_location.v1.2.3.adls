@@ -1,0 +1,102 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=2723747d-2b8c-4fa2-82cb-69abfb13e3e1)
+	s2-EHR-Info_node.anatomical_location.v1.2.3
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	original_namespace = <"org.openehr">
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Heather Leslie, Ocean Informatics, <heather.leslie@oceaninformatics.com>, 2008-11-10">
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.anatomical_location.v1.2.2, copyright 2008 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.anatomical_location.v1.2.2 from <https://ckm.openehr.org>">
+		["tool"] = <"s2 convert openehr">
+		["date"] = <"2024-08-09">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To identify and record structured details about a single physical site on, or within, the human body using macroscopic anatomical terms.">
+			use = <"Use to record structured and consistent details about a single identified physical site on, or within, the human body. 
+            
+            This archetype is designed as an abstract parent of various kinds of concrete anatomic location archetype.">
+			keywords = <"location", "site", "anatomical", "anatomic region", "topographic anatomy", "macroscopic", "anatomic", "anatomy">
+			misuse = <"Not to be used for specifiying unilateral/bilateral occurrences of an anatomical feature.">
+		>
+	>
+	other_contributors = <"openEHR CKM community">
+
+definition
+	Info_node[id1] matches {	-- Anatomical location
+		value matches {
+			Coded_text[id10] matches {
+				term matches {
+					Terminology_term[id110] matches {
+						concept matches {[ac4]}		-- Coded body location
+					}
+				}
+			}
+		}
+		items matches {
+			Info_node[id24] occurrences matches {0..1} matches {	-- Description
+				value matches {
+					Text[id74] 
+				}
+			}
+			use_archetype Info_node[id55, s2-EHR-Info_node.media_file.v2] 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["ac3"] = <
+				text = <"Anatomical Line (synthesised)">
+				description = <"Additional detail using theoretical lines drawn through anatomical structures used to provide a consistent reference point on the human body. (synthesised)">
+			>
+			["ac4"] = <
+				text = <"Coded body location">
+				description = <"Single coded body location">
+			>
+			["id1"] = <
+				text = <"Anatomical location">
+				description = <"A physical site on or within the human body.">
+			>
+			["id24"] = <
+				text = <"Description">
+				description = <"Narrative description that can be used to further refine and support the 'Body site name'.">
+			>
+			["id55"] = <
+				text = <"Multimedia representation">
+				description = <"Image or other media used to support identification of the body site.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id24"] = <http://loinc.org/1c814f9b-cbe7-ee11-8869-6045bdc71c8b>
+			["id1"] = <http://loinc.org/72369-2>
+			["id55"] = <http://loinc.org/104973-3>
+		>
+		["s2"] = <
+			["ac4"] = <http://s2health.org/id/s2.BodyLocation>
+		>
+	>
+
+

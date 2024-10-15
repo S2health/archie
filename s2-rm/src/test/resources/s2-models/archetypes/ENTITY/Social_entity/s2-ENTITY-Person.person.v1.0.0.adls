@@ -1,0 +1,217 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=3f7fbe34-4e64-4c02-8d1a-402f7b0f57ce)
+	s2-ENTITY-Person.person.v1.0.0
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health">
+		["organisation"] = <"S2 Health <http://www.S2Health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-07-26">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2023 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Heather Leslie, Atomica Informatics, <heather.leslie@atomicainformatics.com>, 2021-04-14">
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.person.v1.0.2">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.person.v1.0.2 from <https://ckm.openehr.org>">
+		["tool"] = <"graphite_openehr_to_s2_adl">
+		["date"] = <"$nowIso8601 (Iso8601 date and time is disabled during testing)">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record details about a person.">
+			use = <"Use to record details of a person .">
+			keywords = <"person", "demographics">
+		>
+	>
+
+definition
+	Person[id1] matches {	-- Person
+		comms_addresses matches {
+			use_archetype Comms_address_use[id2, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
+		}
+		location_addresses matches {
+			use_archetype Location_address_use[id6, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
+		}
+		identities matches {
+			use_archetype Party_identity[id7, s2-ENTITY-Party_identity.person_structured_name.v1] 
+		}
+		other_details matches {
+			Info_node[id8] occurrences matches {0..1} matches {	-- Date of birth
+				value matches {
+					Date_value[id108] 
+				}
+			}
+			Info_node[id9] occurrences matches {0..1} matches {	-- Place of birth
+				value matches {
+					Plain_text[id109] 
+				}
+			}
+			Info_node[id12] occurrences matches {0..1} matches {	-- Sex
+				value matches {
+					Coded_text[id102] matches {
+						term matches {
+							Terminology_term[id1102] matches {
+								concept matches {[ac2]}		-- Biological sex
+							}
+						}
+					}
+				}
+			}
+			Info_node[id13] occurrences matches {0..1} matches {	-- Date of decease
+				value matches {
+					Date_value[id103] 
+				}
+			}
+			Info_node[id14] occurrences matches {0..1} matches {	-- Deceased
+				value matches {
+					Boolean_value[id104] 
+				}
+			}
+			Info_node[id15] occurrences matches {0..1} matches {	-- Administrative gender
+				value matches {
+					Coded_text[id115] matches {
+						term matches {
+							Terminology_term[id1105] matches {
+								concept matches {[ac5]}		-- Adminstrative gender
+							}
+						}
+					}
+				}
+			}
+			Info_node[id16] occurrences matches {0..1} matches {	-- Marital status
+				value matches {
+					Coded_text[id116] matches {
+						term matches {
+							Terminology_term[id1106] matches {
+								concept matches {[ac6]}		-- Marital status
+							}
+						}
+					}
+				}
+			}
+			Info_node[id10] occurrences matches {0..1} matches {	-- Photo
+				value matches {
+					Multimedia[id110] 
+				}
+			}
+			Info_node[id11] occurrences matches {0..1} matches {	-- Comment
+				value matches {
+					Plain_text[id111] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Person">
+				description = <"An individual human being.">
+			>
+			["id2"] = <
+				text = <"Comms addresses">
+				description = <"-">
+			>
+			["id3"] = <
+				text = <"Structured name">
+				description = <"Alternative representation of an individual's complete name by separation into discrete, structured components.">
+			>
+			["id6"] = <
+				text = <"Physical address">
+				description = <"Physical address for the individual.">
+			>
+			["id7"] = <
+				text = <"Person identity">
+				description = <"-">
+			>
+			["id8"] = <
+				text = <"Date of birth">
+				description = <"-">
+			>
+			["id9"] = <
+				text = <"Place of birth">
+				description = <"-">
+			>
+			["id10"] = <
+				text = <"Photo">
+				description = <"Photograph of the individual.">
+			>
+			["id11"] = <
+				text = <"Comment">
+				description = <"Additional narrative about the individual not captured in other fields.">
+			>
+			["id12"] = <
+				text = <"Sex">
+				description = <"Biological sex">
+			>
+			["id13"] = <
+				text = <"Date of decease">
+				description = <"-">
+			>
+			["id14"] = <
+				text = <"Deceased">
+				description = <"Deceased status">
+			>
+			["id15"] = <
+				text = <"Administrative gender">
+				description = <"Gender persona, if asserted">
+			>
+			["id16"] = <
+				text = <"Marital status">
+				description = <"-">
+			>
+			["ac1"] = <
+				text = <"Use of identity">
+				description = <"Description of when / how to use this identity, e.g. in written communications, in person.">
+			>
+			["ac2"] = <
+				text = <"Biological sex">
+				description = <"-">
+			>
+			["ac5"] = <
+				text = <"Adminstrative gender">
+				description = <"-">
+			>
+			["ac6"] = <
+				text = <"Marital status">
+				description = <"-">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id10"] = <http://loinc.org/72170-4>
+			["id11"] = <http://loinc.org/48767-8>
+			["id12"] = <http://loinc.org/46098-0>
+			["id13"] = <http://loinc.org/81954-0>
+			["id14"] = <http://loinc.org/104923-8>
+			["id15"] = <http://loinc.org/76691-5>
+			["id16"] = <http://loinc.org/45404-1>
+			["id3"] = <http://loinc.org/97845-2>
+			["id6"] = <http://loinc.org/99953-2>
+			["id1"] = <http://loinc.org/104976-6>
+			["id2"] = <http://loinc.org/104902-2>
+			["id8"] = <http://loinc.org/21112-8>
+			["id9"] = <http://loinc.org/21842-0>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.PersonIdentityUse>
+			["ac2"] = <http://s2health.org/id/s2.Sex>
+			["ac5"] = <http://s2health.org/id/s2.AdministrativeGender>
+			["ac6"] = <http://s2health.org/id/s2.MaritalStatus>
+		>
+	>
+

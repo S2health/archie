@@ -1,0 +1,92 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=fdff5851-463b-4545-8f05-487a34123cea)
+	s2-ENTITY-Comms_address_use.comms_address_use_general.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.electronic_communication.v1.0.2, copyright 2022 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about a specified type of electronic communication as it is known or understood in the course of clinical documentation.">
+			keywords = <"telephone", "phone", "mobile", "email", "fax", "pager", "chat", "social media", "asynchronous", "communication", "SoMe">
+		>
+	>
+
+definition
+	Comms_address_use[id1] matches {	-- Communications address, including postal
+		value matches {
+			Coded_text[id101] matches {
+				term matches {
+					Terminology_term[id1001] matches {
+						concept matches {[ac1]}		-- Communications type, e.g. email, phone (landline), phone (mobile), chat
+					}
+				}
+			}
+		}
+		address matches {/([0-9+()]+|((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?))/}
+		address_platform matches {
+			Terminology_term[id3] matches {
+				concept matches {[ac3]}		-- Address platform, e.g. whatsapp, instagram etc
+			}
+		}
+		purposes matches {
+			Terminology_term[id4] matches {	-- Communications purpose
+				concept matches {[ac4]}		-- Purpose, e.g. business, private
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Communications address, including postal">
+				description = <"-">
+			>
+			["id4"] = <
+				text = <"Communications purpose">
+				description = <"-">
+			>
+			["ac1"] = <
+				text = <"Communications type, e.g. email, phone (landline), phone (mobile), chat">
+				description = <"Communications type, e.g. email, phone (landline), phone (mobile), chat">
+			>
+			["ac3"] = <
+				text = <"Address platform, e.g. whatsapp, instagram etc">
+				description = <"Address platform, e.g. whatsapp, instagram etc">
+			>
+			["ac4"] = <
+				text = <"Purpose, e.g. business, private">
+				description = <"">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.CommsSystemType>
+			["ac3"] = <http://s2health.org/id/s2.CommsSystemPlatform>
+			["ac4"] = <http://s2health.org/id/s2.CommsPurpose>
+		>
+		["loinc"] = <
+			["id1"] = <http://loinc.org/99953-2>
+		>
+	>
+

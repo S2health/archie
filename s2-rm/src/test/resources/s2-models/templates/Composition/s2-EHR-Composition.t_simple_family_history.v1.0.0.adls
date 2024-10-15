@@ -1,0 +1,81 @@
+template (adl_version=2.1.0; rm_release=0.8.6)
+	s2-EHR-Composition.t_simple_family_history.v1.0.0
+
+specialize
+	s2-EHR-Composition.family_history.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@GraphiteHealth.io>">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2023 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Simplified family history template">
+		>
+	>
+
+definition
+	Composition[id1.1] matches {
+		content matches {
+			use_archetype Assessment[id2, s2-EHR-Assessment.t_family_history-1.v1]
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Simplified family history ">
+				description = <"Simplified family history record">
+			>
+		>
+	>
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Assessment.t_family_history-1.v1.0.0
+
+specialize
+	s2-EHR-Assessment.family_history.v2
+
+definition
+	Assessment[id1.1] matches {
+		/data matches {
+			Info_node[id29] matches {	-- Per problem
+				items matches {
+					use_archetype Info_node[id60, s2-EHR-Info_node.family_prevalence.v1]  occurrences matches {0}
+				}
+			}
+			Info_node[id4] matches {	-- Per family member
+				items matches {
+					Info_node[id21] occurrences matches {0} 
+					use_archetype Entity_ref_node[id49, s2-EHR-Entity_ref_node.person_ref.v1] occurrences matches {0}
+					Info_node[id25] occurrences matches {0}
+ 				}
+			}
+			use_archetype Info_node[id54, s2-EHR-Info_node.media_file.v2]  occurrences matches {0}
+		}
+		/qualifiers matches {
+			allow_archetype Info_node[id46] occurrences matches {0}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Simplified family history assessment">
+				description = <"Simplified family history assessment">
+			>
+		>
+	>

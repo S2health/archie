@@ -1,0 +1,75 @@
+template (adl_version=2.1.0; rm_release=0.8.6; uid=435659a8-65d6-4b69-bc68-4c03182a6b93)
+	s2-EHR-Composition.t_lab_report-prostate_specific_antigen.v1.0.0
+
+specialize
+	s2-EHR-Composition.t_lab_report-generic.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Nathan Davis <nathan.davis@graphitehealth.io">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2024 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Prostate specific Ag panel lab result report">
+		>
+	>
+
+definition
+	Composition[id1.1.1] matches {	-- Prostate specific Ag panel lab result report
+		/content[id0.1.1]/data matches {
+			use_archetype Info_node[id0.90.1, s2-EHR-Info_node.ProstateSpecificAgMCncPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.2, s2-EHR-Info_node.ProstateSpecificAgFreeMCncPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.3, s2-EHR-Info_node.ProstateSpecificAgFreeProstateSpecificAgTotalMFrPtSerPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.4, s2-EHR-Info_node.ProprostatespecificAgisoform2MCncPtSerPlasIAQnLabObs.v1] 
+			use_archetype Info_node[id0.90.5, s2-EHR-Info_node.ProstatehealthindexScorePtSerPlasCalculatedQnLabObs.v1] 
+			use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Prostate specific Ag panel lab report">
+				description = <"-">
+			>
+			["id0.1.1"] = <
+				text = <"Prostate specific Ag panel- Serum or plasma">
+				description = <"-">
+			>
+			["id0.90.1"] = <
+				text = <"Prostate specific Ag [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.2"] = <
+				text = <"Prostate Specific Ag Free [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.3"] = <
+				text = <"Prostate Specific Ag Free/Prostate specific Ag.total in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.4"] = <
+				text = <"proPSA isoform 2 [Mass/volume] in Serum or Plasma by Immunoassay">
+				description = <"-">
+			>
+			["id0.90.5"] = <
+				text = <"Prostate health index in Serum or Plasma by calculation">
+				description = <"-">
+			>
+		>
+	>
+
+	term_bindings = <
+		["loinc"] = <
+			["id0.1.1"] = <http://loinc.org/53764-7>
+		>
+	>

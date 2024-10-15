@@ -1,0 +1,295 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=6e37337d-02c1-4e91-8e68-39978ca3ca8f)
+	s2-ENTITY-Substance_kind.medication.v1.0.0
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health">
+		["organisation"] = <"S2 Health <http://www.s2Health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-07-26">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Silje Ljosland Bakke, Nasjonal IKT HF, <silje.ljosland.bakke@nasjonalikt.no>, 2018-06-07">
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.medication.v2.0.1">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.medication.v2.0.1 from <https://ckm.openehr.org>">
+		["tool"] = <"graphite_openehr_to_s2_adl">
+		["date"] = <"2024-07-26">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about a medication or component of a medication, including strength, form and details of any specific constituents.">
+			use = <"Use to record details about a medication or component of a medication, including strength, form and details of any specific constituents.
+            
+            This archetype is intended to be used to record details of a medication or component of a medication where the form and detailed ingredients of the medication need to be specified in more detail, for example, infusions and ad hoc mixtures, or where there is no medication terminology available. In the context of an order for administration or dispensing of a medication, nest this archetype within the 'Medication details' SLOT within the Order.medication_order archetype. In the context of recording the actual administration or dispensing or a medication, nest this archetype within the 'Medication details' SLOT within the Action.medication archetype.
+            
+            This archetype may be redundant in situations where ordering a medication via prescription uses a terminology to identify the medication item. In that case the brand or product name may identify the form and strength of the substance.">
+			keywords = <"medication", "order", "prescribe", "therapy", "substance", "drug", "therapeutic", "therapeutic good", "ad-hoc", "adhoc", "ad hoc", "extemporaneous", "formulation", "medicine">
+		>
+	>
+	other_contributors = <"openEHR CKM community">
+
+definition
+	Substance_kind[id1] matches {	-- Medication details
+		items matches {
+			Info_node[id133] occurrences matches {0..1} matches {	-- Name
+				value matches {
+					Coded_text[id159] matches {
+						term matches {
+							Terminology_term[id1159] matches {
+								concept matches {[ac3]}		-- Medication name
+							}
+						}
+					}
+				}
+			}
+			Info_node[id72] matches {	-- Form
+				value matches {
+					Coded_text[id160] matches {
+						term matches {
+							Terminology_term[id1602] matches {
+								concept matches {[ac4]}		-- Medication form
+							}
+						}
+					}
+				}
+			}
+			Info_node[id143] occurrences matches {0..1} matches {	-- Category
+				value matches {
+					Coded_text[id161] matches {
+						term matches {
+							Terminology_term[id175] matches {
+								concept matches {[ac1]}		-- Category (synthesised)
+							}
+						}
+					}
+					Plain_text[id162] 
+				}
+			}
+			Info_node[id153] occurrences matches {0..1} matches {	-- Strength (formulation)
+				value matches {
+					Proportion[id163] 
+				}
+			}
+			Info_node[id116] occurrences matches {0..1} matches {	-- Strength (concentration)
+				value matches {
+					Quantity[id165] 
+				}
+			}
+			Info_node[id152] occurrences matches {0..1} matches {	-- Manufacturer
+				value matches {
+					Text[id166] 
+				}
+			}
+			Info_node[id151] matches {	-- Batch ID
+				value matches {
+					Text[id167] 
+					Rwe_id_ref[id168] 
+				}
+			}
+			Info_node[id4] occurrences matches {0..1} matches {	-- Expiry
+				value matches {
+					Date_time_value[id169] 
+				}
+			}
+			use_archetype Entity_ref_node[id139, s2-ENTITY-Entity_ref_node.medication_type_ref.v1] 
+			Info_node[id140] occurrences matches {0..1} matches {	-- Amount
+				value matches {
+					Quantity[id170] 
+				}
+			}
+			Info_node[id149] occurrences matches {0..1} matches {	-- Alternate amount
+				value matches {
+					Quantity[id171] 
+				}
+			}
+			Info_node[id128] occurrences matches {0..1} matches {	-- Role
+				value matches {
+					Coded_text[id172] matches {
+						term matches {
+							Terminology_term[id176] matches {
+								concept matches {[ac2]}		-- Role (synthesised)
+							}
+						}
+					}
+					Plain_text[id173] 
+				}
+			}
+			Info_node[id134] occurrences matches {0..1} matches {	-- Description
+				value matches {
+					Text[id174] 
+				}
+			}
+			allow_archetype Info_node[id142] matches {	-- Structured details
+				include
+					archetype_id/value matches {/.*/}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["ac1"] = <
+				text = <"Category (synthesised)">
+				description = <"The category of the medication or medication component, with regard to manufacturing or preparation, and the number of ingredients. (synthesised)">
+			>
+			["ac2"] = <
+				text = <"Role (synthesised)">
+				description = <"The role of the medication or medication component within a mixture. (synthesised)">
+			>
+			["ac3"] = <
+				text = <"Medication name">
+				description = <"Medication name">
+			>
+			["ac4"] = <
+				text = <"Medication form">
+				description = <"Medication form">
+			>
+			["at1"] = <
+				text = <"Combination product">
+				description = <"The medication or medication component consists of a number of separate products which are pre-packaged by the manufacturer, for example Canesten Combi.">
+			>
+			["at143"] = <
+				text = <"Ad-hoc mixture">
+				description = <"The medication or medication component is composed of a mixture of ingredients specified within the order. These are typically prepared by pharmacy or ward personnel to suit individual patients.">
+			>
+			["at144"] = <
+				text = <"Multi-ingredient product">
+				description = <"The medication or medication component consists of a number of active ingredients which are pre-combined into a single form such as a tablet, cream or powder by the manufacturer, for example Paracetamol/codeine.">
+			>
+			["at145"] = <
+				text = <"Single-ingredient product">
+				description = <"The medication or medication component is a manufactured product containing a single active ingredient.">
+			>
+			["at146"] = <
+				text = <"Ingredient">
+				description = <"The medication or medication component is an individual ingredient of the medication. This term is used when the archetype is nested within a parent instance of itself, to describe the individual ingredients of a medication.">
+			>
+			["at80"] = <
+				text = <"Therapeutic">
+				description = <"Constituent that alone or in combination with one or more other ingredients is considered to fulfil the intended activity of a medicinal product.">
+			>
+			["at83"] = <
+				text = <"Adjuvant">
+				description = <"Constituent whose primary function is to modify the activity of an active constituent. An adjuvant constituent itself may or may not be therapeutically active.">
+			>
+			["at84"] = <
+				text = <"Excipient">
+				description = <"Constituent that is inert in relation to the intended activity of the medicinal product.">
+			>
+			["id1"] = <
+				text = <"Medication description">
+				description = <"Description of a medication or component of a medication, including strength, form and details of any specific constituents.">
+			>
+			["id116"] = <
+				text = <"Strength (concentration)">
+				description = <"The strength of the medication or medication component, as a concentration.">
+			>
+			["id128"] = <
+				text = <"Role">
+				description = <"The role of the medication or medication component within a mixture.">
+			>
+			["id133"] = <
+				text = <"Name">
+				description = <"The name of the medication or medication component.">
+			>
+			["id134"] = <
+				text = <"Description">
+				description = <"Narrative description of the medication or medication component where it is not possible to describe this fully using structured Nodes.">
+			>
+			["id139"] = <
+				text = <"Constituent">
+				description = <"Details of an ingredient or product used to make up a mixed pack, preparation or infusion.">
+			>
+			["id140"] = <
+				text = <"Amount">
+				description = <"The amount of medication or medication component.">
+			>
+			["id142"] = <
+				text = <"Structured details">
+				description = <"Additional details about the medication or medication component.">
+			>
+			["id143"] = <
+				text = <"Category">
+				description = <"The category of the medication or medication component, with regard to manufacturing or preparation, and the number of ingredients.">
+			>
+			["id149"] = <
+				text = <"Alternate amount">
+				description = <"An equivalent representation of the amount of the medication or medication component.">
+			>
+			["id151"] = <
+				text = <"Batch ID">
+				description = <"The identifier assigned to the production batch by the manufacturer during production.">
+			>
+			["id152"] = <
+				text = <"Manufacturer">
+				description = <"The manufacturer of the medication or medication component.">
+			>
+			["id153"] = <
+				text = <"Strength (formulation)">
+				description = <"The strength of the medication or medication component, expressed as a proportion.">
+			>
+			["id154"] = <
+				text = <"Strength numerator">
+				description = <"The numerator of the strength fraction.">
+			>
+			["id158"] = <
+				text = <"Strength denominator">
+				description = <"The denominator of the strength fraction.">
+			>
+			["id4"] = <
+				text = <"Expiry">
+				description = <"The expiry date and/or time of the medication or medication component, as given by the manufacturer or individual preparing the mixture.">
+			>
+			["id72"] = <
+				text = <"Form">
+				description = <"The formulation or presentation of the medication or medication component.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id116"] = <http://loinc.org/74057-1>
+			["id133"] = <http://loinc.org/74058-9>
+			["id140"] = <http://loinc.org/82767-5>
+			["id143"] = <http://loinc.org/e55abf1c-7282-ef11-8870-6045bdc71c8b>
+			["id152"] = <http://loinc.org/74719-6>
+			["id4"] = <http://loinc.org/74066-2>
+			["id72"] = <http://loinc.org/74055-5>
+			["id153"] = <http://loinc.org/6a8a94b8-624f-ef11-886e-6045bdc71c8b>
+			["id1"] = <http://loinc.org/540c1425-7282-ef11-8870-6045bdc71c8b>
+			["id128"] = <http://loinc.org/104723-2>
+			["id134"] = <http://loinc.org/1c814f9b-cbe7-ee11-8869-6045bdc71c8b>
+			["id149"] = <http://loinc.org/104823-0>
+			["id142"] = <http://loinc.org/d78806bb-7182-ef11-8870-6045bdc71c8b>
+			["id151"] = <http://loinc.org/74714-7>
+		>
+		["s2"] = <
+			["ac3"] = <http://s2health.org/id/s2.RxNormActive>
+			["ac4"] = <http://s2health.org/id/s2.DoseForm>
+		>
+	>
+	value_sets = <
+		["ac2"] = <
+			id = <"ac2">
+			members = <"at80", "at83", "at84">
+		>
+		["ac1"] = <
+			id = <"ac1">
+			members = <"at143", "at146", "at144", "at145", "at1">
+		>
+	>
+

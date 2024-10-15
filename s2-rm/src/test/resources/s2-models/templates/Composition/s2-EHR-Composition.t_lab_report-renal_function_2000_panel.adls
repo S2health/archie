@@ -1,0 +1,120 @@
+template (adl_version=2.1.0; rm_release=0.8.6; uid=dd8586f6-6de6-41db-9122-58511c389c90)
+	s2-EHR-Composition.t_lab_report-renal_function_2000_panel.v1.0.0
+
+specialize
+	s2-EHR-Composition.t_lab_report-generic.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Nathan Davis <nathan.davis@graphitehealth.io">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2024 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Renal function 2000 panel lab result report">
+		>
+	>
+
+definition
+	Composition[id1.1.1] matches {	-- Renal function 2000 panel lab result report
+		/content[id0.1.1]/data matches {
+			use_archetype Info_node[id0.90.1, s2-EHR-Info_node.GlobulinMCncPtPlasQnLabObs.v1] 
+			use_archetype Info_node[id0.90.2, s2-EHR-Info_node.UreaNitrogenMCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.3, s2-EHR-Info_node.CreatinineMCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.4, s2-EHR-Info_node.UreanitrogenCreatinineMRtoPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.5, s2-EHR-Info_node.Glomerularfiltrationrate173sqMpredictedArVRatPtSerPlasBldQnLabObs.v1]
+			use_archetype Info_node[id0.90.6, s2-EHR-Info_node.CalciumMCncPtSerPlasQnLabObs.v1]
+            use_archetype Info_node[id0.90.7, s2-EHR-Info_node.PhosphateMCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.8, s2-EHR-Info_node.AlbuminMCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.9, s2-EHR-Info_node.SodiumSCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.10, s2-EHR-Info_node.PotassiumSCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.11, s2-EHR-Info_node.ChlorideSCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.12, s2-EHR-Info_node.BicarbonateSCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.13, s2-EHR-Info_node.CarbonDioxideSCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90.14, s2-EHR-Info_node.AniongapSCncPtSerPlasQnLabObs.v1]
+			use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Renal function 2000 panel lab result report">
+				description = <"-">
+			>
+			["id0.1.1"] = <
+				text = <"Renal function 2000 panel - Serum or plasma">
+				description = <"-">
+			>
+			["id0.90.1"] = <
+				text = <"Glucose [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.2"] = <
+				text = <"Urea nitrogen [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.3"] = <
+				text = <"Creatinine [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.4"] = <
+				text = <"Urea nitrogen/Creatinine [Mass Ratio] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.5"] = <
+				text = <"Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood">
+				description = <"-">
+			>
+			["id0.90.6"] = <
+				text = <"Calcium [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.7"] = <
+				text = <"Phosphate [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.8"] = <
+				text = <"Albumin [Mass/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.9"] = <
+				text = <"Sodium [Moles/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.10"] = <
+				text = <"Potassium [Moles/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.11"] = <
+				text = <"Chloride [Moles/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.12"] = <
+				text = <"Bicarbonate [Moles/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.13"] = <
+				text = <"Carbon dioxide, total [Moles/volume] in Serum or Plasma">
+				description = <"-">
+			>
+			["id0.90.14"] = <
+				text = <"Anion gap in Serum or Plasma">
+				description = <"-">
+			>
+		>
+	>
+
+	term_bindings = <
+		["loinc"] = <
+            ["id0.1.1"] = <http://loinc.org/24362-6>
+		>
+	>

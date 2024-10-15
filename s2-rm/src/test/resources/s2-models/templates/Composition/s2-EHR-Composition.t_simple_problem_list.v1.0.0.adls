@@ -1,0 +1,141 @@
+template (adl_version=2.1.0; rm_release=0.8.6)
+	s2-EHR-Composition.t_simple_problem_list.v1.0.0
+
+specialize
+	s2-EHR-Composition.simple_problem_list.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@GraphiteHealth.io>">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Simple problem list template">
+		>
+	>
+
+definition
+	Composition[id1.1] matches {
+		/content matches {
+			use_archetype Assessment[id2, s2-EHR-Assessment.t_simple_problem_list-synth_0001-problem.v1] occurrences matches {0..*} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Problem list template">
+				description = <"-">
+			>
+		>
+	>
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Assessment.t_simple_problem_list-synth_0001-problem.v1.0.0
+
+specialize
+	s2-EHR-Assessment.problem_diagnosis.v1
+
+definition
+	Assessment[id1.1] matches {
+		/data matches {
+			Info_node[id3] matches {
+				name matches {"Problem"}
+				value matches {
+					Coded_text[id81] matches {
+						term matches {
+							Terminology_term[id0.9] matches {
+								concept matches {[ac0.1]}
+							}
+						}
+					}
+				}
+			}
+			Info_node[id78] matches {
+				name matches {"Onset date"}
+			}
+			Info_node[id4] occurrences matches {0} 
+			Info_node[id10] occurrences matches {0}
+			Info_node[id80] occurrences matches {0}
+			Info_node[id6] matches {
+				name matches {"Severity"}
+			}
+			Info_node[id31] occurrences matches {0}
+			Info_node[id79] occurrences matches {0}
+			allow_archetype Info_node[id44] occurrences matches {0}
+			Info_node[id73] occurrences matches {0}
+			use_archetype Info_node[id47, s2-EHR-Info_node.t_simple_problem_list-problem_qualifier_1.v1]
+			Info_node[id74] matches {
+				name matches {"Dx status"}
+			}
+			Info_node[id70] occurrences matches {0}
+		}
+		/qualifiers existence matches {0}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Simplified problem">
+				description = <"Simplified problem">
+			>
+			["ac0.1"] = <
+				text = <"Clinical finding">
+				description = <"Clinical finding">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac0.1"] = <http://s2health.org/id/s2.ClinicalFinding>
+		>
+	>
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Info_node.t_simple_problem_list-problem_qualifier_1.v1.0.0
+
+specialize
+	s2-EHR-Info_node.problem_qualifier.v2
+
+definition
+	Info_node[id1.1] matches {	-- Basic medication authorisation
+		/items matches {
+			Info_node[id5] occurrences matches {0} 
+			Info_node[id61] occurrences matches {0} 
+			Info_node[id99] occurrences matches {0} 
+			Info_node[id103] occurrences matches {0} 
+			Info_node[id84] occurrences matches {0} 
+			Info_node[id90] occurrences matches {0} 
+			Info_node[id2] occurrences matches {0} 
+			Info_node[id108] occurrences matches {0} 
+			Info_node[id72] occurrences matches {0} 
+			Info_node[id78] occurrences matches {0} 
+			Info_node[id64] occurrences matches {0} 
+			Info_node[id74] occurrences matches {0} 
+			Info_node[id111] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Simple problem list - qualifiers">
+				description = <"Simple problem list - qualifiers">
+			>
+		>
+	>
+
+

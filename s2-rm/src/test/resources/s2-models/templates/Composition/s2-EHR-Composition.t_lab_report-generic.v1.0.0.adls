@@ -1,0 +1,140 @@
+template (adl_version=2.1.0; rm_release=0.8.6; uid=f4c62462-eeae-48c4-a85a-bdce9173a2d8)
+	s2-EHR-Composition.t_lab_report-generic.v1.0.0
+
+specialize
+	s2-EHR-Composition.lab_report.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@GraphiteHealth.io>">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Generic lab report">
+		>
+	>
+
+definition
+	Composition[id1.1] matches {
+		/context[id2]/health_care_facility matches {
+			use_archetype Entity_ref_node[id18, s2-EHR-Entity_ref_node.t_lab_report-generic-org_ref-1.v1] 
+		}
+		content matches {
+			Lab_result[id0.1] matches {	-- Lab panel result
+				subject matches {
+					use_archetype Entity_ref_node[id0.2, s2-EHR-Entity_ref_node.self_ref.v1] 
+				}
+				data matches {
+					use_archetype Info_node[id0.90, s2-EHR-Info_node.lab_analyte.v0] 
+				}
+				qualifiers matches {
+					use_archetype Entity_ref_node[id0.10, s2-EHR-Entity_ref_node.device_ref.v1] 
+					Info_node[id0.11] matches {	-- Method
+						value matches {
+							Coded_text[id0.102]  matches {
+								term matches {
+									Terminology_term[id0.1102] matches {
+										concept matches {[ac0.2]}
+									}
+								}
+							}
+						}
+					}
+					Info_node[id0.1060] occurrences matches {0..1} matches {	-- Clinical interpretation
+						value matches {
+							Text[id0.1065] 
+						}
+					}
+					use_archetype Entity_ref_node[id0.20, s2-EHR-Entity_ref_node.t_lab_report-generic-org_ref-1.v1] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Generic lab report">
+				description = <"Lab report structure consisting of any number of panel results">
+			>
+			["id0.1"] = <
+				text = <"Lab panel">
+				description = <"Lab panel result">
+			>
+			["id0.2"] = <
+				text = <"Subject">
+				description = <"Lab panel subject">
+			>
+			["id0.90"] = <
+				text = <"Analyte">
+				description = <"-">
+			>
+			["id0.10"] = <
+				text = <"Device">
+				description = <"-">
+			>
+			["id0.11"] = <
+				text = <"Method">
+				description = <"-">
+			>
+			["id0.20"] = <
+				text = <"Performing laboratory">
+				description = <"Specific lab where the panel was processed">
+			>
+			["ac0.2"] = <
+				text = <"Lab test method">
+				description = <"-">
+			>
+			["id0.1060"] = <
+				text = <"Clinical interpretation">
+				description = <"Single word, phrase or brief description that represents the clinical meaning and significance of the blood pressure measurement.">
+			>
+		>
+	>
+
+	term_bindings = <
+		["loinc"] = <
+			["id0.10"] = <http://loinc.org/74720-4>
+			["id0.11"] = <http://loinc.org/106191-0>
+			["id0.1060"] = <http://loinc.org/64110-0>
+		>
+		["s2"] = <
+			["ac0.2"] = <http://s2health.org/id/s2.LabTestMethod>
+		>
+	>
+
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Entity_ref_node.t_lab_report-generic-org_ref-1.v1.0.0
+
+specialize
+	s2-EHR-Entity_ref_node.lab_organization_ref.v1
+
+definition
+	Entity_ref_node[id1.1.1] matches {
+		/items matches {
+			use_archetype Info_node[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1] occurrences matches {0}
+			use_archetype Info_node[id5, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] occurrences matches {0}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Simplified organization ref">
+				description = <"Simplified organization ref">
+			>
+		>
+	>
+

@@ -1,0 +1,87 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6; uid=9d44ce81-a4e4-4edc-a828-20f5e4b88af5)
+	s2-ENTITY-Location_address_use.location_address_use_general.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Graphite Health">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+		["email"] = <"models@s2.org">
+		["date"] = <"2024-09-01">
+	>
+	custodian_namespace = <"io.graphitehealth">
+	custodian_organisation = <"Graphite Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.address.v1.1.0">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about a physical location.">
+		>
+	>
+
+definition
+	Location_address_use[id1] matches {	-- Address use
+		value matches {
+			Coded_text[id39] matches {
+				term matches {
+					Terminology_term[id34] matches {
+						concept matches {[ac1]}		-- Location type
+					}
+				}
+			}
+		}
+		purposes matches {
+			Terminology_term[id14] matches {	-- Purpose
+				concept matches {[ac2]}		-- Purpose
+			}
+		}
+		items matches {
+			use_archetype Info_node[id2, s2-ENTITY-Info_node.structured_address.v1] occurrences matches {0..1} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["ac1"] = <
+				text = <"Location type">
+				description = <"The type of location, e.g. house, flat, office building, shop.">
+			>
+			["ac2"] = <
+				text = <"Purpose">
+				description = <"-">
+			>
+			["id1"] = <
+				text = <"Address use">
+				description = <"An address with use meta-data.">
+			>
+			["id2"] = <
+				text = <"Address">
+				description = <"Structured address">
+			>
+			["id14"] = <
+				text = <"Purpose">
+				description = <"-">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/99953-2>
+			["id2"] = <http://loinc.org/106181-1>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.PhysicalLocationType>
+			["ac2"] = <http://s2health.org/id/s2.PhysicalAddressPurpose>
+		>
+	>
+

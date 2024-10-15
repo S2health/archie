@@ -6,11 +6,11 @@ import com.nedap.archie.adlparser.ADLParser;
 import com.nedap.archie.aom.*;
 import com.nedap.archie.archetypevalidator.ArchetypeValidator;
 import com.nedap.archie.archetypevalidator.ValidationResult;
-import com.nedap.archie.flattener.specexamples.FlattenerTestUtil;
-import com.nedap.archie.rminfo.ArchieRMInfoLookup;
+import com.nedap.archie.testutil.ParseValidArchetypeTestUtil;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rminfo.ReferenceModels;
 import org.junit.Test;
-import org.openehr.referencemodels.BuiltinReferenceModels;
+import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,9 +26,9 @@ public class OperationalTemplateCreatorTest {
     @Test
     public void fillEmptyOccurrences() throws Exception {
         try(InputStream stream = getClass().getResourceAsStream("openEHR-EHR-CLUSTER.cluster_with_annotations.v1.adls")) {
-            Archetype archetype = new ADLParser(BuiltinReferenceModels.getMetaModels()).parse(stream);
-            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), BuiltinReferenceModels.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
-            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype);
+            Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
+            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
+            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype, 0);
 
             Stack<CObject> workList = new Stack<>();
             workList.push(template.getDefinition());
@@ -37,7 +37,7 @@ public class OperationalTemplateCreatorTest {
                 if(cObject instanceof CComplexObject) {
                     assertNotNull(cObject.getOccurrences());
                     CObject objectInOriginal = archetype.itemAtPath(cObject.getPath());
-                    assertEquals(objectInOriginal.effectiveOccurrences(ArchieRMInfoLookup.getInstance()::referenceModelPropMultiplicity), cObject.getOccurrences());
+                    assertEquals(objectInOriginal.effectiveOccurrences(OpenEhrRmInfoLookup.getInstance()::referenceModelPropMultiplicity), cObject.getOccurrences());
                 }
                 for(CAttribute attribute:cObject.getAttributes()) {
                     workList.addAll(attribute.getChildren());
@@ -49,11 +49,11 @@ public class OperationalTemplateCreatorTest {
     @Test
     public void dontFillEmptyOccurrencesUnlessSet() throws Exception {
         try(InputStream stream = getClass().getResourceAsStream("openEHR-EHR-CLUSTER.cluster_with_annotations.v1.adls")) {
-            Archetype archetype = new ADLParser(BuiltinReferenceModels.getMetaModels()).parse(stream);
+            Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
             FlattenerConfiguration flattenerConfiguration = FlattenerConfiguration.forOperationalTemplate();
             flattenerConfiguration.setFillEmptyOccurrences(false);
-            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), BuiltinReferenceModels.getMetaModels(), flattenerConfiguration);
-            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype);
+            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), AllMetaModelsInitialiser.getMetaModels(), flattenerConfiguration);
+            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype, 0);
 
             Stack<CObject> workList = new Stack<>();
             workList.push(template.getDefinition());
@@ -74,10 +74,10 @@ public class OperationalTemplateCreatorTest {
     public void failOnMissingArchetypeEnabled() throws Exception {
         SimpleArchetypeRepository repository = new SimpleArchetypeRepository();
         try(InputStream stream = getClass().getResourceAsStream("openEHR-EHR-OBSERVATION.with_used_archetype.v1.adls")) {
-            Archetype archetype = new ADLParser(BuiltinReferenceModels.getMetaModels()).parse(stream);
+            Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
             FlattenerConfiguration flattenerConfiguration = FlattenerConfiguration.forOperationalTemplate();
-            Flattener flattener = new Flattener(repository, BuiltinReferenceModels.getMetaModels(), flattenerConfiguration);
-            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype);
+            Flattener flattener = new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), flattenerConfiguration);
+            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype, 0);
             fail();
         }
     }
@@ -85,11 +85,11 @@ public class OperationalTemplateCreatorTest {
     @Test
     public void failOnMissingArchetypeDisabled() throws Exception {
         try(InputStream stream = getClass().getResourceAsStream("openEHR-EHR-OBSERVATION.with_used_archetype.v1.adls")) {
-            Archetype archetype = new ADLParser(BuiltinReferenceModels.getMetaModels()).parse(stream);
+            Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
             FlattenerConfiguration flattenerConfiguration = FlattenerConfiguration.forOperationalTemplate();
             flattenerConfiguration.setFailOnMissingUsedArchetype(false);
-            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), BuiltinReferenceModels.getMetaModels(), flattenerConfiguration);
-            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype);
+            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), AllMetaModelsInitialiser.getMetaModels(), flattenerConfiguration);
+            OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype, 0);
 
             CArchetypeRoot archetypeRoot = template.getDefinition().itemAtPath("/data[id2]/events[id3]/data[id4]/items[id8]");
             assertEquals("openEHR-EHR-CLUSTER.cluster_with_annotations.v1", archetypeRoot.getArchetypeRef());
@@ -137,13 +137,13 @@ public class OperationalTemplateCreatorTest {
     private Archetype parseAndCreateOPTWithConfig(String fileName, InMemoryFullArchetypeRepository repository, FlattenerConfiguration config) throws IOException, ADLParseException {
         Archetype result = parse(fileName);
         ReferenceModels models = new ReferenceModels();
-        models.registerModel(ArchieRMInfoLookup.getInstance());
+        models.registerModel(OpenEhrRmInfoLookup.getInstance());
         ValidationResult validationResult = new ArchetypeValidator(models).validate(result, repository);
         assertTrue(validationResult.getErrors().toString(), validationResult.passes());
-        return new Flattener(repository, BuiltinReferenceModels.getMetaModels(), config).flatten(parse(fileName));
+        return new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), config).flatten(parse(fileName), 0);
     }
 
     private Archetype parse(String filePath) throws IOException, ADLParseException {
-        return FlattenerTestUtil.parse(filePath);
+        return ParseValidArchetypeTestUtil.parse(this.getClass(), filePath);
     }
 }
