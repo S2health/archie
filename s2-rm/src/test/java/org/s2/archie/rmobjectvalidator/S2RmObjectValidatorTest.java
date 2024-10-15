@@ -20,7 +20,6 @@ import org.s2.rm.base.data_types.quantity.Proportion;
 import org.s2.rm.base.data_types.quantity.Quantity;
 import org.s2.rm.base.data_types.text.CodedText;
 import org.s2.rm.base.data_types.text.PlainText;
-import org.s2.rm.base.data_types.text.Text;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.patterns.data_structures.InfoNode;
@@ -55,7 +54,7 @@ public class S2RmObjectValidatorTest {
         Archetype archetype = parse("/adl2-tests/rmobjectvalidity/s2-EHR-Node.element_with_required_attributes.v1.0.0.adls");
         OperationalTemplate opt = createOpt(archetype);
 
-        Node node = (Node) testUtil.constructEmptyRMObject(archetype.getDefinition());
+        InfoNode node = (InfoNode) testUtil.constructEmptyRMObject(archetype.getDefinition());
         Proportion proportion = (Proportion) node.getValue();
         assert proportion != null;
         proportion.setDenominator(new Quantity(new BigDecimal("4.0"), new CodedText(new TerminologyTerm("ml", new TerminologyCode("snomed", "258773002")), "mL")));
