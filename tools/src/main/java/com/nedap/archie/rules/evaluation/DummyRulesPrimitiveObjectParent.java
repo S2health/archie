@@ -2,7 +2,7 @@ package com.nedap.archie.rules.evaluation;
 
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.CAttribute;
-import com.nedap.archie.apath.PathSegment;
+import com.nedap.archie.paths.PathSegment;
 
 import java.util.ArrayList;
 import java.util.List;

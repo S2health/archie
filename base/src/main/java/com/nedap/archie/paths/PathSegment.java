@@ -1,11 +1,11 @@
-package com.nedap.archie.apath;
+package com.nedap.archie.paths;
 
 import com.google.common.base.Joiner;
 
 import java.util.regex.Pattern;
 
 /**
- * Segment of an apath-query
+ * Segment of an query-query
  * Created by pieter.bos on 19/10/15.
  */
 public class PathSegment {

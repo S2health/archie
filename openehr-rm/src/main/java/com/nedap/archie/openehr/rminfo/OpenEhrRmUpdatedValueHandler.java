@@ -8,7 +8,7 @@ import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Interval;
-import com.nedap.archie.apath.APathQuery;
+import com.nedap.archie.query.APathQuery;
 import com.nedap.archie.query.RMObjectWithPath;
 import com.nedap.archie.query.RMPathQuery;
 import org.openehr.rm.archetyped.Archetyped;

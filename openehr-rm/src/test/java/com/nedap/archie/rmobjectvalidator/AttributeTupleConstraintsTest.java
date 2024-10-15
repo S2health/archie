@@ -3,8 +3,8 @@ package com.nedap.archie.rmobjectvalidator;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.CAttributeTuple;
 import com.nedap.archie.aom.CComplexObject;
-import com.nedap.archie.rm.datavalues.quantity.DvQuantity;
-import com.nedap.archie.rminfo.ArchieRMInfoLookup;
+import org.openehr.rm.datavalues.quantity.DvQuantity;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.testutil.TestUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,11 +20,11 @@ public class AttributeTupleConstraintsTest {
 
     private static CAttributeTuple attributeTuple;
     
-    private final ValidationHelper helper = new ValidationHelper(ArchieRMInfoLookup.getInstance(), new ValidationConfiguration.Builder().build());
+    private final ValidationHelper helper = new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build());
 
     @BeforeClass
     public static void setup() throws Exception {
-        Archetype archetype = TestUtil.parseFailOnErrors("/basic.adl");
+        Archetype archetype = TestUtil.parseFailOnErrors(AttributeTupleConstraintsTest.class,"/basic.adl");
         CComplexObject valueObject = archetype.getDefinition().itemAtPath("/context[id11]/other_context[id2]/items[id3]/items[id7]/value[id16]");
         attributeTuple = valueObject.getAttributeTuples().get(0);
     }

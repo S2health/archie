@@ -3,9 +3,8 @@ package com.nedap.archie.query;
 
 import com.google.common.collect.Lists;
 import com.nedap.archie.aom.utils.AOMUtils;
-import com.nedap.archie.apath.APathQuery;
 import com.nedap.archie.definitions.AdlCodeDefinitions;
-import com.nedap.archie.apath.PathSegment;
+import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMAttributeInfo;
 import org.slf4j.Logger;

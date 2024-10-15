@@ -1,7 +1,7 @@
 package org.openehr.rm.archetyped;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nedap.archie.apath.PathSegment;
+import com.nedap.archie.paths.PathSegment;
 import org.openehr.rm.datavalues.DvText;
 import org.openehr.rm.support.identification.UIDBasedId;
 import com.nedap.archie.rminfo.Invariant;

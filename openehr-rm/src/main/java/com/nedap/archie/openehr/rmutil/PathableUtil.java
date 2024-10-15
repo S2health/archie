@@ -1,7 +1,7 @@
 package com.nedap.archie.openehr.rmutil;
 
-import com.nedap.archie.apath.PathSegment;
-import com.nedap.archie.apath.PathUtil;
+import com.nedap.archie.paths.PathSegment;
+import com.nedap.archie.paths.PathUtil;
 import com.nedap.archie.query.RMObjectAttributes;
 import org.openehr.rm.archetyped.Pathable;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;

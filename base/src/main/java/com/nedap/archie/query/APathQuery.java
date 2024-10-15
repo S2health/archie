@@ -1,10 +1,11 @@
-package com.nedap.archie.apath;
+package com.nedap.archie.query;
 
 
 import com.google.common.base.Joiner;
 import com.nedap.archie.adlparser.antlr.XPathLexer;
 import com.nedap.archie.adlparser.antlr.XPathParser;
 import com.nedap.archie.adlparser.antlr.XPathParser.*;
+import com.nedap.archie.paths.PathSegment;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 

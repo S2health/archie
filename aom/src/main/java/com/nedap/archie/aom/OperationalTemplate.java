@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
-import com.nedap.archie.apath.PathSegment;
+import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.xml.adapters.ArchetypeTerminologyAdapter;
 import com.nedap.archie.xml.types.XmlArchetypeTerminology;
 

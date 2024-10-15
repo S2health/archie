@@ -1,8 +1,8 @@
 package org.openehr.rm.archetyped;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nedap.archie.apath.PathSegment;
-import com.nedap.archie.apath.PathUtil;
+import com.nedap.archie.paths.PathSegment;
+import com.nedap.archie.paths.PathUtil;
 import com.nedap.archie.query.RMObjectWithPath;
 import com.nedap.archie.query.RMPathQuery;
 import com.nedap.archie.base.RMObject;
