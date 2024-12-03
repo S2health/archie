@@ -32,7 +32,7 @@ public class PathableUtilTest {
     @Before
     public void setup() throws Exception {
         ArchieLanguageConfiguration.setThreadLocalDescriptiongAndMeaningLanguage("en");
-        archetype = new ADLParser(new RMConstraintImposer()).parse(getClass().getResourceAsStream("/basic.adl"));
+        archetype = new ADLParser(new RMConstraintImposer()).parse(getClass().getResourceAsStream("/com/nedap/archie/basic.adl"));
         testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
     }
 

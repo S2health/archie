@@ -21,14 +21,12 @@ import com.nedap.archie.rules.OperatorKind;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
 import com.nedap.archie.serializer.adl.ADLArchetypeSerializer;
 import com.nedap.archie.testutil.TestUtil;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
+import org.openehr.rm.composition.Observation;
 import org.threeten.extra.PeriodDuration;
 
-import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.time.Duration;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
@@ -155,7 +153,7 @@ public class AOMJacksonTest {
 
     @Test
     public void archetypeSlot() throws Exception {
-        try(InputStream stream = getClass().getResourceAsStream( "/basic.adl")) {
+        try(InputStream stream = getClass().getResourceAsStream("/com/nedap/archie/basic.adl")) {
             Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
             ObjectMapper objectMapper = new ObjectMapper();
             OpenEhrRmJacksonUtil.configureObjectMapper(objectMapper, ArchieJacksonConfiguration.createStandardsCompliant());
@@ -181,7 +179,7 @@ public class AOMJacksonTest {
 
     @Test
     public void archetypeSlotOldExpressionClassNames() throws Exception {
-        try(InputStream stream = getClass().getResourceAsStream( "/basic.adl")) {
+        try(InputStream stream = getClass().getResourceAsStream("/com/nedap/archie/basic.adl")) {
             Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
             ArchieJacksonConfiguration config = ArchieJacksonConfiguration.createStandardsCompliant();
             config.setStandardsCompliantExpressions(false);
@@ -200,6 +198,20 @@ public class AOMJacksonTest {
         }
     }
 
+    @Test
+    public void archetypeSlotToJson() throws Exception {
+        try(InputStream stream = getClass().getResourceAsStream("/ckm-mirror/local/archetypes/entry/observation/openEHR-EHR-OBSERVATION.body_mass_index.v2.0.0.adls")) {
+
+            Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
+            ArchieJacksonConfiguration config = ArchieJacksonConfiguration.createStandardsCompliant();
+            config.setStandardsCompliantExpressions(false);
+
+            ObjectMapper objectMapper = OpenEhrRmJacksonUtil.getObjectMapper(config);
+            String serialized = objectMapper.writeValueAsString(archetype);
+            System.out.println(serialized);
+            assertArchetypeSlot(objectMapper, serialized);
+        }
+    }
 
     @Test
     public void cDuration() throws Exception {

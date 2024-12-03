@@ -1,0 +1,52 @@
+archetype (adl_version=2.1.0; rm_release=0.8.6)
+    s2-EHR-Info_node.cardinality_testing.v1.0.0
+
+language
+    original_language = <[iso_639-1::en]>
+
+description
+    original_author = <
+        ["name"] = <"Thomas Beale">
+    >
+    lifecycle_state = <"DRAFT">
+    details = <
+        ["en"] = <
+            language = <[iso_639-1::en]>
+            purpose = <"Testing">
+        >
+    >
+
+definition
+    Info_node[id1] matches {    -- Cardinality Testing
+        items cardinality matches {1..2; unique} matches {
+            Info_node[id7] occurrences matches {0..1} matches {    -- Text 1
+                value matches {
+                    Plain_text[id8]
+                }
+            }
+            Info_node[id13] occurrences matches {0..1} matches {    -- Text 2
+                value matches {
+                    Plain_text[id14]
+                }
+            }
+        }
+    }
+
+terminology
+    term_definitions = <
+        ["en"] = <
+            ["id1"] = <
+                text = <"Cardinality Testing">
+                description = <"Cardinality testing">
+                code = <"id1">
+            >
+            ["id7"] = <
+                text = <"Text 1">
+                description = <"">
+            >
+            ["id13"] = <
+                text = <"Text 2">
+                description = <"">
+            >
+        >
+    >

@@ -11,6 +11,7 @@ import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageType;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.testutil.TestUtil;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -39,6 +40,7 @@ public class S2RmObjectValidatorTest {
     InMemoryFullArchetypeRepository emptyRepo;
     private RMObjectValidator validator;
 
+    private RMObjectValidator validatorWithoutInvariants;
 
     @Before
     public void setup() {
@@ -47,11 +49,13 @@ public class S2RmObjectValidatorTest {
 
         emptyRepo = new InMemoryFullArchetypeRepository();
         validator = new RMObjectValidator(S2RmInfoLookup.getInstance(), emptyRepo);
+        validatorWithoutInvariants = new RMObjectValidator(S2RmInfoLookup.getInstance(), emptyRepo,
+                new ValidationConfiguration.Builder().validateInvariants(false).build());
     }
 
     @Test
     public void requiredAttributesShouldBePresent() throws Exception {
-        Archetype archetype = parse("/adl2-tests/rmobjectvalidity/s2-EHR-Node.element_with_required_attributes.v1.0.0.adls");
+        Archetype archetype = parse("/adl2-tests/rmobjectvalidity/s2-EHR-Info_node.element_with_required_attributes.v1.0.0.adls");
         OperationalTemplate opt = createOpt(archetype);
 
         InfoNode node = (InfoNode) testUtil.constructEmptyRMObject(archetype.getDefinition());
@@ -59,8 +63,7 @@ public class S2RmObjectValidatorTest {
         assert proportion != null;
         proportion.setDenominator(new Quantity(new BigDecimal("4.0"), new CodedText(new TerminologyTerm("ml", new TerminologyCode("snomed", "258773002")), "mL")));
 
-        validator.setRunInvariantChecks(false);
-        List<RMObjectValidationMessage> validationMessages = validator.validate(opt, node);
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, node);
         assertEquals("There should be 2 errors", 2, validationMessages.size());
         assertEquals("There should be a validation message about the numerator", "Attribute numerator of class Proportion does not match existence 1..1", validationMessages.get(1).getMessage());
         assertEquals("There should be a validation message about the magnitiude", "Attribute magnitude of class Proportion does not match existence 1..1", validationMessages.get(0).getMessage());
@@ -72,6 +75,23 @@ public class S2RmObjectValidatorTest {
 
         validationMessages = validator.validate(opt, node);
         assertEquals("There should be 0 errors", 0, validationMessages.size());
+    }
+
+    @Test
+    public void cardinalityMismatchValidation() throws Exception {
+        Archetype archetype = parse("/adl2-tests/rmobjectvalidity/s2-EHR-Info_node.cardinality_testing.v1.0.0.adls");
+        OperationalTemplate opt = createOpt(archetype);
+
+        InfoNode itemTree = (InfoNode) testUtil.constructEmptyRMObject(archetype.getDefinition());
+        List<Node> items = itemTree.getItems();
+        items.remove(0);
+        items.remove(0);
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, itemTree);
+        assertEquals("There should be 1 error", 1, validationMessages.size());
+        assertEquals("Attribute does not match cardinality 1..2", validationMessages.get(0).getMessage());
+        // Type should be REQUIRED
+        assertEquals(RMObjectValidationMessageType.CARDINALITY_MISMATCH, validationMessages.get(0).getType());
     }
 
     private OperationalTemplate createOpt(Archetype archetype) {
@@ -94,14 +114,14 @@ public class S2RmObjectValidatorTest {
 
     @Test
     public void testNodeWithoutArchetype() {
-        Node node = new InfoNode();
-        node.setName("test cluster");
-        node.setArchetypeNodeId("id12");
-        Node element = new InfoNode();
-        element.setValue(new PlainText("hi!"));
-        node.setItems(Lists.newArrayList(element));
+        Node node1 = new InfoNode();
+        node1.setName("test Info_node");
+        node1.setArchetypeNodeId("id12");
+        Node node2 = new InfoNode();
+        node2.setValue(new PlainText("hi!"));
+        node1.setItems(Lists.newArrayList(node2));
 
-        List<RMObjectValidationMessage> messages = validator.validate(node);
+        List<RMObjectValidationMessage> messages = validator.validate(node1);
         assertEquals(messages.toString() ,2, messages.size());
         for(RMObjectValidationMessage message:messages) {
             assertTrue(message.getPath(), Sets.newHashSet("/items[1]/name", "/items[1]/archetype_node_id").contains(message.getPath()));
@@ -112,10 +132,10 @@ public class S2RmObjectValidatorTest {
     @Test
     public void testValidNodeWithoutArchetype() {
         Node node1 = new InfoNode();
-        node1.setName("test cluster");
+        node1.setName("test Info_node");
         node1.setArchetypeNodeId("id12");
         Node node2 = new InfoNode();
-        node2.setName("test element");
+        node2.setName("test Info_node");
         node2.setValue(new PlainText("value"));
         node2.setArchetypeNodeId("id15");
         node1.setItems(Lists.newArrayList(node2));
@@ -137,8 +157,7 @@ public class S2RmObjectValidatorTest {
         List<RMObjectValidationMessage> messages = validator.validate(node);
         assertEquals(messages.toString(), 1, messages.size());
 
-        validator.setRunInvariantChecks(false);
-        messages = validator.validate(node);
+        messages = validatorWithoutInvariants.validate(node);
         assertEquals(messages.toString(), 0, messages.size());
     }
 

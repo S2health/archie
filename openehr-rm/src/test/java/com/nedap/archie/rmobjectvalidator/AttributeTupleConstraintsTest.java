@@ -24,7 +24,7 @@ public class AttributeTupleConstraintsTest {
 
     @BeforeClass
     public static void setup() throws Exception {
-        Archetype archetype = TestUtil.parseFailOnErrors(AttributeTupleConstraintsTest.class,"/basic.adl");
+        Archetype archetype = TestUtil.parseFailOnErrors(AttributeTupleConstraintsTest.class, "/com/nedap/archie/basic.adl");
         CComplexObject valueObject = archetype.getDefinition().itemAtPath("/context[id11]/other_context[id2]/items[id3]/items[id7]/value[id16]");
         attributeTuple = valueObject.getAttributeTuples().get(0);
     }

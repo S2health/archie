@@ -8,6 +8,7 @@ import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.query.RMQueryContext;
 import com.nedap.archie.base.RMObject;
 import org.openehr.rm.composition.Composition;
+import org.openehr.rm.composition.Observation;
 import org.openehr.rm.datastructures.Cluster;
 import org.openehr.rm.datavalues.DvText;
 import org.openehr.rm.datavalues.DvURI;

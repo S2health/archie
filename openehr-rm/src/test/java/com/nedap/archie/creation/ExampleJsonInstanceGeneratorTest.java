@@ -19,6 +19,9 @@ import com.nedap.archie.json.JsonSchemaValidator;
 import com.nedap.archie.base.RMObject;
 import com.nedap.archie.test.CkmRepositoryBuilder;
 import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
+import com.nedap.archie.tools.json.OpenEHRRmJSONSchemaCreator;
+import jakarta.json.JsonObject;
+import org.leadpony.justify.api.*;
 import org.openehr.rm.composition.Observation;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
@@ -27,7 +30,6 @@ import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.testutil.DummyOperationalTemplateProvider;
 import org.junit.Test;
-import org.leadpony.justify.api.Problem;
 import org.openehr.bmm.core.BmmModel;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.slf4j.Logger;
@@ -36,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -162,8 +165,8 @@ public class ExampleJsonInstanceGeneratorTest {
         int rmObjectValidatorRan = 0, rmObjectValidatorFailed = 0;
         repository.compile(AllMetaModelsInitialiser.getMetaModels());
         BmmModel model = AllMetaModelsInitialiser.getBmmRepository().getModel("openehr_rm_1.0.4").getModel();
-        JsonSchemaValidator firstValidator = new JsonSchemaValidator(model, true);
-        JsonSchemaValidator secondValidator = new JsonSchemaValidator(model,false);
+        JsonSchemaValidator firstValidator = new JsonSchemaValidator(JsonSchemaInstantiateFromBmm(model, true));
+        JsonSchemaValidator secondValidator = new JsonSchemaValidator(JsonSchemaInstantiateFromBmm(model,false));
 
         ObjectMapper archieObjectMapper = getArchieObjectMapper();
         List<String> rmValidationErrors = new ArrayList<>();
@@ -278,4 +281,28 @@ public class ExampleJsonInstanceGeneratorTest {
         }
         return objectMapper.writeValueAsString(structure);
     }
+
+
+    /**
+     * Creates a JsonSchemaValidator that validates against the json schema created from the given Bmm Model
+     * The JSON Schema complies to the JSON format that the OpenEHR project uses. This may very well be different from
+     * the serialization rules corresponding to your own different BMM file, if it is not an OpenEHR model.
+     *
+     * @param bmmModel the model to create the JSON Schema for
+     * @param allowAdditionalProperties whether to allow additional properties in the JSON
+     */
+    private Map<String, JsonObject> JsonSchemaInstantiateFromBmm(BmmModel bmmModel, boolean allowAdditionalProperties) {
+        Map<String, JsonObject> result = new LinkedHashMap<>();
+        new OpenEHRRmJSONSchemaCreator()
+                .allowAdditionalProperties(allowAdditionalProperties)
+                .withBaseUri("http://something/")
+                //the validator can actually handle a schema split in multiple files, but
+                //Justify's implementation is not perfect, causing some extra memory use that might be better to avoid.
+                .splitInMultipleFiles(false)
+                .withFullReferences(true)
+                .create(bmmModel)
+                .forEach( (uri, schema) -> result.put(uri.getId(), schema));
+        return result;
+    }
+
 }

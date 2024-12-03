@@ -5,9 +5,9 @@ import com.nedap.archie.diff.Differentiator;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.rminfo.MetaModels;
+import com.nedap.archie.rminfo.ReferenceModels;
 import com.nedap.archie.serializer.adl.ADLArchetypeSerializer;
 import org.openehr.bmm.v2.validation.BmmRepository;
-import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,21 +21,21 @@ public class DiffTestUtil {
     private InMemoryFullArchetypeRepository repository;
     private MetaModels models;
 
-    public DiffTestUtil(String archetypesResourceLocation, String expectationsResourceLocation) {
+    public DiffTestUtil(ReferenceModels nativeRms, String archetypesResourceLocation, String expectationsResourceLocation) {
         this.archetypesResourceLocation = archetypesResourceLocation;
         this.expectationsResourceLocation = expectationsResourceLocation;
         repository = new InMemoryFullArchetypeRepository();
-        models = new MetaModels(AllMetaModelsInitialiser.getNativeRms(), (BmmRepository) null);
+        models = new MetaModels(nativeRms, null);
     }
 
-    public void test(Class<?> caller, String parentFileName, String childFileName) throws Exception {
+    public void test(Class<?> caller, MetaModels metaModels, String parentFileName, String childFileName) throws Exception {
         Archetype parent = ParseValidArchetypeTestUtil.parse(caller, archetypesResourceLocation + parentFileName);
         repository.addArchetype(parent);
         Archetype child = ParseValidArchetypeTestUtil.parse(caller, archetypesResourceLocation + childFileName);
         Archetype flattened = new Flattener(repository, models).flatten(child, 0);
         assertEquals(child.getParentArchetypeId(), flattened.getParentArchetypeId());
 
-        Archetype diffed = new Differentiator(AllMetaModelsInitialiser.getMetaModels()).differentiate(flattened, parent);
+        Archetype diffed = new Differentiator(metaModels).differentiate(flattened, parent);
         child.setGenerated(true);//this is set by the diff tool :)
         String originalSerialized = ADLArchetypeSerializer.serialize(child);
         String diffedSerialized = ADLArchetypeSerializer.serialize(diffed);
@@ -47,7 +47,7 @@ public class DiffTestUtil {
 
     }
 
-    public void testWithExplicitExpect(Class<?> caller, String parentFileName, String childFileName) throws Exception {
+    public void testWithExplicitExpect(Class<?> caller, MetaModels metaModels, String parentFileName, String childFileName) throws Exception {
         Archetype parent = ParseValidArchetypeTestUtil.parse(caller, archetypesResourceLocation + parentFileName);
         repository.addArchetype(parent);
         Archetype child = ParseValidArchetypeTestUtil.parse(caller, archetypesResourceLocation + childFileName);
@@ -55,7 +55,7 @@ public class DiffTestUtil {
         Archetype flattened = new Flattener(repository, models).flatten(child, 0);
         assertEquals(child.getParentArchetypeId(), flattened.getParentArchetypeId());
 
-        Archetype diffed = new Differentiator(AllMetaModelsInitialiser.getMetaModels()).differentiate(flattened, parent);
+        Archetype diffed = new Differentiator(metaModels).differentiate(flattened, parent);
         expectedDiff.setGenerated(true);//this is set by the diff tool :)
         String expectedSerialized = ADLArchetypeSerializer.serialize(expectedDiff);
         String diffedSerialized = ADLArchetypeSerializer.serialize(diffed);
