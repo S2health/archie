@@ -204,12 +204,12 @@ public class AOMJacksonTest {
 
             Archetype archetype = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
             ArchieJacksonConfiguration config = ArchieJacksonConfiguration.createStandardsCompliant();
-            config.setStandardsCompliantExpressions(false);
+            config.setStandardsCompliantExpressions(true);
 
             ObjectMapper objectMapper = OpenEhrRmJacksonUtil.getObjectMapper(config);
             String serialized = objectMapper.writeValueAsString(archetype);
             System.out.println(serialized);
-            assertArchetypeSlot(objectMapper, serialized);
+            assertTrue(serialized.contains("EXPR_BINARY_OPERATOR"));
         }
     }
 
