@@ -1,5 +1,8 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7)
 	s2-EHR-Entity_ref_node.organization_ref.v1.0.0
+
+specialize
+	s2-EHR-Entity_ref_node.party_ref.v1
 
 language
 	original_language = <[iso_639-1::en]>
@@ -28,43 +31,43 @@ description
 	>
 
 definition
-	Entity_ref_node[id1] matches {	-- Organization ref
+	Entity_ref_node[id1.1] matches {	-- Organization ref
 		items matches {
-			Info_node[id2] occurrences matches {0..1} matches {	-- Name
+			Info_node[id0.2] occurrences matches {0..1} matches {	-- Name
 				value matches {
-					Plain_text[id102] 
+					Plain_text[id0.102] 
 				}
 			}
-			Info_node[id4] occurrences matches {0..1} matches {	-- Identifier
+			Info_node[id0.4] occurrences matches {0..1} matches {	-- Identifier
 				value matches {
-					Rwe_id_ref[id104] 
+					Rwe_id_ref[id0.104] 
 				}
 			}
-			use_archetype Info_node[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
-			use_archetype Info_node[id5, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
+			use_archetype Info_node[id0.3, s2-ENTITY-Info_node.location_address.v1] 
+			use_archetype Info_node[id0.5, s2-ENTITY-Info_node.comms_address.v1] 
 		}
 	}
 
 terminology
 	term_definitions = <
 		["en"] = <
-			["id1"] = <
+			["id1.1"] = <
 				text = <"Organization ref">
 				description = <"Reference to an organization">
 			>
-			["id2"] = <
+			["id0.2"] = <
 				text = <"Name">
 				description = <"The unstructured name for the Organization.">
 			>
-			["id3"] = <
+			["id0.3"] = <
 				text = <"Physical address">
 				description = <"Unstructured physical address.">
 			>
-			["id4"] = <
+			["id0.4"] = <
 				text = <"Identifier">
 				description = <"Identifier associated with the organization.">
 			>
-			["id5"] = <
+			["id0.5"] = <
 				text = <"Comms address">
 				description = <"-">
 			>
@@ -72,10 +75,11 @@ terminology
 	>
 	term_bindings = <
 		["loinc"] = <
-			["id2"] = <http://loinc.org/76469-6>
-			["id3"] = <http://loinc.org/90052-2>
-			["id4"] = <http://loinc.org/76468-8>
-			["id5"] = <http://loinc.org/90054-8>
+			["id0.2"] = <http://loinc.org/76469-6>
+			["id0.3"] = <http://loinc.org/90052-2>
+			["id0.4"] = <http://loinc.org/76468-8>
+			["id0.5"] = <http://loinc.org/90054-8>
+			["id1.1"] = <http://loinc.org/90055-5>
 		>
 	>
 

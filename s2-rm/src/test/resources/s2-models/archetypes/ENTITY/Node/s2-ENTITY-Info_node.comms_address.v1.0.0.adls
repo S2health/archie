@@ -1,0 +1,130 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=fdff5851-463b-4545-8f05-487a34123cea)
+	s2-ENTITY-Info_node.comms_address.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.electronic_communication.v1.0.2, copyright 2022 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about a specified type of electronic communication as it is known or understood in the course of clinical documentation.">
+			keywords = <"telephone", "phone", "mobile", "email", "fax", "pager", "chat", "social media", "asynchronous", "communication", "SoMe">
+		>
+	>
+
+definition
+	Info_node[id1] matches {	-- Communications address, including postal
+		items matches {
+			Info_node[id10] matches {	-- Address string
+				value matches {
+					Plain_text[id110] matches {
+						text matches {/([0-9+()]+|((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?))/}
+					}
+				}
+			}
+			Info_node[id11] matches {	-- Communications platform
+				value matches {
+					Coded_text[id111] matches {
+						term matches {
+							Terminology_term[id1111] matches {
+								concept matches {[ac3]}		-- Address platform, e.g. whatsapp, instagram etc
+							}
+						}
+					}
+				}
+			}
+			Info_node[id12] matches {	-- Communications purpose
+				value matches {
+					Coded_text[id112] matches {
+						term matches {
+							Terminology_term[id1112] matches {
+								concept matches {[ac4]}		-- Purpose, e.g. business, private
+							}
+						}
+					}
+				}
+			}
+			Info_node[id13] matches {	-- Communication technology, e.g. phone, email etc
+				value matches {
+					Coded_text[id113] matches {
+						term matches {
+							Terminology_term[id1113] matches {
+								concept matches {[ac1]}		-- Communication technology, e.g. email, phone (landline), phone (mobile), chat
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Communications address, including postal">
+				description = <"-">
+			>
+			["id12"] = <
+				text = <"Communications purpose">
+				description = <"-">
+			>
+			["id13"] = <
+				text = <"Communication technology, e.g. phone, email etc">
+				description = <"-">
+			>
+			["id10"] = <
+				text = <"Address string">
+				description = <"Address string value, e.g. email address, phone number etc">
+			>
+			["id11"] = <
+				text = <"Communications platform">
+				description = <"Specific communications platform, e.g gmail, whatsapp, linked-in IM">
+			>
+			["ac1"] = <
+				text = <"Communication technology, e.g. email, phone (landline), phone (mobile), chat">
+				description = <"Communication technology, e.g. email, phone (landline), phone (mobile), chat">
+			>
+			["ac3"] = <
+				text = <"Address platform, e.g. whatsapp, instagram etc">
+				description = <"Address platform, e.g. whatsapp, instagram etc">
+			>
+			["ac4"] = <
+				text = <"Purpose, e.g. business, private">
+				description = <"">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.CommsSystemType>
+			["ac3"] = <http://s2health.org/id/s2.CommsSystemPlatform>
+			["ac4"] = <http://s2health.org/id/s2.CommunicationPurpose>
+		>
+		["loinc"] = <
+			["id1"] = <http://loinc.org/99953-2>
+			["id12"] = <http://loinc.org/104911-3>
+			["id10"] = <http://loinc.org/104917-0>
+			["id11"] = <http://loinc.org/512a53ca-db9a-ef11-8872-6045bdc71c8b>
+			["id13"] = <http://loinc.org/99949-0>
+		>
+	>
+

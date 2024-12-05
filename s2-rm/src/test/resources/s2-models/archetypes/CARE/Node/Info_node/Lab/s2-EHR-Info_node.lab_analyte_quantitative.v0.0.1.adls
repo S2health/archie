@@ -1,11 +1,11 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=45a563b4-d817-4085-9d13-2a2bc866c384)
 	s2-EHR-Info_node.lab_analyte_quantitative.v0.0.1
 
 specialize
 	s2-EHR-Info_node.lab_analyte.v0
 
 language
-	original_language = <[ISO_639-1::en]>
+	original_language = <[iso_639-1::en]>
 
 description
 	lifecycle_state = <"unmanaged">
@@ -19,19 +19,31 @@ description
 	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
 	details = <
 		["en"] = <
-			language = <[ISO_639-1::en]>
+			language = <[iso_639-1::en]>
 			purpose = <"Quantitative lab analyte result">
 		>
 	>
 
 definition
-	Info_node[id1.1] matches {
+	Info_node[id1.1] matches {	-- Quantitative lab analyte result
+		/items matches {
+			use_archetype Info_node[id9, s2-EHR-Info_node.specimen_details.v1] occurrences matches {0..1} 
+		}
 		value matches {
 			Measured<Quantity>[id0.1] matches {
 				value matches {
-					Quantity[id0.2]
-                               }
-                        }
+					Quantity[id0.2] 
+				}
+				reference_ranges matches {
+					Reference_range<Quantity>[id0.10] matches {	-- Reference ranges
+						type matches {
+							Terminology_term[id0.11] matches {
+								concept matches {[ac0.1]}		-- Reference range meaning
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -42,5 +54,23 @@ terminology
 				text = <"Quantitative lab analyte result">
 				description = <"-">
 			>
+			["id0.10"] = <
+				text = <"Reference ranges">
+				description = <"-">
+			>
+			["ac0.1"] = <
+				text = <"Reference range meaning">
+				description = <"-">
+			>
 		>
 	>
+	term_bindings = <
+		["s2"] = <
+			["ac0.1"] = <http://s2health.org/id/s2.ReferenceRangeMeaning>
+		>
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/43f93831-318e-ef11-8872-6045bdc71c8b>
+			["id0.10"] = <http://loinc.org/f8d749e3-728a-ef11-8872-6045bdc71c8b>
+		>
+	>
+

@@ -1,11 +1,11 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=30b7a702-ad4c-4060-85ae-cce8b660b578)
 	s2-EHR-Info_node.lab_analyte_ordinal.v0.0.1
 
 specialize
 	s2-EHR-Info_node.lab_analyte.v0
 
 language
-	original_language = <[ISO_639-1::en]>
+	original_language = <[iso_639-1::en]>
 
 description
 	lifecycle_state = <"unmanaged">
@@ -19,8 +19,8 @@ description
 	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
 	details = <
 		["en"] = <
-			language = <[ISO_639-1::en]>
-			purpose = <"???">
+			language = <[iso_639-1::en]>
+			purpose = <"Coded ordinal value lab analyte">
 		>
 	>
 
@@ -31,7 +31,7 @@ definition
 				concept matches {
 					Coded_text[id0.9] matches {
 						term matches {
-							Terminology_term[id0.10]	
+							Terminology_term[id0.10] 
 						}
 					}
 				}
@@ -48,3 +48,9 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/8dbff427-318e-ef11-8872-6045bdc71c8b>
+		>
+	>
+

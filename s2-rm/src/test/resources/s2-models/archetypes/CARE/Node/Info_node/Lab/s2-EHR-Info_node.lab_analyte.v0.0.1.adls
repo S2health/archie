@@ -1,8 +1,8 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=8f1039ab-6ab5-4d2a-aa4b-20e1a97e7a5e)
 	s2-EHR-Info_node.lab_analyte.v0.0.1
 
 language
-	original_language = <[ISO_639-1::en]>
+	original_language = <[iso_639-1::en]>
 
 description
 	lifecycle_state = <"unmanaged">
@@ -16,7 +16,7 @@ description
 	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
 	details = <
 		["en"] = <
-			language = <[ISO_639-1::en]>
+			language = <[iso_639-1::en]>
 			purpose = <"Abstract parent lab analyte model">
 		>
 	>
@@ -45,12 +45,12 @@ definition
 					Date_time_value[id6] 
 				}
 			}
-			Info_node[id8] occurrences matches {0..1} matches {
+			Info_node[id8] occurrences matches {0..1} matches {	-- Test method
 				value matches {
 					Coded_text[id4] matches {
 						term matches {
 							Terminology_term[id10] matches {
-								concept matches {[ac2]}
+								concept matches {[ac2]}		-- Lab test method
 							}
 						}
 					}
@@ -123,6 +123,8 @@ terminology
 			["id3"] = <http://loinc.org/92236-9>
 			["id5"] = <http://loinc.org/90056-3>
 			["id8"] = <http://loinc.org/85069-3>
+			["id1"] = <http://loinc.org/cbfb8ff4-7082-ef11-8870-6045bdc71c8b>
+			["id9"] = <http://loinc.org/66746-9>
 		>
 	>
 	value_sets = <

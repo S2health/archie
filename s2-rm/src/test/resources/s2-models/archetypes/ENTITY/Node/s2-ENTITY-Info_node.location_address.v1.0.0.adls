@@ -1,0 +1,101 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=9d44ce81-a4e4-4edc-a828-20f5e4b88af5)
+	s2-ENTITY-Info_node.location_address.v1.0.1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Graphite Health">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+		["email"] = <"models@s2.org">
+		["date"] = <"2024-09-01">
+	>
+	custodian_namespace = <"io.graphitehealth">
+	custodian_organisation = <"Graphite Health <http://graphitehealth.io>">
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.address.v1.1.0">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about a physical location.">
+		>
+	>
+
+definition
+	Info_node[id1] matches {	-- Physical address information
+		items matches {
+			use_archetype Info_node[id2, s2-ENTITY-Info_node.structured_address.v1] occurrences matches {0..1} 
+			Info_node[id12] matches {	-- Address purpose
+				value matches {
+					Coded_text[id112] matches {
+						term matches {
+							Terminology_term[id1112] matches {
+								concept matches {[ac2]}		-- Purpose
+							}
+						}
+					}
+				}
+			}
+			Info_node[id13] matches {	-- Address location type
+				value matches {
+					Coded_text[id113] matches {
+						term matches {
+							Terminology_term[id1113] matches {
+								concept matches {[ac1]}		-- Location type
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["ac1"] = <
+				text = <"Location type">
+				description = <"The type of location, e.g. house, flat, office building, shop.">
+			>
+			["ac2"] = <
+				text = <"Purpose">
+				description = <"-">
+			>
+			["id1"] = <
+				text = <"Physical address information">
+				description = <"A physical address with various meta-data.">
+			>
+			["id2"] = <
+				text = <"Address">
+				description = <"Structured address">
+			>
+			["id12"] = <
+				text = <"Address purpose">
+				description = <"-">
+			>
+			["id13"] = <
+				text = <"Address location type">
+				description = <"-">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/99953-2>
+			["id2"] = <http://loinc.org/99952-4>
+			["id12"] = <http://loinc.org/99958-1>
+			["id13"] = <http://loinc.org/99957-3>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.AddressType>
+			["ac2"] = <http://s2health.org/id/s2.AddressUse>
+		>
+	>
+

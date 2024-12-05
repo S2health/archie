@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7)
 	s2-EHR-Composition.simple_medication_list.v1.0.0
 
 language
@@ -26,7 +26,7 @@ description
 	>
 
 definition
-	Composition[id1] matches {
+	Composition[id1] matches {	-- Simple medication List
 		code matches {
 			Terminology_term[id10] matches {
 				concept matches {[at1]}
@@ -42,7 +42,7 @@ definition
 			use_archetype Entity_ref_node[id21, s2-EHR-Entity_ref_node.healthcare_professional_ref.v1] 
 		}
 		content matches {
-			use_archetype Order[id2, s2-EHR-Order.medication_order.v4]
+			use_archetype Order[id2, s2-EHR-Order.medication_order.v4] 
 		}
 	}
 
@@ -71,13 +71,15 @@ terminology
 			>
 		>
 	>
-
 	term_bindings = <
 		["loinc"] = <
 			["id1"] = <http://loinc.org/104207-6>
 			["at1"] = <http://loinc.org/104207-6>
+			["id21"] = <http://loinc.org/52457-9>
+			["id2"] = <http://loinc.org/cfa8c219-f249-ef11-886e-6045bdc71c8b>
 		>
 		["openehr"] = <
 			["at2"] = <http://openehr.org/id/431>
 		>
 	>
+

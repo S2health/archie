@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; uid=97038e53-acec-4381-bc1c-891d9b3c5d58)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=97038e53-acec-4381-bc1c-891d9b3c5d58)
 	s2-ENTITY-Organization.organization.v1.0.0
 
 language
@@ -12,13 +12,11 @@ description
 		["email"] = <"models@s2health.org">
 		["date"] = <"2024-08-09">
 	>
-	original_namespace = <"org.openehr">
 	custodian_namespace = <"org.s2health">
 	custodian_organisation = <"S2 Health <http://s2health.org>">
 	copyright = <"Copyright (c) 2024 S2 Health">
 	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
 	ip_acknowledgements = <
-		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.organisation.v1.0.1, copyright 2021 openEHR International <http://www.openEHR.org>">
 		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
 		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
 		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
@@ -35,10 +33,17 @@ description
 definition
 	Organization[id1] matches {	-- Organization
 		comms_addresses matches {
-			use_archetype Comms_address_use[id2, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
+			use_archetype Info_node[id2, s2-ENTITY-Info_node.comms_address.v1] 
 		}
 		location_addresses matches {
-			use_archetype Location_address_use[id3, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
+			use_archetype Info_node[id3, s2-ENTITY-Info_node.location_address.v1] 
+		}
+		identities matches {
+			Info_node[id4] occurrences matches {1} matches {	-- Organization name
+				value matches {
+					Plain_text[id5] 
+				}
+			}
 		}
 	}
 
@@ -57,6 +62,10 @@ terminology
 				text = <"Physical adresses">
 				description = <"Physical location addresses">
 			>
+			["id4"] = <
+				text = <"Organization name">
+				description = <"-">
+			>
 		>
 	>
 	term_bindings = <
@@ -64,6 +73,7 @@ terminology
 			["id1"] = <http://loinc.org/90055-5>
 			["id3"] = <http://loinc.org/90052-2>
 			["id2"] = <http://loinc.org/99953-2>
+			["id4"] = <http://loinc.org/76469-6>
 		>
 	>
 

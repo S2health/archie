@@ -1,5 +1,5 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; uid=3f7fbe34-4e64-4c02-8d1a-402f7b0f57ce)
-	s2-ENTITY-Person.person.v1.0.0
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=3f7fbe34-4e64-4c02-8d1a-402f7b0f57ce)
+	s2-ENTITY-Person.person.v1.0.1
 
 language
 	original_language = <[ISO_639-1::en]>
@@ -17,15 +17,10 @@ description
 	copyright = <"Copyright (c) 2023 S2 Health">
 	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
 	ip_acknowledgements = <
-		["original_author"] = <"Heather Leslie, Atomica Informatics, <heather.leslie@atomicainformatics.com>, 2021-04-14">
+		["original_author"] = <"Thomas Beale <thomas.beale@graphitehealth.io">
 		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
 		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
 		["openehr"] = <"Converted from openEHR archetype openEHR-EHR-CLUSTER.person.v1.0.2">
-	>
-	conversion_details = <
-		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.person.v1.0.2 from <https://ckm.openehr.org>">
-		["tool"] = <"graphite_openehr_to_s2_adl">
-		["date"] = <"$nowIso8601 (Iso8601 date and time is disabled during testing)">
 	>
 	details = <
 		["en"] = <
@@ -39,13 +34,13 @@ description
 definition
 	Person[id1] matches {	-- Person
 		comms_addresses matches {
-			use_archetype Comms_address_use[id2, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
+			use_archetype Info_node[id2, s2-ENTITY-Info_node.comms_address.v1] 
 		}
 		location_addresses matches {
-			use_archetype Location_address_use[id6, s2-ENTITY-Location_address_use.location_address_use_general.v1] 
+			use_archetype Info_node[id6, s2-ENTITY-Info_node.location_address.v1] 
 		}
 		identities matches {
-			use_archetype Party_identity[id7, s2-ENTITY-Party_identity.person_structured_name.v1] 
+			use_archetype Info_node[id7, s2-ENTITY-Info_node.person_name_and_use.v1] 
 		}
 		other_details matches {
 			Info_node[id8] occurrences matches {0..1} matches {	-- Date of birth
@@ -60,9 +55,9 @@ definition
 			}
 			Info_node[id12] occurrences matches {0..1} matches {	-- Sex
 				value matches {
-					Coded_text[id102] matches {
+					Coded_text[id112] matches {
 						term matches {
-							Terminology_term[id1102] matches {
+							Terminology_term[id1112] matches {
 								concept matches {[ac2]}		-- Biological sex
 							}
 						}
@@ -71,19 +66,19 @@ definition
 			}
 			Info_node[id13] occurrences matches {0..1} matches {	-- Date of decease
 				value matches {
-					Date_value[id103] 
+					Date_value[id113] 
 				}
 			}
 			Info_node[id14] occurrences matches {0..1} matches {	-- Deceased
 				value matches {
-					Boolean_value[id104] 
+					Boolean_value[id114] 
 				}
 			}
 			Info_node[id15] occurrences matches {0..1} matches {	-- Administrative gender
 				value matches {
 					Coded_text[id115] matches {
 						term matches {
-							Terminology_term[id1105] matches {
+							Terminology_term[id1115] matches {
 								concept matches {[ac5]}		-- Adminstrative gender
 							}
 						}
@@ -94,7 +89,7 @@ definition
 				value matches {
 					Coded_text[id116] matches {
 						term matches {
-							Terminology_term[id1106] matches {
+							Terminology_term[id1116] matches {
 								concept matches {[ac6]}		-- Marital status
 							}
 						}
@@ -206,6 +201,7 @@ terminology
 			["id2"] = <http://loinc.org/104902-2>
 			["id8"] = <http://loinc.org/21112-8>
 			["id9"] = <http://loinc.org/21842-0>
+			["id7"] = <http://loinc.org/97845-2>
 		>
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.PersonIdentityUse>

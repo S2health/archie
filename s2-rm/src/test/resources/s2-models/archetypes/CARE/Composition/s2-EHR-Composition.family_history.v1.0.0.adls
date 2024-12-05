@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7)
 	s2-EHR-Composition.family_history.v1.0.0
 
 language
@@ -22,7 +22,7 @@ description
 	>
 
 definition
-	Composition[id1] matches {
+	Composition[id1] matches {	-- Family history record
 		code matches {
 			Terminology_term[id10] matches {
 				concept matches {[at1]}
@@ -70,6 +70,8 @@ terminology
 	term_bindings = <
 		["loinc"] = <
 			["id1"] = <http://loinc.org/8670-2>
+			["id21"] = <http://loinc.org/52457-9>
+			["id2"] = <http://loinc.org/8670-2>
 		>
 		["openehr"] = <
 			["at2"] = <http://openehr.org/id/431>

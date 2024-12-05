@@ -1,11 +1,11 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=ac4db8fc-2c44-4f54-86e1-37f44781b406)
 	s2-EHR-Info_node.lab_analyte_coded.v0.0.1
 
 specialize
 	s2-EHR-Info_node.lab_analyte.v0
 
 language
-	original_language = <[ISO_639-1::en]>
+	original_language = <[iso_639-1::en]>
 
 description
 	lifecycle_state = <"unmanaged">
@@ -19,21 +19,21 @@ description
 	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
 	details = <
 		["en"] = <
-			language = <[ISO_639-1::en]>
+			language = <[iso_639-1::en]>
 			purpose = <"Lab result with coded value">
 		>
 	>
 
 definition
-	Info_node[id1.1] matches {
+	Info_node[id1.1] matches {	-- Lab result with coded value
 		value matches {
-			Coded_text[id0.1]  matches {
+			Coded_text[id0.1] matches {
 				term matches {
-					Terminology_term[id0.2]
+					Terminology_term[id0.2] 
 				}
 			}
 		}
-        }
+	}
 
 terminology
 	term_definitions = <
@@ -44,3 +44,9 @@ terminology
 			>
 		>
 	>
+	term_bindings = <
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/cb54981e-318e-ef11-8872-6045bdc71c8b>
+		>
+	>
+

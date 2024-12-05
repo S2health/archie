@@ -1,5 +1,5 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; uid=c615d9f9-902f-425c-9a2f-d16ea828a768)
-	s2-ENTITY-Info_node.patient_contact.v1.0.0
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=c615d9f9-902f-425c-9a2f-d16ea828a768)
+	s2-ENTITY-Info_node.patient_contact.v1.0.1
 
 language
 	original_language = <[iso_639-1::en]>
@@ -29,31 +29,31 @@ description
 	>
 
 definition
-	Info_node[id1]  matches {
+	Info_node[id1] matches {	-- Reference to a Patient contact
 		value matches {
 			Coded_text[id101] matches {
 				term matches {
 					Terminology_term[id1101] matches {
-						concept matches {[ac1]}
+						concept matches {[ac1]}		-- Relationship type
 					}
 				}
 			}
 		}
 		items matches {
-			Info_node[id2] matches {
+			Info_node[id2] matches {	-- Functional role
 				value matches {
 					Coded_text[id102] matches {
 						term matches {
 							Terminology_term[id1102] matches {
-								concept matches {[ac2]}
+								concept matches {[ac2]}		-- Patient contact role
 							}
 						}
 					}
 				}
 			}
-			use_archetype Info_node[id3,s2-ENTITY-Party_identity.person_structured_name.v1] occurrences matches {0..1}
-			use_archetype Info_node[id4, s2-ENTITY-Comms_address_use.comms_address_use_general.v1] 
-			use_archetype Info_node[id5, s2-ENTITY-Location_address_use.location_address_use_general.v1]
+			use_archetype Info_node[id3, s2-ENTITY-Info_node.person_name_and_use.v1] occurrences matches {0..1} 
+			use_archetype Info_node[id4, s2-ENTITY-Info_node.comms_address.v1] 
+			use_archetype Info_node[id5, s2-ENTITY-Info_node.location_address.v1] 
 		}
 	}
 
@@ -94,6 +94,13 @@ terminology
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.SubjectRelationship>
 			["ac2"] = <http://s2health.org/id/s2.RelatedPersonRole>
+		>
+		["loinc"] = <
+			["id2"] = <http://loinc.org/44767-2>
+			["id3"] = <http://loinc.org/97845-2>
+			["id4"] = <http://loinc.org/90054-8>
+			["id5"] = <http://loinc.org/99952-4>
+			["id1"] = <http://loinc.org/42efa0c7-338e-ef11-8872-6045bdc71c8b>
 		>
 	>
 

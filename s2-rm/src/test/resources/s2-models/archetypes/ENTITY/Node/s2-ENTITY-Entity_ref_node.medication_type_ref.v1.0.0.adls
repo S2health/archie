@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; uid=1de66765-9e18-4dc1-97b1-5bb2b62c9869)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=1de66765-9e18-4dc1-97b1-5bb2b62c9869)
 	s2-ENTITY-Entity_ref_node.medication_type_ref.v1.0.0
 
 language
@@ -29,19 +29,17 @@ description
 	>
 
 definition
-	Entity_ref_node[id1] occurrences matches {0..1} matches {	-- Medication details
-		items matches {
-			Info_node[id133] occurrences matches {0..1} matches {	-- Name
-				value matches {
-					Coded_text[id159] matches {
-						term matches {
-							Terminology_term[id1159] matches {
-								concept matches {[ac1]}		-- Medication name
-							}
-						}
+	Entity_ref_node[id1] occurrences matches {0..1} matches {	-- Medication
+		value matches {
+			Coded_text[id159] matches {
+				term matches {
+					Terminology_term[id1159] matches {
+						concept matches {[ac1]}		-- Medication name
 					}
 				}
 			}
+		}
+		items matches {
 			Info_node[id72] matches {	-- Form
 				value matches {
 					Coded_text[id160] matches {
@@ -63,6 +61,17 @@ definition
 					Text[id166] 
 				}
 			}
+			Info_node[id3] matches {
+				value matches {
+					Coded_text[id103] matches {
+						term matches {
+							Terminology_term[id1103] matches {
+								concept matches {[ac1]}		-- Medication name
+							}
+						}
+					}	
+				}
+			}
 		}
 	}
 
@@ -73,7 +82,11 @@ terminology
 				text = <"Medication">
 				description = <"Reference to a medication or component of a medication, including strength, form and details of any specific constituents.">
 			>
-			["id133"] = <
+			["id3"] = <
+				text = <"Active ingredient">
+				description = <"Active ingredient.">
+			>
+			["id159"] = <
 				text = <"Name">
 				description = <"The name of the medication or medication component.">
 			>
@@ -101,11 +114,12 @@ terminology
 	>
 	term_bindings = <
 		["loinc"] = <
-			["id133"] = <http://loinc.org/74058-9>
+			["id159"] = <http://loinc.org/74058-9>
 			["id152"] = <http://loinc.org/74719-6>
 			["id72"] = <http://loinc.org/74055-5>
 			["id153"] = <http://loinc.org/6a8a94b8-624f-ef11-886e-6045bdc71c8b>
-			["id1"] = <http://loinc.org/540c1425-7282-ef11-8870-6045bdc71c8b>
+			["id1"] = <http://loinc.org/74078-7>
+			["id3"] = <http://loinc.org/31258fe3-bc8f-ef11-8872-6045bdc71c8b>
 		>
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.RxNormActive>

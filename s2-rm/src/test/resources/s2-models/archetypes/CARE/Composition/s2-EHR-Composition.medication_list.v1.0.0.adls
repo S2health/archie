@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; uid=d237406f-7ea2-46de-8c0f-d36c2fbdbb93)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=d237406f-7ea2-46de-8c0f-d36c2fbdbb93)
 	s2-EHR-Composition.medication_list.v1.0.0
 
 language
@@ -22,7 +22,7 @@ description
 	>
 
 definition
-	Composition[id1] matches {
+	Composition[id1] matches {	-- Medication List
 		code matches {
 			Terminology_term[id10] matches {
 				concept matches {[at1]}
@@ -60,13 +60,14 @@ terminology
 			>
 		>
 	>
-
 	term_bindings = <
 		["loinc"] = <
 			["id1"] = <http://loinc.org/104207-6>
 			["at1"] = <http://loinc.org/104207-6>
+			["id21"] = <http://loinc.org/52457-9>
 		>
 		["openehr"] = <
 			["at2"] = <http://openehr.org/id/431>
 		>
 	>
+

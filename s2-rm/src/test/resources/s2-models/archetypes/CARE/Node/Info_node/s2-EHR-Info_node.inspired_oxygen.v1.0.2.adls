@@ -1,4 +1,4 @@
-archetype (adl_version=2.1.0; rm_release=0.8.6; generated; uid=2859a129-4b4f-4bf5-b43c-85392edbedf9)
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=2859a129-4b4f-4bf5-b43c-85392edbedf9)
 	s2-EHR-Info_node.inspired_oxygen.v1.0.2
 
 language
@@ -48,26 +48,13 @@ description
 			misuse = <"Do not use for other inhaled gases such as nitrous oxide.">
 		>
 	>
-	other_contributors = <"Tomas Alme, DIPS ASA, Norway", "Nadim Anani, Karolinska Institutet, Sweden", "Vebjørn Arntzen, Oslo University Hospital, Norway", "Koray Atalag, University of Auckland, New Zealand", "Silje Ljosland Bakke, Nasjonal IKT HF, Norway (openEHR Editor)", "Marcus Baw, openGPSoC / BawMedical Ltd, United Kingdom", "Ivar Berge, Oslo Universitetssykehus, Norway", "Kristian Berg, Vestvågøy kommune - Fagutviklingsavdelingen, Norway", "SBhusan Bhattacharyya, Sudisa Consultancy Services, India", "Lars Bitsch-Larsen, Haukeland University hospital, Norway", "Marja Buur, Medisch Centrum Alkmaar, Netherlands", "Gregory Caulton PatientOS Inc., USA", "Bjørn Christensen, Helse Bergen HF, Norway", "Stig Erik Hegrestad, Helse Førde, Norway", "Einar Fosse, National Centre for Integrated Care and Telemedicine, Norway", "Sebastian Garde, Ocean Informatics, Germany", "Mikkel Gaup Grønmo, FSE, Helse Nord, Norway (Nasjonal IKT redaktør)", "Heather Grain, Llewelyn Grain Informatics, Australia", "Cecilie Graver, Oslo universitetssykehus HF, Norway", "Anne Harbison, CPCER, Australia", "Sam Heard, Ocean Informatics, Australia", "Annette Hole Sjøborg, DIPS ASA, Norway", "Hilde Hollås, DIPS ASA, Norway", "Omer Hotomargolu,, Turkey", "Evelyn Hovenga, EJSH Consulting, Australia", "Lars Ivar Mehlum, Helse Bergen HF, Norway", "Sundarasan Jaganathan NHS Scotland, United Kingdom", "Andrew James, University of Toronto, Canada", "Tom Jarl Jakobsen, Helse Bergen, Norway", "Lars Morgan Karlsen, DIPS ASA, Norway", "Shinji Kobayashi, Kyoto University, Japan", "Heather Leslie, Ocean Health Systems, Australia (openEHR Editor)", "Marit Ludvigsen, St Olavs Hospital, Norway", "Siv Marie Lien, DIPS ASA, Norway", "Ian McNicoll, freshEHR Clinical Informatics, United Kingdom (openEHR Editor)", "Bjoern Naess, DIPS ASA, Norway", "Andrej Orel, Marand d.o.o., Slovenia", "Anne Pauline Anderssen, Helse Nord RHF, Norway", "Line Silsand, Universitetssykehuset i Nord-Norge, Norway", "Ingrid Skard, Edproof, Norway", "Rafa Sotoca, Spanish Ministry of Health, Spain", "Roy Støle, OUS, Norway", "Tesfay Teame, Folkehelseinstituttet, Norway", "Rowan Thomas, St. Vincent's Hospital Melbourne, Australia", "John Tore Valand, Haukeland Universitetssjukehus, Norway (Nasjonal IKT redaktør)", "Stian Torleif Varpe, Helse Bergen, Norway", "Karl Trygve Kalleberg, Oslo Universitetssykehus, Norway", "Marc Twagirumukiza, Agfa HealthCare, Belgium", "Gro-Hilde Ulriksen, Norwegian center for ehealthresearch, Norway">
+	other_contributors = <"openEHR CKM community">
 
 definition
 	Info_node[id1] matches {	-- Inspired oxygen
 		items matches {
 			Info_node[id52] occurrences matches {0..1} matches {	-- Flow rate
 				value matches {
-					Quantity[id65] matches {	-- Flow rate (ml/min)
-						magnitude matches {|0.0..50000.0|}
-						units matches {
-							Coded_text[id67] matches {
-								term matches {
-									Terminology_term[id66] matches {
-										concept matches {[at2]}
-									}
-								}
-							}
-						}
-						precision matches {2}
-					}
 					Quantity[id68] matches {	-- Flow rate (l/min)
 						magnitude matches {|0.0..50.0|}
 						units matches {
@@ -75,6 +62,21 @@ definition
 								term matches {
 									Terminology_term[id69] matches {
 										concept matches {[at3]}
+									}
+								}
+							}
+						}
+						precision matches {2}
+					}
+				}
+				original_value matches {
+					Quantity[id65] matches {	-- Flow rate (ml/min)
+						magnitude matches {|0.0..50000.0|}
+						units matches {
+							Coded_text[id67] matches {
+								term matches {
+									Terminology_term[id66] matches {
+										concept matches {[at2]}
 									}
 								}
 							}
@@ -171,14 +173,6 @@ terminology
 				text = <"Oxygen delivery detail">
 				description = <"Further details of the method of oxygen delivery.">
 			>
-			["id65"] = <
-				text = <"Flow rate (ml/min)">
-				description = <"Flow rate (ml/min)">
-			>
-			["id68"] = <
-				text = <"Flow rate (l/min)">
-				description = <"Flow rate (l/min)">
-			>
 		>
 	>
 	term_bindings = <
@@ -198,7 +192,7 @@ terminology
 		["loinc"] = <
 			["id53"] = <http://loinc.org/71835-3>
 			["id52"] = <http://loinc.org/3151-8>
-			["id1"] = <http://loinc.org/cbfb8ff4-7082-ef11-8870-6045bdc71c8b>
+			["id1"] = <http://loinc.org/e9d427da-7082-ef11-8870-6045bdc71c8b>
 			["id54"] = <http://loinc.org/3150-0>
 			["id55"] = <http://loinc.org/df90d9cb-7082-ef11-8870-6045bdc71c8b>
 			["id58"] = <http://loinc.org/b52cfec2-7082-ef11-8870-6045bdc71c8b>
