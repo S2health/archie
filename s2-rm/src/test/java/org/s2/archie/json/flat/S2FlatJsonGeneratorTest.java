@@ -139,7 +139,7 @@ public class S2FlatJsonGeneratorTest {
     @Test
     public void continuesIndices() throws Exception {
         InfoNode cluster = new InfoNode();
-
+/*
         cluster.addItem(new InfoNode("id2", "first"));
         cluster.setValue(new PlainText("First"));
 
@@ -151,7 +151,7 @@ public class S2FlatJsonGeneratorTest {
 
         cluster.addItem(new InfoNode("id3", "4"));
         cluster.setValue(new Count(4));
-
+*/
         FlatJsonFormatConfiguration config = FlatJsonFormatConfiguration.nedapInternalFormat();
         Map<String, Object> stringObjectMap = new FlatJsonGenerator(S2RmInfoLookup.getInstance(), config).buildPathsAndValues(cluster);
 

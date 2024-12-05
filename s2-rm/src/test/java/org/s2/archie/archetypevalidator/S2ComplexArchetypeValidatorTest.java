@@ -50,7 +50,7 @@ public class S2ComplexArchetypeValidatorTest {
 
     @Test
     public void testTemplateWithOverlay() {
-        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.0");
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         assertEquals(0, messages.size());
@@ -58,7 +58,7 @@ public class S2ComplexArchetypeValidatorTest {
 
     @Test
     public void testObservationArchetype() {
-        Archetype archetype = repository.getArchetype("s2-EHR-Direct_observation.blood_pressure.v3.0.0");
+        Archetype archetype = repository.getArchetype("s2-EHR-Direct_observation.blood_pressure.v3.0.1");
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         assertEquals(32, messages.size());
@@ -74,9 +74,9 @@ public class S2ComplexArchetypeValidatorTest {
 
     @Test
     public void testEntityArchetype() {
-        Archetype archetype = repository.getArchetype("s2-ENTITY-Substance_kind.medication.v1.0.0");
+        Archetype archetype = repository.getArchetype("s2-ENTITY-Substance_kind.medication.v1.0.1");
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
-        assertEquals(6, messages.size());
+        assertEquals(5, messages.size());
     }
 }
