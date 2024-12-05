@@ -100,10 +100,6 @@ public abstract class Node extends InfoItem {
   public void setItems(@Nullable List<Node> items) {
     this.items = items;
   }
-  public void addItem(@Nullable Node item) {
-    this.items.add(item);
-  }
-
 
   public @Nullable Uuid getUid() {
     return uid;
