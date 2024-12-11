@@ -3,9 +3,9 @@ package org.s2.rm.admin;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.base.patterns.data_structures.Participation;
@@ -15,7 +15,7 @@ import org.s2.rm.entity.occurrent.CareProcess;
 * BMM name: Service_event
 * BMM ancestors: Care_process
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Service_event", propOrder = {
@@ -50,8 +50,8 @@ public class ServiceEvent extends CareProcess {
 
   public ServiceEvent() {}
 
-  public ServiceEvent(TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(domainType, archetypeNodeId, name);
+  public ServiceEvent(String archetypeNodeId, String name) {
+    super(archetypeNodeId, name);
   }
 
   @Override
@@ -64,9 +64,11 @@ public class ServiceEvent extends CareProcess {
       Objects.equals(getStartTime(), otherAsServiceEvent.getStartTime()) &&
       Objects.equals(getEndTime(), otherAsServiceEvent.getEndTime()) &&
       Objects.equals(getParticipations(), otherAsServiceEvent.getParticipations()) &&
-      Objects.equals(getDomainType(), otherAsServiceEvent.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsServiceEvent.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsServiceEvent.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsServiceEvent.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsServiceEvent.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsServiceEvent.getLinks()) &&
       Objects.equals(getUid(), otherAsServiceEvent.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsServiceEvent.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsServiceEvent.getName()) &&

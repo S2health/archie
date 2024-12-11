@@ -3,26 +3,21 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.interval.Interval;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
-import org.s2.rm.base.foundation_types.time.RmDate;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.domain_data_structures.Capability;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
 
 /**
 * BMM name: Persona
 * BMM ancestors: Party
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Persona", propOrder = {
   "performer",
-  "timeValidity",
   "capabilities"
 })
 public class Persona extends Party {
@@ -34,18 +29,11 @@ public class Persona extends Party {
   private ObjectRef performer;
 
   /**
-  * BMM name: time_validity | BMM type: {@code Interval<Date>}
-  * isMandatory: false | isComputed: false | isImRuntime: true | isImInfrastructure: false | existence: 0..1
-  */
-  @XmlElement(name = "time_validity")
-  private @Nullable Interval<RmDate> timeValidity;
-
-  /**
-  * BMM name: capabilities | BMM type: {@code List<Capability>}
+  * BMM name: capabilities | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "capabilities")
-  private @Nullable List<Capability> capabilities;
+  private @Nullable List<Node> capabilities;
 
 
   // Properties added from the extended class: Locatable
@@ -60,8 +48,8 @@ public class Persona extends Party {
 
   public Persona() {}
 
-  public Persona(ObjectRef performer, List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public Persona(ObjectRef performer, List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
     this.performer = performer;
   }
 
@@ -75,22 +63,23 @@ public class Persona extends Party {
       Objects.equals(getLocationAddresses(), otherAsPersona.getLocationAddresses()) &&
       Objects.equals(getCommsAddresses(), otherAsPersona.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsPersona.getAccountabilityTypes()) &&
-      Objects.equals(getDomainType(), otherAsPersona.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsPersona.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsPersona.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsPersona.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsPersona.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsPersona.getLinks()) &&
       Objects.equals(getUid(), otherAsPersona.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsPersona.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPersona.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsPersona.getArchetypeDetails()) &&
       Objects.equals(getFeederAudit(), otherAsPersona.getFeederAudit()) &&
       Objects.equals(performer, otherAsPersona.performer) &&
-      Objects.equals(timeValidity, otherAsPersona.timeValidity) &&
       Objects.equals(capabilities, otherAsPersona.capabilities);
   }
 
   @Override
   public int hashCode() {
-    int result = Objects.hash(super.hashCode(), performer, timeValidity);
+    int result = Objects.hash(super.hashCode(), performer);
     result = capabilities == null ? 0 : 31 * result + capabilities.hashCode();
     return result;
   }
@@ -103,19 +92,11 @@ public class Persona extends Party {
     this.performer = performer;
   }
 
-  public @Nullable Interval<RmDate> getTimeValidity() {
-    return timeValidity;
-  }
-
-  public void setTimeValidity(@Nullable Interval<RmDate> timeValidity) {
-    this.timeValidity = timeValidity;
-  }
-
-  public @Nullable List<Capability> getCapabilities() {
+  public @Nullable List<Node> getCapabilities() {
     return capabilities;
   }
 
-  public void setCapabilities(@Nullable List<Capability> capabilities) {
+  public void setCapabilities(@Nullable List<Node> capabilities) {
     this.capabilities = capabilities;
   }
 

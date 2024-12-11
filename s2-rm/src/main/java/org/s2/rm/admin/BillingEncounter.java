@@ -7,16 +7,16 @@ import org.s2.rm.base.data_types.RweIdRef;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.base.patterns.data_structures.Participation;
-import org.s2.rm.base.patterns.domain_data_structures.IdUse;
 import org.s2.rm.entity.occurrent.CareProcess;
 
 /**
 * BMM name: Billing_encounter
 * BMM ancestors: Care_process
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Billing_encounter", propOrder = {
@@ -35,11 +35,11 @@ public class BillingEncounter extends CareProcess {
   private RweIdRef identifier;
 
   /**
-  * BMM name: external_identifiers | BMM type: {@code List<Id_use>}
+  * BMM name: external_identifiers | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "external_identifiers")
-  private @Nullable List<IdUse> externalIdentifiers;
+  private @Nullable List<Node> externalIdentifiers;
 
   /**
   * BMM name: interaction_type | BMM type: Terminology_term
@@ -75,8 +75,8 @@ public class BillingEncounter extends CareProcess {
 
   public BillingEncounter() {}
 
-  public BillingEncounter(RweIdRef identifier, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(domainType, archetypeNodeId, name);
+  public BillingEncounter(RweIdRef identifier, String archetypeNodeId, String name) {
+    super(archetypeNodeId, name);
     this.identifier = identifier;
   }
 
@@ -90,9 +90,11 @@ public class BillingEncounter extends CareProcess {
       Objects.equals(getStartTime(), otherAsBillingEncounter.getStartTime()) &&
       Objects.equals(getEndTime(), otherAsBillingEncounter.getEndTime()) &&
       Objects.equals(getParticipations(), otherAsBillingEncounter.getParticipations()) &&
-      Objects.equals(getDomainType(), otherAsBillingEncounter.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsBillingEncounter.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsBillingEncounter.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsBillingEncounter.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsBillingEncounter.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsBillingEncounter.getLinks()) &&
       Objects.equals(getUid(), otherAsBillingEncounter.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsBillingEncounter.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsBillingEncounter.getName()) &&
@@ -121,11 +123,11 @@ public class BillingEncounter extends CareProcess {
     this.identifier = identifier;
   }
 
-  public @Nullable List<IdUse> getExternalIdentifiers() {
+  public @Nullable List<Node> getExternalIdentifiers() {
     return externalIdentifiers;
   }
 
-  public void setExternalIdentifiers(@Nullable List<IdUse> externalIdentifiers) {
+  public void setExternalIdentifiers(@Nullable List<Node> externalIdentifiers) {
     this.externalIdentifiers = externalIdentifiers;
   }
 

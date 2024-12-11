@@ -3,9 +3,9 @@ package org.s2.rm.entity.occurrent;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.base.patterns.data_structures.Participation;
@@ -14,7 +14,7 @@ import org.s2.rm.base.patterns.data_structures.Participation;
 * BMM name: Care_process
 * BMM ancestors: Process
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Care_process", propOrder = {
@@ -49,8 +49,8 @@ public class CareProcess extends Process {
 
   public CareProcess() {}
 
-  public CareProcess(TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(domainType, archetypeNodeId, name);
+  public CareProcess(String archetypeNodeId, String name) {
+    super(archetypeNodeId, name);
   }
 
   @Override
@@ -61,9 +61,11 @@ public class CareProcess extends Process {
     return Objects.equals(getStartTime(), otherAsCareProcess.getStartTime()) &&
       Objects.equals(getEndTime(), otherAsCareProcess.getEndTime()) &&
       Objects.equals(getParticipations(), otherAsCareProcess.getParticipations()) &&
-      Objects.equals(getDomainType(), otherAsCareProcess.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsCareProcess.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsCareProcess.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsCareProcess.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsCareProcess.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsCareProcess.getLinks()) &&
       Objects.equals(uid, otherAsCareProcess.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsCareProcess.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsCareProcess.getName()) &&

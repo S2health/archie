@@ -5,13 +5,14 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Space
 * BMM ancestors: Object_extension_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Space", propOrder = {
@@ -49,6 +50,9 @@ public class Space extends ObjectExtensionKind {
     Space otherAsSpace = (Space) other;
     return Objects.equals(parts, otherAsSpace.parts) &&
       Objects.equals(getItems(), otherAsSpace.getItems()) &&
+      Objects.equals(getCode(), otherAsSpace.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsSpace.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsSpace.getLinks()) &&
       Objects.equals(uid, otherAsSpace.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsSpace.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsSpace.getName()) &&

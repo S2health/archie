@@ -3,15 +3,14 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
+import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Individual_agent
 * BMM ancestors: Agent
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Individual_agent", propOrder = {
@@ -30,8 +29,8 @@ public abstract class IndividualAgent extends Agent {
 
   public IndividualAgent() {}
 
-  public IndividualAgent(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public IndividualAgent(List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
   }
 
   public @Nullable Uuid getUid() {

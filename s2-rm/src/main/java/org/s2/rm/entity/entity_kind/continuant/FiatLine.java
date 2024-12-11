@@ -4,13 +4,14 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Fiat_line
 * BMM ancestors: Material_location
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Fiat_line", propOrder = {
@@ -47,6 +48,9 @@ public class FiatLine extends MaterialLocation {
     if (other == null || getClass() != other.getClass()) return false;
     FiatLine otherAsFiatLine = (FiatLine) other;
     return Objects.equals(getItems(), otherAsFiatLine.getItems()) &&
+      Objects.equals(getCode(), otherAsFiatLine.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsFiatLine.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsFiatLine.getLinks()) &&
       Objects.equals(getUid(), otherAsFiatLine.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsFiatLine.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsFiatLine.getName()) &&

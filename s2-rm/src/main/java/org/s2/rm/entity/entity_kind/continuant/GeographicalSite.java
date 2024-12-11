@@ -5,13 +5,14 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Geographical_site
 * BMM ancestors: Fiat_line
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Geographical_site", propOrder = {
@@ -41,6 +42,9 @@ public class GeographicalSite extends FiatLine {
     GeographicalSite otherAsGeographicalSite = (GeographicalSite) other;
     return Objects.equals(getIsClosed(), otherAsGeographicalSite.getIsClosed()) &&
       Objects.equals(getItems(), otherAsGeographicalSite.getItems()) &&
+      Objects.equals(getCode(), otherAsGeographicalSite.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsGeographicalSite.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsGeographicalSite.getLinks()) &&
       Objects.equals(uid, otherAsGeographicalSite.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsGeographicalSite.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsGeographicalSite.getName()) &&

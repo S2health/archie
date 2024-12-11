@@ -3,17 +3,16 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
 
 /**
 * BMM name: Person
 * BMM ancestors: Individual_agent
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Person", propOrder = {
@@ -32,8 +31,8 @@ public class Person extends IndividualAgent {
 
   public Person() {}
 
-  public Person(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public Person(List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
   }
 
   @Override
@@ -48,9 +47,11 @@ public class Person extends IndividualAgent {
       Objects.equals(getLocationAddresses(), otherAsPerson.getLocationAddresses()) &&
       Objects.equals(getCommsAddresses(), otherAsPerson.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsPerson.getAccountabilityTypes()) &&
-      Objects.equals(getDomainType(), otherAsPerson.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsPerson.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsPerson.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsPerson.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsPerson.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsPerson.getLinks()) &&
       Objects.equals(uid, otherAsPerson.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsPerson.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPerson.getName()) &&

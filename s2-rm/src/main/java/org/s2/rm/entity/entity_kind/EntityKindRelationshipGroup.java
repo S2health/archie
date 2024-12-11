@@ -7,13 +7,14 @@ import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
-import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.InfoItem;
+import org.s2.rm.base.patterns.archetyped.Link;
 
 /**
 * BMM name: Entity_kind_relationship_group
-* BMM ancestors: Locatable
+* BMM ancestors: Info_item
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_kind_relationship_group", propOrder = {
@@ -21,7 +22,7 @@ import org.s2.rm.base.patterns.archetyped.Locatable;
   "type",
   "members"
 })
-public class EntityKindRelationshipGroup extends Locatable {
+public class EntityKindRelationshipGroup extends InfoItem {
   /**
   * BMM name: type | BMM type: Terminology_term
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
@@ -58,7 +59,10 @@ public class EntityKindRelationshipGroup extends Locatable {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     EntityKindRelationshipGroup otherAsEntityKindRelationshipGroup = (EntityKindRelationshipGroup) other;
-    return Objects.equals(uid, otherAsEntityKindRelationshipGroup.uid) &&
+    return Objects.equals(getCode(), otherAsEntityKindRelationshipGroup.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsEntityKindRelationshipGroup.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsEntityKindRelationshipGroup.getLinks()) &&
+      Objects.equals(uid, otherAsEntityKindRelationshipGroup.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsEntityKindRelationshipGroup.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsEntityKindRelationshipGroup.getName()) &&
       Objects.equals(getArchetypeDetails(), otherAsEntityKindRelationshipGroup.getArchetypeDetails()) &&

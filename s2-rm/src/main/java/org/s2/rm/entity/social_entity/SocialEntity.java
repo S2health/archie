@@ -1,14 +1,13 @@
 package org.s2.rm.entity.social_entity;
 
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.entity.entity.Entity;
 
 /**
 * BMM name: Social_entity
 * BMM ancestors: Entity
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Social_entity")
@@ -26,8 +25,8 @@ public abstract class SocialEntity extends Entity {
 
   public SocialEntity() {}
 
-  public SocialEntity(TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(domainType, archetypeNodeId, name);
+  public SocialEntity(String archetypeNodeId, String name) {
+    super(archetypeNodeId, name);
   }
 
   @Override

@@ -4,21 +4,21 @@ import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
-import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.InfoItem;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Entity_kind
-* BMM ancestors: Locatable
+* BMM ancestors: Info_item
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_kind", propOrder = {
   "uid",
   "items"
 })
-public abstract class EntityKind extends Locatable {
+public abstract class EntityKind extends InfoItem {
   /**
   * BMM name: items | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1

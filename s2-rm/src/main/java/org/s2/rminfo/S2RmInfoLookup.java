@@ -54,7 +54,7 @@ import java.util.*;
 
 public class S2RmInfoLookup extends ReflectionModelInfoLookup {
 
-    public static final String RM_VERSION = "0.8.6";
+    public static final String RM_VERSION = "0.8.7";
 
     @Override
     public Collection<RMPackageId> getId() {

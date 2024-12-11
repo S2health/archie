@@ -3,15 +3,13 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
-import org.s2.rm.base.patterns.domain_data_structures.LanguageCapability;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
+import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Agent
 * BMM ancestors: Party
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Agent", propOrder = {
@@ -27,11 +25,11 @@ public abstract class Agent extends Party {
   private @Nullable List<Persona> personas;
 
   /**
-  * BMM name: languages | BMM type: {@code List<Language_capability>}
+  * BMM name: languages | BMM type: {@code List<Node>}
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "languages")
-  private @Nullable List<LanguageCapability> languages;
+  private @Nullable List<Node> languages;
 
 
   // Properties added from the extended class: Locatable
@@ -46,8 +44,8 @@ public abstract class Agent extends Party {
 
   public Agent() {}
 
-  public Agent(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public Agent(List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
   }
 
   public @Nullable List<Persona> getPersonas() {
@@ -58,11 +56,11 @@ public abstract class Agent extends Party {
     this.personas = personas;
   }
 
-  public @Nullable List<LanguageCapability> getLanguages() {
+  public @Nullable List<Node> getLanguages() {
     return languages;
   }
 
-  public void setLanguages(@Nullable List<LanguageCapability> languages) {
+  public void setLanguages(@Nullable List<Node> languages) {
     this.languages = languages;
   }
 

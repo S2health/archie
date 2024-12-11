@@ -4,13 +4,14 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Artifact_kind
 * BMM ancestors: Independent_object_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Artifact_kind")
@@ -50,6 +51,9 @@ public class ArtifactKind extends IndependentObjectKind {
     ArtifactKind otherAsArtifactKind = (ArtifactKind) other;
     return Objects.equals(getParts(), otherAsArtifactKind.getParts()) &&
       Objects.equals(getItems(), otherAsArtifactKind.getItems()) &&
+      Objects.equals(getCode(), otherAsArtifactKind.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsArtifactKind.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsArtifactKind.getLinks()) &&
       Objects.equals(getUid(), otherAsArtifactKind.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsArtifactKind.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsArtifactKind.getName()) &&

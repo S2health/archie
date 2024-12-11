@@ -4,13 +4,14 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Biological_entity_kind
 * BMM ancestors: Independent_object_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Biological_entity_kind")
@@ -50,6 +51,9 @@ public class BiologicalEntityKind extends IndependentObjectKind {
     BiologicalEntityKind otherAsBiologicalEntityKind = (BiologicalEntityKind) other;
     return Objects.equals(getParts(), otherAsBiologicalEntityKind.getParts()) &&
       Objects.equals(getItems(), otherAsBiologicalEntityKind.getItems()) &&
+      Objects.equals(getCode(), otherAsBiologicalEntityKind.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsBiologicalEntityKind.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsBiologicalEntityKind.getLinks()) &&
       Objects.equals(getUid(), otherAsBiologicalEntityKind.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsBiologicalEntityKind.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsBiologicalEntityKind.getName()) &&

@@ -4,36 +4,27 @@ import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.foundation_types.interval.Interval;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDate;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
-import org.s2.rm.base.patterns.archetyped.Locatable;
+import org.s2.rm.base.patterns.archetyped.InfoItem;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Entity_relationship
-* BMM ancestors: Locatable
+* BMM ancestors: Info_item
 * isAbstract: true | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Entity_relationship", propOrder = {
   "uid",
-  "domainType",
   "source",
   "target",
   "otherDetails",
   "timeValidity"
 })
-public abstract class EntityRelationship extends Locatable {
-  /**
-  * BMM name: domain_type | BMM type: Terminology_term
-  * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
-  */
-  @XmlElement(name = "domain_type")
-  private TerminologyTerm domainType;
-
+public abstract class EntityRelationship extends InfoItem {
   /**
   * BMM name: source | BMM type: Object_ref
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
@@ -74,19 +65,10 @@ public abstract class EntityRelationship extends Locatable {
 
   public EntityRelationship() {}
 
-  public EntityRelationship(TerminologyTerm domainType, ObjectRef source, ObjectRef target, String archetypeNodeId, String name) {
+  public EntityRelationship(ObjectRef source, ObjectRef target, String archetypeNodeId, String name) {
     super(archetypeNodeId, name);
-    this.domainType = domainType;
     this.source = source;
     this.target = target;
-  }
-
-  public TerminologyTerm getDomainType() {
-    return domainType;
-  }
-
-  public void setDomainType(TerminologyTerm domainType) {
-    this.domainType = domainType;
   }
 
   public ObjectRef getSource() {

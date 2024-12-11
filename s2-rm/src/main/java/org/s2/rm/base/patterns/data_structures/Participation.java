@@ -14,7 +14,7 @@ import org.s2.rm.base.patterns.archetyped.Locatable;
 * BMM name: Participation
 * BMM ancestors: Locatable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Participation", propOrder = {

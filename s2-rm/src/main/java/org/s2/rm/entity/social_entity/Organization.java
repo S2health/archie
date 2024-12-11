@@ -3,17 +3,16 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
 
 /**
 * BMM name: Organization
 * BMM ancestors: Org_entity
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Organization", propOrder = {
@@ -32,8 +31,8 @@ public class Organization extends OrgEntity {
 
   public Organization() {}
 
-  public Organization(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public Organization(List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
   }
 
   @Override
@@ -48,9 +47,11 @@ public class Organization extends OrgEntity {
       Objects.equals(getLocationAddresses(), otherAsOrganization.getLocationAddresses()) &&
       Objects.equals(getCommsAddresses(), otherAsOrganization.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsOrganization.getAccountabilityTypes()) &&
-      Objects.equals(getDomainType(), otherAsOrganization.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsOrganization.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsOrganization.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsOrganization.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsOrganization.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsOrganization.getLinks()) &&
       Objects.equals(uid, otherAsOrganization.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsOrganization.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsOrganization.getName()) &&

@@ -3,10 +3,10 @@ package org.s2.rm.entity.physical_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.entity.entity.Entity;
 import org.s2.rm.entity.entity_kind.continuant.PhysicalEntityKind;
@@ -16,7 +16,7 @@ import org.s2.rm.entity.entity_kind.continuant.PhysicalEntityKind;
 * BMM generic parameters: {@code Physical_entity<K Physical_entity_kind>}
 * BMM ancestors: Entity
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Physical_entity", propOrder = {
@@ -51,8 +51,8 @@ public class PhysicalEntity<K extends PhysicalEntityKind> extends Entity {
 
   public PhysicalEntity() {}
 
-  public PhysicalEntity(TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(domainType, archetypeNodeId, name);
+  public PhysicalEntity(String archetypeNodeId, String name) {
+    super(archetypeNodeId, name);
   }
 
   @Override
@@ -60,9 +60,11 @@ public class PhysicalEntity<K extends PhysicalEntityKind> extends Entity {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     PhysicalEntity<K> otherAsPhysicalEntity = (PhysicalEntity<K>) other;
-    return Objects.equals(getDomainType(), otherAsPhysicalEntity.getDomainType()) &&
-      Objects.equals(getRelationships(), otherAsPhysicalEntity.getRelationships()) &&
+    return Objects.equals(getRelationships(), otherAsPhysicalEntity.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsPhysicalEntity.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsPhysicalEntity.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsPhysicalEntity.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsPhysicalEntity.getLinks()) &&
       Objects.equals(getUid(), otherAsPhysicalEntity.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsPhysicalEntity.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPhysicalEntity.getName()) &&

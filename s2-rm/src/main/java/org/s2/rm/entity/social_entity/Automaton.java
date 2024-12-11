@@ -2,17 +2,16 @@ package org.s2.rm.entity.social_entity;
 
 import java.util.*;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
 
 /**
 * BMM name: Automaton
 * BMM ancestors: Individual_agent
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Automaton")
@@ -30,8 +29,8 @@ public class Automaton extends IndividualAgent {
 
   public Automaton() {}
 
-  public Automaton(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public Automaton(List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
   }
 
   @Override
@@ -46,9 +45,11 @@ public class Automaton extends IndividualAgent {
       Objects.equals(getLocationAddresses(), otherAsAutomaton.getLocationAddresses()) &&
       Objects.equals(getCommsAddresses(), otherAsAutomaton.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsAutomaton.getAccountabilityTypes()) &&
-      Objects.equals(getDomainType(), otherAsAutomaton.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsAutomaton.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsAutomaton.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsAutomaton.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsAutomaton.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsAutomaton.getLinks()) &&
       Objects.equals(getUid(), otherAsAutomaton.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsAutomaton.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsAutomaton.getName()) &&

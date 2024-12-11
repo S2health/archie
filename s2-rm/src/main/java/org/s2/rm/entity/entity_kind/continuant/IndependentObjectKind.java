@@ -5,13 +5,14 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Independent_object_kind
 * BMM ancestors: Object_extension_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Independent_object_kind", propOrder = {
@@ -52,6 +53,9 @@ public class IndependentObjectKind extends ObjectExtensionKind {
     IndependentObjectKind otherAsIndependentObjectKind = (IndependentObjectKind) other;
     return Objects.equals(parts, otherAsIndependentObjectKind.parts) &&
       Objects.equals(getItems(), otherAsIndependentObjectKind.getItems()) &&
+      Objects.equals(getCode(), otherAsIndependentObjectKind.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsIndependentObjectKind.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsIndependentObjectKind.getLinks()) &&
       Objects.equals(uid, otherAsIndependentObjectKind.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsIndependentObjectKind.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsIndependentObjectKind.getName()) &&

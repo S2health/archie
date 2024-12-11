@@ -2,17 +2,16 @@ package org.s2.rm.entity.social_entity;
 
 import java.util.*;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
-import org.s2.rm.base.patterns.domain_data_structures.PartyIdentity;
 
 /**
 * BMM name: Team
 * BMM ancestors: Aggregate_agent
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Team")
@@ -30,8 +29,8 @@ public class Team extends AggregateAgent {
 
   public Team() {}
 
-  public Team(List<PartyIdentity> identities, TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(identities, domainType, archetypeNodeId, name);
+  public Team(List<Node> identities, String archetypeNodeId, String name) {
+    super(identities, archetypeNodeId, name);
   }
 
   @Override
@@ -46,9 +45,11 @@ public class Team extends AggregateAgent {
       Objects.equals(getLocationAddresses(), otherAsTeam.getLocationAddresses()) &&
       Objects.equals(getCommsAddresses(), otherAsTeam.getCommsAddresses()) &&
       Objects.equals(getAccountabilityTypes(), otherAsTeam.getAccountabilityTypes()) &&
-      Objects.equals(getDomainType(), otherAsTeam.getDomainType()) &&
       Objects.equals(getRelationships(), otherAsTeam.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsTeam.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsTeam.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsTeam.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsTeam.getLinks()) &&
       Objects.equals(getUid(), otherAsTeam.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsTeam.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsTeam.getName()) &&

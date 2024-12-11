@@ -79,4 +79,13 @@ public class S2ComplexArchetypeValidatorTest {
         List<ValidationMessage> messages = validationResult.getErrors();
         assertEquals(5, messages.size());
     }
+
+    @Test
+    public void testOrganizationArchetype() {
+        Archetype archetype = repository.getArchetype("s2-ENTITY-Organization.t_organization-test.v1.0.0");
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
+        List<ValidationMessage> messages = validationResult.getErrors();
+        assertEquals(0, messages.size());
+    }
+
 }

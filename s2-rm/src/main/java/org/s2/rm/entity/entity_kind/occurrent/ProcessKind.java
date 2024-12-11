@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.entity.entity_kind.EntityKind;
 
@@ -12,7 +13,7 @@ import org.s2.rm.entity.entity_kind.EntityKind;
 * BMM name: Process_kind
 * BMM ancestors: Entity_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Process_kind", propOrder = {
@@ -41,6 +42,9 @@ public class ProcessKind extends EntityKind {
     if (other == null || getClass() != other.getClass()) return false;
     ProcessKind otherAsProcessKind = (ProcessKind) other;
     return Objects.equals(getItems(), otherAsProcessKind.getItems()) &&
+      Objects.equals(getCode(), otherAsProcessKind.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsProcessKind.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsProcessKind.getLinks()) &&
       Objects.equals(uid, otherAsProcessKind.uid) &&
       Objects.equals(getArchetypeNodeId(), otherAsProcessKind.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsProcessKind.getName()) &&

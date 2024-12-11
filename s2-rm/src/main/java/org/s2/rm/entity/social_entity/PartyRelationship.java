@@ -3,10 +3,11 @@ package org.s2.rm.entity.social_entity;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.model_support.identification.ObjectRef;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
+import org.s2.rm.base.patterns.data_structures.EntityRefNode;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.entity.entity.EntityRelationship;
 
@@ -14,7 +15,7 @@ import org.s2.rm.entity.entity.EntityRelationship;
 * BMM name: Party_relationship
 * BMM ancestors: Entity_relationship
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Party_relationship", propOrder = {
@@ -22,11 +23,11 @@ import org.s2.rm.entity.entity.EntityRelationship;
 })
 public class PartyRelationship extends EntityRelationship {
   /**
-  * BMM name: scoper | BMM type: String
+  * BMM name: scoper | BMM type: Entity_ref_node
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
   */
   @XmlElement(name = "scoper")
-  private @Nullable String scoper;
+  private @Nullable EntityRefNode scoper;
 
 
   // Properties added from the extended class: Locatable
@@ -41,8 +42,8 @@ public class PartyRelationship extends EntityRelationship {
 
   public PartyRelationship() {}
 
-  public PartyRelationship(TerminologyTerm domainType, ObjectRef source, ObjectRef target, String archetypeNodeId, String name) {
-    super(domainType, source, target, archetypeNodeId, name);
+  public PartyRelationship(ObjectRef source, ObjectRef target, String archetypeNodeId, String name) {
+    super(source, target, archetypeNodeId, name);
   }
 
   @Override
@@ -50,11 +51,13 @@ public class PartyRelationship extends EntityRelationship {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     PartyRelationship otherAsPartyRelationship = (PartyRelationship) other;
-    return Objects.equals(getDomainType(), otherAsPartyRelationship.getDomainType()) &&
-      Objects.equals(getSource(), otherAsPartyRelationship.getSource()) &&
+    return Objects.equals(getSource(), otherAsPartyRelationship.getSource()) &&
       Objects.equals(getTarget(), otherAsPartyRelationship.getTarget()) &&
       Objects.equals(getOtherDetails(), otherAsPartyRelationship.getOtherDetails()) &&
       Objects.equals(getTimeValidity(), otherAsPartyRelationship.getTimeValidity()) &&
+      Objects.equals(getCode(), otherAsPartyRelationship.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsPartyRelationship.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsPartyRelationship.getLinks()) &&
       Objects.equals(getUid(), otherAsPartyRelationship.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsPartyRelationship.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsPartyRelationship.getName()) &&
@@ -68,11 +71,11 @@ public class PartyRelationship extends EntityRelationship {
     return Objects.hash(super.hashCode(), scoper);
   }
 
-  public @Nullable String getScoper() {
+  public @Nullable EntityRefNode getScoper() {
     return scoper;
   }
 
-  public void setScoper(@Nullable String scoper) {
+  public void setScoper(@Nullable EntityRefNode scoper) {
     this.scoper = scoper;
   }
 

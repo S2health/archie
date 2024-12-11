@@ -4,13 +4,14 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Fiat_point
 * BMM ancestors: Material_location
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Fiat_point")
@@ -38,6 +39,9 @@ public class FiatPoint extends MaterialLocation {
     if (other == null || getClass() != other.getClass()) return false;
     FiatPoint otherAsFiatPoint = (FiatPoint) other;
     return Objects.equals(getItems(), otherAsFiatPoint.getItems()) &&
+      Objects.equals(getCode(), otherAsFiatPoint.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsFiatPoint.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsFiatPoint.getLinks()) &&
       Objects.equals(getUid(), otherAsFiatPoint.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsFiatPoint.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsFiatPoint.getName()) &&

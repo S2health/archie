@@ -3,10 +3,10 @@ package org.s2.rm.entity.occurrent;
 import java.util.*;
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.base.patterns.data_structures.Participation;
 import org.s2.rm.entity.entity.Entity;
@@ -15,7 +15,7 @@ import org.s2.rm.entity.entity.Entity;
 * BMM name: Process
 * BMM ancestors: Entity
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Process", propOrder = {
@@ -58,8 +58,8 @@ public class Process extends Entity {
 
   public Process() {}
 
-  public Process(TerminologyTerm domainType, String archetypeNodeId, String name) {
-    super(domainType, archetypeNodeId, name);
+  public Process(String archetypeNodeId, String name) {
+    super(archetypeNodeId, name);
   }
 
   @Override
@@ -67,9 +67,11 @@ public class Process extends Entity {
     if (this == other) return true;
     if (other == null || getClass() != other.getClass()) return false;
     Process otherAsProcess = (Process) other;
-    return Objects.equals(getDomainType(), otherAsProcess.getDomainType()) &&
-      Objects.equals(getRelationships(), otherAsProcess.getRelationships()) &&
+    return Objects.equals(getRelationships(), otherAsProcess.getRelationships()) &&
       Objects.equals(getOtherDetails(), otherAsProcess.getOtherDetails()) &&
+      Objects.equals(getCode(), otherAsProcess.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsProcess.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsProcess.getLinks()) &&
       Objects.equals(getUid(), otherAsProcess.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsProcess.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsProcess.getName()) &&

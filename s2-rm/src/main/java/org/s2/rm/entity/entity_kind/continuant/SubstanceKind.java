@@ -4,13 +4,14 @@ import java.util.*;
 import javax.xml.bind.annotation.*;
 import org.s2.rm.base.model_support.identification.Uuid;
 import org.s2.rm.base.patterns.archetyped.FeederAudit;
+import org.s2.rm.base.patterns.archetyped.Link;
 import org.s2.rm.base.patterns.data_structures.Node;
 
 /**
 * BMM name: Substance_kind
 * BMM ancestors: Independent_object_kind
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Substance_kind")
@@ -50,6 +51,9 @@ public class SubstanceKind extends IndependentObjectKind {
     SubstanceKind otherAsSubstanceKind = (SubstanceKind) other;
     return Objects.equals(getParts(), otherAsSubstanceKind.getParts()) &&
       Objects.equals(getItems(), otherAsSubstanceKind.getItems()) &&
+      Objects.equals(getCode(), otherAsSubstanceKind.getCode()) &&
+      Objects.equals(getOriginalCode(), otherAsSubstanceKind.getOriginalCode()) &&
+      Objects.equals(getLinks(), otherAsSubstanceKind.getLinks()) &&
       Objects.equals(getUid(), otherAsSubstanceKind.getUid()) &&
       Objects.equals(getArchetypeNodeId(), otherAsSubstanceKind.getArchetypeNodeId()) &&
       Objects.equals(getName(), otherAsSubstanceKind.getName()) &&

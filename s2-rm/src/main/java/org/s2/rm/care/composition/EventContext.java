@@ -16,7 +16,7 @@ import org.s2.rm.base.patterns.data_structures.Participation;
 * BMM name: Event_context
 * BMM ancestors: Locatable
 * isAbstract: false | isPrimitiveType: false | isOverride: false
-* BMM schema: S2RM 0.8.6
+* BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Event_context", propOrder = {
