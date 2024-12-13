@@ -16,7 +16,7 @@ public class Operator extends Expression {
 
     private String symbol;
 
-    @JsonIgnore
+    // @JsonIgnore
     public OperatorKind getOperator() {
         return operator;
     }
