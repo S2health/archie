@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.*;
   "lowerIncluded",
   "upperIncluded"
 })
-public class Interval<T extends Comparable> extends RMObject {
+public class Interval<T > extends RMObject {
   /**
   * BMM name: lower | BMM type: T
   * isMandatory: false | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 0..1
