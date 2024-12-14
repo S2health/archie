@@ -18,6 +18,7 @@ import org.s2.rm.base.patterns.archetyped.Link;
 @XmlType(name = "Info_node", propOrder = {
   "originalValue"
 })
+@XmlRootElement(name = "info_node")
 public class InfoNode extends Node {
   /**
   * BMM name: original_value | BMM type: Data_value

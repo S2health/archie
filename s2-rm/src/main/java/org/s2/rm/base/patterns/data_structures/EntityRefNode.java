@@ -19,6 +19,8 @@ import org.s2.rm.base.patterns.archetyped.Link;
   "isSelf",
   "entityRef"
 })
+@XmlRootElement(name = "entity_ref_node")
+
 public class EntityRefNode extends Node {
   /**
   * BMM name: is_self | BMM type: Boolean

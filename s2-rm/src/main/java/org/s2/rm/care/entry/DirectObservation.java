@@ -28,6 +28,8 @@ import org.s2.rm.base.patterns.data_structures.Participation;
   "dataSeries",
   "stateSeries"
 })
+@XmlRootElement(name = "direct_observation")
+
 public class DirectObservation extends Observation {
   /**
   * BMM name: trend | BMM type: Trend_kind

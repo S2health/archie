@@ -26,6 +26,8 @@ import org.s2.rm.base.patterns.data_structures.Participation;
   "description",
   "stateTransition"
 })
+@XmlRootElement(name = "action")
+
 public class Action extends CareActEntry {
   /**
   * BMM name: activity_id | BMM type: String

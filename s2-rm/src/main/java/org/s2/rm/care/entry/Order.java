@@ -25,6 +25,8 @@ import org.s2.rm.base.patterns.data_structures.Participation;
   "expiryTime",
   "activities"
 })
+@XmlRootElement(name = "order")
+
 public class Order extends CareActEntry {
   /**
   * BMM name: narrative | BMM type: Text
