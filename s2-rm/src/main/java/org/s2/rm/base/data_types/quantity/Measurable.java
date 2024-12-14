@@ -9,9 +9,7 @@ import javax.xml.bind.annotation.*;
 * BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Measurable", propOrder = {
-  "magnitude"
-})
+@XmlType(name = "Measurable")
 public abstract class Measurable extends OrderedValue {
   /**
   * BMM name: magnitude | BMM type: Numeric

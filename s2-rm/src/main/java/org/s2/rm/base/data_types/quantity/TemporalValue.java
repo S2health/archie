@@ -9,9 +9,7 @@ import javax.xml.bind.annotation.*;
 * BMM schema: S2RM 0.8.7
 */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Temporal_value", propOrder = {
-  "magnitude"
-})
+@XmlType(name = "Temporal_value")
 public abstract class TemporalValue extends OrderedValue {
   /**
   * BMM name: magnitude | BMM type: Temporal
