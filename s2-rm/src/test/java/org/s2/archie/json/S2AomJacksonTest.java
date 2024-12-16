@@ -1,6 +1,7 @@
 package org.s2.archie.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.collect.Lists;
@@ -15,6 +16,7 @@ import com.nedap.archie.aom.primitives.ConstraintStatus;
 import com.nedap.archie.aom.rmoverlay.VisibilityType;
 import com.nedap.archie.base.Interval;
 import com.nedap.archie.json.ArchieJacksonConfiguration;
+import org.apache.commons.io.IOUtils;
 import org.s2.serialisation.json.S2RmJacksonUtil;
 import com.nedap.archie.rules.BinaryOperator;
 import com.nedap.archie.rules.Constraint;
@@ -27,9 +29,12 @@ import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.threeten.extra.PeriodDuration;
 
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.Iterator;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -61,13 +66,95 @@ public class S2AomJacksonTest {
 
     @Test
     public void roundTripMedicationOrder() throws Exception {
-        try(InputStream stream = getClass().getResourceAsStream("delirium_observation_screening.json")) {
-            ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createLegacyConfiguration());
-            Archetype archetype = objectMapper.readValue(stream, Archetype.class);
+        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Order.medication_order.v4.0.2.json")) {
+            ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
+            String json = IOUtils.toString(stream, StandardCharsets.UTF_8);
+            Archetype archetype = objectMapper.readValue(json, Archetype.class);
             String reserialized = objectMapper.writeValueAsString(archetype);
             //System.out.println(reserialized);
-            objectMapper.readValue(reserialized, Archetype.class);
+            //objectMapper.readValue(reserialized, Archetype.class);
+
+            assertTrue(areJsonStringsEqual(json, reserialized));
+
         }
+    }
+
+    public boolean areJsonStringsEqual(String json1, String json2) {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode tree1 = objectMapper.readTree(json1);
+                JsonNode tree2 = objectMapper.readTree(json2);
+                return compareJsonNodes(tree1, tree2, "");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+    }
+
+    public static boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path) {
+        // If both nodes are null, they are equal at this level
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+
+        // If one node is null and the other is not, print the difference
+        if (node1 == null || node2 == null) {
+            System.out.println("Difference at path: " + path + " (One is null, the other is not)");
+            return false;
+        }
+
+        // If nodes are not equal at this level
+        if (!node1.equals(node2)) {
+            if (node1.isObject() && node2.isObject()) {
+                Iterator<Map.Entry<String, JsonNode>> fields1 = node1.fields();
+                Iterator<Map.Entry<String, JsonNode>> fields2 = node2.fields();
+
+                // Compare fields of both JSON objects
+                while (fields1.hasNext()) {
+                    Map.Entry<String, JsonNode> entry1 = fields1.next();
+                    String key = entry1.getKey();
+                    JsonNode value1 = entry1.getValue();
+
+                    JsonNode value2 = node2.get(key); // Corresponding key in the second JSON
+                    if (!compareJsonNodes(value1, value2, path + "/" + key)) {
+                        return false; // Stop comparison if a difference is found
+                    }
+                }
+
+                // Check for keys that are in node2 but not in node1
+                while (fields2.hasNext()) {
+                    Map.Entry<String, JsonNode> entry2 = fields2.next();
+                    String key = entry2.getKey();
+                    if (!node1.has(key)) {
+                        System.out.println("Difference at path: " + path + "/" + key + " (Key missing in first JSON)");
+                        return false;
+                    }
+                }
+            } else if (node1.isArray() && node2.isArray()) {
+                // Compare arrays
+                int minSize = Math.min(node1.size(), node2.size());
+                for (int i = 0; i < minSize; i++) {
+                    if (!compareJsonNodes(node1.get(i), node2.get(i), path + "[" + i + "]")) {
+                        return false; // Stop comparison if a difference is found
+                    }
+                }
+
+                // Check for additional elements in arrays
+                if (node1.size() > node2.size()) {
+                    System.out.println("Difference at path: " + path + " (Extra elements in first JSON array)");
+                    return false;
+                } else if (node2.size() > node1.size()) {
+                    System.out.println("Difference at path: " + path + " (Extra elements in second JSON array)");
+                    return false;
+                }
+            } else {
+                // Leaf nodes are different
+                System.out.println("Difference at path: " + path + " (Value1: " + node1 + ", Value2: " + node2 + ")");
+                return false;
+            }
+        }
+        return true;
     }
 
 
