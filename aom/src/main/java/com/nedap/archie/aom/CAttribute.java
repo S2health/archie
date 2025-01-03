@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by pieter.bos on 15/10/15.
  */
-@JsonPropertyOrder({"@type", "rm_attribute_name", "path", "logical_path", "differential_path", "multiple", "mandatory", "existence", "cardinality", "children"})
+@JsonPropertyOrder({"_type", "rm_attribute_name", "path", "logical_path", "differential_path", "multiple", "mandatory", "existence", "cardinality", "children"})
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name="C_ATTRIBUTE", propOrder = {
         "existence",
