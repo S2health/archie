@@ -287,13 +287,14 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
             //this is an abstract class and cannot be created. Create point event instead
             return PointEvent.class;
         }
-        return getClass(rmTypename);
+        else if (rmTypename.equals("Node")) {
+            //this is an abstract class and cannot be created. Create InfoNode instead
+            return InfoNode.class;
+        }
+        else
+            return getClass(rmTypename);
     }
 
-    @Override
-    public Object convertToConstraintObject(Object object, CPrimitiveObject<?, ?> cPrimitiveObject) {
-        return object;
-    }
 
     @Override
     public void processCreatedObject(Object createdObject, CObject constraint) {
