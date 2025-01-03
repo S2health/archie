@@ -30,9 +30,9 @@ public class S2RmMetaModelsInitialiserTest {
             System.out.println(validation.getLogger().toString());
 
         }
-        assertEquals(26, bmmRepository.getPersistentSchemas().size());
-        assertEquals(26, bmmRepository.getModels().size());
-        assertEquals(26, bmmRepository.getValidModels().size());
+        assertEquals(39, bmmRepository.getPersistentSchemas().size());
+        assertEquals(39, bmmRepository.getModels().size());
+        assertEquals(39, bmmRepository.getValidModels().size());
         assertEquals(0, bmmRepository.getInvalidModels().size());
     }
 
