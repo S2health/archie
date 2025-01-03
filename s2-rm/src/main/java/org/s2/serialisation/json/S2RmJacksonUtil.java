@@ -90,7 +90,7 @@ public class S2RmJacksonUtil {
         }
 
         objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.registerModule(new ArchieDurationModule());
+        objectMapper.registerModule(new S2DurationModule());
 
 
         SimpleModule module = new SimpleModule("archie-module");
