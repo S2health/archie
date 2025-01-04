@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  */
 @XmlType(name="TERMINOLOGY_CODE")
 @XmlAccessorType(XmlAccessType.FIELD)
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, defaultImpl=TerminologyCode.class)
+//@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, defaultImpl=TerminologyCode.class)
 public class TerminologyCode extends OpenEHRBase {
 
     @XmlElement(name="terminology_id")
