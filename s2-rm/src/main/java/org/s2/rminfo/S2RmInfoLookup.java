@@ -354,7 +354,7 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
         if(rmObject instanceof RMObject) {
             return ((RMObject) rmObject).clone();
         }
-        throw new IllegalArgumentException("The ArchieRMInfoLookup can only clone s2 reference model objects");
+        throw new IllegalArgumentException("S2RMInfoLookup can only clone instances of RMObject descendants");
     }
 
     /**
