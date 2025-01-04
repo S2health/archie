@@ -67,7 +67,10 @@ public class S2AomJacksonTest {
     @Test
     public void roundTripMedicationOrder() throws Exception {
         try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Order.medication_order.v4.0.2.json")) {
-            ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
+            ArchieJacksonConfiguration config = ArchieJacksonConfiguration.createStandardsCompliant();
+            config.setAlwaysIncludeTypeProperty(true);
+            ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(config);
+
             String json = IOUtils.toString(stream, StandardCharsets.UTF_8);
             Archetype archetype = objectMapper.readValue(json, Archetype.class);
             String reserialized = objectMapper.writeValueAsString(archetype);
@@ -79,28 +82,32 @@ public class S2AomJacksonTest {
         }
     }
 
-    public boolean areJsonStringsEqual(String json1, String json2) {
-
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                JsonNode tree1 = objectMapper.readTree(json1);
-                JsonNode tree2 = objectMapper.readTree(json2);
-                return compareJsonNodes(tree1, tree2, "");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
+    private boolean areJsonStringsEqual(String json1, String json2) {
+        ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
+        try {
+            JsonNode tree1 = objectMapper.readTree(json1);
+            JsonNode tree2 = objectMapper.readTree(json2);
+            return compareJsonNodes(tree1, tree2, "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public static boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path) {
+    private static boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path) {
         // If both nodes are null, they are equal at this level
         if (node1 == null && node2 == null) {
             return true;
         }
 
         // If one node is null and the other is not, print the difference
-        if (node1 == null || node2 == null) {
-            System.out.println("Difference at path: " + path + " (One is null, the other is not)");
+        if (node1 == null) {
+            System.out.println("Difference at path " + path + ": (first is null)");
+            return false;
+        }
+
+        if (node2 == null) {
+            System.out.println("Difference at path " + path + ": (second is null)");
             return false;
         }
 
