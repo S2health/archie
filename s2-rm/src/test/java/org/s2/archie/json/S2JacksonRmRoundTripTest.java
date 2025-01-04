@@ -4,14 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nedap.archie.adlparser.ADLParser;
 import com.nedap.archie.adlparser.modelconstraints.S2RmConstraintImposer;
 import com.nedap.archie.aom.Archetype;
+import com.nedap.archie.base.terminology.TerminologyCode;
 import com.nedap.archie.json.ArchieJacksonConfiguration;
-import org.s2.rm.base.data_types.quantity.DateTimeValue;
-import org.s2.rm.base.data_types.quantity.DateValue;
-import org.s2.rm.base.data_types.quantity.Quantity;
-import org.s2.rm.base.data_types.quantity.TimeValue;
+import org.s2.rm.base.data_types.quantity.*;
 import org.s2.rm.base.data_types.text.PlainText;
+import org.s2.rm.base.data_types.uri.UriRef;
 import org.s2.rm.base.foundation_types.primitive_types.Uri;
-import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.foundation_types.time.RmDate;
 import org.s2.rm.base.foundation_types.time.RmDateTime;
@@ -32,6 +30,7 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.is;
 import static junit.framework.TestCase.assertEquals;
@@ -58,44 +57,58 @@ public class S2JacksonRmRoundTripTest {
     @Test
     public void dataValues() throws Exception {
         archetype = parser.parse(S2JacksonRmRoundTripTest.class.getResourceAsStream("s2-EHR-Info_node.datavalues.v1.0.0.adls"));
-        InfoNode cluster =  (InfoNode) testUtil.constructEmptyRMObject(archetype.getDefinition());
+        InfoNode infoNode =  (InfoNode) testUtil.constructEmptyRMObject(archetype.getDefinition());
+        InfoNode firstNode = (InfoNode) infoNode.getItems().get(0);
+
         Uuid uid = new Uuid("111111-2222-3333-444444");
-        cluster.setUid(uid);
-        RMQueryContext queryContext = getQueryContext(cluster);
-        PlainText text = queryContext.find("/items['Text']/value");
+        infoNode.setUid(uid);
+        RMQueryContext queryContext = getQueryContext(infoNode);
+
+        PlainText text = queryContext.find("/items[id2]/value");
         text.setText("test-text");
-        Quantity quantity = queryContext.find("/items['Quantity']/value");
+
+        Count count = queryContext.find("/items[id3]/value");
+        count.setMagnitude(4);
+
+        Quantity quantity = queryContext.find("/items[id4]/value");
         quantity.setMagnitude(new BigDecimal(23));
-        DateValue date = queryContext.find("/items['Date']/value");
+
+        Proportion proportion = queryContext.find("/items[id5]/value");
+        proportion.setMagnitude(new BigDecimal(1));
+        proportion.setDenominator(quantity);
+
+        DateValue date = queryContext.find("/items[id6]/value");
         date.setMagnitude(new RmDate("2016-01-01"));
 
-        DateTimeValue datetime = queryContext.find("/items['Datetime']/value");
-        datetime.setMagnitude(new RmDateTime("2016-01-01T12:00:00"));
-
-        TimeValue time = queryContext.find("/items['Time']/value");
+        TimeValue time = queryContext.find("/items[id7]/value");
         time.setMagnitude(new RmTime("12:00:00"));
 
-        Uri uri = queryContext.find("/items['Uri']/value");
-        uri.setValue("http://test.example.com");
+        DateTimeValue datetime = queryContext.find("/items[id8]/value");
+        datetime.setMagnitude(new RmDateTime("2016-01-01T12:00:00"));
 
-        String json = S2RmJacksonUtil.getObjectMapper().writeValueAsString(cluster);
+        CodedOrdinal codedOrdinal = queryContext.find("/items[id9]/value");
+
+        UriRef uriRef = queryContext.find("/items[id10]/value");
+        uriRef.setValue("http://test.example.com");
+
+        String json = S2RmJacksonUtil.getObjectMapper().writeValueAsString(infoNode);
         System.out.println(json);
         InfoNode parsedInfoNode = (InfoNode) S2RmJacksonUtil.getObjectMapper().readValue(json, InfoNode.class);
         RMQueryContext parsedQueryContext = getQueryContext(parsedInfoNode);
 
-        assertThat(parsedQueryContext.<PlainText>find("/items['Text']/value").getText(), is("test-text"));
-        assertThat(parsedQueryContext.<Quantity>find("/items['Quantity']/value").getMagnitude(), is(23d));
-        assertThat(parsedQueryContext.<DateValue>find("/items['Date']/value").getMagnitude(), is(LocalDate.of(2016, 1, 1)));
-        assertThat(parsedQueryContext.<DateTimeValue>find("/items['Datetime']/value").getMagnitude(), is(LocalDateTime.of(2016, 1, 1, 12, 00)));
-        assertThat(parsedQueryContext.<TimeValue>find("/items['Time']/value").getMagnitude(), is(LocalTime.of(12, 0)));
-        assertThat(parsedQueryContext.<Uri>find("/items['Uri']/value").getValue(), is(URI.create("http://test.example.com")));
-        assertThat(parsedInfoNode.getUid().getValue(), is("SOME_UUID"));
+        assertThat(parsedQueryContext.<PlainText>find("/items[id2]/value").getText(), is("test-text"));
+        assertThat(parsedQueryContext.<Quantity>find("/items[id4]/value").getMagnitude().intValue(), is(23));
+        assertThat(parsedQueryContext.<DateValue>find("/items[id6]/value").getMagnitude().getValue(), is("2016-01-01"));
+        assertThat(parsedQueryContext.<DateTimeValue>find("/items[id8]/value").getMagnitude().getValue(), is("2016-01-01T12:00:00"));
+        assertThat(parsedQueryContext.<TimeValue>find("/items[id7]/value").getMagnitude().getValue(), is("12:00:00"));
+        assertThat(parsedQueryContext.<UriRef>find("/items[id10]/value").getValue(), is("http://test.example.com"));
+        assertThat(parsedInfoNode.getUid().getValue(), is("111111-2222-3333-444444"));
         assertThat(parsedInfoNode.getArchetypeNodeId(), is("id1"));
 
     }
 
-    private RMQueryContext getQueryContext(InfoNode cluster) {
-        return new RMQueryContext(S2RmInfoLookup.getInstance(), cluster, S2RmJaxbUtil.getArchieJAXBContext());
+    private RMQueryContext getQueryContext(InfoNode infoNode) {
+        return new RMQueryContext(S2RmInfoLookup.getInstance(), infoNode, S2RmJaxbUtil.getArchieJAXBContext());
     }
 
     @Test

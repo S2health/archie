@@ -29,14 +29,14 @@ public abstract class Locatable extends Pathable {
   * BMM name: archetype_node_id | BMM type: String
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: true | existence: 1..1
   */
-  @XmlElement(name = "archetype_node_id")
+  @XmlAttribute(name = "archetype_node_id")
   private String archetypeNodeId;
 
   /**
   * BMM name: name | BMM type: String
   * isMandatory: true | isComputed: false | isImRuntime: false | isImInfrastructure: false | existence: 1..1
   */
-  @XmlElement(name = "name")
+  @XmlAttribute(name = "name")
   private String name;
 
   /**
