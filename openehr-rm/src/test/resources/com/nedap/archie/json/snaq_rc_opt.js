@@ -5892,7 +5892,6 @@
       "nl": {
         "_type": "RESOURCE_DESCRIPTION_ITEM",
         "language": {
-          "_type": "TerminologyCode",
           "code_string": "nl",
           "terminology_id": "ISO_639-1",
           "terminology_id_string": "ISO_639-1"
@@ -5905,10 +5904,7 @@
     "ip_acknowledgements": {
 
     },
-    "lifecycle_state": {
-      "_type": "TerminologyCode",
-      "code_string": "unmanaged"
-    },
+    "lifecycle_state":  "unmanaged",
     "original_author": {
 
     },
@@ -5925,7 +5921,6 @@
   "differential": false,
   "generated": true,
   "original_language": {
-    "_type": "TerminologyCode",
     "code_string": "nl",
     "terminology_id": "ISO_639-1",
     "terminology_id_string": "ISO_639-1"
