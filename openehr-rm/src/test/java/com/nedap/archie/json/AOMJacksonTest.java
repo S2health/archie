@@ -270,10 +270,8 @@ public class AOMJacksonTest {
                 "      \"/subject\" : {\n" +
                 "        \"visibility\" : \"hide\",\n" +
                 "        \"alias\" : {\n" +
-                "          \"@type\" : \"TerminologyCode\",\n" +
                 "          \"terminology_id\" : \"local\",\n" +
-                "          \"code_string\" : \"at12\",\n" +
-                "          \"terminology_id_string\" : \"local\"\n" +
+                "          \"code_string\" : \"at12\"\n" +
                 "        }\n" +
                 "      },\n" +
                 "      \"/data[id2]/events[id3]/data[id4]/items[id5]\" : {\n" +
