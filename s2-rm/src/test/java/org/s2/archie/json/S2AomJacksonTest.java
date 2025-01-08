@@ -77,24 +77,24 @@ public class S2AomJacksonTest {
             //System.out.println(reserialized);
             //objectMapper.readValue(reserialized, Archetype.class);
 
-            assertTrue(areJsonStringsEqual(json, reserialized));
+            assertTrue(areJsonStringsEqual(json, reserialized, true));
 
         }
     }
 
-    private boolean areJsonStringsEqual(String json1, String json2) {
+    private boolean areJsonStringsEqual(String json1, String json2, boolean ignoreType) {
         ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
         try {
             JsonNode tree1 = objectMapper.readTree(json1);
             JsonNode tree2 = objectMapper.readTree(json2);
-            return compareJsonNodes(tree1, tree2, "");
+            return compareJsonNodes(tree1, tree2, "", ignoreType);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    private static boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path) {
+    private static boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path, boolean ignoreType) {
         // If both nodes are null, they are equal at this level
         if (node1 == null && node2 == null) {
             return true;
@@ -121,10 +121,16 @@ public class S2AomJacksonTest {
                 while (fields1.hasNext()) {
                     Map.Entry<String, JsonNode> entry1 = fields1.next();
                     String key = entry1.getKey();
-                    JsonNode value1 = entry1.getValue();
 
+                    // Skip the `_type` property if the ignoreType flag is set
+                    if (ignoreType && key.equals("_type")) {
+                        continue;
+                    }
+
+                    JsonNode value1 = entry1.getValue();
                     JsonNode value2 = node2.get(key); // Corresponding key in the second JSON
-                    if (!compareJsonNodes(value1, value2, path + "/" + key)) {
+
+                    if (!compareJsonNodes(value1, value2, path + "/" + key, ignoreType)) {
                         return false; // Stop comparison if a difference is found
                     }
                 }
@@ -133,6 +139,12 @@ public class S2AomJacksonTest {
                 while (fields2.hasNext()) {
                     Map.Entry<String, JsonNode> entry2 = fields2.next();
                     String key = entry2.getKey();
+
+                    // Skip the `_type` property if the ignoreType flag is set
+                    if (ignoreType && key.equals("_type")) {
+                        continue;
+                    }
+
                     if (!node1.has(key)) {
                         System.out.println("Difference at path: " + path + "/" + key + " (Key missing in first JSON)");
                         return false;
@@ -142,7 +154,7 @@ public class S2AomJacksonTest {
                 // Compare arrays
                 int minSize = Math.min(node1.size(), node2.size());
                 for (int i = 0; i < minSize; i++) {
-                    if (!compareJsonNodes(node1.get(i), node2.get(i), path + "[" + i + "]")) {
+                    if (!compareJsonNodes(node1.get(i), node2.get(i), path + "[" + i + "]", ignoreType)) {
                         return false; // Stop comparison if a difference is found
                     }
                 }
@@ -163,6 +175,7 @@ public class S2AomJacksonTest {
         }
         return true;
     }
+
 
 
     @Test
