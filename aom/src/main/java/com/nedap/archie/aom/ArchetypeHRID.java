@@ -111,6 +111,7 @@ public class ArchetypeHRID extends ArchetypeModelObject {
         this.buildCount = buildCount;
     }
 
+    @JsonIgnore
     public String getFullId() {
         StringBuilder result = new StringBuilder(30);
         result.append(getIdUpToConcept());
@@ -123,6 +124,7 @@ public class ArchetypeHRID extends ArchetypeModelObject {
         return result.toString();
     }
 
+    @JsonIgnore
     public String getSemanticId() {
         return getIdUpToConcept() + ((releaseVersion == null) ? "" : ".v" + ((releaseVersion.isEmpty()) ? "" : getMajorVersion()));
     }
@@ -152,16 +154,19 @@ public class ArchetypeHRID extends ArchetypeModelObject {
         return result.toString();
     }
 
+    @JsonIgnore
     public String getMajorVersion() {
         return (releaseVersion == null || releaseVersion.isEmpty()) ? null : releaseVersion.split("\\.")[0];
     }
 
+    @JsonIgnore
     public String getMinorVersion() {
         if (releaseVersion == null) return null;
         String[] splitVersion = releaseVersion.split("\\.");
         return (splitVersion.length >= 2) ? splitVersion[1] : null;
     }
 
+    @JsonIgnore
     public String getPatchVersion() {
         if (releaseVersion == null) return null;
         String[] splitVersion = releaseVersion.split("\\.|\\-");
@@ -257,6 +262,7 @@ public class ArchetypeHRID extends ArchetypeModelObject {
         return Objects.hash(namespace, rmPublisher, rmPackage, rmClass, conceptId, releaseVersion, versionStatus, buildCount);
     }
 
+    @JsonIgnore
     @RMPropertyIgnore
     public String getIdUpToConcept() {
         StringBuilder result = new StringBuilder(30);

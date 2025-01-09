@@ -1,5 +1,6 @@
 package org.s2.archie.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -70,6 +71,9 @@ public class S2AomJacksonTest {
             ArchieJacksonConfiguration config = ArchieJacksonConfiguration.createStandardsCompliant();
             config.setAlwaysIncludeTypeProperty(true);
             ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(config);
+            objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            objectMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+
 
             String json = IOUtils.toString(stream, StandardCharsets.UTF_8);
             Archetype archetype = objectMapper.readValue(json, Archetype.class);
@@ -94,7 +98,9 @@ public class S2AomJacksonTest {
         }
     }
 
-    private static boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path, boolean ignoreType) {
+    private boolean compareJsonNodes(JsonNode node1, JsonNode node2, String path, boolean ignoreType) {
+        boolean areEqual = true; // Assume nodes are equal initially
+
         // If both nodes are null, they are equal at this level
         if (node1 == null && node2 == null) {
             return true;
@@ -131,7 +137,7 @@ public class S2AomJacksonTest {
                     JsonNode value2 = node2.get(key); // Corresponding key in the second JSON
 
                     if (!compareJsonNodes(value1, value2, path + "/" + key, ignoreType)) {
-                        return false; // Stop comparison if a difference is found
+                        areEqual = false; // Mark as not equal, but continue checking
                     }
                 }
 
@@ -147,7 +153,7 @@ public class S2AomJacksonTest {
 
                     if (!node1.has(key)) {
                         System.out.println("Difference at path: " + path + "/" + key + " (Key missing in first JSON)");
-                        return false;
+                        areEqual = false;
                     }
                 }
             } else if (node1.isArray() && node2.isArray()) {
@@ -155,26 +161,29 @@ public class S2AomJacksonTest {
                 int minSize = Math.min(node1.size(), node2.size());
                 for (int i = 0; i < minSize; i++) {
                     if (!compareJsonNodes(node1.get(i), node2.get(i), path + "[" + i + "]", ignoreType)) {
-                        return false; // Stop comparison if a difference is found
+                        areEqual = false; // Mark as not equal, but continue checking
                     }
                 }
 
                 // Check for additional elements in arrays
                 if (node1.size() > node2.size()) {
                     System.out.println("Difference at path: " + path + " (Extra elements in first JSON array)");
-                    return false;
+                    areEqual = false;
                 } else if (node2.size() > node1.size()) {
                     System.out.println("Difference at path: " + path + " (Extra elements in second JSON array)");
-                    return false;
+                    areEqual = false;
                 }
             } else {
                 // Leaf nodes are different
                 System.out.println("Difference at path: " + path + " (Value1: " + node1 + ", Value2: " + node2 + ")");
-                return false;
+                areEqual = false;
             }
         }
-        return true;
+
+        return areEqual;
     }
+
+
 
 
 
