@@ -1,6 +1,7 @@
 package com.nedap.archie.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Joiner;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -20,6 +21,8 @@ import java.util.Objects;
         "isUnique",
         "interval"
 })
+
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Cardinality extends OpenEHRBase {
 
     private MultiplicityInterval interval;
@@ -55,6 +58,7 @@ public class Cardinality extends OpenEHRBase {
         this.isOrdered = ordered;
     }
 
+    @JsonIgnore
     public boolean isUnique() {
         return isUnique;
     }

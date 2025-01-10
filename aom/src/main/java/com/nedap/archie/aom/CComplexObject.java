@@ -34,6 +34,7 @@ public class CComplexObject extends CDefinedObject<OpenEHRBase> {
     @JsonIgnore
     protected transient Archetype archetype;
 
+   @JsonIgnore
     public boolean isAnyAllowed() {
         return attributes == null || attributes.isEmpty();
     }

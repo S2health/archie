@@ -2,6 +2,7 @@ package com.nedap.archie.aom;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.aom.rmoverlay.RmAttributeVisibility;
 import com.nedap.archie.aom.rmoverlay.RmOverlay;
@@ -47,6 +48,7 @@ import java.util.stream.Collectors;
         "xmlOtherMetaData",
         "rmOverlay"
 })
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Archetype extends AuthoredResource {
 
     @XmlElement(name="parent_archetype_id")

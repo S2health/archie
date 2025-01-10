@@ -1,6 +1,7 @@
 package com.nedap.archie.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nedap.archie.rminfo.Invariant;
 import com.nedap.archie.rminfo.RMPropertyIgnore;
 
@@ -20,6 +21,7 @@ import java.util.Objects;
  */
 @XmlType(name = "INTERVAL")
 @XmlAccessorType(XmlAccessType.FIELD)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Interval<T> extends OpenEHRBase {
 
     /**

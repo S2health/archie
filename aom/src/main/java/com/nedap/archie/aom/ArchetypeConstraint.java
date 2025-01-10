@@ -44,6 +44,7 @@ public abstract class ArchetypeConstraint extends ArchetypeModelObject {
     @XmlTransient
     public abstract List<PathSegment> getPathSegments();
 
+    @JsonIgnore // JFC
     public final String getPath() {
         return PathUtil.getPath(getPathSegments());
     }
@@ -56,6 +57,7 @@ public abstract class ArchetypeConstraint extends ArchetypeModelObject {
      * @deprecated This functionality will be removed.
      */
     @Deprecated
+    @JsonIgnore // JFC
     public abstract String getLogicalPath();
 
     @Deprecated

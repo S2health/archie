@@ -109,6 +109,7 @@ public abstract class CObject extends ArchetypeConstraint {
     /**
      * Get the archetype term, in the defined meaning and description language
      */
+    @JsonIgnore
     public ArchetypeTerm getTerm() {
         if(nodeId == null) {
             return null;
@@ -177,7 +178,9 @@ public abstract class CObject extends ArchetypeConstraint {
         return meaning;
     }
 
+
     @Deprecated
+    @JsonIgnore
     public String getLogicalPath() {
         //TODO: this can cause name clashes. Solve them!
         //TODO: the text can contain []-characters. Replace them?
@@ -201,6 +204,7 @@ public abstract class CObject extends ArchetypeConstraint {
         return path;
     }
 
+    @JsonIgnore
     public boolean isAllowed() {
         if(occurrences == null) {
             return true;
@@ -213,6 +217,7 @@ public abstract class CObject extends ArchetypeConstraint {
         return (CAttribute) super.getParent();
     }
 
+    @JsonIgnore
     public boolean isRequired() {
         if(occurrences == null) {
             return false;
@@ -267,6 +272,7 @@ public abstract class CObject extends ArchetypeConstraint {
         return "CObject: " + getRmTypeName() + "[" + getNodeId() + "]";
     }
 
+    @JsonIgnore // JFC
     public boolean isProhibited() {
         return occurrences != null && occurrences.isProhibited();
     }

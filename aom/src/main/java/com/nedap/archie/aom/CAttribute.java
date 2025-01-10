@@ -1,6 +1,7 @@
 package com.nedap.archie.aom;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Cardinality;
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * Created by pieter.bos on 15/10/15.
  */
+@JsonInclude(JsonInclude.Include.NON_DEFAULT) //JFC Experiment
 @JsonPropertyOrder({"_type", "rm_attribute_name", "path", "logical_path", "differential_path", "multiple", "mandatory", "existence", "cardinality", "children"})
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name="C_ATTRIBUTE", propOrder = {
@@ -31,7 +33,6 @@ import java.util.List;
         "cardinality",
         "children"
 })
-
 public class CAttribute extends ArchetypeConstraint {
 
     @XmlAttribute(name="rm_attribute_name")
@@ -358,6 +359,7 @@ public class CAttribute extends ArchetypeConstraint {
         return !multiple;
     }
 
+    @JsonIgnore
     public boolean isMandatory() {
         if(existence != null) {
             return existence.isMandatory();
@@ -369,7 +371,7 @@ public class CAttribute extends ArchetypeConstraint {
         return children.isEmpty() && !isProhibited();
     }
 
-
+    @JsonIgnore
     public boolean isProhibited() {
         if(existence != null) {
             return existence.isProhibited();
