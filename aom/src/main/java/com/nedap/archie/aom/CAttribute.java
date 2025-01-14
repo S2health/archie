@@ -1,8 +1,6 @@
 package com.nedap.archie.aom;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
@@ -24,12 +22,12 @@ import java.util.List;
  * Created by pieter.bos on 15/10/15.
  */
 @JsonInclude(JsonInclude.Include.NON_DEFAULT) //JFC Experiment
-@JsonPropertyOrder({"_type", "rm_attribute_name", "path", "logical_path", "differential_path", "multiple", "mandatory", "existence", "cardinality", "children"})
+@JsonPropertyOrder({"_type", "rm_attribute_name", "path", "logical_path", "differential_path", "is_multiple", "mandatory", "existence", "cardinality", "children"})
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name="C_ATTRIBUTE", propOrder = {
         "existence",
         "differentialPath",
-        "multiple",
+        "is_multiple",
         "cardinality",
         "children"
 })
@@ -83,10 +81,12 @@ public class CAttribute extends ArchetypeConstraint {
         this.differentialPath = differentialPath;
     }
 
+    @JsonProperty("is_multiple")
     public boolean isMultiple() {
         return multiple;
     }
 
+    @JsonProperty("is_multiple")
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
     }
