@@ -50,11 +50,11 @@ public class S2AomJacksonTest {
 
     @Test
     public void parseMedicationOrder() throws Exception {
-        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Order.medication_order.v4.0.2.json")) {
+        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Order.medication_order.v5.0.0.json")) {
             Archetype archetype = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Archetype.class);
             System.out.println(archetype);
             assertTrue(archetype.getGenerated());
-            assertThat(archetype.getArchetypeId().getFullId(), is("s2-EHR-Order.medication_order.v4.0.2"));
+            assertThat(archetype.getArchetypeId().getFullId(), is("s2-EHR-Order.medication_order.v5.0.0"));
             assertThat(archetype.getDefinition().getRmTypeName(), is("Order"));
             CComplexObject infoNode = archetype.getDefinition().itemAtPath("/activities[id2]/description[id95]");
             assertThat(infoNode.getRmTypeName(), is("Info_node"));
@@ -67,7 +67,7 @@ public class S2AomJacksonTest {
 
     @Test
     public void roundTripMedicationOrder() throws Exception {
-        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Order.medication_order.v4.0.2.json")) {
+        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Order.medication_order.v5.0.0.json")) {
             ArchieJacksonConfiguration config = ArchieJacksonConfiguration.createStandardsCompliant();
             config.setAlwaysIncludeTypeProperty(true);
             ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(config);
