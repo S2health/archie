@@ -1,6 +1,10 @@
 package com.nedap.archie.aom.primitives;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.nedap.archie.ArchieLanguageConfiguration;
 import com.nedap.archie.ValidationConfiguration;
 import com.nedap.archie.aom.Archetype;
@@ -22,6 +26,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +59,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
     }
 
     @Override
+    @JsonSerialize(using = SingleOrArraySerializer.class)
     public List<String> getConstraint() {
         return this.constraint;
     }
@@ -299,6 +305,27 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
         }
         result.append("]}");
         return result.toString();
+    }
+
+    public static class SingleOrArraySerializer extends JsonSerializer<List<String>> {
+        public SingleOrArraySerializer() {
+            super();
+        }
+
+        @Override
+        public void serialize(List<String> value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            if (value != null && value.size() == 1) {
+                gen.writeString(value.get(0));
+            } else {
+                gen.writeStartArray();
+                if (value != null) {
+                    for (String item : value) {
+                        gen.writeString(item);
+                    }
+                }
+                gen.writeEndArray();
+            }
+        }
     }
 
 }
