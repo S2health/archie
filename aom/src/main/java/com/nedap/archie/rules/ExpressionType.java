@@ -1,5 +1,8 @@
 package com.nedap.archie.rules;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * TODO: this should contain all primitive types and primitive types should be merged into this
  * Created by pieter.bos on 27/10/15.
@@ -7,6 +10,7 @@ package com.nedap.archie.rules;
 public enum ExpressionType {
      BOOLEAN, STRING, INTEGER, REAL, DATE, TIME, DATETIME, DURATION, C_STRING;
 
+    @JsonCreator
     public static ExpressionType fromString(String string) {
         switch(string) {
             case "Boolean":
@@ -31,6 +35,7 @@ public enum ExpressionType {
         return null;
     }
 
+    @JsonValue
     public String toString() {
         switch(this) {
             case BOOLEAN:
