@@ -25,11 +25,11 @@ public enum ExpressionType {
                 return DATE;
             case "Time":
                 return TIME;
-            case "DateTime":
+            case "Date_time":
                 return DATETIME;
             case "Duration":
                 return DURATION;
-            case "CString":
+            case "C_STRING":
                 return C_STRING;
         }
         return null;
@@ -51,11 +51,11 @@ public enum ExpressionType {
             case TIME:
                 return "Time";
             case DATETIME:
-                return "DateTime";
+                return "Date_time";
             case DURATION:
                 return "Duration";
             case C_STRING:
-                return "CString";
+                return "C_STRING";
         }
         return null;
     }
