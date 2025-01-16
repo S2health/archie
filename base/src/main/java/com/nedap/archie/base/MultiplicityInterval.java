@@ -171,25 +171,25 @@ public class MultiplicityInterval extends Interval<Integer> implements Serializa
     }
 
     @Override
-    @JsonIgnore
+    //@JsonIgnore
     public boolean isLowerUnbounded() {
         return super.isLowerUnbounded();
     }
 
     @Override
-    @JsonIgnore
+    //@JsonIgnore
     public boolean isUpperUnbounded() {
         return super.isUpperUnbounded();
     }
 
     @Override
-    @JsonIgnore
+    //@JsonIgnore
     public boolean isLowerIncluded() {
         return super.isLowerIncluded();
     }
 
     @Override
-    @JsonIgnore
+    //@JsonIgnore
     public boolean isUpperIncluded() {
         return super.isUpperIncluded();
     }
