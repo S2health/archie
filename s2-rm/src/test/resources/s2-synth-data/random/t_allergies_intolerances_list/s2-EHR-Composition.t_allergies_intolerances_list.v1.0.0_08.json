@@ -1,0 +1,293 @@
+{
+  "_type": "Composition",
+  "uid": {
+    "_type": "Uuid",
+    "value": "7b6510d5-be91-4ee6-a364-9e75025a5848"
+  },
+  "archetype_node_id": "id1.1",
+  "name": "Allergies and intolerances",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.allergies_intolerances_list.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.t_allergies_intolerances_list.v1.0.0"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "Allergies and intolerances",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "106203-3",
+      "uri": "http://loinc.org/106203-3"
+    }
+  },
+  "language": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_639-1",
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_3166-1-alpha2",
+    "code_string": "US"
+  },
+  "category": {
+    "_type": "Terminology_term",
+    "description": "Persistent Composition category",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "openehr",
+      "code_string": "431",
+      "uri": "http://openehr.org/id/431"
+    }
+  },
+  "author": {
+    "_type": "Entity_ref_node",
+    "archetype_node_id": "id21",
+    "name": "Author",
+    "archetype_details": {
+      "_type": "Archetyped",
+      "archetype_id": {
+        "_type": "Archetype_id",
+        "value": "s2-EHR-Entity_ref_node.healthcare_professional_ref.v1.0.0"
+      },
+      "rm_version": "0.8.7"
+    },
+    "code": {
+      "_type": "Terminology_term",
+      "description": "Author",
+      "concept": {
+        "_type": "Terminology_code",
+        "terminology_id": "loinc",
+        "code_string": "52457-9",
+        "uri": "http://loinc.org/52457-9"
+      }
+    },
+    "items": [
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.2",
+        "name": "Name",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Name",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "52458-7",
+            "uri": "http://loinc.org/52458-7"
+          }
+        },
+        "value": {
+          "_type": "Plain_text",
+          "text": "Anita Casper"
+        }
+      },
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.3",
+        "name": "Professional capacity",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional capacity",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "74571-1",
+            "uri": "http://loinc.org/74571-1"
+          }
+        },
+        "value": {
+          "_type": "Plain_text",
+          "text": "Communications"
+        }
+      },
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.4",
+        "name": "Professional registration",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional registration",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "255e5533-a685-ef11-8870-6045bdc71c8b",
+            "uri": "http://loinc.org/255e5533-a685-ef11-8870-6045bdc71c8b"
+          }
+        },
+        "value": {
+          "_type": "Rwe_id_ref",
+          "id": "a21674cb-5621-4270-99db-541c6dcd12c8"
+        }
+      }
+    ],
+    "is_self": false
+  },
+  "content": [
+    {
+      "_type": "Assessment",
+      "uid": {
+        "_type": "Uuid",
+        "value": "ceb718cb-4383-4331-b2a0-093d8bd63119"
+      },
+      "archetype_node_id": "id2",
+      "name": "Substance",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-EHR-Assessment.t_allergies_intolerances-adverse.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Substance",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "104986-5",
+          "uri": "http://loinc.org/104986-5"
+        }
+      },
+      "time": "1974-10-29T14:00:00.000",
+      "language": {
+        "_type": "Terminology_code",
+        "terminology_id": "iso_639-1",
+        "code_string": "en"
+      },
+      "subject": {
+        "_type": "Entity_ref_node",
+        "archetype_node_id": "id8000",
+        "name": "Subject",
+        "archetype_details": {
+          "_type": "Archetyped",
+          "archetype_id": {
+            "_type": "Archetype_id",
+            "value": "s2-EHR-Entity_ref_node.party_ref.v1.0.0"
+          },
+          "rm_version": "0.8.7"
+        },
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Subject",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "106184-5",
+            "uri": "http://loinc.org/106184-5"
+          }
+        },
+        "is_self": true
+      },
+      "qualifiers": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id63",
+          "name": "Last updated",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Last updated",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106177-9",
+              "uri": "http://loinc.org/106177-9"
+            }
+          },
+          "value": {
+            "_type": "Date_time_value",
+            "magnitude": "1950-09-15T03:00:00.000"
+          }
+        }
+      ],
+      "data": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id3",
+          "name": "Substance",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Substance",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104986-5",
+              "uri": "http://loinc.org/104986-5"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "HLA-DR antigen",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "HLA-DR antigen",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "62038004",
+                "uri": "http://snomed.info/id/62038004"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id102",
+          "name": "Criticality",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Criticality",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "82606-5",
+              "uri": "http://loinc.org/82606-5"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "dummy"
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.1",
+          "name": "Substance reaction",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Substance reaction",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "66947-3",
+              "uri": "http://loinc.org/66947-3"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Anaphylaxis",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Anaphylaxis",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "39579001",
+                "uri": "http://snomed.info/id/39579001"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4560 @@
+{
+  "_type": "Composition",
+  "uid": {
+    "_type": "Uuid",
+    "value": "10e45ce0-29be-4840-96d6-01b228cc6d0d"
+  },
+  "archetype_node_id": "id1.1.1",
+  "name": "CMP lab report",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.t_lab_report-generic.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.t_lab_report-CMP.v1.0.0"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "CMP lab report",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "c6368655-6682-ef11-8870-6045bdc71c8b",
+      "uri": "http://loinc.org/c6368655-6682-ef11-8870-6045bdc71c8b"
+    }
+  },
+  "language": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_639-1",
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_3166-1-alpha2",
+    "code_string": "US"
+  },
+  "category": {
+    "_type": "Terminology_term",
+    "description": "Persistent Composition category",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "openehr",
+      "code_string": "431",
+      "uri": "http://openehr.org/id/431"
+    }
+  },
+  "author": {
+    "_type": "Entity_ref_node",
+    "archetype_node_id": "id21",
+    "name": "Author",
+    "archetype_details": {
+      "_type": "Archetyped",
+      "archetype_id": {
+        "_type": "Archetype_id",
+        "value": "s2-EHR-Entity_ref_node.healthcare_professional_ref.v1.0.0"
+      },
+      "rm_version": "0.8.7"
+    },
+    "code": {
+      "_type": "Terminology_term",
+      "description": "Author",
+      "concept": {
+        "_type": "Terminology_code",
+        "terminology_id": "loinc",
+        "code_string": "52457-9",
+        "uri": "http://loinc.org/52457-9"
+      }
+    },
+    "items": [
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.3",
+        "name": "Professional capacity",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional capacity",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "74571-1",
+            "uri": "http://loinc.org/74571-1"
+          }
+        },
+        "value": {
+          "_type": "Plain_text",
+          "text": "Brand"
+        }
+      },
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.4",
+        "name": "Professional registration",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional registration",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "255e5533-a685-ef11-8870-6045bdc71c8b",
+            "uri": "http://loinc.org/255e5533-a685-ef11-8870-6045bdc71c8b"
+          }
+        },
+        "value": {
+          "_type": "Rwe_id_ref",
+          "id": "303cad33-2cbe-4568-9077-0580e9945942"
+        }
+      }
+    ],
+    "is_self": false
+  },
+  "context": {
+    "_type": "Event_context",
+    "archetype_node_id": "id2",
+    "name": "id2",
+    "health_care_facility": {
+      "_type": "Entity_ref_node",
+      "archetype_node_id": "id18",
+      "name": "Laboratory organization",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-EHR-Entity_ref_node.t_lab_report-generic-org_ref-1.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Laboratory organization",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "106205-8",
+          "uri": "http://loinc.org/106205-8"
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.4",
+          "name": "Identifier",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Identifier",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "76468-8",
+              "uri": "http://loinc.org/76468-8"
+            }
+          },
+          "value": {
+            "_type": "Rwe_id_ref",
+            "id": "e0e40b87-1e23-4435-b3e5-c520d08754ce"
+          }
+        }
+      ],
+      "is_self": false
+    },
+    "start_time": "1959-08-09T12:00:00.000",
+    "encounter": {
+      "_type": "Entity_ref_node",
+      "archetype_node_id": "id20",
+      "name": "Billing encounter",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-EHR-Entity_ref_node.encounter_ref.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Billing encounter",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "a82d501b-5274-ef11-8870-6045bdc71c8b",
+          "uri": "http://loinc.org/a82d501b-5274-ef11-8870-6045bdc71c8b"
+        }
+      },
+      "value": {
+        "_type": "Coded_text",
+        "text": "Encounter group therapy",
+        "term": {
+          "_type": "Terminology_term",
+          "description": "Encounter group therapy",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "30808008",
+            "uri": "http://snomed.info/id/30808008"
+          }
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.3",
+          "name": "Encounter identifier",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Encounter identifier",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "75519-9",
+              "uri": "http://loinc.org/75519-9"
+            }
+          },
+          "value": {
+            "_type": "Rwe_id_ref",
+            "id": "1119588d-ae25-49a5-a20a-50d8baed6919"
+          }
+        }
+      ],
+      "is_self": false
+    },
+    "other_context": [
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id3",
+        "name": "Report identifier",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Report identifier",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "90084-5",
+            "uri": "http://loinc.org/90084-5"
+          }
+        },
+        "value": {
+          "_type": "Rwe_id_ref",
+          "id": "99aa2d45-5abe-457b-8424-39206aa0cbda"
+        }
+      },
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id9",
+        "name": "Report status",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Report status",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "91582-7",
+            "uri": "http://loinc.org/91582-7"
+          }
+        },
+        "value": {
+          "_type": "Coded_text",
+          "text": "Preliminary",
+          "term": {
+            "_type": "Terminology_term",
+            "description": "Preliminary",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "snomed",
+              "code_string": "261420005",
+              "uri": "http://snomed.info/id/261420005"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "content": [
+    {
+      "_type": "Lab_result",
+      "uid": {
+        "_type": "Uuid",
+        "value": "950a619c-9d2d-4968-a0dc-b920b732a5b9"
+      },
+      "archetype_node_id": "id0.1.1",
+      "name": "Comprehensive metabolic lab panel",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Comprehensive metabolic lab panel",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "24323-8",
+          "uri": "http://loinc.org/24323-8"
+        }
+      },
+      "time": "2016-10-03T15:00:00.000",
+      "language": {
+        "_type": "Terminology_code",
+        "terminology_id": "iso_639-1",
+        "code_string": "en"
+      },
+      "subject": {
+        "_type": "Entity_ref_node",
+        "uid": {
+          "_type": "Uuid",
+          "value": "ebd5786e-0b55-4411-8dd7-ac7bc5ddbd51"
+        },
+        "archetype_node_id": "id0.2",
+        "name": "Subject",
+        "archetype_details": {
+          "_type": "Archetyped",
+          "archetype_id": {
+            "_type": "Archetype_id",
+            "value": "s2-EHR-Entity_ref_node.self_ref.v1.0.0"
+          },
+          "rm_version": "0.8.7"
+        },
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Subject",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "104976-6",
+            "uri": "http://loinc.org/104976-6"
+          }
+        },
+        "is_self": true
+      },
+      "qualifiers": [
+        {
+          "_type": "Entity_ref_node",
+          "archetype_node_id": "id0.10",
+          "name": "Device",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Entity_ref_node.device_ref.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Device",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "74720-4",
+              "uri": "http://loinc.org/74720-4"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Automatic-inflation electronic sphygmomanometer, portable, arm/wrist",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Automatic-inflation electronic sphygmomanometer, portable, arm/wrist",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "466086009",
+                "uri": "http://snomed.info/id/466086009"
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id2",
+              "name": "Device name",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Device name",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "74720-4",
+                  "uri": "http://loinc.org/74720-4"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Mercury sphygmomanometer",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Mercury sphygmomanometer",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "309642005",
+                    "uri": "http://snomed.info/id/309642005"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id4",
+              "name": "Type",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Type",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66464-9",
+                  "uri": "http://loinc.org/66464-9"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "eum"
+              }
+            }
+          ],
+          "is_self": false
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.11",
+          "name": "Method",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Method",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106191-0",
+              "uri": "http://loinc.org/106191-0"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Detection limit equal to or less than 0.05 mIU/L",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Detection limit equal to or less than 0.05 mIU/L",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "703438001",
+                "uri": "http://snomed.info/id/703438001"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Entity_ref_node",
+          "archetype_node_id": "id0.20",
+          "name": "Performing laboratory",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Entity_ref_node.t_lab_report-generic-org_ref-1.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Performing laboratory",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106205-8",
+              "uri": "http://loinc.org/106205-8"
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id0.2",
+              "name": "Name",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Name",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "76469-6",
+                  "uri": "http://loinc.org/76469-6"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "Olson - Olson"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id0.4",
+              "name": "Identifier",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Identifier",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "76468-8",
+                  "uri": "http://loinc.org/76468-8"
+                }
+              },
+              "value": {
+                "_type": "Rwe_id_ref",
+                "id": "0adc33d6-13ad-400e-841a-4e04981d0013"
+              }
+            }
+          ],
+          "is_self": true
+        }
+      ],
+      "data": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.1",
+          "name": "Glucose - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.GlucoseMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Glucose - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2345-7",
+              "uri": "http://loinc.org/2345-7"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 73.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mg/dL",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mg/dL",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258797006",
+                    "uri": "http://snomed.info/id/258797006"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 80.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 90.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "L",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Low",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "62482003"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Final",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Final",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "24571000205104",
+                    "uri": "http://snomed.info/id/24571000205104"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1979-09-28T15:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "In mollitia cumque labore repellendus. Itaque maxime minus nihil repellendus. Consequatur itaque omnis eum unde."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.2",
+          "name": "Urea nitrogen - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.UreaNitrogenMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Urea nitrogen - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "3094-0",
+              "uri": "http://loinc.org/3094-0"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 22.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mg/dL",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mg/dL",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258797006",
+                    "uri": "http://snomed.info/id/258797006"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 8.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 20.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "H",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "High",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "75540009"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Entered in error",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Entered in error",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "723510000",
+                    "uri": "http://snomed.info/id/723510000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1987-06-09T13:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Vitae iste odio repellendus non. Iure qui placeat repellendus nesciunt. Doloremque aut exercitationem non exercitationem."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Range<Date_time_value>",
+                    "lower": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1921-05-17T06:00:00.000"
+                    },
+                    "upper": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1935-01-30T00:00:00.000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.3",
+          "name": "Creatinine - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.CreatinineMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Creatinine - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2160-0",
+              "uri": "http://loinc.org/2160-0"
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Corrected",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Corrected",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "33714007",
+                    "uri": "http://snomed.info/id/33714007"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1937-05-26T04:00:00.000"
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.4",
+          "name": "Urea nitrogen/Creatinine ratio - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.UreanitrogenCreatinineMRtoPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Urea nitrogen/Creatinine ratio - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "3097-3",
+              "uri": "http://loinc.org/3097-3"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 13.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "Ratio",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Ratio",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "118586006",
+                    "uri": "http://snomed.info/id/118586006"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 10.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "Ratio",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "Ratio",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "118586006",
+                          "uri": "http://snomed.info/id/118586006"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 20.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "Ratio",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "Ratio",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "118586006",
+                          "uri": "http://snomed.info/id/118586006"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "N",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Normal",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "17621005"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Entered in error",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Entered in error",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "723510000",
+                    "uri": "http://snomed.info/id/723510000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1969-12-28T09:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Nephelometry",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Nephelometry",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "359838000",
+                    "uri": "http://snomed.info/id/359838000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Quia maiores nihil et ut. Nihil voluptatem debitis est rem. Sit laborum dicta soluta voluptas."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Date_time_value",
+                    "magnitude": "1940-09-03T14:00:00.000"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.5",
+          "name": "eGFR",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.Glomerularfiltrationrate173sqMpredictedArVRatPtSerPlasBldQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "eGFR",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "69405-9",
+              "uri": "http://loinc.org/69405-9"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 99.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mL/min",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mL/min",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258859000",
+                    "uri": "http://snomed.info/id/258859000"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 100.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mL/min",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mL/min",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258859000",
+                          "uri": "http://snomed.info/id/258859000"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 120.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mL/min",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mL/min",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258859000",
+                          "uri": "http://snomed.info/id/258859000"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "L",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Low",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "62482003"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Canceled",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Canceled",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "89925002",
+                    "uri": "http://snomed.info/id/89925002"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "2010-04-19T05:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Blood specimen",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Blood specimen",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "119297000",
+                        "uri": "http://snomed.info/id/119297000"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Eius modi enim molestiae ea. Consequatur eos ullam sapiente accusantium. Excepturi fugit et deserunt voluptatum."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Range<Date_time_value>",
+                    "lower": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1947-12-20T22:00:00.000"
+                    },
+                    "upper": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1947-12-20T22:00:00.000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.6",
+          "name": "Calcium - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.CalciumMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Calcium - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "17861-6",
+              "uri": "http://loinc.org/17861-6"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 11.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mg/dL",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mg/dL",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258797006",
+                    "uri": "http://snomed.info/id/258797006"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 9.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 10.5,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "H",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "High",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "75540009"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Preliminary",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Preliminary",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "261420005",
+                    "uri": "http://snomed.info/id/261420005"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1942-11-23T10:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Aut ut quo eos alias. Harum qui ut a minima. Delectus velit qui et dignissimos."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Range<Date_time_value>",
+                    "lower": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1934-01-09T17:00:00.000"
+                    },
+                    "upper": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1969-11-15T02:00:00.000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.7",
+          "name": "Protein - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.ProteinMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Protein - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2885-2",
+              "uri": "http://loinc.org/2885-2"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 5.246549365953677,
+              "units": {
+                "_type": "Coded_text",
+                "text": "g/dL",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "g/dL",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258795003",
+                    "uri": "http://snomed.info/id/258795003"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 6.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "g/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "g/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258795003",
+                          "uri": "http://snomed.info/id/258795003"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 8.3,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "g/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "g/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258795003",
+                          "uri": "http://snomed.info/id/258795003"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "L",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Low",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "62482003"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Corrected",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Corrected",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "33714007",
+                    "uri": "http://snomed.info/id/33714007"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1964-02-13T14:00:00.000"
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.8",
+          "name": "Albumin - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.AlbuminMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Albumin - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "1751-7",
+              "uri": "http://loinc.org/1751-7"
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Canceled",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Canceled",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "89925002",
+                    "uri": "http://snomed.info/id/89925002"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1960-12-04T06:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Bromocresol green dye binding technique",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Bromocresol green dye binding technique",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "1303770001",
+                    "uri": "http://snomed.info/id/1303770001"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Upper respiratory specimen",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Upper respiratory specimen",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "258604001",
+                        "uri": "http://snomed.info/id/258604001"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Aspernatur beatae libero repudiandae aliquid. Et excepturi dolorum illo voluptatum. Sit aliquid animi cum inventore."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.9",
+          "name": "Globulin - serum",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.GlobulinMCncPtSerQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Globulin - serum",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2336-6",
+              "uri": "http://loinc.org/2336-6"
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Entered in error",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Entered in error",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "723510000",
+                    "uri": "http://snomed.info/id/723510000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1956-10-16T13:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Creatinine-based formula chronic kidney disease - epidemiology technique",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Creatinine-based formula chronic kidney disease - epidemiology technique",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "31081000205108",
+                    "uri": "http://snomed.info/id/31081000205108"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.10",
+          "name": "Albumin/globulin ratio - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.AlbuminGlobulinMRtoPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Albumin/globulin ratio - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "1759-0",
+              "uri": "http://loinc.org/1759-0"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 1.1945007457206755,
+              "units": {
+                "_type": "Coded_text",
+                "text": "Ratio",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Ratio",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "118586006",
+                    "uri": "http://snomed.info/id/118586006"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 1.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "Ratio",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "Ratio",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "118586006",
+                          "uri": "http://snomed.info/id/118586006"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 2.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "Ratio",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "Ratio",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "118586006",
+                          "uri": "http://snomed.info/id/118586006"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "N",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Normal",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "17621005"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Corrected",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Corrected",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "33714007",
+                    "uri": "http://snomed.info/id/33714007"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1947-03-28T11:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Body tissue structure",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Body tissue structure",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "85756007",
+                        "uri": "http://snomed.info/id/85756007"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Ex dignissimos dolorem in rerum. Et molestiae commodi corporis et. Temporibus ut maxime laborum est."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Date_time_value",
+                    "magnitude": "1954-02-11T15:00:00.000"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.11",
+          "name": "Bilirubin total - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.BilirubinMCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Bilirubin total - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "1975-2",
+              "uri": "http://loinc.org/1975-2"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 0.9921966978411152,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mg/dL",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mg/dL",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258797006",
+                    "uri": "http://snomed.info/id/258797006"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 0.4,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 0.75,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mg/dL",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mg/dL",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258797006",
+                          "uri": "http://snomed.info/id/258797006"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "H",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "High",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "75540009"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Entered in error",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Entered in error",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "723510000",
+                    "uri": "http://snomed.info/id/723510000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "2005-03-01T12:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Electrical impedance technique",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Electrical impedance technique",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "703452004",
+                    "uri": "http://snomed.info/id/703452004"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Stool specimen",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Stool specimen",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "119339001",
+                        "uri": "http://snomed.info/id/119339001"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Nisi tempora quia aspernatur adipisci. Doloribus doloremque exercitationem voluptatem distinctio. Quia repudiandae suscipit expedita impedit."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Date_time_value",
+                    "magnitude": "1910-09-11T19:00:00.000"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.12",
+          "name": "Alkaline phosphatase - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.AlkalinePhosphataseCCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Alkaline phosphatase - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "6768-6",
+              "uri": "http://loinc.org/6768-6"
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Final",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Final",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "24571000205104",
+                    "uri": "http://snomed.info/id/24571000205104"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "2020-05-11T02:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Specimen from genital system",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Specimen from genital system",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "119344008",
+                        "uri": "http://snomed.info/id/119344008"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Labore consectetur et adipisci et. Dolores distinctio beatae illo consequatur. Accusamus quia ipsam aut aliquid."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Range<Date_time_value>",
+                    "lower": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1902-05-10T08:00:00.000"
+                    },
+                    "upper": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1933-11-09T15:00:00.000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.13",
+          "name": "Alanine aminotransferase - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.AlanineAminotransferaseCCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Alanine aminotransferase - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "1742-6",
+              "uri": "http://loinc.org/1742-6"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 27.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "U/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "U/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258947003",
+                    "uri": "http://snomed.info/id/258947003"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 7.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "U/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "U/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258947003",
+                          "uri": "http://snomed.info/id/258947003"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 56.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "U/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "U/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258947003",
+                          "uri": "http://snomed.info/id/258947003"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "N",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Normal",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "17621005"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Entered in error",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Entered in error",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "723510000",
+                    "uri": "http://snomed.info/id/723510000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1933-01-03T05:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Reported",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Reported",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "733985002",
+                    "uri": "http://snomed.info/id/733985002"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.14",
+          "name": "Aspartate aminotransferase - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.AspartateAminotransferaseCCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Aspartate aminotransferase - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "1920-8",
+              "uri": "http://loinc.org/1920-8"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 28.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "U/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "U/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258947003",
+                    "uri": "http://snomed.info/id/258947003"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 8.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "U/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "U/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258947003",
+                          "uri": "http://snomed.info/id/258947003"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 33.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "U/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "U/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258947003",
+                          "uri": "http://snomed.info/id/258947003"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "N",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Normal",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "17621005"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Canceled",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Canceled",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "89925002",
+                    "uri": "http://snomed.info/id/89925002"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "2020-09-09T11:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Oximetry testing technique",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Oximetry testing technique",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "31071000205106",
+                    "uri": "http://snomed.info/id/31071000205106"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.15",
+          "name": "Sodium - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.SodiumSCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Sodium - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2951-2",
+              "uri": "http://loinc.org/2951-2"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 122.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mmol/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mmol/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258813002",
+                    "uri": "http://snomed.info/id/258813002"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 136.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 145.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "L",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Low",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "62482003"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Entered in error",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Entered in error",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "723510000",
+                    "uri": "http://snomed.info/id/723510000"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1988-11-02T16:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Light microscopy",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Light microscopy",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "702661004",
+                    "uri": "http://snomed.info/id/702661004"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.16",
+          "name": "Potassium - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.PotassiumSCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Potassium - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2823-3",
+              "uri": "http://loinc.org/2823-3"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 4.409871409305524,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mmol/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mmol/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258813002",
+                    "uri": "http://snomed.info/id/258813002"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 3.7,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 5.2,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "N",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Normal",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "17621005"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Canceled",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Canceled",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "89925002",
+                    "uri": "http://snomed.info/id/89925002"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1999-04-02T11:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Body tissue structure",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Body tissue structure",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "85756007",
+                        "uri": "http://snomed.info/id/85756007"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Accusamus laudantium incidunt vitae laboriosam. Officiis aliquam aut nesciunt nesciunt. Non dolorem blanditiis incidunt quia."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Range<Date_time_value>",
+                    "lower": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1913-08-23T01:00:00.000"
+                    },
+                    "upper": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1948-09-20T15:00:00.000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.17",
+          "name": "Chloride - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.ChlorideSCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Chloride - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2075-0",
+              "uri": "http://loinc.org/2075-0"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 119.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mmol/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mmol/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258813002",
+                    "uri": "http://snomed.info/id/258813002"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 96.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 106.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "H",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "High",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "75540009"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Corrected",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Corrected",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "33714007",
+                    "uri": "http://snomed.info/id/33714007"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1925-04-28T02:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Test method",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Test method",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "85069-3",
+                  "uri": "http://loinc.org/85069-3"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Computer assisted testing technique",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Computer assisted testing technique",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "31101000205101",
+                    "uri": "http://snomed.info/id/31101000205101"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.18",
+          "name": "Bicarbonate - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.BicarbonateSCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Bicarbonate - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "1963-8",
+              "uri": "http://loinc.org/1963-8"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 29.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mmol/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mmol/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258813002",
+                    "uri": "http://snomed.info/id/258813002"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 23.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 28.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "H",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "High",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "75540009"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Preliminary",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Preliminary",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "261420005",
+                    "uri": "http://snomed.info/id/261420005"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1999-04-21T08:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Et fugiat sint incidunt delectus. Quidem aut laborum aperiam qui. Ullam quo non qui modi."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.19",
+          "name": "Carbon dioxide - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.CarbonDioxideSCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Carbon dioxide - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "2028-9",
+              "uri": "http://loinc.org/2028-9"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 32.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mmol/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mmol/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258813002",
+                    "uri": "http://snomed.info/id/258813002"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 23.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 29.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "H",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "High",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "75540009"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Preliminary",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Preliminary",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "261420005",
+                    "uri": "http://snomed.info/id/261420005"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1988-10-16T03:00:00.000"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Specimen",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Info_node.specimen_details.v1.0.0"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specimen",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "66746-9",
+                  "uri": "http://loinc.org/66746-9"
+                }
+              },
+              "items": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id30",
+                  "name": "Specimen type",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specimen type",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "66746-9",
+                      "uri": "http://loinc.org/66746-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Cerebrospinal fluid specimen",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Cerebrospinal fluid specimen",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "258450006",
+                        "uri": "http://snomed.info/id/258450006"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id9",
+                  "name": "Sampling context",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sampling context",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e83b6448-0651-ef11-886e-6045bdc71c8b",
+                      "uri": "http://loinc.org/e83b6448-0651-ef11-886e-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Quia iste vel quo placeat. Eligendi ut sit et porro. Ut ut ea est voluptas."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id16",
+                  "name": "Collection date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Collection date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "68963-8",
+                      "uri": "http://loinc.org/68963-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Range<Date_time_value>",
+                    "lower": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1980-04-20T18:00:00.000"
+                    },
+                    "upper": {
+                      "_type": "Date_time_value",
+                      "magnitude": "1980-04-20T18:00:00.000"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.90.20",
+          "name": "Aninon gap - serum or plasma",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Info_node.AniongapSCncPtSerPlasQnLabObs.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Aninon gap - serum or plasma",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "33037-3",
+              "uri": "http://loinc.org/33037-3"
+            }
+          },
+          "value": {
+            "_type": "Measured<Quantity>",
+            "value": {
+              "_type": "Quantity",
+              "magnitude": 11.0,
+              "units": {
+                "_type": "Coded_text",
+                "text": "mmol/L",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "mmol/L",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "258813002",
+                    "uri": "http://snomed.info/id/258813002"
+                  }
+                }
+              }
+            },
+            "reference_ranges": [
+              {
+                "_type": "Reference_range<Quantity>",
+                "type": {
+                  "_type": "Terminology_term",
+                  "description": "Normal range",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "260395002",
+                    "uri": "http://snomed.info/id/260395002"
+                  }
+                },
+                "range": {
+                  "_type": "Range<Quantity>",
+                  "lower": {
+                    "_type": "Quantity",
+                    "magnitude": 4.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  },
+                  "upper": {
+                    "_type": "Quantity",
+                    "magnitude": 12.0,
+                    "units": {
+                      "_type": "Coded_text",
+                      "text": "mmol/L",
+                      "term": {
+                        "_type": "Terminology_term",
+                        "description": "mmol/L",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "snomed",
+                          "code_string": "258813002",
+                          "uri": "http://snomed.info/id/258813002"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ],
+            "interpretation": {
+              "_type": "Coded_text",
+              "text": "N",
+              "term": {
+                "_type": "Terminology_term",
+                "description": "Normal",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "snomed",
+                  "code_string": "17621005"
+                }
+              }
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Result status",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result status",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "92236-9",
+                  "uri": "http://loinc.org/92236-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Canceled",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Canceled",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "89925002",
+                    "uri": "http://snomed.info/id/89925002"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Result time",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Result time",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "90056-3",
+                  "uri": "http://loinc.org/90056-3"
+                }
+              },
+              "value": {
+                "_type": "Date_time_value",
+                "magnitude": "1939-02-07T09:00:00.000"
+              }
+            }
+          ]
+        }
+      ],
+      "result_time": "1908-06-25T10:00:00.000"
+    }
+  ]
+}

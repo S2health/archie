@@ -1,0 +1,2787 @@
+{
+  "_type": "Composition",
+  "uid": {
+    "_type": "Uuid",
+    "value": "5aad6add-137a-4c16-8a87-9d7eee92de35"
+  },
+  "archetype_node_id": "id1.1",
+  "name": "Medication List",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.medication_list.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.t_medication_list.v1.0.0"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "Medication List",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "104207-6",
+      "uri": "http://loinc.org/104207-6"
+    }
+  },
+  "language": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_639-1",
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_3166-1-alpha2",
+    "code_string": "US"
+  },
+  "category": {
+    "_type": "Terminology_term",
+    "description": "Persistent Composition category",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "openehr",
+      "code_string": "431",
+      "uri": "http://openehr.org/id/431"
+    }
+  },
+  "author": {
+    "_type": "Entity_ref_node",
+    "archetype_node_id": "id21",
+    "name": "Author",
+    "archetype_details": {
+      "_type": "Archetyped",
+      "archetype_id": {
+        "_type": "Archetype_id",
+        "value": "s2-EHR-Entity_ref_node.healthcare_professional_ref.v1.0.0"
+      },
+      "rm_version": "0.8.7"
+    },
+    "code": {
+      "_type": "Terminology_term",
+      "description": "Author",
+      "concept": {
+        "_type": "Terminology_code",
+        "terminology_id": "loinc",
+        "code_string": "52457-9",
+        "uri": "http://loinc.org/52457-9"
+      }
+    },
+    "items": [
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.3",
+        "name": "Professional capacity",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional capacity",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "74571-1",
+            "uri": "http://loinc.org/74571-1"
+          }
+        },
+        "value": {
+          "_type": "Plain_text",
+          "text": "Quality"
+        }
+      },
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.4",
+        "name": "Professional registration",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional registration",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "255e5533-a685-ef11-8870-6045bdc71c8b",
+            "uri": "http://loinc.org/255e5533-a685-ef11-8870-6045bdc71c8b"
+          }
+        },
+        "value": {
+          "_type": "Rwe_id_ref",
+          "id": "baa515c4-0e25-49d2-a100-be06015e4b61"
+        }
+      }
+    ],
+    "is_self": true
+  },
+  "content": [
+    {
+      "_type": "Section",
+      "archetype_node_id": "id0.1",
+      "name": "Medication history content",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-EHR-Section.t_medication_history_heading-1.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Medication history content",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "a591c089-6982-ef11-8870-6045bdc71c8b",
+          "uri": "http://loinc.org/a591c089-6982-ef11-8870-6045bdc71c8b"
+        }
+      },
+      "items": [
+        {
+          "_type": "Order",
+          "uid": {
+            "_type": "Uuid",
+            "value": "0099acb6-2e8c-4475-aee9-405bdbe4919c"
+          },
+          "archetype_node_id": "id2.1",
+          "name": "Medication order",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-EHR-Order.medication_order.v4.0.2"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Medication order",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "cfa8c219-f249-ef11-886e-6045bdc71c8b",
+              "uri": "http://loinc.org/cfa8c219-f249-ef11-886e-6045bdc71c8b"
+            }
+          },
+          "time": "1959-10-14T02:00:00.000",
+          "language": {
+            "_type": "Terminology_code",
+            "terminology_id": "iso_639-1",
+            "code_string": "en"
+          },
+          "subject": {
+            "_type": "Entity_ref_node",
+            "archetype_node_id": "id8000",
+            "name": "Subject",
+            "archetype_details": {
+              "_type": "Archetyped",
+              "archetype_id": {
+                "_type": "Archetype_id",
+                "value": "s2-EHR-Entity_ref_node.party_ref.v1.0.0"
+              },
+              "rm_version": "0.8.7"
+            },
+            "code": {
+              "_type": "Terminology_term",
+              "description": "Subject",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "loinc",
+                "code_string": "106184-5",
+                "uri": "http://loinc.org/106184-5"
+              }
+            },
+            "is_self": false
+          },
+          "qualifiers": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Order identifier",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Order identifier",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "104756-2",
+                  "uri": "http://loinc.org/104756-2"
+                }
+              },
+              "value": {
+                "_type": "Rwe_id_ref",
+                "id": "71b90481-66bd-43b4-8a55-968c6278c902"
+              }
+            }
+          ],
+          "narrative": {
+            "_type": "Plain_text",
+            "text": "once every 6h, maximum 4 times in 24h period"
+          },
+          "activities": [
+            {
+              "_type": "Activity",
+              "archetype_node_id": "id2",
+              "name": "Order",
+              "description": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id92",
+                  "name": "Route",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Route",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "71468-3",
+                      "uri": "http://loinc.org/71468-3"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Oral route",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Oral route",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "26643006",
+                        "uri": "http://snomed.info/id/26643006"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id95",
+                  "name": "Administration method",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Administration method",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104817-2",
+                      "uri": "http://loinc.org/104817-2"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Swallow",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Swallow",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "738995006",
+                        "uri": "http://snomed.info/id/738995006"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Entity_ref_node",
+                  "archetype_node_id": "id96",
+                  "name": "Administration device",
+                  "archetype_details": {
+                    "_type": "Archetyped",
+                    "archetype_id": {
+                      "_type": "Archetype_id",
+                      "value": "s2-EHR-Entity_ref_node.device_ref.v1.0.0"
+                    },
+                    "rm_version": "0.8.7"
+                  },
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Administration device",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "82307-0",
+                      "uri": "http://loinc.org/82307-0"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Blood cell diluter",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Blood cell diluter",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "466488002",
+                        "uri": "http://snomed.info/id/466488002"
+                      }
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id2",
+                      "name": "Device name",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Device name",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "74720-4",
+                          "uri": "http://loinc.org/74720-4"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "Automatic-inflation electronic sphygmomanometer, non-portable",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "Automatic-inflation electronic sphygmomanometer, non-portable",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "snomed",
+                            "code_string": "466093008",
+                            "uri": "http://snomed.info/id/466093008"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id5",
+                      "name": "Manufacturer",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Manufacturer",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "74719-6",
+                          "uri": "http://loinc.org/74719-6"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Sporer - Sporer"
+                      }
+                    }
+                  ],
+                  "is_self": false
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id10",
+                  "name": "Overall directions description",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Overall directions description",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104818-0",
+                      "uri": "http://loinc.org/104818-0"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Possimus explicabo non veritatis necessitatibus. Doloribus blanditiis aliquam quisquam sed. Blanditiis alias voluptatem consequatur omnis."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id174",
+                  "name": "Specific directions description",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Specific directions description",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104792-7",
+                      "uri": "http://loinc.org/104792-7"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Officiis omnis tenetur optio nesciunt. Ut mollitia non reiciendis nemo. Consectetur praesentium ullam laborum similique."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id175",
+                  "name": "Dosage justification",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Dosage justification",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104809-9",
+                      "uri": "http://loinc.org/104809-9"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Excepturi occaecati et ab repellat. Officiis ad est debitis occaecati. Id recusandae rerum rerum culpa."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id178",
+                  "name": "Structured dose and timing directions",
+                  "archetype_details": {
+                    "_type": "Archetyped",
+                    "archetype_id": {
+                      "_type": "Archetype_id",
+                      "value": "s2-EHR-Info_node.therapeutic_direction.v1.3.0"
+                    },
+                    "rm_version": "0.8.7"
+                  },
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Structured dose and timing directions",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "57833-6",
+                      "uri": "http://loinc.org/57833-6"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id58",
+                      "name": "Direction sequence",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Direction sequence",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104824-8",
+                          "uri": "http://loinc.org/104824-8"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 1636704537
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id177",
+                      "name": "Dosage",
+                      "archetype_details": {
+                        "_type": "Archetyped",
+                        "archetype_id": {
+                          "_type": "Archetype_id",
+                          "value": "s2-EHR-Info_node.dosage.v2.0.3"
+                        },
+                        "rm_version": "0.8.7"
+                      },
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Dosage",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "18817-7",
+                          "uri": "http://loinc.org/18817-7"
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id165",
+                          "name": "Dosage sequence",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Dosage sequence",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "a45a1001-7082-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/a45a1001-7082-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "value": {
+                            "_type": "Count",
+                            "magnitude": 894405816
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id145",
+                          "name": "Dose",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Dose",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "30973-2",
+                              "uri": "http://loinc.org/30973-2"
+                            }
+                          },
+                          "value": {
+                            "_type": "Quantity",
+                            "magnitude": 500.0,
+                            "units": {
+                              "_type": "Coded_text",
+                              "text": "mg",
+                              "term": {
+                                "_type": "Terminology_term",
+                                "description": "mg",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "snomed",
+                                  "code_string": "258684004",
+                                  "uri": "http://snomed.info/id/258684004"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id38",
+                          "name": "Daily timing",
+                          "archetype_details": {
+                            "_type": "Archetyped",
+                            "archetype_id": {
+                              "_type": "Archetype_id",
+                              "value": "s2-EHR-Info_node.timing_daily.v1.0.2"
+                            },
+                            "rm_version": "0.8.7"
+                          },
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Daily timing",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "18818-5",
+                              "uri": "http://loinc.org/18818-5"
+                            }
+                          },
+                          "items": [
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id5",
+                              "name": "Specific time",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Specific time",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "8404a85a-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/8404a85a-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Range<Time_value>",
+                                "lower": {
+                                  "_type": "Time_value",
+                                  "magnitude": "00:00:00.000"
+                                },
+                                "upper": {
+                                  "_type": "Time_value",
+                                  "magnitude": "00:00:00.000"
+                                }
+                              }
+                            },
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id28",
+                              "name": "Timing description",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Timing description",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "db04a85a-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/db04a85a-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Plain_text",
+                                "text": "Non beatae aliquam sed assumenda. Earum deleniti qui dolor ea. Sed maxime deserunt rerum sed."
+                              }
+                            },
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id24",
+                              "name": "Exact timing critical?",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Exact timing critical?",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "4fe26062-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/4fe26062-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Boolean_value",
+                                "value": true,
+                                "true_term": {
+                                  "_type": "Terminology_term",
+                                  "description": "True (qualifier value)",
+                                  "concept": {
+                                    "_type": "Terminology_code",
+                                    "terminology_id": "snomed",
+                                    "code_string": "31874001",
+                                    "uri": "http://snomed.info/id/31874001"
+                                  }
+                                },
+                                "false_term": {
+                                  "_type": "Terminology_term",
+                                  "description": "False (qualifier value)",
+                                  "concept": {
+                                    "_type": "Terminology_code",
+                                    "terminology_id": "snomed",
+                                    "code_string": "64100000",
+                                    "uri": "http://snomed.info/id/64100000"
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id40",
+                              "name": "Specific event",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Specific event",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "f8a1bd7c-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/f8a1bd7c-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              }
+                            },
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id36",
+                              "name": "On / off cycle",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "On / off cycle",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "d42db293-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/d42db293-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "items": [
+                                {
+                                  "_type": "Info_node",
+                                  "archetype_node_id": "id37",
+                                  "name": "On",
+                                  "code": {
+                                    "_type": "Terminology_term",
+                                    "description": "On",
+                                    "concept": {
+                                      "_type": "Terminology_code",
+                                      "terminology_id": "loinc",
+                                      "code_string": "88657184-7282-ef11-8870-6045bdc71c8b",
+                                      "uri": "http://loinc.org/88657184-7282-ef11-8870-6045bdc71c8b"
+                                    }
+                                  },
+                                  "value": {
+                                    "_type": "Duration_value",
+                                    "magnitude": "PT0S"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id135",
+                          "name": "Administration rate",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Administration rate",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "52426-4",
+                              "uri": "http://loinc.org/52426-4"
+                            }
+                          },
+                          "value": {
+                            "_type": "Quantity",
+                            "magnitude": 4865780890.73,
+                            "units": {
+                              "_type": "Coded_text",
+                              "text": "ml/min",
+                              "term": {
+                                "_type": "Terminology_term",
+                                "description": "ml/min",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "snomed",
+                                  "code_string": "258859000",
+                                  "uri": "http://snomed.info/id/258859000"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id67",
+                      "name": "Direction duration",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Direction duration",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104793-5",
+                          "uri": "http://loinc.org/104793-5"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "dummy"
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id173",
+                      "name": "Maximum number of administrations",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Maximum number of administrations",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104733-1",
+                          "uri": "http://loinc.org/104733-1"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 800306762
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id180",
+                      "name": "Order stop date/time",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Order stop date/time",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104748-9",
+                          "uri": "http://loinc.org/104748-9"
+                        }
+                      },
+                      "value": {
+                        "_type": "Date_time_value",
+                        "magnitude": "1932-06-10T13:00:00.000"
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id91",
+                      "name": "Repetition timing",
+                      "archetype_details": {
+                        "_type": "Archetyped",
+                        "archetype_id": {
+                          "_type": "Archetype_id",
+                          "value": "s2-EHR-Info_node.timing_nondaily.v1.1.3"
+                        },
+                        "rm_version": "0.8.7"
+                      },
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Repetition timing",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104719-0",
+                          "uri": "http://loinc.org/104719-0"
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id3",
+                          "name": "Repetition interval",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Repetition interval",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "c01580a1-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/c01580a1-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "value": {
+                            "_type": "Duration_value",
+                            "magnitude": "PT0S"
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id2",
+                          "name": "Specific date",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Specific date",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "319dd6b7-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/319dd6b7-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "value": {
+                            "_type": "Date_value",
+                            "magnitude": "1947-10-04"
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id4",
+                          "name": "Specific day of week",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Specific day of week",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "90a31fbe-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/90a31fbe-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "value": {
+                            "_type": "Coded_text",
+                            "text": "Saturday",
+                            "term": {
+                              "_type": "Terminology_term",
+                              "description": "Saturday",
+                              "concept": {
+                                "_type": "Terminology_code",
+                                "terminology_id": "snomed",
+                                "code_string": "307151009",
+                                "uri": "http://snomed.info/id/307151009"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id5",
+                          "name": "Specific day of month",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Specific day of month",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "e7a31fbe-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/e7a31fbe-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "value": {
+                            "_type": "Range<Count>",
+                            "lower": {
+                              "_type": "Count",
+                              "magnitude": 24
+                            },
+                            "upper": {
+                              "_type": "Count",
+                              "magnitude": 24
+                            }
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id7",
+                          "name": "Specific event",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Specific event",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "333eb0db-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/333eb0db-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "items": [
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id6",
+                              "name": "Event name",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Event name",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "f082e473-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/f082e473-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Plain_text",
+                                "text": "nisi"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id11",
+                          "name": "On / off cycle",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "On / off cycle",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "6d54abf3-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/6d54abf3-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "items": [
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id12",
+                              "name": "On",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "On",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "88657184-7282-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/88657184-7282-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Duration_value",
+                                "magnitude": "PT3H"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id63",
+                  "name": "Medication safety",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Medication safety",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "d98767fb-6882-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/d98767fb-6882-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id179",
+                      "name": "Safety override",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Safety override",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104707-5",
+                          "uri": "http://loinc.org/104707-5"
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id172",
+                          "name": "Overriden safety advice",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Overriden safety advice",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "104725-7",
+                              "uri": "http://loinc.org/104725-7"
+                            }
+                          },
+                          "value": {
+                            "_type": "Plain_text",
+                            "text": "Iure neque ea blanditiis quo. Corrupti ipsa officiis quia odio. Cum sit sed incidunt in."
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id163",
+                          "name": "Override reason",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Override reason",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "104777-8",
+                              "uri": "http://loinc.org/104777-8"
+                            }
+                          },
+                          "value": {
+                            "_type": "Plain_text",
+                            "text": "Minima veritatis consectetur nostrum architecto. Delectus quia neque est quod. Rerum deserunt quo reiciendis possimus."
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id52",
+                      "name": "Maximum dose",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Maximum dose",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104778-6",
+                          "uri": "http://loinc.org/104778-6"
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id131",
+                          "name": "Maximum amount",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Maximum amount",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "104822-2",
+                              "uri": "http://loinc.org/104822-2"
+                            }
+                          },
+                          "value": {
+                            "_type": "Quantity",
+                            "magnitude": 95018.19,
+                            "units": {
+                              "_type": "Coded_text",
+                              "text": "dummy",
+                              "term": {
+                                "_type": "Terminology_term",
+                                "description": "dummy",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "dummy",
+                                  "code_string": "dummy"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id45",
+                  "name": "Additional instruction",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Additional instruction",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104796-8",
+                      "uri": "http://loinc.org/104796-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Et quidem quam non veniam. Vel reprehenderit et recusandae nisi. Blanditiis sit tempore aliquam ea."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id106",
+                  "name": "Patient information",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Patient information",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "74772-5",
+                      "uri": "http://loinc.org/74772-5"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Stefan Friesen"
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id108",
+                  "name": "Monitoring instruction",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Monitoring instruction",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "78fbdb06-6982-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/78fbdb06-6982-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Ad fuga fugiat sint quia. Amet voluptas non laborum mollitia. Voluptatem sit quibusdam exercitationem id."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id19",
+                  "name": "Clinical indication",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Clinical indication",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104720-8",
+                      "uri": "http://loinc.org/104720-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Maxime consequatur modi blanditiis ut. Ut eaque magnam modi qui. Eos in excepturi sit consequatur."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id149",
+                  "name": "Therapeutic intent",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Therapeutic intent",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104803-2",
+                      "uri": "http://loinc.org/104803-2"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Officia ut laborum voluptate voluptatibus. Ea dolorem natus facere et. Aut itaque dolores est veniam."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id180",
+                  "name": "Clinician guidance",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Clinician guidance",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104736-4",
+                      "uri": "http://loinc.org/104736-4"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Fuga nihil sed non non. Aspernatur rem fuga repellat quia. Quibusdam nesciunt possimus commodi et."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id70",
+                  "name": "Authorisation directions",
+                  "archetype_details": {
+                    "_type": "Archetyped",
+                    "archetype_id": {
+                      "_type": "Archetype_id",
+                      "value": "s2-EHR-Info_node.medication_authorisation.v0.0.1-alpha"
+                    },
+                    "rm_version": "0.8.7"
+                  },
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Authorisation directions",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "71573-0",
+                      "uri": "http://loinc.org/71573-0"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id74",
+                      "name": "Authorisation type",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Authorisation type",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "71573-0",
+                          "uri": "http://loinc.org/71573-0"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "Repeat dispensing",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "Repeat dispensing",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "snomed",
+                            "code_string": "31271000205102",
+                            "uri": "http://snomed.info/id/31271000205102"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id80",
+                      "name": "Number of refills remaining",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Number of refills remaining",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "825f8cc6-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/825f8cc6-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 121058287
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id73",
+                      "name": "Authorisation expiry date",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Authorisation expiry date",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "fef7d1d4-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/fef7d1d4-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Date_time_value",
+                        "magnitude": "1918-07-04T23:00:00.000"
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id81",
+                      "name": "Prescriber endorsement",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Prescriber endorsement",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "b9d481db-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/b9d481db-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Suscipit ea ea reprehenderit a. Mollitia debitis optio tempora sunt. Consequatur optio quae nam minus."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id130",
+                  "name": "Dispense directions",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Dispense directions",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "fcb29648-6982-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/fcb29648-6982-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id107",
+                      "name": "Dispense instruction",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Dispense instruction",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104763-8",
+                          "uri": "http://loinc.org/104763-8"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Quaerat quia repellat vitae aut. Accusamus mollitia odit perspiciatis atque. Sit quae et quia omnis."
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id66",
+                      "name": "Dispense amount",
+                      "archetype_details": {
+                        "_type": "Archetyped",
+                        "archetype_id": {
+                          "_type": "Archetype_id",
+                          "value": "s2-EHR-Info_node.medication_supply_amount.v0.0.1-alpha"
+                        },
+                        "rm_version": "0.8.7"
+                      },
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Dispense amount",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "82767-5",
+                          "uri": "http://loinc.org/82767-5"
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id162",
+                          "name": "Amount description",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Amount description",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "6cf95804-7282-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/6cf95804-7282-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "value": {
+                            "_type": "Plain_text",
+                            "text": "Tempore sint labore ea enim. Quibusdam omnis quidem ratione quia. A unde autem voluptas id."
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id132",
+                          "name": "Amount",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Amount",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "82767-5",
+                              "uri": "http://loinc.org/82767-5"
+                            }
+                          },
+                          "value": {
+                            "_type": "Quantity",
+                            "magnitude": 81.0,
+                            "units": {
+                              "_type": "Coded_text",
+                              "text": "1",
+                              "term": {
+                                "_type": "Terminology_term",
+                                "description": "1",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "ucum",
+                                  "code_string": "1",
+                                  "uri": "http://ucum.org/id/1"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id133",
+                      "name": "Substitution direction",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Substitution direction",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104804-0",
+                          "uri": "http://loinc.org/104804-0"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "Permitted",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "Permitted",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "snomed",
+                            "code_string": "31281000205100",
+                            "uri": "http://snomed.info/id/31281000205100"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id155",
+                      "name": "Non-substitution reason",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Non-substitution reason",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104703-4",
+                          "uri": "http://loinc.org/104703-4"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Et quisquam est repellat velit. Non cupiditate et sed nisi. Ducimus repellendus quae in libero."
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id156",
+                      "name": "Dispensing start date",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Dispensing start date",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "106197-7",
+                          "uri": "http://loinc.org/106197-7"
+                        }
+                      },
+                      "value": {
+                        "_type": "Date_time_value",
+                        "magnitude": "1911-06-07T09:00:00.000"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "_type": "Section",
+          "archetype_node_id": "id3",
+          "name": "Action history",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Action history",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "11492282-6982-ef11-8870-6045bdc71c8b",
+              "uri": "http://loinc.org/11492282-6982-ef11-8870-6045bdc71c8b"
+            }
+          },
+          "items": [
+            {
+              "_type": "Action",
+              "uid": {
+                "_type": "Uuid",
+                "value": "a9b8a620-51a6-4ce6-8b89-176600269753"
+              },
+              "archetype_node_id": "id4",
+              "name": "Specific action",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Action.medication.v1.2.4"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Specific action",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "14f2d87b-6982-ef11-8870-6045bdc71c8b",
+                  "uri": "http://loinc.org/14f2d87b-6982-ef11-8870-6045bdc71c8b"
+                }
+              },
+              "time": "1959-08-14T23:00:00.000",
+              "language": {
+                "_type": "Terminology_code",
+                "terminology_id": "iso_639-1",
+                "code_string": "en"
+              },
+              "subject": {
+                "_type": "Entity_ref_node",
+                "archetype_node_id": "id8000",
+                "name": "Subject",
+                "archetype_details": {
+                  "_type": "Archetyped",
+                  "archetype_id": {
+                    "_type": "Archetype_id",
+                    "value": "s2-EHR-Entity_ref_node.party_ref.v1.0.0"
+                  },
+                  "rm_version": "0.8.7"
+                },
+                "code": {
+                  "_type": "Terminology_term",
+                  "description": "Subject",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "loinc",
+                    "code_string": "106184-5",
+                    "uri": "http://loinc.org/106184-5"
+                  }
+                },
+                "is_self": false
+              },
+              "qualifiers": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id104",
+                  "name": "Order ID",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Order ID",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104756-2",
+                      "uri": "http://loinc.org/104756-2"
+                    }
+                  },
+                  "value": {
+                    "_type": "Rwe_id_ref",
+                    "id": "8b73d9a5-88c5-4310-822d-5e5d3749ac76"
+                  }
+                }
+              ],
+              "activity_id": "dummy",
+              "description": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id21",
+                  "name": "Medication item",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Medication item",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104717-4",
+                      "uri": "http://loinc.org/104717-4"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "dummy",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "dummy",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "dummy",
+                        "code_string": "dummy"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Entity_ref_node",
+                  "archetype_node_id": "id105",
+                  "name": "Medication details",
+                  "archetype_details": {
+                    "_type": "Archetyped",
+                    "archetype_id": {
+                      "_type": "Archetype_id",
+                      "value": "s2-ENTITY-Entity_ref_node.medication_type_ref.v1.0.0"
+                    },
+                    "rm_version": "0.8.7"
+                  },
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Medication details",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "74078-7",
+                      "uri": "http://loinc.org/74078-7"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "petrolatum 0.43 MG/MG",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "petrolatum 0.43 MG/MG",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "rxnorm",
+                        "code_string": "1085619",
+                        "uri": "http://www.nlm.nih.gov/research/umls/rxnorm/1085619"
+                      }
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id72",
+                      "name": "Form",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Form",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "74055-5",
+                          "uri": "http://loinc.org/74055-5"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "Ear drops emulsion",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "Ear drops emulsion",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "snomed",
+                            "code_string": "385138003",
+                            "uri": "http://snomed.info/id/385138003"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id152",
+                      "name": "Manufacturer",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Manufacturer",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "74719-6",
+                          "uri": "http://loinc.org/74719-6"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Wisozk - Wisozk"
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id3",
+                      "name": "Active ingredient",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Active ingredient",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "31258fe3-bc8f-ef11-8872-6045bdc71c8b",
+                          "uri": "http://loinc.org/31258fe3-bc8f-ef11-8872-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "pergolide Oral Product",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "pergolide Oral Product",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "rxnorm",
+                            "code_string": "1165426",
+                            "uri": "http://www.nlm.nih.gov/research/umls/rxnorm/1165426"
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "is_self": false
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id157",
+                  "name": "Clinical indication",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Clinical indication",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104720-8",
+                      "uri": "http://loinc.org/104720-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Ab eos inventore voluptas et. Quibusdam laudantium molestiae a nisi. Cupiditate et velit fugit vel."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id156",
+                  "name": "Restart criterion",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Restart criterion",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "a24db229-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/a24db229-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Amet perspiciatis totam optio dolorum. Eos rerum quam ullam pariatur. Ut est rerum voluptatem qui."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id22",
+                  "name": "Reason",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Reason",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "6ab52531-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/6ab52531-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Vel dolor cum eos architecto. Velit aliquid voluptatem deserunt soluta. Voluptatem quaerat reprehenderit possimus maxime."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id54",
+                  "name": "Additional details",
+                  "archetype_details": {
+                    "_type": "Archetyped",
+                    "archetype_id": {
+                      "_type": "Archetype_id",
+                      "value": "s2-EHR-Info_node.medication_authorisation.v0.0.1-alpha"
+                    },
+                    "rm_version": "0.8.7"
+                  },
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Additional details",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "46696-1",
+                      "uri": "http://loinc.org/46696-1"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id79",
+                      "name": "Number of refills issued",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Number of refills issued",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "2b5f8cc6-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/2b5f8cc6-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 1731422792
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id80",
+                      "name": "Number of refills remaining",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Number of refills remaining",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "825f8cc6-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/825f8cc6-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 542397210
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id73",
+                      "name": "Authorisation expiry date",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Authorisation expiry date",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "fef7d1d4-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/fef7d1d4-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Date_time_value",
+                        "magnitude": "1944-01-09T14:00:00.000"
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id81",
+                      "name": "Prescriber endorsement",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Prescriber endorsement",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "b9d481db-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/b9d481db-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Soluta cum molestiae praesentium voluptatem. Aperiam repellendus perferendis eum et. Est quia sint asperiores enim."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id34",
+                  "name": "Patient guidance",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Patient guidance",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e9928739-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/e9928739-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Quos repellat rem voluptatem labore. Delectus quia debitis et temporibus. Officiis at commodi amet quo."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id150",
+                  "name": "Double-checked?",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Double-checked?",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "6af40340-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/6af40340-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Boolean_value",
+                    "value": true,
+                    "true_term": {
+                      "_type": "Terminology_term",
+                      "description": "True (qualifier value)",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "31874001",
+                        "uri": "http://snomed.info/id/31874001"
+                      }
+                    },
+                    "false_term": {
+                      "_type": "Terminology_term",
+                      "description": "False (qualifier value)",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "64100000",
+                        "uri": "http://snomed.info/id/64100000"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id26",
+                  "name": "Sequence number",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Sequence number",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "8cd55646-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/8cd55646-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Count",
+                    "magnitude": 858590632
+                  }
+                }
+              ],
+              "state_transition": {
+                "_type": "State_transition",
+                "archetype_node_id": "id152",
+                "name": "Prescription invalid or expired",
+                "current_state": "planned"
+              }
+            },
+            {
+              "_type": "Action",
+              "uid": {
+                "_type": "Uuid",
+                "value": "8e1d7ae0-184e-4133-8677-580cc4325180"
+              },
+              "archetype_node_id": "id4.1",
+              "name": "Medication action",
+              "archetype_details": {
+                "_type": "Archetyped",
+                "archetype_id": {
+                  "_type": "Archetype_id",
+                  "value": "s2-EHR-Action.medication.v1.2.4"
+                },
+                "rm_version": "0.8.7"
+              },
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Medication action",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "14f2d87b-6982-ef11-8870-6045bdc71c8b",
+                  "uri": "http://loinc.org/14f2d87b-6982-ef11-8870-6045bdc71c8b"
+                }
+              },
+              "time": "1917-02-13T21:00:00.000",
+              "language": {
+                "_type": "Terminology_code",
+                "terminology_id": "iso_639-1",
+                "code_string": "en"
+              },
+              "subject": {
+                "_type": "Entity_ref_node",
+                "archetype_node_id": "id8000",
+                "name": "Subject",
+                "archetype_details": {
+                  "_type": "Archetyped",
+                  "archetype_id": {
+                    "_type": "Archetype_id",
+                    "value": "s2-EHR-Entity_ref_node.party_ref.v1.0.0"
+                  },
+                  "rm_version": "0.8.7"
+                },
+                "code": {
+                  "_type": "Terminology_term",
+                  "description": "Subject",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "loinc",
+                    "code_string": "106184-5",
+                    "uri": "http://loinc.org/106184-5"
+                  }
+                },
+                "is_self": false
+              },
+              "qualifiers": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id104",
+                  "name": "Order ID",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Order ID",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104756-2",
+                      "uri": "http://loinc.org/104756-2"
+                    }
+                  },
+                  "value": {
+                    "_type": "Rwe_id_ref",
+                    "id": "d06954bd-b29e-4ed0-8106-d78118492060"
+                  }
+                }
+              ],
+              "activity_id": "dummy",
+              "description": [
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id21",
+                  "name": "Medication item",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Medication item",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "104717-4",
+                      "uri": "http://loinc.org/104717-4"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "dummy"
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id133",
+                  "name": "Substitution",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Substitution",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "9773f90d-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/9773f90d-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Coded_text",
+                    "text": "Not performed",
+                    "term": {
+                      "_type": "Terminology_term",
+                      "description": "Not performed",
+                      "concept": {
+                        "_type": "Terminology_code",
+                        "terminology_id": "snomed",
+                        "code_string": "262008008",
+                        "uri": "http://snomed.info/id/262008008"
+                      }
+                    }
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id134",
+                  "name": "Substitution reason",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Substitution reason",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "8161fa14-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/8161fa14-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Eum reiciendis deserunt impedit accusamus. Et a dicta quis iusto. Reiciendis cum saepe incidunt repellat."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id44",
+                  "name": "Original scheduled date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Original scheduled date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "0974bb1b-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/0974bb1b-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Date_time_value",
+                    "magnitude": "1971-09-16T07:00:00.000"
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id155",
+                  "name": "Restart date/time",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Restart date/time",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "f075b022-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/f075b022-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Date_time_value",
+                    "magnitude": "1904-08-29T16:00:00.000"
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id22",
+                  "name": "Reason",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Reason",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "6ab52531-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/6ab52531-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Animi aut omnis cupiditate sit. Ut maxime harum doloribus et. Et dicta aut nam aut."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id141",
+                  "name": "Administration details",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Administration details",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "80565-5",
+                      "uri": "http://loinc.org/80565-5"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id142",
+                      "name": "Body site",
+                      "archetype_details": {
+                        "_type": "Archetyped",
+                        "archetype_id": {
+                          "_type": "Archetype_id",
+                          "value": "s2-EHR-Info_node.anatomical_location.v1.2.3"
+                        },
+                        "rm_version": "0.8.7"
+                      },
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Body site",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "39111-0",
+                          "uri": "http://loinc.org/39111-0"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "Skin of anterior surface of thorax",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "Skin of anterior surface of thorax",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "snomed",
+                            "code_string": "244106003",
+                            "uri": "http://snomed.info/id/244106003"
+                          }
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id55",
+                          "name": "Multimedia representation",
+                          "archetype_details": {
+                            "_type": "Archetyped",
+                            "archetype_id": {
+                              "_type": "Archetype_id",
+                              "value": "s2-EHR-Info_node.media_file.v2.0.0"
+                            },
+                            "rm_version": "0.8.7"
+                          },
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Multimedia representation",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "d9eea4aa-7182-ef11-8870-6045bdc71c8b",
+                              "uri": "http://loinc.org/d9eea4aa-7182-ef11-8870-6045bdc71c8b"
+                            }
+                          },
+                          "items": [
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id3",
+                              "name": "Content name",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Content name",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "0764e579-7182-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/0764e579-7182-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Plain_text",
+                                "text": "Quaerat consequatur qui rem vel. Quia provident vitae accusantium deleniti. Consectetur architecto omnis omnis quisquam."
+                              }
+                            },
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id11",
+                              "name": "Identifier",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Identifier",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "c9beaf97-5f86-ef11-8870-6045bdc71c8b",
+                                  "uri": "http://loinc.org/c9beaf97-5f86-ef11-8870-6045bdc71c8b"
+                                }
+                              },
+                              "value": {
+                                "_type": "Rwe_id_ref",
+                                "id": "13e10a13-28c1-47dd-ad66-bac926ab9574"
+                              }
+                            },
+                            {
+                              "_type": "Entity_ref_node",
+                              "uid": {
+                                "_type": "Uuid",
+                                "value": "d5c78062-94d7-4b41-9ce3-c7e07846d9e9"
+                              },
+                              "archetype_node_id": "id13",
+                              "name": "Creator",
+                              "archetype_details": {
+                                "_type": "Archetyped",
+                                "archetype_id": {
+                                  "_type": "Archetype_id",
+                                  "value": "s2-EHR-Entity_ref_node.person_ref.v1.0.0"
+                                },
+                                "rm_version": "0.8.7"
+                              },
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Creator",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "104976-6",
+                                  "uri": "http://loinc.org/104976-6"
+                                }
+                              },
+                              "items": [
+                                {
+                                  "_type": "Info_node",
+                                  "archetype_node_id": "id0.2",
+                                  "name": "Name",
+                                  "code": {
+                                    "_type": "Terminology_term",
+                                    "description": "Name",
+                                    "concept": {
+                                      "_type": "Terminology_code",
+                                      "terminology_id": "loinc",
+                                      "code_string": "90d847a8-6c82-ef11-8870-6045bdc71c8b",
+                                      "uri": "http://loinc.org/90d847a8-6c82-ef11-8870-6045bdc71c8b"
+                                    }
+                                  },
+                                  "value": {
+                                    "_type": "Plain_text",
+                                    "text": "Keshaun  Ward"
+                                  }
+                                },
+                                {
+                                  "_type": "Info_node",
+                                  "archetype_node_id": "id0.4",
+                                  "name": "Identifier",
+                                  "code": {
+                                    "_type": "Terminology_term",
+                                    "description": "Identifier",
+                                    "concept": {
+                                      "_type": "Terminology_code",
+                                      "terminology_id": "loinc",
+                                      "code_string": "106193-6",
+                                      "uri": "http://loinc.org/106193-6"
+                                    }
+                                  },
+                                  "value": {
+                                    "_type": "Rwe_id_ref",
+                                    "id": "99c86175-237d-4698-a1dc-de199eebbd91"
+                                  }
+                                },
+                                {
+                                  "_type": "Info_node",
+                                  "archetype_node_id": "id0.5",
+                                  "name": "Relationship",
+                                  "code": {
+                                    "_type": "Terminology_term",
+                                    "description": "Relationship",
+                                    "concept": {
+                                      "_type": "Terminology_code",
+                                      "terminology_id": "loinc",
+                                      "code_string": "44767-2",
+                                      "uri": "http://loinc.org/44767-2"
+                                    }
+                                  },
+                                  "value": {
+                                    "_type": "Coded_text",
+                                    "text": "Maternal great grandfather",
+                                    "term": {
+                                      "_type": "Terminology_term",
+                                      "description": "Maternal great grandfather",
+                                      "concept": {
+                                        "_type": "Terminology_code",
+                                        "terminology_id": "snomed",
+                                        "code_string": "719771001",
+                                        "uri": "http://snomed.info/id/719771001"
+                                      }
+                                    }
+                                  }
+                                }
+                              ],
+                              "is_self": true
+                            },
+                            {
+                              "_type": "Entity_ref_node",
+                              "archetype_node_id": "id12",
+                              "name": "Source device",
+                              "archetype_details": {
+                                "_type": "Archetyped",
+                                "archetype_id": {
+                                  "_type": "Archetype_id",
+                                  "value": "s2-EHR-Entity_ref_node.device_ref.v1.0.0"
+                                },
+                                "rm_version": "0.8.7"
+                              },
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Source device",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "82307-0",
+                                  "uri": "http://loinc.org/82307-0"
+                                }
+                              },
+                              "value": {
+                                "_type": "Coded_text",
+                                "text": "Paraffin wax oven",
+                                "term": {
+                                  "_type": "Terminology_term",
+                                  "description": "Paraffin wax oven",
+                                  "concept": {
+                                    "_type": "Terminology_code",
+                                    "terminology_id": "snomed",
+                                    "code_string": "465165000",
+                                    "uri": "http://snomed.info/id/465165000"
+                                  }
+                                }
+                              },
+                              "items": [
+                                {
+                                  "_type": "Info_node",
+                                  "archetype_node_id": "id2",
+                                  "name": "Device name",
+                                  "code": {
+                                    "_type": "Terminology_term",
+                                    "description": "Device name",
+                                    "concept": {
+                                      "_type": "Terminology_code",
+                                      "terminology_id": "loinc",
+                                      "code_string": "74720-4",
+                                      "uri": "http://loinc.org/74720-4"
+                                    }
+                                  },
+                                  "value": {
+                                    "_type": "Coded_text",
+                                    "text": "Aneroid sphygmomanometer",
+                                    "term": {
+                                      "_type": "Terminology_term",
+                                      "description": "Aneroid sphygmomanometer",
+                                      "concept": {
+                                        "_type": "Terminology_code",
+                                        "terminology_id": "snomed",
+                                        "code_string": "309641003",
+                                        "uri": "http://snomed.info/id/309641003"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "_type": "Info_node",
+                                  "archetype_node_id": "id5",
+                                  "name": "Manufacturer",
+                                  "code": {
+                                    "_type": "Terminology_term",
+                                    "description": "Manufacturer",
+                                    "concept": {
+                                      "_type": "Terminology_code",
+                                      "terminology_id": "loinc",
+                                      "code_string": "74719-6",
+                                      "uri": "http://loinc.org/74719-6"
+                                    }
+                                  },
+                                  "value": {
+                                    "_type": "Plain_text",
+                                    "text": "Larson Inc"
+                                  }
+                                }
+                              ],
+                              "is_self": true
+                            },
+                            {
+                              "_type": "Info_node",
+                              "archetype_node_id": "id8",
+                              "name": "Comment",
+                              "code": {
+                                "_type": "Terminology_term",
+                                "description": "Comment",
+                                "concept": {
+                                  "_type": "Terminology_code",
+                                  "terminology_id": "loinc",
+                                  "code_string": "106173-8",
+                                  "uri": "http://loinc.org/106173-8"
+                                }
+                              },
+                              "value": {
+                                "_type": "Plain_text",
+                                "text": "Totam corporis quam sed explicabo. Et modi quam modi ipsam. Laudantium iure molestiae eligendi nobis."
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id144",
+                      "name": "Administration method",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Administration method",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "104817-2",
+                          "uri": "http://loinc.org/104817-2"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "dummy"
+                      }
+                    },
+                    {
+                      "_type": "Entity_ref_node",
+                      "archetype_node_id": "id145",
+                      "name": "Administration device",
+                      "archetype_details": {
+                        "_type": "Archetyped",
+                        "archetype_id": {
+                          "_type": "Archetype_id",
+                          "value": "s2-EHR-Entity_ref_node.device_ref.v1.0.0"
+                        },
+                        "rm_version": "0.8.7"
+                      },
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Administration device",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "82307-0",
+                          "uri": "http://loinc.org/82307-0"
+                        }
+                      },
+                      "value": {
+                        "_type": "Coded_text",
+                        "text": "Centrifugal sample concentrator",
+                        "term": {
+                          "_type": "Terminology_term",
+                          "description": "Centrifugal sample concentrator",
+                          "concept": {
+                            "_type": "Terminology_code",
+                            "terminology_id": "snomed",
+                            "code_string": "467736003",
+                            "uri": "http://snomed.info/id/467736003"
+                          }
+                        }
+                      },
+                      "items": [
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id2",
+                          "name": "Device name",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Device name",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "74720-4",
+                              "uri": "http://loinc.org/74720-4"
+                            }
+                          },
+                          "value": {
+                            "_type": "Coded_text",
+                            "text": "Automatic-inflation electronic sphygmomanometer, portable, arm/wrist",
+                            "term": {
+                              "_type": "Terminology_term",
+                              "description": "Automatic-inflation electronic sphygmomanometer, portable, arm/wrist",
+                              "concept": {
+                                "_type": "Terminology_code",
+                                "terminology_id": "snomed",
+                                "code_string": "466086009",
+                                "uri": "http://snomed.info/id/466086009"
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id4",
+                          "name": "Type",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Type",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "66464-9",
+                              "uri": "http://loinc.org/66464-9"
+                            }
+                          },
+                          "value": {
+                            "_type": "Plain_text",
+                            "text": "et"
+                          }
+                        },
+                        {
+                          "_type": "Info_node",
+                          "archetype_node_id": "id5",
+                          "name": "Manufacturer",
+                          "code": {
+                            "_type": "Terminology_term",
+                            "description": "Manufacturer",
+                            "concept": {
+                              "_type": "Terminology_code",
+                              "terminology_id": "loinc",
+                              "code_string": "74719-6",
+                              "uri": "http://loinc.org/74719-6"
+                            }
+                          },
+                          "value": {
+                            "_type": "Plain_text",
+                            "text": "McGlynn - McGlynn"
+                          }
+                        }
+                      ],
+                      "is_self": true
+                    }
+                  ]
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id54",
+                  "name": "Additional details",
+                  "archetype_details": {
+                    "_type": "Archetyped",
+                    "archetype_id": {
+                      "_type": "Archetype_id",
+                      "value": "s2-EHR-Info_node.medication_authorisation.v0.0.1-alpha"
+                    },
+                    "rm_version": "0.8.7"
+                  },
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Additional details",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "46696-1",
+                      "uri": "http://loinc.org/46696-1"
+                    }
+                  },
+                  "items": [
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id79",
+                      "name": "Number of refills issued",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Number of refills issued",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "2b5f8cc6-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/2b5f8cc6-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 1151988225
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id80",
+                      "name": "Number of refills remaining",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Number of refills remaining",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "825f8cc6-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/825f8cc6-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Count",
+                        "magnitude": 174803650
+                      }
+                    },
+                    {
+                      "_type": "Info_node",
+                      "archetype_node_id": "id81",
+                      "name": "Prescriber endorsement",
+                      "code": {
+                        "_type": "Terminology_term",
+                        "description": "Prescriber endorsement",
+                        "concept": {
+                          "_type": "Terminology_code",
+                          "terminology_id": "loinc",
+                          "code_string": "b9d481db-7182-ef11-8870-6045bdc71c8b",
+                          "uri": "http://loinc.org/b9d481db-7182-ef11-8870-6045bdc71c8b"
+                        }
+                      },
+                      "value": {
+                        "_type": "Plain_text",
+                        "text": "Ipsum aliquam voluptas molestias praesentium. Hic voluptatem voluptatum sed rerum. Accusantium atque itaque iure ut."
+                      }
+                    }
+                  ]
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id34",
+                  "name": "Patient guidance",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Patient guidance",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "e9928739-6782-ef11-8870-6045bdc71c8b",
+                      "uri": "http://loinc.org/e9928739-6782-ef11-8870-6045bdc71c8b"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Qui explicabo velit pariatur nam. Aliquid iusto reprehenderit voluptas repellendus. Quia quo ea magnam sed."
+                  }
+                },
+                {
+                  "_type": "Info_node",
+                  "archetype_node_id": "id25",
+                  "name": "Comment",
+                  "code": {
+                    "_type": "Terminology_term",
+                    "description": "Comment",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "loinc",
+                      "code_string": "106173-8",
+                      "uri": "http://loinc.org/106173-8"
+                    }
+                  },
+                  "value": {
+                    "_type": "Plain_text",
+                    "text": "Provident rem amet animi natus. Velit non eius possimus recusandae. Recusandae dolorem natus blanditiis non."
+                  }
+                }
+              ],
+              "state_transition": {
+                "_type": "State_transition",
+                "archetype_node_id": "id16",
+                "name": "Medication course stopped",
+                "current_state": "scheduled"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

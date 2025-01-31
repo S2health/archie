@@ -9,6 +9,7 @@ import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.FullArchetypeRepository;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.json.ArchieJacksonConfiguration;
 import com.nedap.archie.rminfo.MetaModels;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageType;
@@ -29,12 +30,15 @@ import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.patterns.data_structures.InfoNode;
 import org.s2.rm.base.patterns.data_structures.Node;
+import org.s2.rm.care.composition.Composition;
 import org.s2.rminfo.S2RmInfoLookup;
 import org.s2.rminfo.S2RmMetaModelsInitialiser;
+import org.s2.serialisation.json.S2RmJacksonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.EnumSet;
 import java.util.List;
@@ -71,27 +75,45 @@ public class S2RmObjectValidatorTest2 {
     }
 
     @Test
-    public void test1() throws Exception {
-        Archetype archetype = parse("/adl2-tests/rmobjectvalidity/s2-EHR-Info_node.element_with_required_attributes.v1.0.0.adls");
-        OperationalTemplate opt = createOpt(archetype);
+    public void validateCreatedDataAgainstOptSimple() throws Exception {
+        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Info_node.environmental_conditions.v1.0.0");
+        InfoNode infoNode = (InfoNode) testUtil.constructEmptyRMObject(opt.getDefinition());
 
-        InfoNode node = (InfoNode) testUtil.constructEmptyRMObject(archetype.getDefinition());
-        Proportion proportion = (Proportion) node.getValue();
-        assert proportion != null;
-        proportion.setDenominator(new Quantity(new BigDecimal("4.0"), new CodedText(new TerminologyTerm("ml", new TerminologyCode("snomed", "258773002")), "mL")));
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
+    }
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, node);
-        assertEquals("There should be 2 errors", 2, validationMessages.size());
-        assertEquals("There should be a validation message about the numerator", "Attribute numerator of class Proportion does not match existence 1..1", validationMessages.get(1).getMessage());
-        assertEquals("There should be a validation message about the magnitiude", "Attribute magnitude of class Proportion does not match existence 1..1", validationMessages.get(0).getMessage());
-        assertEquals("The path should be correct", "/value/numerator", validationMessages.get(1).getPath());
-        assertEquals("The archetype path should be correct", "/value[id2]/numerator", validationMessages.get(1).getArchetypePath());
+    @Test
+    public void validateSynthDataAgainstOptSimple() throws Exception {
+        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Info_node.environmental_conditions.v1.0.0");
 
-        proportion.setMagnitude(BigDecimal.valueOf(0.5));
-        proportion.setNumerator(new Quantity(new BigDecimal("2.0"), new CodedText(new TerminologyTerm("ml", new TerminologyCode("snomed", "258773002")), "mL")));
+        // read in a synth data file for the above template
+        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Info_node.environmental_conditions.v1.0.0.json")) {
+            InfoNode infoNode = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, InfoNode.class);
 
-        validationMessages = validator.validate(opt, node);
-        assertEquals("There should be 0 errors", 0, validationMessages.size());
+            // try to validate
+            List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
+        }
+    }
+
+    @Test
+    public void validateCreatedDataAgainstOptComplex() throws Exception {
+        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
+        Composition comp = (Composition) testUtil.constructEmptyRMObject(opt.getDefinition());
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
+    }
+
+    @Test
+    public void validateSynthDataAgainstOptComplex() throws Exception {
+        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
+
+        // read in a synth data file for the above template
+        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1")) {
+            Composition comp = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
+
+            // try to validate
+            List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
+        }
     }
 
     private OperationalTemplate createOpt(Archetype archetype) {

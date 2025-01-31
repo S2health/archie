@@ -44,7 +44,7 @@ public class S2RmJacksonTest {
     public void parseDuration() throws Exception {
         String json = "{\n" +
                 "  \"_type\": \"Duration_value\",\n" +
-                "  \"value\": \"PT12H20S\"\n" +
+                "  \"magnitude\": \"PT12H20S\"\n" +
                 "}";
         ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
         DurationValue durationValue = objectMapper.readValue(json, DurationValue.class);
@@ -58,11 +58,11 @@ public class S2RmJacksonTest {
     public void parseNegativeDuration() throws Exception {
         String json = "{\n" +
                 "  \"_type\": \"Duration_value\",\n" +
-                "  \"value\": \"-PT12H20S\"\n" +
+                "  \"magnitude\": \"-PT12H20S\"\n" +
                 "}";
         ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
         DurationValue durationValue = objectMapper.readValue(json, DurationValue.class);
-        assertEquals(Duration.parse("-PT12H20S"), durationValue.getMagnitude());
+        assertEquals(Duration.parse("-PT12H20S"), durationValue.getMagnitude().getValue());
 
         String s = objectMapper.writeValueAsString(durationValue);
         assertTrue(s.contains("-PT12H20S"));
@@ -72,7 +72,7 @@ public class S2RmJacksonTest {
     public void parsePeriodDuration() throws Exception {
         String json = "{\n" +
                 "  \"_type\": \"Duration_value\",\n" +
-                "  \"value\": \"-P10Y10DT12H20S\"\n" +
+                "  \"magnitude\": \"-P10Y10DT12H20S\"\n" +
                 "}";
         ObjectMapper objectMapper = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant());
         DurationValue durationValue = objectMapper.readValue(json, DurationValue.class);

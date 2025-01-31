@@ -1,0 +1,272 @@
+{
+  "_type": "Composition",
+  "uid": {
+    "_type": "Uuid",
+    "value": "379adc46-7709-4c6a-a4cc-7027517e1e12"
+  },
+  "archetype_node_id": "id1.1",
+  "name": "Allergies and intolerances",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.allergies_intolerances_list.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-EHR-Composition.t_allergies_intolerances_list.v1.0.0"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "Allergies and intolerances",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "106203-3",
+      "uri": "http://loinc.org/106203-3"
+    }
+  },
+  "language": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_639-1",
+    "code_string": "en"
+  },
+  "territory": {
+    "_type": "Terminology_code",
+    "terminology_id": "iso_3166-1-alpha2",
+    "code_string": "US"
+  },
+  "category": {
+    "_type": "Terminology_term",
+    "description": "Persistent Composition category",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "openehr",
+      "code_string": "431",
+      "uri": "http://openehr.org/id/431"
+    }
+  },
+  "author": {
+    "_type": "Entity_ref_node",
+    "archetype_node_id": "id21",
+    "name": "Author",
+    "archetype_details": {
+      "_type": "Archetyped",
+      "archetype_id": {
+        "_type": "Archetype_id",
+        "value": "s2-EHR-Entity_ref_node.healthcare_professional_ref.v1.0.0"
+      },
+      "rm_version": "0.8.7"
+    },
+    "code": {
+      "_type": "Terminology_term",
+      "description": "Author",
+      "concept": {
+        "_type": "Terminology_code",
+        "terminology_id": "loinc",
+        "code_string": "52457-9",
+        "uri": "http://loinc.org/52457-9"
+      }
+    },
+    "items": [
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.3",
+        "name": "Professional capacity",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional capacity",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "74571-1",
+            "uri": "http://loinc.org/74571-1"
+          }
+        },
+        "value": {
+          "_type": "Plain_text",
+          "text": "Creative"
+        }
+      },
+      {
+        "_type": "Info_node",
+        "archetype_node_id": "id0.4",
+        "name": "Professional registration",
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Professional registration",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "255e5533-a685-ef11-8870-6045bdc71c8b",
+            "uri": "http://loinc.org/255e5533-a685-ef11-8870-6045bdc71c8b"
+          }
+        },
+        "value": {
+          "_type": "Rwe_id_ref",
+          "id": "5721bc6e-5a13-41d3-b947-9356494a700b"
+        }
+      }
+    ],
+    "is_self": false
+  },
+  "content": [
+    {
+      "_type": "Assessment",
+      "uid": {
+        "_type": "Uuid",
+        "value": "17427b07-a9c7-483d-90ec-b6c69a084692"
+      },
+      "archetype_node_id": "id2",
+      "name": "Substance",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-EHR-Assessment.t_allergies_intolerances-adverse.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Substance",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "104986-5",
+          "uri": "http://loinc.org/104986-5"
+        }
+      },
+      "time": "1910-05-10T23:00:00.000",
+      "language": {
+        "_type": "Terminology_code",
+        "terminology_id": "iso_639-1",
+        "code_string": "en"
+      },
+      "subject": {
+        "_type": "Entity_ref_node",
+        "archetype_node_id": "id8000",
+        "name": "Subject",
+        "archetype_details": {
+          "_type": "Archetyped",
+          "archetype_id": {
+            "_type": "Archetype_id",
+            "value": "s2-EHR-Entity_ref_node.party_ref.v1.0.0"
+          },
+          "rm_version": "0.8.7"
+        },
+        "code": {
+          "_type": "Terminology_term",
+          "description": "Subject",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "loinc",
+            "code_string": "106184-5",
+            "uri": "http://loinc.org/106184-5"
+          }
+        },
+        "is_self": true
+      },
+      "data": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id3",
+          "name": "Substance",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Substance",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104986-5",
+              "uri": "http://loinc.org/104986-5"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Aluminum potassium sulfate",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Aluminum potassium sulfate",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "430364003",
+                "uri": "http://snomed.info/id/430364003"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id102",
+          "name": "Criticality",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Criticality",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "82606-5",
+              "uri": "http://loinc.org/82606-5"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "dummy"
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id7",
+          "name": "Comment",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Comment",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106173-8",
+              "uri": "http://loinc.org/106173-8"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Et sed esse eum nostrum. Fugit aliquid sit consequatur sit. Eius laudantium aliquid voluptatum quod."
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id0.1",
+          "name": "Substance reaction",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Substance reaction",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "66947-3",
+              "uri": "http://loinc.org/66947-3"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Edema",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Edema",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "267038008",
+                "uri": "http://snomed.info/id/267038008"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
