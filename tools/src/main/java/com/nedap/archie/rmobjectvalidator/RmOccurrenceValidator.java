@@ -9,8 +9,8 @@ import com.nedap.archie.rminfo.MetaModel;
 import java.util.ArrayList;
 import java.util.List;
 
-class RmOccurrenceValidator {
-    List<RMObjectValidationMessage> validate(MetaModel metaModel, List<RMObjectWithPath> rmObjects, String pathSoFar, CObject cobject) {
+public class RmOccurrenceValidator {
+    public List<RMObjectValidationMessage> validate(MetaModel metaModel, List<RMObjectWithPath> rmObjects, String pathSoFar, CObject cobject) {
         if(cobject != null) {
             MultiplicityInterval occurrences = cobject.effectiveOccurrences(metaModel::referenceModelPropMultiplicity);
             if (occurrences != null && !occurrences.has(rmObjects.size())) {

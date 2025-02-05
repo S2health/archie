@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-class RMObjectValidationUtil {
+public class RMObjectValidationUtil {
 
     /**
      * Retrieve the terminology name of the observation that an attribute is a part of.

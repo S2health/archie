@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-class RmMultiplicityValidator {
-    List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
+public class RmMultiplicityValidator {
+    public List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
         if (attributeValue instanceof Collection) {
             Collection<?> collectionValue = (Collection<?>) attributeValue;
             //validate multiplicity

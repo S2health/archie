@@ -1,35 +1,21 @@
 package org.s2.archie.rmobjectvalidator;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.nedap.archie.adlparser.ADLParseException;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.FullArchetypeRepository;
-import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.json.ArchieJacksonConfiguration;
 import com.nedap.archie.rminfo.MetaModels;
-import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
-import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageType;
-import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
-import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
+import com.nedap.archie.rmobjectvalidator.*;
 import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
 import com.nedap.archie.testutil.TestUtil;
+import com.nedap.archie.tools.rmobjectvalidator.S2RMObjectValidator;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
-import org.s2.archie.archetypevalidator.S2ModelsArchetypeValidatorTest;
-import org.s2.rm.base.data_types.quantity.Proportion;
-import org.s2.rm.base.data_types.quantity.Quantity;
-import org.s2.rm.base.data_types.text.CodedText;
-import org.s2.rm.base.data_types.text.PlainText;
-import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
-import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rm.base.patterns.data_structures.InfoNode;
-import org.s2.rm.base.patterns.data_structures.Node;
 import org.s2.rm.care.composition.Composition;
 import org.s2.rminfo.S2RmInfoLookup;
 import org.s2.rminfo.S2RmMetaModelsInitialiser;
@@ -39,11 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.EnumSet;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class S2RmObjectValidatorTest2 {
 
@@ -54,9 +36,9 @@ public class S2RmObjectValidatorTest2 {
     FullArchetypeRepository repository;
 
     MetaModels bmmReferenceModels;
-    private RMObjectValidator validator;
+    private S2RMObjectValidator validator;
 
-    private RMObjectValidator validatorWithoutInvariants;
+    private S2RMObjectValidator validatorWithoutInvariants;
 
     @Before
     public void setup() {
@@ -69,10 +51,25 @@ public class S2RmObjectValidatorTest2 {
         bmmReferenceModels = new MetaModels(null, s2RmMetaModelsInitialiser.getBmmRepository(), s2RmMetaModelsInitialiser.getAomProfiles());
         repository.compile(bmmReferenceModels);
 
-        validator = new RMObjectValidator(S2RmInfoLookup.getInstance(), repository);
-        validatorWithoutInvariants = new RMObjectValidator(S2RmInfoLookup.getInstance(), repository,
+        validator = new S2RMObjectValidator(S2RmInfoLookup.getInstance(), repository);
+        validatorWithoutInvariants = new S2RMObjectValidator(S2RmInfoLookup.getInstance(), repository,
                 new ValidationConfiguration.Builder().validateInvariants(false).build());
     }
+
+    @Test
+    public void betaTest() throws Exception {
+        setup();
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.0.0");
+        OperationalTemplate opt = createOpt(archetype);
+
+        InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Composition.t_lab_report-CBC.v1.0.0.json");
+        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+
+        System.out.println("testNothing");
+    }
+
 
     @Test
     public void validateCreatedDataAgainstOptSimple() throws Exception {

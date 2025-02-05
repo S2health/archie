@@ -1,17 +1,21 @@
-package com.nedap.archie.rmobjectvalidator;
+package com.nedap.archie.tools.rmobjectvalidator;
 
 import com.nedap.archie.aom.CPrimitiveObject;
 import com.nedap.archie.query.RMObjectWithPath;
+import com.nedap.archie.rmobjectvalidator.ConstraintToStringUtil;
+import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
+import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageIds;
+// import com.nedap.archie.rmobjectvalidator.ValidationHelper;
 import org.openehr.utils.message.I18n;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RmPrimitiveObjectValidator {
-    private final ValidationHelper validationHelper;
+public class S2RmPrimitiveObjectValidator {
+    private final S2ValidationHelper validationHelper;
 
-    public RmPrimitiveObjectValidator(ValidationHelper validationHelper) {
+    public S2RmPrimitiveObjectValidator(S2ValidationHelper validationHelper) {
         this.validationHelper = validationHelper;
     }
 
