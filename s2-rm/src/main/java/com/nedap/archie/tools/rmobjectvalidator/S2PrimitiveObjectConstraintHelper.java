@@ -12,6 +12,7 @@ import com.nedap.archie.base.Interval;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
+import org.s2.terminology.S2TerminologyAccess;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -116,6 +117,7 @@ class S2PrimitiveObjectConstraintHelper {
         }
     }
 
+    // TODO JCoyle function for code lookup validation and vsets??
     private boolean isValidValue(CTerminologyCode terminologyCode, TerminologyCode value) {
         if(terminologyCode.getConstraint().isEmpty()) {
             return true;
@@ -131,6 +133,10 @@ class S2PrimitiveObjectConstraintHelper {
                 values = getOpenEHRValueSetExpanded(terminologyCode);
             } else if (terminologyId.equalsIgnoreCase("IANA_media-types")) {
                 values = getIANAMediaTypesValueSetExpanded(terminologyCode);
+            } else if (terminologyId.equalsIgnoreCase("snomed")) {
+                values = getSnomedValueSetExpanded(terminologyCode);
+            } else if (terminologyId.equalsIgnoreCase("loinc")) {
+                values = getLoincValueSetExpanded(terminologyCode);
             } else {
                 // This is not a local nor an openehr terminology.
                 // If a term binding is there, we may be able to validate, if external, we wil not be able to.
@@ -163,6 +169,52 @@ class S2PrimitiveObjectConstraintHelper {
             URI termBinding = terminology.getTermBinding("openehr", atCode);
             if (termBinding != null) {
                 String code = terminologyAccess.parseTerminologyURI(termBinding.toString());
+                if (code != null) {
+                    result.add(code);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private List<String> getLoincValueSetExpanded(CTerminologyCode terminologyCode) {
+        List<String> atCodes = terminologyCode.getValueSetExpanded();
+        ArchetypeTerminology terminology = getTerminology(terminologyCode);
+        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
+        List<String> result = new ArrayList<>();
+
+        if(terminology == null) {
+            return result;
+        }
+
+        for(String atCode : atCodes) {
+            URI termBinding = terminology.getTermBinding("loinc", atCode);
+            if (termBinding != null) {
+                String code = terminologyAccess.parseLoincTerminologyURI(termBinding.toString());
+                if (code != null) {
+                    result.add(code);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private List<String> getSnomedValueSetExpanded(CTerminologyCode terminologyCode) {
+        List<String> atCodes = terminologyCode.getValueSetExpanded();
+        ArchetypeTerminology terminology = getTerminology(terminologyCode);
+        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
+        List<String> result = new ArrayList<>();
+
+        if(terminology == null) {
+            return result;
+        }
+
+        for(String atCode : atCodes) {
+            URI termBinding = terminology.getTermBinding("snomed", atCode);
+            if (termBinding != null) {
+                String code = terminologyAccess.parseSnomedTerminologyURI(termBinding.toString());
                 if (code != null) {
                     result.add(code);
                 }

@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.nedap.archie.adlparser.modelconstraints.ReflectionConstraintImposer;
 import com.nedap.archie.aom.*;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.base.RMObject;
 import com.nedap.archie.flattener.OperationalTemplateProvider;
 import com.nedap.archie.query.RMObjectWithPath;
 import com.nedap.archie.query.RMPathQuery;
@@ -14,6 +15,7 @@ import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMTypeInfo;
 import com.nedap.archie.rmobjectvalidator.*;
 import org.openehr.utils.message.I18n;
+import org.s2.rm.base.foundation_types.terminology.TerminologyTerm;
 import org.s2.rminfo.S2RmInfoLookup;
 
 import java.lang.reflect.InvocationTargetException;
@@ -148,6 +150,7 @@ public class S2RMObjectValidator extends RMObjectValidatingProcessor {
 
 
     private List<RMObjectValidationMessage> validateInvariants(RMObjectWithPath objectWithPath, String pathSoFar) {
+        // TODO: JCoyle global variable validateInvariants, where is this set?
         if (!validateInvariants) {
             return Collections.emptyList();
         }
