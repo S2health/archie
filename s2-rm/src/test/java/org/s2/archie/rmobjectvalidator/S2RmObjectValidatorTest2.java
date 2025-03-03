@@ -1,5 +1,6 @@
 package org.s2.archie.rmobjectvalidator;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nedap.archie.adlparser.ADLParseException;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.OperationalTemplate;
@@ -20,12 +21,16 @@ import org.s2.rm.care.composition.Composition;
 import org.s2.rminfo.S2RmInfoLookup;
 import org.s2.rminfo.S2RmMetaModelsInitialiser;
 import org.s2.serialisation.json.S2RmJacksonUtil;
+import org.s2.terminology.TerminologyCacheableSet;
+import org.s2.terminology.TerminologySet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class S2RmObjectValidatorTest2 {
 
@@ -58,7 +63,6 @@ public class S2RmObjectValidatorTest2 {
 
     @Test
     public void betaTest() throws Exception {
-        setup();
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.0.0");
         OperationalTemplate opt = createOpt(archetype);
 
@@ -66,9 +70,10 @@ public class S2RmObjectValidatorTest2 {
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        assertEquals("There should be 0 errors", 0, validationMessages.size());
 
-        System.out.println("testNothing");
     }
+
 
 
     @Test

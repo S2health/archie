@@ -148,11 +148,32 @@ class S2PrimitiveObjectConstraintHelper {
             if(values != null && !values.isEmpty()) {
                 return value.getCodeString() != null && values.contains(value.getCodeString());
             }
+
+            // s2 vset check - JCoyle
+            String s2ValuesetId = getS2ValuesetId(terminologyCode);
+            if(s2ValuesetId != null && !s2ValuesetId.isEmpty()) {
+                return S2TerminologyAccess.getInstance().valuesetHasMember(s2ValuesetId, value.getCodeString());
+            }
+            
+
         } else {
             return true;
         }
 
         return false;
+    }
+
+    private String getS2ValuesetId(CTerminologyCode terminologyCode) {
+        ArchetypeTerminology terminology = getTerminology(terminologyCode);
+        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
+        String acCode = terminologyAccess.parseAcCode(terminologyCode.toString());
+        if(acCode.startsWith("ac")) {
+            URI termBinding = terminology.getTermBinding("s2", acCode);
+            if (termBinding != null) {
+                return terminologyAccess.parseS2TerminologyURI(termBinding.toString());
+            }
+        }
+        return null;
     }
 
     private List<String> getOpenEHRValueSetExpanded(CTerminologyCode terminologyCode) {
