@@ -63,6 +63,9 @@ public class S2RmObjectValidatorTest2 {
     }
 
     @Test
+    public void emptyTest() throws Exception {}
+
+    @Test
     public void betaTest() throws Exception {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.0.0");
         OperationalTemplate opt = createOpt(archetype);

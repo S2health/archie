@@ -148,11 +148,15 @@ class OperationalTemplateCreator {
             CObject object = workList.pop();
             for(CAttribute attribute:object.getAttributes()) {
                 for(CObject child:attribute.getChildren()) {
-                    if(child instanceof CArchetypeRoot) { //use_archetype
+                    if(child instanceof CArchetypeRoot &&
+                            flattener.getCreateOperationalTemplate() &&
+                            ( child.getAttributes() == null || child.getAttributes().isEmpty()) &&
+                            depth <= AdlDefinitions.TemplateMaxDepth) {
                         fillArchetypeRoot((CArchetypeRoot) child, result, depth + 1);
+                        workList.push(child);
                     }
-                    workList.push(child);
                 }
+
             }
         }
     }
@@ -191,9 +195,7 @@ class OperationalTemplateCreator {
      * Only fillArchetypeRoot if this is not done yet
      */
     private void fillArchetypeRoot(CArchetypeRoot root, OperationalTemplate result, int depth) {
-        if(flattener.getCreateOperationalTemplate() &&
-                ( root.getAttributes() == null || root.getAttributes().isEmpty()) &&
-                depth <= AdlDefinitions.TemplateMaxDepth) {
+
             String archetypeRef = root.getArchetypeRef();
             String newArchetypeRef = archetypeRef;
             OverridingArchetypeRepository repository = flattener.getRepository();
@@ -260,7 +262,7 @@ class OperationalTemplateCreator {
             flattener.getAnnotationsAndOverlaysFlattener().addVisibilityWithPathPrefix(rootToFill.getPath(), archetype, result);
             //todo: do we have to put something in the terminology extracts?
             //templateResult.addTerminologyExtract(child.getNodeId(), archetype.getTerminology().);
-        }
+
 
     }
 
