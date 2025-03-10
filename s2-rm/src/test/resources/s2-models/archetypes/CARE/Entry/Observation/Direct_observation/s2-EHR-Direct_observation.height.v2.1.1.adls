@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7; uid=375f1a29-3f45-42cd-880a-2b14a82fe62d)
-	s2-EHR-Direct_observation.height.v2.1.1
+	s2-EHR-Direct_observation.height.v2.1.2
 
 language
 	original_language = <[iso_639-1::en]>
@@ -104,7 +104,7 @@ definition
 					}
 				}
 			}
-			Info_node[id20] occurrences matches {0..1} matches {	-- Confounding factors
+			Info_node[id20] occurrences matches {0..1} matches {	-- Associated Situation
 				value matches {
 					Text[id27] 
 				}
@@ -136,7 +136,7 @@ definition
 			Point_event[id22] occurrences matches {0..1} matches {	-- Birth
 				items matches {
 					use_node Info_node[id15] /state[id15]	-- /state[Position]
-					use_node Info_node[id20] /state[id20]	-- /state[Confounding factors]
+					use_node Info_node[id20] /state[id20]	-- /state[Associated Situation]
 				}
 			}
 		}
@@ -193,7 +193,7 @@ terminology
 				description = <"Additional narrative about the measurement, not captured in other fields.">
 			>
 			["id20"] = <
-				text = <"Confounding factors">
+				text = <"Associated Situation">
 				description = <"Narrative description of any issues or factors that may impact on the measurement.">
 			>
 			["id22"] = <
@@ -229,7 +229,7 @@ terminology
 			["id12"] = <http://loinc.org/74720-4>
 			["id15"] = <http://loinc.org/8361-8>
 			["id19"] = <http://loinc.org/106173-8>
-			["id20"] = <http://loinc.org/106176-1>
+			["id20"] = <http://loinc.org/106168-8>
 			["id40"] = <http://loinc.org/83844-1>
 			["id22"] = <http://loinc.org/89269-5>
 			["id8000"] = <http://loinc.org/106184-5>

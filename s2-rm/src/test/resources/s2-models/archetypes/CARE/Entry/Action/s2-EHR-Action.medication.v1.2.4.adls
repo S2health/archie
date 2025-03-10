@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7; uid=8334c955-c460-4157-968a-49123cd0e5fb)
-	s2-EHR-Action.medication.v1.2.4
+	s2-EHR-Action.medication.v1.2.5
 
 language
 	original_language = <[iso_639-1::en]>
@@ -289,7 +289,7 @@ definition
 			use_archetype Entity_ref_node[id105, s2-ENTITY-Entity_ref_node.medication_type_ref.v1] occurrences matches {0..1} 
 			allow_archetype Info_node[id132] occurrences matches {0..1} matches {	-- Amount
 				include
-					archetype_id/value matches {/s2-EHR-Info_node\.medication_supply_amount(-[a-zA-Z0-9_]+)*\.v0|s2-EHR-Info_node\.medication_supply_amount(-[a-zA-Z0-9_]+)*\.v1|s2-EHR-Info_node\.dosage(-[a-zA-Z0-9_]+)*\.v1|s2-EHR-Info_node\.dosage(-[a-zA-Z0-9_]+)*\.v2/}
+					archetype_id/value matches {/s2-EHR-Info_node\.medication_supply_amount(-[a-zA-Z0-9_]+)*\.v0|s2-EHR-Info_node\.dosage(-[a-zA-Z0-9_]+)*\.v3/}
 			}
 			Info_node[id157] occurrences matches {0..1} matches {	-- Clinical indication
 				value matches {

@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7; uid=0bead8c2-089c-477a-b1bc-8199c72a2763)
-	s2-EHR-Direct_observation.body_mass_index.v2.0.8
+	s2-EHR-Direct_observation.body_mass_index.v2.0.9
 
 language
 	original_language = <[iso_639-1::en]>
@@ -48,7 +48,7 @@ description
 			misuse = <"Not intended to record information regarding Body Mass Index percentiles - use the OBSERVATION.child_growth archetype for this purpose.">
 		>
 	>
-	other_contributors = <"openEHR CKM community">
+	other_contributors = <"openEHR CKM community", ...>
 
 definition
 	Direct_observation[id1] matches {	-- Body mass index
@@ -103,7 +103,7 @@ definition
 			}
 		}
 		state matches {
-			Info_node[id12] occurrences matches {0..1} matches {	-- Confounding factors
+			Info_node[id12] occurrences matches {0..1} matches {	-- Associated situation
 				value matches {
 					Text[id20] 
 				}
@@ -168,7 +168,7 @@ terminology
 				description = <"Formula used to derive the body mass index.">
 			>
 			["id12"] = <
-				text = <"Confounding factors">
+				text = <"Associated situation">
 				description = <"Narrative description of any issues or factors that may impact on the calculation.">
 			>
 			["id13"] = <
@@ -210,7 +210,7 @@ terminology
 			["id12"] = <http://loinc.org/106176-1>
 			["id13"] = <http://loinc.org/106173-8>
 			["id7"] = <http://loinc.org/106191-0>
-			["id11"] = <http://loinc.org/97a5406b-6882-ef11-8870-6045bdc71c8b>
+			["id11"] = <http://loinc.org/107102-6>
 			["id8000"] = <http://loinc.org/106184-5>
 		>
 		["openehr"] = <

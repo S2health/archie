@@ -1,0 +1,124 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=d3f3f819-808c-4076-8705-d9da6546ebe1)
+	s2-ENTITY-Info_node.person_other_demographics-us.v0.0.1
+
+specialize
+	s2-ENTITY-Info_node.person_other_demographics.v0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"US-specific extended demographics">
+		>
+	>
+
+definition
+	Info_node[id1.1] matches {	-- US-specific extended demographics
+		items matches {
+			Info_node[id0.2] occurrences matches {0..1} matches {	-- mothers_maiden_name
+				value matches {
+					Plain_text[id0.7] 
+				}
+			}
+			Info_node[id0.3] occurrences matches {0..1} matches {	-- Nationalities
+				items matches {
+					Info_node[id0.8] matches {	-- Nationality
+						value matches {
+							Coded_text[id0.9]  matches {
+								term matches {
+									Terminology_term[id0.1005] matches {
+										concept matches {[ac0.3]}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			Info_node[id0.5] occurrences matches {0..1} matches {	-- Religion
+				value matches {
+					Coded_text[id0.105] matches {
+						term matches {
+							Terminology_term[id0.1005] matches {
+								concept matches {[ac0.1]}
+							}
+						}
+					}
+				}
+			}
+			Info_node[id0.6] occurrences matches {0..1} matches {	-- Military service status
+				value matches {
+					Coded_text[id0.106] matches {
+						term matches {
+							Terminology_term[id0.1006] matches {
+								concept matches {[ac0.2]}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"US-specific extended demographics">
+				description = <"-">
+			>
+			["id0.2"] = <
+				text = <"Mothers maiden name">
+				description = <"-">
+			>
+			["id0.3"] = <
+				text = <"Nationalities">
+				description = <"-">
+			>
+			["id0.5"] = <
+				text = <"Religion">
+				description = <"-">
+			>
+			["id0.6"] = <
+				text = <"Military service status">
+				description = <"-">
+			>
+			["id0.8"] = <
+				text = <"Nationality">
+				description = <"-">
+			>
+			["ac0.1"] = <
+				text = <"Religion">
+				description = <"Religious affiliation.">
+			>
+			["ac0.2"] = <
+				text = <"Military service status">
+				description = <"Military service status.">
+			>
+			["ac0.3"] = <
+				text = <"Nationality">
+				description = <"Person nationality, i.e. citizenship.">
+			>
+		>
+	>
+
+	term_bindings = <
+		["s2"] = <
+			["ac0.1"] = <http://s2health.org/id/s2.ReligiousAffiliation>
+			["ac0.2"] = <http://s2health.org/id/s2.MilitaryServiceStatus>
+			["ac0.3"] = <http://iso.org/code_sets/iso_3166-1-alpha2>
+		>
+	>
+

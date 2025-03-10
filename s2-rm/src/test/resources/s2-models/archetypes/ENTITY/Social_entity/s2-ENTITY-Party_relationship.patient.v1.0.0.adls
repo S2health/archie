@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7; uid=9f7dbe3a-4e64-4c02-8d1a-402f7b0f57ce)
-	s2-ENTITY-Party_relationship.patient.v1.0.0
+	s2-ENTITY-Party_relationship.patient.v1.1.1
 
 language
 	original_language = <[ISO_639-1::en]>
@@ -33,6 +33,46 @@ description
 definition
 	Party_relationship[id1] matches {	-- Patient
 		other_details matches {
+			Info_node[id6] occurrences matches {0..1} matches {	-- Language capabilities
+				items matches {
+					use_archetype Info_node[id7, s2-EHR-Info_node.language.v2] 
+				}
+			}
+			use_archetype Info_node[id3, s2-ENTITY-Info_node.patient_contact.v1] 
+			Info_node[id4] occurrences matches {0..1} matches {	-- Multiple birth indicator
+				value matches {
+					Boolean_value[id104] 
+				}
+			}
+			Info_node[id5] occurrences matches {0..1} matches {	-- Multiple birth order number
+				value matches {
+					Count[id105] matches {
+						magnitude matches {|>0|}
+					}
+				}
+			}
+			Info_node[id8] occurrences matches {0..1} matches {	-- Care-relevant disabilities
+				items matches {
+					Info_node[id9] occurrences matches {0..1} matches {	-- Disability
+						value matches {
+							Coded_text[id109] matches {
+								term matches {
+									Terminology_term[id1009] matches {
+										concept matches {[ac1]}		-- Disability
+									}
+								}
+							}
+						}
+						items matches {
+							Info_node[id10] occurrences matches {0..1} matches {	-- Comment
+								value matches {
+									Plain_text[id110] 
+								}
+							}
+						}
+					}
+				}
+			}
 			Info_node[id2] occurrences matches {0..1} matches {	-- Insurance details
 				items matches {
 					Info_node[id22] occurrences matches {0..1} matches {	-- Insurance organization
@@ -52,13 +92,33 @@ definition
 					}
 				}
 			}
-			use_archetype Info_node[id3, s2-ENTITY-Info_node.patient_contact.v1] 
+			Info_node[id30] matches {	-- External identifier description
+				value matches {
+					Plain_text[id1030] occurrences matches {1} 
+				}
+				items matches {
+					Info_node[id130] occurrences matches {1} matches {	-- Identifier
+						value matches {
+							Rwe_id_ref[id1130] occurrences matches {1} 
+						}
+					}
+					Info_node[id131] occurrences matches {1} matches {	-- Comment
+						value matches {
+							Rwe_id_ref[id1131] occurrences matches {1} 
+						}
+					}
+				}
+			}
 		}
 	}
 
 terminology
 	term_definitions = <
 		["en"] = <
+			["ac1"] = <
+				text = <"Disability">
+				description = <"Disability types.">
+			>
 			["id1"] = <
 				text = <"Patient">
 				description = <"An individual patient.">
@@ -83,9 +143,45 @@ terminology
 				text = <"Contacts">
 				description = <"Related parties relevant to care of the subject e.g. family etc">
 			>
-			["id104"] = <
-				text = <"Contact ref">
+			["id4"] = <
+				text = <"Multiple birth indicator">
+				description = <"Indicates if this patient was one of a multiple birth">
+			>
+			["id5"] = <
+				text = <"Multiple birth order number">
+				description = <"Order of this patient within a multiple birth.">
+			>
+			["id6"] = <
+				text = <"Language capabilities">
 				description = <"-">
+			>
+			["id7"] = <
+				text = <"Language description">
+				description = <"-">
+			>
+			["id8"] = <
+				text = <"Care-relevant disabilities">
+				description = <"Care provision relevant disabilities">
+			>
+			["id9"] = <
+				text = <"Disability">
+				description = <"-">
+			>
+			["id10"] = <
+				text = <"Comment">
+				description = <"-">
+			>
+			["id30"] = <
+				text = <"External patient identifier">
+				description = <"-">
+			>
+			["id130"] = <
+				text = <"Patient identifier">
+				description = <"-">
+			>
+			["id131"] = <
+				text = <"Comment">
+				description = <"Comment on use of this identifier">
 			>
 		>
 	>
@@ -97,6 +193,19 @@ terminology
 			["id23"] = <http://loinc.org/89061-6>
 			["id24"] = <http://loinc.org/b4788aca-7482-ef11-8870-6045bdc71c8b>
 			["id3"] = <http://loinc.org/95727-4>
+			["id4"] = <http://loinc.org/2934ca74-a1b1-ef11-8872-6045bdc71c8b>
+			["id5"] = <http://loinc.org/73771-8>
+			["id10"] = <http://loinc.org/106173-8>
+			["id6"] = <http://loinc.org/104957-6>
+			["id7"] = <http://loinc.org/104916-2>
+			["id8"] = <http://loinc.org/496e35a2-b2b1-ef11-8872-6045bdc71c8b>
+			["id9"] = <http://loinc.org/95377-8>
+			["id30"] = <http://loinc.org/ca6778ff-1fb4-ef11-8872-6045bdc71c8b>
+			["id130"] = <http://loinc.org/76435-7>
+			["id131"] = <http://loinc.org/106173-8>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.DisabilityRelatedToCare>
 		>
 	>
 

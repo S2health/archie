@@ -1,0 +1,234 @@
+template (adl_version=2.1.0; rm_release=0.8.7; uid=62fa3c46-8bf8-4d61-9208-90cbb9ecbaf1)
+	s2-EHR-Order.t_simple_medication_order.v2.0.0
+
+specialize
+	s2-EHR-Order.medication_order.v5
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@GraphiteHealth.io>">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	copyright = <"Copyright (c) 2023 Graphite Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Simple medication order template">
+		>
+	>
+
+definition
+	Order[id1.1] matches {	-- Basic medication order
+		/activities[id2]/description matches {
+			Info_node[id92] matches {
+				value matches {
+					Coded_text[id182.1] matches {
+						term matches {
+							Terminology_term[id0.2] matches {
+								concept matches {[ac0.2]}		-- Medication route
+							}
+						}
+					}
+				}
+			}
+
+			use_archetype Info_node[id93, s2-EHR-Info_node.t_medication-anatomical_location-1.v1] 
+
+			Info_node[id95] matches {
+				value matches {
+					Coded_text[id184.1] matches {
+						term matches {
+							Terminology_term[id0.4] matches {
+								concept matches {[ac0.4]}		-- Medication admin method
+							}
+						}
+					}
+				}
+			}
+			use_archetype Entity_ref_node[id96, s2-EHR-Entity_ref_node.device_ref.v1] occurrences matches {0} 
+			use_archetype Entity_ref_node[id144, s2-ENTITY-Entity_ref_node.medication_type_ref.v1] 
+			Info_node[id48] occurrences matches {0} 
+			Info_node[id174] occurrences matches {0} 
+			Info_node[id175] occurrences matches {0} 
+			use_archetype Info_node[id178, s2-EHR-Info_node.t_medication_order-therapeutic_direction-1.v1]
+			Info_node[id63] occurrences matches {0} 
+			Info_node[id45] occurrences matches {0} 
+			Info_node[id108] occurrences matches {0} 
+			Info_node[id10] occurrences matches {0} 
+			Info_node[id19] occurrences matches {0} 
+			Info_node[id149] occurrences matches {0} 
+			Info_node[id180] occurrences matches {0} 
+			Info_node[id114] occurrences matches {0..1} matches {
+				items matches {
+					Info_node[id12] occurrences matches {0} 
+					Info_node[id17] occurrences matches {0} 
+					Info_node[id61] occurrences matches {0} 
+					Info_node[id51] occurrences matches {0} 
+					use_archetype Info_node[id113, s2-EHR-Info_node.medication_order_summary.v0] occurrences matches {0} 
+				}
+			}
+			Info_node[id130] occurrences matches {0} 
+			use_archetype Info_node[id70, s2-EHR-Info_node.t_simple_medication_order_v111-medication_auth-1.v1] 
+			allow_archetype Info_node[id167] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Basic medication order">
+				description = <"Basic medication order">
+			>
+			["ac0.2"] = <
+				text = <"Medication route">
+				description = <"Medication route">
+			>
+			["ac0.4"] = <
+				text = <"Medication admin method">
+				description = <"Medication admin method">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac0.2"] = <http://s2health.org/id/s2.MedicationAdministrationRoute>
+			["ac0.4"] = <http://s2health.org/id/s2.MedicationAdministrationMethod>
+		>
+	>
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Info_node.t_simple_medication_order_v111-medication_auth-1.v1.0.0
+
+specialize
+	s2-EHR-Info_node.medication_authorisation.v0
+
+
+definition
+	Info_node[id1.1] matches {	-- Basic medication authorisation
+		/items matches {
+			Info_node[id74] occurrences matches {0} 
+			Info_node[id79] occurrences matches {0} 
+			Info_node[id80] occurrences matches {0} 
+			Info_node[id47] occurrences matches {0} 
+			Info_node[id73] occurrences matches {0} 
+			Info_node[id81] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Basic medication authorisation">
+				description = <"Basic medication authorisation">
+			>
+		>
+	>
+
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Info_node.t_medication-anatomical_location-1.v1.2.3
+
+specialize
+	s2-EHR-Info_node.anatomical_location_classical.v1
+
+definition
+	Info_node[id1.1.1] matches {	-- Anatomical location
+		value matches {
+			Coded_text[id10] matches {
+				term matches {
+					Terminology_term[id110] matches {
+						concept matches {[ac4.0.1]}		-- Coded body location
+					}
+				}
+			}
+		}
+		items matches {
+			use_archetype Info_node[id55, s2-EHR-Info_node.media_file.v2] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1.1"] = <
+				text = <"Medication supply amount">
+				description = <"Medication supply amount">
+			>
+			["ac4.0.1"] = <
+				text = <"Medication admin site">
+				description = <"Medication admin site">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac4.0.1"] = <http://s2health.org/id/s2.MedicationAdministrationSite>
+		>
+	>
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Info_node.t_medication_order-therapeutic_direction-1.v1.0.0
+
+specialize
+	s2-EHR-Info_node.therapeutic_direction.v2
+
+definition
+	Info_node[id1.1] matches {
+		/items matches {
+			Info_node[id58] occurrences matches {0} 
+			use_archetype Info_node[id177, s2-EHR-Info_node.t_medication_order-dosage-1.v1] 
+			Info_node[id67] occurrences matches {0} 
+			Info_node[id173] occurrences matches {0} 
+			Info_node[id178] occurrences matches {0} 
+			Info_node[id179] occurrences matches {0} 
+			Info_node[id180] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Therapeutic direction">
+				description = <"Therapeutic direction">
+			>
+		>
+	>
+
+-------------------------------------------------------------
+template_overlay
+	s2-EHR-Info_node.t_medication_order-dosage-1.v1.0.0
+
+specialize
+	s2-EHR-Info_node.dosage.v3
+
+definition
+	Info_node[id1.1] matches {
+		/items matches {
+			Info_node[id165] occurrences matches {0} 
+			Info_node[id136] occurrences matches {0} 
+			Info_node[id179] occurrences matches {0} 
+			Info_node[id38] occurrences matches {0} 
+			Info_node[id177] occurrences matches {0} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Dosage">
+				description = <"Dosage">
+			>
+		>
+	>

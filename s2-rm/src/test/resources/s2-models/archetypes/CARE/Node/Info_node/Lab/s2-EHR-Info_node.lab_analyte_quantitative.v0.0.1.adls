@@ -26,9 +26,6 @@ description
 
 definition
 	Info_node[id1.1] matches {	-- Quantitative lab analyte result
-		/items matches {
-			use_archetype Info_node[id9, s2-EHR-Info_node.specimen_details.v1] occurrences matches {0..1} 
-		}
 		value matches {
 			Measured<Quantity>[id0.1] matches {
 				value matches {

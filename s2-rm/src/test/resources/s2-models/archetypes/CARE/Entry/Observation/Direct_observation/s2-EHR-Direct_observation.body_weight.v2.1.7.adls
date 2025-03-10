@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7; uid=f3fbec37-c2e9-4acf-bdba-2c7b534e28d8)
-	s2-EHR-Direct_observation.body_weight.v2.1.7
+	s2-EHR-Direct_observation.body_weight.v2.1.8
 
 language
 	original_language = <[iso_639-1::en]>
@@ -121,7 +121,7 @@ definition
 					}
 				}
 			}
-			Info_node[id26] matches {	-- Confounding factors
+			Info_node[id26] matches {	-- Associated Situation
 				value matches {
 					Text[id32] 
 				}
@@ -142,7 +142,7 @@ definition
 			Point_event[id27] occurrences matches {0..1} matches {	-- Birth
 				items matches {
 					use_node Info_node[id10] /state[id10]	-- /state[State of dress]
-					use_node Info_node[id26] /state[id26]	-- /state[Confounding factors]
+					use_node Info_node[id26] /state[id26]	-- /state[Associated Situation]
 				}
 			}
 		}
@@ -211,7 +211,7 @@ terminology
 				description = <"Additional narrative about the measurement of Body weight, not captured in other fields.">
 			>
 			["id26"] = <
-				text = <"Confounding factors">
+				text = <"Associated Situation">
 				description = <"Record any issues or factors that may impact on the measurement of body weight eg timing in menstrual cycle, timing of recent bowel motion or noting of amputation.">
 			>
 			["id27"] = <
@@ -240,7 +240,7 @@ terminology
 			["id10"] = <http://loinc.org/8352-7>
 			["id21"] = <http://loinc.org/74720-4>
 			["id25"] = <http://loinc.org/106173-8>
-			["id26"] = <http://loinc.org/106176-1>
+			["id26"] = <http://loinc.org/106168-8>
 			["id27"] = <http://loinc.org/8339-4>
 			["id8000"] = <http://loinc.org/106184-5>
 		>

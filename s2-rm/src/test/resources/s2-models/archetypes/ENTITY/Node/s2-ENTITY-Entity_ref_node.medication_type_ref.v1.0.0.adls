@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7; uid=1de66765-9e18-4dc1-97b1-5bb2b62c9869)
-	s2-ENTITY-Entity_ref_node.medication_type_ref.v1.0.0
+	s2-ENTITY-Entity_ref_node.medication_type_ref.v1.1.0
 
 language
 	original_language = <[iso_639-1::en]>
@@ -31,7 +31,7 @@ description
 definition
 	Entity_ref_node[id1] occurrences matches {0..1} matches {	-- Medication
 		value matches {
-			Coded_text[id159] matches {
+			Coded_text[id159] matches {	-- Name
 				term matches {
 					Terminology_term[id1159] matches {
 						concept matches {[ac1]}		-- Medication name
@@ -56,12 +56,17 @@ definition
 					Proportion[id163] 
 				}
 			}
+			Info_node[id116] occurrences matches {0..1} matches {	-- Strength (per unit)
+				value matches {
+					Quantity[id165] 
+				}
+			}
 			Info_node[id152] occurrences matches {0..1} matches {	-- Manufacturer
 				value matches {
 					Text[id166] 
 				}
 			}
-			Info_node[id3] matches {
+			Info_node[id3] matches {	-- Active ingredient
 				value matches {
 					Coded_text[id103] matches {
 						term matches {
@@ -69,7 +74,7 @@ definition
 								concept matches {[ac1]}		-- Medication name
 							}
 						}
-					}	
+					}
 				}
 			}
 		}
@@ -96,7 +101,11 @@ terminology
 			>
 			["id153"] = <
 				text = <"Strength (formulation)">
-				description = <"The strength of the medication or medication component, expressed as a proportion.">
+				description = <"The strength of the medication, expressed as a proportion.">
+			>
+			["id116"] = <
+				text = <"Strength (per unit)">
+				description = <"The strength of the medication, expressed as a quantity per dose unit (tab, drop etc).">
 			>
 			["id72"] = <
 				text = <"Form">
@@ -120,6 +129,7 @@ terminology
 			["id153"] = <http://loinc.org/6a8a94b8-624f-ef11-886e-6045bdc71c8b>
 			["id1"] = <http://loinc.org/74078-7>
 			["id3"] = <http://loinc.org/31258fe3-bc8f-ef11-8872-6045bdc71c8b>
+			["id116"] = <http://loinc.org/74057-1>
 		>
 		["s2"] = <
 			["ac1"] = <http://s2health.org/id/s2.RxNormActive>

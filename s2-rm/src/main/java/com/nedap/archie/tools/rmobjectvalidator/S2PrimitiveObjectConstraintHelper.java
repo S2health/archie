@@ -117,7 +117,6 @@ class S2PrimitiveObjectConstraintHelper {
         }
     }
 
-    // TODO JCoyle function for code lookup validation and vsets??
     private boolean isValidValue(CTerminologyCode terminologyCode, TerminologyCode value) {
         if(terminologyCode.getConstraint().isEmpty()) {
             return true;
@@ -154,7 +153,7 @@ class S2PrimitiveObjectConstraintHelper {
             if(s2ValuesetId != null && !s2ValuesetId.isEmpty()) {
                 return S2TerminologyAccess.getInstance().valuesetHasMember(s2ValuesetId, value.getCodeString());
             }
-            
+
 
         } else {
             return true;

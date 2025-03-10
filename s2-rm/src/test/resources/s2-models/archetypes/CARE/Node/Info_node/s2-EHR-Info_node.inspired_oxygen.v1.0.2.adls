@@ -48,14 +48,14 @@ description
 			misuse = <"Do not use for other inhaled gases such as nitrous oxide.">
 		>
 	>
-	other_contributors = <"openEHR CKM community">
+	other_contributors = <"openEHR CKM community", ...>
 
 definition
 	Info_node[id1] matches {	-- Inspired oxygen
 		items matches {
 			Info_node[id52] occurrences matches {0..1} matches {	-- Flow rate
 				value matches {
-					Quantity[id68] matches {	-- Flow rate (l/min)
+					Quantity[id68] matches {
 						magnitude matches {|0.0..50.0|}
 						units matches {
 							Coded_text[id70] matches {
@@ -70,7 +70,7 @@ definition
 					}
 				}
 				original_value matches {
-					Quantity[id65] matches {	-- Flow rate (ml/min)
+					Quantity[id65] matches {
 						magnitude matches {|0.0..50000.0|}
 						units matches {
 							Coded_text[id67] matches {
@@ -192,11 +192,11 @@ terminology
 		["loinc"] = <
 			["id53"] = <http://loinc.org/71835-3>
 			["id52"] = <http://loinc.org/3151-8>
-			["id1"] = <http://loinc.org/e9d427da-7082-ef11-8870-6045bdc71c8b>
+			["id1"] = <http://loinc.org/107151-3>
 			["id54"] = <http://loinc.org/3150-0>
-			["id55"] = <http://loinc.org/df90d9cb-7082-ef11-8870-6045bdc71c8b>
-			["id58"] = <http://loinc.org/b52cfec2-7082-ef11-8870-6045bdc71c8b>
-			["id59"] = <http://loinc.org/272160d3-7082-ef11-8870-6045bdc71c8b>
+			["id55"] = <http://loinc.org/107117-4>
+			["id58"] = <http://loinc.org/107116-6>
+			["id59"] = <http://loinc.org/107115-8>
 		>
 	>
 

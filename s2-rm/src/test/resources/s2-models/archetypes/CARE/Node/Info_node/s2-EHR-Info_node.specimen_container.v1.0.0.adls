@@ -1,0 +1,162 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; generated; uid=f819271d-8e7d-4c19-be94-efe283097986)
+	s2-EHR-Info_node.specimen_container.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	original_namespace = <"org.openehr">
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Dr Ian McNicoll, Ocean Informatics, <ian.mcnicoll@oceaninformatics.com>, 2009-06-21">
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.specimen_container.v1.0.0, copyright 2009 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.specimen_container.v1.0.0 from <https://ckm.openehr.org>">
+		["tool"] = <"s2 convert openehr">
+		["date"] = <"2024-08-09">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details of a container used to hold, transport and/or archive a specimen for laboratory examination.">
+			use = <"Use to record details of a container used to hold transport and/or archive a specimen for laboratory examination.
+            
+            This archetype has been designed to be used within OBSERVATION.laboratory test_result, Info_node.specimen, Info_node.biobank_storage, Info_node.biospecimen_summary and other clinically appropriate archetypes. Commonly the Info_node.specimen and the Info_node.specimen_container will be used as a pair, with order of nesting varying as appropriate for the use case.
+            For example: 
+            -	The ‘Specimen container’ can be nested within 'Specimen'; for example, when a venous blood specimen is divided between two vials, or a whole large intestine is divided into three buckets. 
+            -	The 'Specimen' can be nested within 'Specimen container'; for example, when a bucket of formalin contains a section of large intestine and a rectum, or a jar contains five individually marked moles.">
+			keywords = <"specimen", "lab", "laboratory", "pathology", "transport medium", "swab", "vial", "vacuum tube", "slide", "additive", "sample">
+			misuse = <"">
+		>
+	>
+	other_contributors = <"openEHR CKM community">
+
+definition
+	Info_node[id1] matches {	-- Specimen container
+		items matches {
+			Info_node[id6] occurrences matches {0..1} matches {	-- Container type
+				value matches {
+					Text[id40] 
+				}
+			}
+			Info_node[id4] matches {	-- Container ID
+				value matches {
+					Rwe_id_ref[id41] 
+					Text[id42] 
+				}
+			}
+			Info_node[id14] occurrences matches {0..1} matches {	-- Description
+				value matches {
+					Text[id43] 
+				}
+			}
+			Info_node[id38] matches {	-- Components
+				value matches {
+					Text[id44] 
+				}
+			}
+			Info_node[id27] matches {	-- Additive/s
+				value matches {
+					Text[id45] 
+				}
+			}
+			Info_node[id36] occurrences matches {0..1} matches {	-- Capacity
+				value matches {
+					Text[id46] 
+					Quantity[id47] 
+				}
+			}
+			Info_node[id39] occurrences matches {0..1} matches {	-- Minimum volum
+				value matches {
+					Text[id48] 
+					Quantity[id49] 
+				}
+			}
+			allow_archetype Info_node[id29] matches {	-- Additional details
+				include
+					archetype_id/value matches {/s2-EHR-Info_node\.biobank_storage(-[a-zA-Z0-9_]+)*\.v1|s2-EHR-Info_node\.specimen_transport\.v0|s2-EHR-Info_node\.specimen_transport\.v1|s2-EHR-Info_node\.biobank_storage\.v0/}
+			}
+			allow_archetype Info_node[id30] matches {	-- Contents
+				include
+					archetype_id/value matches {/s2-EHR-Info_node\.specimen(-[a-zA-Z0-9_]+)*\.v1|s2-EHR-Info_node\.specimen_container(-[a-zA-Z0-9_]+)*\.v0|s2-EHR-Info_node\.specimen_container\.v1/}
+			}
+			Info_node[id37] occurrences matches {0..1} matches {	-- Comment
+				value matches {
+					Text[id50] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Specimen container">
+				description = <"Details of a container used to hold, transport and/or archive a specimen for laboratory examination.">
+			>
+			["id14"] = <
+				text = <"Description">
+				description = <"Narrative description about the container.">
+			>
+			["id27"] = <
+				text = <"Additive/s">
+				description = <"Introduced substance to preserve, maintain or enhance the specimen.">
+			>
+			["id29"] = <
+				text = <"Additional details">
+				description = <"Additional structured details related to the specimen container.">
+			>
+			["id30"] = <
+				text = <"Contents">
+				description = <"The contents of this container.">
+			>
+			["id36"] = <
+				text = <"Capacity">
+				description = <"The capacity of the container.">
+			>
+			["id37"] = <
+				text = <"Comment">
+				description = <"Additional narrative about the transportation process not captured in other fields.">
+			>
+			["id38"] = <
+				text = <"Components">
+				description = <"Description about the physical components of the container.">
+			>
+			["id39"] = <
+				text = <"Minimum volum">
+				description = <"The minimum volume to be conditioned in the container.">
+			>
+			["id4"] = <
+				text = <"Container ID">
+				description = <"The unique identifier given to the container.">
+			>
+			["id6"] = <
+				text = <"Container type">
+				description = <"The type of container associated with the specimen.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/74384-9>
+			["id6"] = <http://loinc.org/74384-9>
+			["id14"] = <http://loinc.org/1c814f9b-cbe7-ee11-8869-6045bdc71c8b>
+			["id37"] = <http://loinc.org/106173-8>
+		>
+	>
+

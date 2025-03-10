@@ -1,5 +1,5 @@
 archetype (adl_version=2.1.0; rm_release=0.8.7)
-	s2-EHR-Composition.care_plan.v0.0.1
+	s2-EHR-Composition.care_plan.v0.0.3
 
 language
 	original_language = <[iso_639-1::en]>
@@ -62,7 +62,7 @@ definition
 				items matches {
 					Section[id7] occurrences matches {0..*} matches {	-- Intervention
 						items matches {
-							use_archetype Order[id8, s2-EHR-Order.medication_order.v4] 
+							use_archetype Order[id8, s2-EHR-Order.medication_order.v5] 
 							allow_archetype Assessment[id9] occurrences matches {0..*} 	-- Targets
 							use_archetype Action[id10, s2-EHR-Action.medication.v1] 
 						}
