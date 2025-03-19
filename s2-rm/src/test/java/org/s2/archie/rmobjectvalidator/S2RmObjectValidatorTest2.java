@@ -185,6 +185,19 @@ public class S2RmObjectValidatorTest2 {
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
     }
+    @Test
+    public void validateDecimalOutOfRangeMinimal() throws Exception {
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");
+        OperationalTemplate opt = createOpt(archetype);
+
+        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_decimal_out_of_range-lab_value-minimal.json");
+        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        logMessages(validationMessages);
+
+        assertEquals("There should be 1 errors", 1, validationMessages.size());
+    }
 
     // TODO: Error not caught
     @Test
