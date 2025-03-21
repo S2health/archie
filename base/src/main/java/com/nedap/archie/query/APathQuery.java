@@ -5,6 +5,7 @@ import com.google.common.base.Joiner;
 import com.nedap.archie.adlparser.antlr.XPathLexer;
 import com.nedap.archie.adlparser.antlr.XPathParser;
 import com.nedap.archie.adlparser.antlr.XPathParser.*;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -26,6 +27,8 @@ import java.util.regex.Pattern;
 public class APathQuery {
 
     private List<PathSegment> pathSegments = new ArrayList<>();
+
+    private int pathDepth = 0;
 
     public APathQuery(String query) {
         if(!query.startsWith("/") && !query.contains("/") && !query.contains("[")) {
@@ -67,10 +70,15 @@ public class APathQuery {
                             String expression = equalityExprContext.getText();
                             if (isDigit.matcher(expression).matches()) {
                                 pathSegment.setIndex(Integer.parseInt(expression));
-                            } else if(expression.matches("\".*\"") || expression.matches("'.*'")) {
-                                pathSegment.setNodeId(expression.substring(1, expression.length()-1));
                             } else {
-                                pathSegment.setNodeId(expression);
+                                String nodeId;
+                                if (expression.matches("\".*\"") || expression.matches("'.*'"))
+                                    nodeId = expression.substring(1, expression.length()-1);
+                                else
+                                    nodeId = expression;
+
+                                pathSegment.setNodeId(nodeId);
+                                pathDepth = Math.max(pathDepth, AdlCodeUtils.getSpecializationDepthFromCode (nodeId));
                             }
                         }
 
@@ -84,6 +92,8 @@ public class APathQuery {
     public List<PathSegment> getPathSegments() {
         return pathSegments;
     }
+
+    public int getPathDepth() { return pathDepth; };
 
     public String toString(){
         if (pathSegments.size() == 0) {

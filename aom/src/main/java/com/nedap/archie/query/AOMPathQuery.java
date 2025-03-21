@@ -33,6 +33,8 @@ public class AOMPathQuery {
 
     private final List<PathSegment> pathSegments;
 
+    private int pathDepth = 0;
+
     /** If true, extend the search through C_COMPLEX_OBJECT_PROXY objects by looking up the replacement first.*/
     private final boolean findThroughCComplexObjectProxies;
 
@@ -41,6 +43,7 @@ public class AOMPathQuery {
     public AOMPathQuery(String query) {
         APathQuery apathQuery = new APathQuery(query);
         this.pathSegments = apathQuery.getPathSegments();
+        this.pathDepth = apathQuery.getPathDepth();
         findThroughCComplexObjectProxies = true;
     }
 
@@ -227,6 +230,8 @@ public class AOMPathQuery {
     public List<PathSegment> getPathSegments() {
         return pathSegments;
     }
+
+    public int getPathDepth() { return pathDepth; };
 
 
     /**
