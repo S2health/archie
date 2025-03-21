@@ -8,6 +8,7 @@ import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ConformanceCheckResult;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.rminfo.RMProperty;
 import org.openehr.utils.message.I18n;
@@ -264,7 +265,7 @@ public abstract class CObject extends ArchetypeConstraint {
      * @return
      */
     public Integer specialisationDepth() {
-        return AOMUtils.getSpecializationDepthFromCode(nodeId);
+        return AdlCodeUtils.getSpecializationDepthFromCode(nodeId);
     }
 
     @Override
@@ -309,7 +310,7 @@ public abstract class CObject extends ArchetypeConstraint {
      * @return
      */
     public boolean nodeIdConformsTo(CObject other) {
-        return AOMUtils.codesConformant(this.getNodeId(), other.getNodeId());
+        return AdlCodeUtils.codesConformant(this.getNodeId(), other.getNodeId());
     }
 
     public boolean occurrencesConformsTo(CObject other) {

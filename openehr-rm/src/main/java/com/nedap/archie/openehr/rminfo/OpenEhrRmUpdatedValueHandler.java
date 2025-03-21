@@ -8,6 +8,7 @@ import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Interval;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.query.APathQuery;
 import com.nedap.archie.query.RMObjectWithPath;
 import com.nedap.archie.query.RMPathQuery;
@@ -135,7 +136,7 @@ public class OpenEhrRmUpdatedValueHandler {
         }
         if(codedText.getDefiningCode() != null &&
                 (codedText.getDefiningCode().getTerminologyId() == null || Strings.isNullOrEmpty(codedText.getDefiningCode().getTerminologyId().getValue()))) {
-            if(AOMUtils.isValueCode(codedText.getDefiningCode().getCodeString())) {
+            if(AdlCodeUtils.isValueCode(codedText.getDefiningCode().getCodeString())) {
                 codedText.getDefiningCode().setTerminologyId(new TerminologyId("local"));
                 result.put(path + "/defining_code/terminology_id/value", "local");
             }

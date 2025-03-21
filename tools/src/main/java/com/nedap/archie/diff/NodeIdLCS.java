@@ -2,6 +2,7 @@ package com.nedap.archie.diff;
 
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.CodeRedefinitionStatus;
+import com.nedap.archie.definitions.AdlCodeUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,7 +58,7 @@ public class NodeIdLCS {
     private void calculateReplacements(List<String> parent, List<String> child, int childSpecializationDepth) {
         for(String nodeId:child) {
             if(AOMUtils.getSpecialisationStatusFromCode(nodeId, childSpecializationDepth) == CodeRedefinitionStatus.REDEFINED) {
-                String parentNodeId = AOMUtils.getCodeInNearestParent(nodeId);
+                String parentNodeId = AdlCodeUtils.getCodeInNearestParent(nodeId);
                 if(!child.contains(parentNodeId)) {
                     //replacement!
                     nodeIdReplacements.put(nodeId, parentNodeId);

@@ -16,7 +16,8 @@ import com.nedap.archie.aom.primitives.CString;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
-import com.nedap.archie.aom.utils.NodeIdUtil;
+import com.nedap.archie.definitions.AdlCodeUtils;
+import com.nedap.archie.definitions.NodeIdUtil;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.query.APathQuery;
@@ -192,7 +193,7 @@ public class ADL14NodeIDConverter {
                     if(valueOrPath.startsWith("/")) {
                         String newPath = convertPath(valueOrPath);
                         newTermbindingsMap.put(newPath, termbindingMap.get(valueOrPath));
-                    } else if (AOMUtils.isValueCode(valueOrPath)) {
+                    } else if (AdlCodeUtils.isValueCode(valueOrPath)) {
                         if(convertedCodes.containsKey(valueOrPath)) {
                             for(String newCode:convertedCodes.get(valueOrPath).getConvertedCodes()) {
                                 newTermbindingsMap.put(newCode, termbindingMap.get(valueOrPath));
@@ -202,7 +203,7 @@ public class ADL14NodeIDConverter {
                             newTermbindingsMap.put(valueOrPath, termbindingMap.get(valueOrPath));
                             conversionResult.getLog().addWarningWithLocation(ADL14ConversionMessageCode.WARNING_UNKNOWN_CODE_TYPE_IN_TERMBINDING, valueOrPath, valueOrPath);
                         }
-                    } else if (AOMUtils.isValueSetCode(valueOrPath)) {
+                    } else if (AdlCodeUtils.isValueSetCode(valueOrPath)) {
                         if(convertedCodes.containsKey(valueOrPath)) {
                             for(String newCode:convertedCodes.get(valueOrPath).getConvertedCodes()) {
                                 newTermbindingsMap.put(newCode, termbindingMap.get(valueOrPath));
@@ -211,7 +212,7 @@ public class ADL14NodeIDConverter {
                             //unused value set code, this can be converted
                             newTermbindingsMap.put(this.convertCode(valueOrPath, "ac"), termbindingMap.get(valueOrPath));
                         }
-                    } else if (AOMUtils.isIdCode(valueOrPath)) {
+                    } else if (AdlCodeUtils.isIdCode(valueOrPath)) {
                         if(convertedCodes.containsKey(valueOrPath)) {
                             for(String newCode:convertedCodes.get(valueOrPath).getConvertedCodes()) {
                                 newTermbindingsMap.put(newCode, termbindingMap.get(valueOrPath));
@@ -240,7 +241,7 @@ public class ADL14NodeIDConverter {
                 //if found, this is a specialization of said node and needs to be checked for differences and/or
                 //given the same node id
                 //if not found, generate/synthesize a new node id.
-                String parentPath = AOMUtils.pathAtSpecializationLevel(cObject.getPathSegments(), archetype.specializationDepth()-1);
+                String parentPath = AdlCodeUtils.pathAtSpecializationLevel(cObject.getPathSegments(), archetype.specializationDepth()-1);
 
                 CAttribute cAttributeInParent = flatParentArchetype.itemAtPath(parentPath);
                 if(cAttributeInParent != null) {
@@ -342,7 +343,7 @@ public class ADL14NodeIDConverter {
                 //VSSID validation does not exist in ADL 1.4. Fix it here
 
                 if(flatParentArchetype != null) {
-                    String parentPath = AOMUtils.pathAtSpecializationLevel(cObject.getPathSegments(), archetype.specializationDepth() - 1);
+                    String parentPath = AdlCodeUtils.pathAtSpecializationLevel(cObject.getPathSegments(), archetype.specializationDepth() - 1);
                     CObject cObjectInParent = flatParentArchetype.itemAtPath(parentPath);
                     if (cObjectInParent != null && cObjectInParent instanceof ArchetypeSlot && !cObjectInParent.getNodeId().equalsIgnoreCase(cObject.getNodeId())) {
                         //specializing a node id for an archetype slot is not allowed in ADL 2. Set to parent node id.

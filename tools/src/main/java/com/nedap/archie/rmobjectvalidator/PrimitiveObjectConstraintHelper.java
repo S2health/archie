@@ -10,6 +10,7 @@ import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Interval;
 import com.nedap.archie.base.terminology.TerminologyCode;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
 
 import java.net.URI;
@@ -124,7 +125,7 @@ class PrimitiveObjectConstraintHelper {
 
             List<String> values;
             String terminologyId = value.getTerminologyId();
-            if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AOMUtils.isValueSetCode(value.getTerminologyId())) {
+            if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AdlCodeUtils.isValueSetCode(value.getTerminologyId())) {
                 values = terminologyCode.getValueSetExpanded();
             } else if (terminologyId.equalsIgnoreCase("openehr")) {
                 values = getOpenEHRValueSetExpanded(terminologyCode);

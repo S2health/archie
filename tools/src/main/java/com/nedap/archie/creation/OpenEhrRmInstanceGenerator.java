@@ -11,6 +11,7 @@ import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import org.openehr.bmm.core.BmmClass;
 import org.openehr.bmm.core.BmmProperty;
 
@@ -296,7 +297,7 @@ class OpenEhrRmInstanceGenerator {
     private void fixCodePhrase(Map<String, Object> result, CObject cObject) {
         String codeString = (String) result.get("code_string");//TODO: check terminology code to be local?
 
-        if(codeString != null && AOMUtils.isValueCode(codeString)) {
+        if(codeString != null && AdlCodeUtils.isValueCode(codeString)) {
             //check for OpenEHR term mapping and use that if available, so we get correct
             //rm objects
 

@@ -3,6 +3,7 @@ package com.nedap.archie.adl14;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.definitions.AdlCodeDefinitions;
+import com.nedap.archie.definitions.AdlCodeUtils;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -24,7 +25,7 @@ public class OutsideRangeIdCodeGenerator implements IdCodeGenerator {
     public OutsideRangeIdCodeGenerator(Archetype archetype) {
         this.archetype = archetype;
         this.allUsedCodes = archetype.getAllUsedCodes();
-        this.counter = Math.max(counter, AOMUtils.getMaximumIdCode(archetype.specializationDepth(), allUsedCodes));
+        this.counter = Math.max(counter, AdlCodeUtils.getMaximumIdCode(archetype.specializationDepth(), allUsedCodes));
 
     }
 

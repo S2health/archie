@@ -7,6 +7,7 @@ import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.archetypevalidator.ArchetypeValidationBase;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.base.terminology.TerminologyCode;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import org.openehr.utils.message.I18n;
 
 public class RmOverlayValidation extends ArchetypeValidationBase {
@@ -35,7 +36,7 @@ public class RmOverlayValidation extends ArchetypeValidationBase {
                         }
 
                         TerminologyCode alias = rmOverlay.getRmVisibility().get(path).getAlias();
-                        if(alias != null && alias.getCodeString() != null && AOMUtils.isValueCode(alias.getCodeString())) {
+                        if(alias != null && alias.getCodeString() != null && AdlCodeUtils.isValueCode(alias.getCodeString())) {
                             if(operationalTemplate.getTerm(archetype.getDefinition(), alias.getCodeString(), archetype.getOriginalLanguage().getCodeString()) == null) {
                                 addMessage(ErrorType.VATID, I18n.t("The code {0} is missing in the terminology. It is defined in rm_visibility at path {1}", alias.getCodeString(), path));
                             }

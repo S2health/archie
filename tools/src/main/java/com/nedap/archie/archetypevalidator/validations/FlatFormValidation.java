@@ -6,6 +6,7 @@ import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.archetypevalidator.ValidatingVisitor;
 import com.nedap.archie.base.Cardinality;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.query.AOMPathQuery;
 import com.nedap.archie.query.ComplexObjectProxyReplacement;
 import org.openehr.utils.message.I18n;
@@ -74,13 +75,13 @@ public class FlatFormValidation extends ValidatingVisitor {
                 } catch (Exception e) {
                     //if not a valid path, fine
                 }
-                if(!AOMUtils.isValidCode(constraintCodeOrPath) && !(
+                if(!AdlCodeUtils.isValidCode(constraintCodeOrPath) && !(
                         archetypeHasPath || combinedModels.hasReferenceModelPath(archetype.getDefinition().getRmTypeName(), constraintCodeOrPath)
                 )
                         ) {
                     addMessage(ErrorType.VTTBK, I18n.t("Term binding key {0} points to a path that cannot be found in the archetype", constraintCodeOrPath));
                 }
-                else if(AOMUtils.isValidCode(constraintCodeOrPath) &&
+                else if(AdlCodeUtils.isValidCode(constraintCodeOrPath) &&
                         !terminology.hasCode(constraintCodeOrPath) &&
                         !(archetype.isSpecialized() && flatParent != null && !flatParent.getTerminology().hasCode(constraintCodeOrPath))
                         )

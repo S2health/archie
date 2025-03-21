@@ -12,6 +12,7 @@ import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ArchetypeParsePostProcesser;
 import com.nedap.archie.definitions.AdlCodeDefinitions;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.query.AOMPathQuery;
 import com.nedap.archie.rminfo.RMProperty;
 import com.nedap.archie.xml.adapters.ArchetypeTerminologyAdapter;
@@ -267,7 +268,7 @@ public class Archetype extends AuthoredResource {
 
     @JsonIgnore
     public int specializationDepth() {
-        return AOMUtils.getSpecializationDepthFromCode(definition.getNodeId());
+        return AdlCodeUtils.getSpecializationDepthFromCode(definition.getNodeId());
     }
 
     /**
@@ -320,24 +321,24 @@ public class Archetype extends AuthoredResource {
 
     @JsonIgnore
     public Set<String> getUsedIdCodes() {
-        return getAllUsedCodes().stream().filter(code -> AOMUtils.isIdCode(code)).collect(Collectors.toSet());
+        return getAllUsedCodes().stream().filter(code -> AdlCodeUtils.isIdCode(code)).collect(Collectors.toSet());
     }
 
     @JsonIgnore
     public Set<String> getUsedValueCodes() {
-        return getAllUsedCodes().stream().filter(code -> AOMUtils.isValueCode(code)).collect(Collectors.toSet());
+        return getAllUsedCodes().stream().filter(code -> AdlCodeUtils.isValueCode(code)).collect(Collectors.toSet());
 
     }
 
     @JsonIgnore
     public Set<String> getUsedValueSetCodes() {
-        return getAllUsedCodes().stream().filter(code -> AOMUtils.isValidValueSetCode(code)).collect(Collectors.toSet());
+        return getAllUsedCodes().stream().filter(code -> AdlCodeUtils.isValidValueSetCode(code)).collect(Collectors.toSet());
     }
 
 
     private String generateNextCode(String prefix, Set<String> usedCodes) {
         int specializationDepth = this.specializationDepth();
-        int maximumIdCode = AOMUtils.getMaximumIdCode(specializationDepth, usedCodes);
+        int maximumIdCode = AdlCodeUtils.getMaximumIdCode(specializationDepth, usedCodes);
         return prefix + generateSpecializationDepthCodePrefix(specializationDepth()) + (maximumIdCode+1);
     }
 
@@ -364,12 +365,12 @@ public class Archetype extends AuthoredResource {
 
     public String generateNextSpecializedIdCode(String nodeId) {
         int specializationDepth = specializationDepth();
-        int nodeIdSpecializationDepth = AOMUtils.getSpecializationDepthFromCode(nodeId);
+        int nodeIdSpecializationDepth = AdlCodeUtils.getSpecializationDepthFromCode(nodeId);
         if(nodeIdSpecializationDepth >= specializationDepth) {
             throw new IllegalArgumentException("cannot specialize a node id at the same or higher specialization depth as the archetype");
         }
 
-        int maximumIdCode = AOMUtils.getMaximumIdCode(specializationDepth, nodeId, getAllUsedCodes());
+        int maximumIdCode = AdlCodeUtils.getMaximumIdCode(specializationDepth, nodeId, getAllUsedCodes());
         return nodeId + AdlCodeDefinitions.SPECIALIZATION_SEPARATOR + generateSpecializationDepthCodePrefix(specializationDepth-nodeIdSpecializationDepth-1) + (maximumIdCode+1);
 
     }

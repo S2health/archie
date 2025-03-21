@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.query.APathQuery;
 import com.nedap.archie.rminfo.RMProperty;
@@ -114,7 +115,7 @@ public class CAttribute extends ArchetypeConstraint {
             return result;
         }
         for(CObject child:children) {
-            if(nodeId.equals(child.getNodeId()) || AOMUtils.codesConformant(child.getNodeId(), nodeId)) {
+            if(nodeId.equals(child.getNodeId()) || AdlCodeUtils.codesConformant(child.getNodeId(), nodeId)) {
                 return child;
             } else if(child instanceof CArchetypeRoot) {
                 //TODO: Should we look for specialized archetype roots as well? :)

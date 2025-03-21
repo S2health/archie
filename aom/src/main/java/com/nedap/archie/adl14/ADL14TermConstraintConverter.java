@@ -10,6 +10,7 @@ import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.OpenEHRBase;
 import com.nedap.archie.base.terminology.TerminologyCode;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
 import com.nedap.archie.terminology.TermCode;
 import org.slf4j.Logger;
@@ -63,7 +64,7 @@ public class ADL14TermConstraintConverter {
                         convertCTerminologyCode(cTerminologyCode);
                         if(cTerminologyCode.getConstraint().size() == 1) {
                             String constraint = cTerminologyCode.getConstraint().get(0);
-                            if(AOMUtils.isValueCode(constraint)) {
+                            if(AdlCodeUtils.isValueCode(constraint)) {
                                 atCodes.add(constraint);
                             }
                         }
@@ -101,7 +102,7 @@ public class ADL14TermConstraintConverter {
             String firstConstraint = cTerminologyCode.getConstraint().get(0);
             TerminologyCode termCode = TerminologyCode.createFromString(firstConstraint);
             boolean isLocalCode = termCode.getTerminologyId() == null || termCode.getTerminologyId().equalsIgnoreCase("local");
-            if(isLocalCode && AOMUtils.isValueCode(firstConstraint)) {
+            if(isLocalCode && AdlCodeUtils.isValueCode(firstConstraint)) {
                 //local codes
                 if(cTerminologyCode.getConstraint().size() == 1) {
                     //do not create a value set, just convert the code
@@ -119,7 +120,7 @@ public class ADL14TermConstraintConverter {
                     ValueSet valueSet = findOrCreateValueSet(cTerminologyCode.getArchetype(), localCodes, cTerminologyCode);
                     cTerminologyCode.setConstraint(Lists.newArrayList(valueSet.getId()));
                 }
-            } else if (isLocalCode && AOMUtils.isValueSetCode(termCode.getCodeString())) {
+            } else if (isLocalCode && AdlCodeUtils.isValueSetCode(termCode.getCodeString())) {
                 List<String> newConstraint = new ArrayList<>();
                 for(String constraint:cTerminologyCode.getConstraint()) {
                     TerminologyCode code = TerminologyCode.createFromString(constraint);
@@ -253,7 +254,7 @@ public class ADL14TermConstraintConverter {
             }
             //now if this has a parent with a value set already, we probably want to use that
             if(flatParentArchetype != null) {
-                String parentPath = AOMUtils.pathAtSpecializationLevel(owningConstraint.getPathSegments(), archetype.specializationDepth() - 1);
+                String parentPath = AdlCodeUtils.pathAtSpecializationLevel(owningConstraint.getPathSegments(), archetype.specializationDepth() - 1);
                 OpenEHRBase inParent = flatParentArchetype.itemAtPath(parentPath);
                 if(inParent instanceof CAttribute) {
                     CAttribute cAttributeInParent = (CAttribute) inParent;

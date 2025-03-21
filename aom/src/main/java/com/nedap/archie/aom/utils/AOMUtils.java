@@ -13,6 +13,7 @@ import com.nedap.archie.aom.CObject;
 import com.nedap.archie.aom.primitives.CString;
 import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.definitions.AdlCodeDefinitions;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.paths.PathUtil;
 import com.nedap.archie.query.AOMPathQuery;
@@ -36,112 +37,24 @@ import java.util.regex.Pattern;
 
 public class AOMUtils {
 
-    private static Pattern idCodePattern = Pattern.compile("(id|at|ac)(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*))*");
-    private static Pattern adl14CodePattern = Pattern.compile("(id|at|ac)([0-9]+)(\\.(0|[1-9][0-9]*))*");
-
-    public static int getSpecializationDepthFromCode(String code) {
-        if(code == null) {
-            return -1;
-        } else if(code.indexOf(AdlCodeDefinitions.SPECIALIZATION_SEPARATOR) < 0) {
-            return 0;
-        } else {
-            return StringUtils.countMatches(code, String.valueOf(AdlCodeDefinitions.SPECIALIZATION_SEPARATOR));
-        }
-    }
-
-    public static boolean isIdCode(String code) {
-        return code.startsWith(AdlCodeDefinitions.ID_CODE_LEADER);
-    }
-
-    public static boolean isValueCode(String code) {
-        return code.startsWith(AdlCodeDefinitions.VALUE_CODE_LEADER);
-    }
-
-    public static boolean isValueSetCode(String code) {
-        return code.startsWith(AdlCodeDefinitions.VALUE_SET_CODE_LEADER);
-    }
-
-    public static boolean isValidValueSetCode(String code) {
-        return isValueSetCode(code) && isValidCode(code);
-    }
-
-    public static boolean isValidCode(String code) {
-        if(code == null) {
-            return false;
-        }
-        return idCodePattern.matcher(code).matches();
-    }
-
-    /**
-     * Get the numeric node id from a valid id code without any prefix (like at, ac or id)
-     * @param nodeId the node id to strip the prefix of.
-     * @return the numeric node id without any prefix
-     */
-    public static String stripPrefix(String nodeId) {
-        if(AOMUtils.isValidCode(nodeId)) {
-            return nodeId.substring(2);
-        }
-        return nodeId;
-    }
-
-    public static String pathAtSpecializationLevel(List<PathSegment> pathSegments, int level) {
-        //todo: this doesn't clone the original
-        for(PathSegment segment:pathSegments) {
-            if(segment.getNodeId() != null && AOMUtils.isValidCode(segment.getNodeId()) && AOMUtils.getSpecializationDepthFromCode(segment.getNodeId()) > level) {
-                segment.setNodeId(codeAtLevel(segment.getNodeId(), level));
-            }
-        }
-        return PathUtil.getPath(pathSegments);
-    }
-
-    public static String codeAtLevel(String nodeId, int level) {
-        NodeIdUtil nodeIdUtil = new NodeIdUtil(nodeId);
-        List<Integer> codes = new ArrayList<>();
-        for(int i = 0; i <= level && i < nodeIdUtil.getCodes().size();i++) {
-            codes.add(nodeIdUtil.getCodes().get(i));
-        }
-        //remove leading .0 codes - they are not present in the code at the given level
-        int numberOfCodesToRemove = 0;
-        for(int i = codes.size()-1; i >= 0 ; i--) {
-            if(codes.get(i).intValue() == 0) {
-                numberOfCodesToRemove++;
-            } else {
-                break;
-            }
-        }
-        if(numberOfCodesToRemove > 0) {
-            codes = codes.subList(0, codes.size()-numberOfCodesToRemove);
-        }
-        return nodeIdUtil.getPrefix() + Joiner.on(AdlCodeDefinitions.SPECIALIZATION_SEPARATOR).join(codes);
-
-    }
-
     public static boolean isOverridenCObject(CObject specialized, CObject parent) {
-        return isOverriddenIdCode(specialized.getNodeId(), parent.getNodeId());
-    }
-
-    public static boolean isOverriddenIdCode(String specializedNodeId, String parentNodeId) {
-        if(specializedNodeId.equalsIgnoreCase(parentNodeId)) {
-            return true;
-        }
-
-        return specializedNodeId.toLowerCase().startsWith(parentNodeId.toLowerCase() + ".");
+        return AdlCodeUtils.isOverriddenIdCode (specialized.getNodeId(), parent.getNodeId());
     }
 
     public static CodeRedefinitionStatus getSpecialisationStatusFromCode(String nodeId, int specialisationDepth) {
 
-        if(specialisationDepth > getSpecializationDepthFromCode(nodeId)) {
+        if(specialisationDepth > AdlCodeUtils.getSpecializationDepthFromCode(nodeId)) {
             return CodeRedefinitionStatus.INHERITED;
         } else {
-            boolean codeDefinedAtThisLevel = codeIndexAtLevel(nodeId, specialisationDepth) > 0;
+            boolean codeDefinedAtThisLevel = AdlCodeUtils.codeIndexAtLevel(nodeId, specialisationDepth) > 0;
             if(codeDefinedAtThisLevel) {
-                if(specialisationDepth > 0 && codeExistsAtLevel(nodeId, specialisationDepth-1)) {
+                if(specialisationDepth > 0 && AdlCodeUtils.codeExistsAtLevel(nodeId, specialisationDepth-1)) {
                     return CodeRedefinitionStatus.REDEFINED;
                 } else {
                     return CodeRedefinitionStatus.ADDED;
                 }
 
-            } else if (specialisationDepth > 0 && codeExistsAtLevel(nodeId, specialisationDepth-1)) {
+            } else if (specialisationDepth > 0 && AdlCodeUtils.codeExistsAtLevel(nodeId, specialisationDepth-1)) {
                 return CodeRedefinitionStatus.INHERITED;
             } else {
                 return CodeRedefinitionStatus.UNDEFINED;
@@ -149,21 +62,13 @@ public class AOMUtils {
         }
     }
 
-    public static int codeIndexAtLevel(String nodeId, int specialisationDepth) {
-        NodeIdUtil nodeIdUtil = new NodeIdUtil(nodeId);
-        if(specialisationDepth < 0 || specialisationDepth >= nodeIdUtil.getCodes().size()) {
-            throw new IllegalArgumentException("code is not valid at specialization depth " + specialisationDepth);
-        }
-        return nodeIdUtil.getCodes().get(specialisationDepth);
-    }
-
     public static ArchetypeModelObject getDifferentialPathFromParent(Archetype flatParent, CAttribute attributeWithDifferentialPath) {
         //adl workbench deviates from spec by only allowing differential paths at root, we allow them everywhere, according to spec
-        ArchetypeModelObject parentAOMObject = flatParent.itemAtPath(pathAtSpecializationLevel(attributeWithDifferentialPath.getParent().getPathSegments(), flatParent.specializationDepth()));
+        ArchetypeModelObject parentAOMObject = flatParent.itemAtPath(AdlCodeUtils.pathAtSpecializationLevel(attributeWithDifferentialPath.getParent().getPathSegments(), flatParent.specializationDepth()));
         if (parentAOMObject != null && parentAOMObject instanceof CComplexObject) {
             CComplexObject parentObject = (CComplexObject) parentAOMObject;
             ArchetypeModelObject attributeInParent = parentObject.itemAtPath(
-                    pathAtSpecializationLevel( //TODO: the ADL workbench does this, so /items[id9.1]/value is a valid differential path even in openEHR-EHR-CLUSTER.exam-uterine_cervix.v1.0.0. Should it be?
+                    AdlCodeUtils.pathAtSpecializationLevel( //TODO: the ADL workbench does this, so /items[id9.1]/value is a valid differential path even in openEHR-EHR-CLUSTER.exam-uterine_cervix.v1.0.0. Should it be?
                             new APathQuery(attributeWithDifferentialPath.getDifferentialPath()).getPathSegments(),
                             flatParent.specializationDepth()
                     )
@@ -171,46 +76,6 @@ public class AOMUtils {
             return attributeInParent;
         }
         return null;
-    }
-
-    /**
-     * Returns true if at least one [idx] predicate is present in the path
-     * @param path
-     * @return
-     */
-    public static boolean isArchetypePath(String path) {
-        APathQuery query = new APathQuery(path);
-        for(PathSegment segment:query.getPathSegments()) {
-            if(segment.getNodeId() != null || segment.getArchetypeRef() != null) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //check if the last node id in the path has a bigger specialization level than the specialization level of the parent
-    //but it does a little loop to check if it happens somewhere else as well. ok...
-    public static boolean isPhantomPathAtLevel(List<PathSegment> pathSegments, int specializationDepth) {
-        for(int i = pathSegments.size()-1; i >=0; i--) {
-            String nodeId = pathSegments.get(i).getNodeId();
-            if(nodeId != null && AOMUtils.isValidCode(nodeId) && specializationDepth > AOMUtils.getSpecializationDepthFromCode(nodeId)) {
-                return codeExistsAtLevel(nodeId, specializationDepth);
-            }
-        }
-        return false;
-    }
-
-    public static boolean codeExistsAtLevel(String nodeId, int specializationDepth) {
-        NodeIdUtil nodeIdUtil = new NodeIdUtil(nodeId);
-        int specializationDepthOfCode = AOMUtils.getSpecializationDepthFromCode(nodeId);
-        if(specializationDepth <= specializationDepthOfCode) {
-            String code = "";
-            for(int i = 0; i <= specializationDepth; i++) {
-                code += nodeIdUtil.getCodes().get(i);
-            }
-            return Integer.parseInt(code) > 0;
-        }
-        return false;
     }
 
     public static boolean archetypeRefMatchesSlotExpression(String archetypeRef, ArchetypeSlot slot) {
@@ -279,12 +144,6 @@ public class AOMUtils {
         return null;// unsupported expression type
     }
 
-    public static boolean codesConformant(String childNodeId, String parentNodeId) {
-        return isValidCode(childNodeId) && childNodeId.startsWith(parentNodeId) &&
-                (childNodeId.length() == parentNodeId.length() || (childNodeId.length() > parentNodeId.length() && childNodeId.charAt(parentNodeId.length()) == AdlCodeDefinitions.SPECIALIZATION_SEPARATOR));
-
-    }
-
     public static CAttributeTuple findMatchingTuple(List<CAttributeTuple> attributeTuples, CAttributeTuple specializedTuple) {
         return attributeTuples.stream()
                 .filter((existingTuple) -> existingTuple.getMemberNames().equals(specializedTuple.getMemberNames()))
@@ -316,51 +175,13 @@ public class AOMUtils {
         return attribute;
     }
 
-    /** Get the maximum code used at the given specialization level. useful for generating new codes*/
-    public static int getMaximumIdCode(int specializationDepth, Collection<String> usedIdCodes) {
-
-        int maximumIdCode = 0;
-        for(String code:usedIdCodes) {
-            if (code.length() > 2) {
-                int numberOfDots = getSpecializationDepthFromCode(code);
-                if(specializationDepth == numberOfDots) {
-                    try {
-                        int numericCode = numberOfDots == 0 ? Integer.parseInt(code.substring(2)) : Integer.parseInt(code.substring(code.lastIndexOf('.') + 1));
-                        maximumIdCode = Math.max(numericCode, maximumIdCode);
-                    } catch (NumberFormatException ex) {
-                        //TODO: get rid of this, temporary for term codes that still need conversion!
-                    }
-                }
-            }
-        }
-        return maximumIdCode;
-    }
-
-    /** Get the maximum code used at the given specialization level. useful for generating new codes*/
-    public static int getMaximumIdCode(int specializationDepth, String prefix, Collection<String> usedIdCodes) {
-        if(specializationDepth == 0) {
-            throw new IllegalArgumentException("can only get the maximum code with prefix at a specialization depth > 0");
-        }
-        int maximumIdCode = 0;
-        for(String code:usedIdCodes) {
-            if(code.startsWith(prefix + ".")) {
-                int numberOfDots = CharMatcher.is(AdlCodeDefinitions.SPECIALIZATION_SEPARATOR).countIn(code);
-                if(specializationDepth == numberOfDots) {
-                    int numericCode = Integer.parseInt(code.substring(code.lastIndexOf('.')+1));
-                    maximumIdCode = Math.max(numericCode, maximumIdCode);
-                }
-            }
-        }
-        return maximumIdCode;
-    }
-
     public static boolean isPathInArchetypeOrRm(MetaModel metaModel, String path, Archetype template) {
         AOMPathQuery aomPathQuery = new AOMPathQuery(path);
         PartialMatch partial = aomPathQuery.findPartial(template.getDefinition());
         if(partial.isFullMatch()) {
             return true;
         } else {
-            if(isArchetypePath(partial.getRemainingPath())) {
+            if (AdlCodeUtils.isArchetypePath(partial.getRemainingPath())) {
                 // the remaining path is an archetype path, so cannot be found purely in the RM without
                 //further constraints
                 return false;
@@ -375,7 +196,7 @@ public class AOMUtils {
                 } else if (archetypeModelObject instanceof CAttribute) {
                     CAttribute attribute = (CAttribute) archetypeModelObject;
                     //matched an attribute. So if even one object matches, return true
-                    for(CObject child:attribute.getChildren()) {
+                    for (CObject child:attribute.getChildren()) {
                         if (metaModel.hasReferenceModelPath(child.getRmTypeName(), partial.getRemainingPath())) {
                             return true;
                         }
@@ -386,34 +207,6 @@ public class AOMUtils {
         return false;
     }
 
-    /**
-     * Given a code such as 'id4.1.0.0.1', return the nearest code that exists in a parent. In this example,
-     * returns id4.1, so removes all zeros.
-     * @param nodeId
-     * @return
-     */
-    public static String getCodeInNearestParent(String nodeId) {
-
-        NodeIdUtil nodeIdUtil = new NodeIdUtil(nodeId);
-
-        List<Integer> codes = nodeIdUtil.getCodes();
-        int newDepth = 0;
-        for(int i = codes.size()-2; i >= 0; i--) {
-            if(codes.get(i) != 0) {
-                newDepth = i;
-                break;
-            }
-        }
-        return nodeIdUtil.getPrefix() + Joiner.on('.').join(codes.subList(0, newDepth+1));
-
-    }
-
-    public static boolean isValidADL14Code(String code) {
-        if(code == null) {
-            return false;
-        }
-        return adl14CodePattern.matcher(code).matches();
-    }
 
     /**
      * Returns the expanded set of members of a value set, replacing any ac-codes with at-codes if this is a flat archetype
@@ -426,7 +219,7 @@ public class AOMUtils {
     public static Set<String> getExpandedValueSetMembers(Map<String, ValueSet> allValueSets, ValueSet valueSet) {
         Set<String> result = new LinkedHashSet<>();
         for(String member:valueSet.getMembers()) {
-            if(AOMUtils.isValueSetCode(member)) {
+            if(AdlCodeUtils.isValueSetCode(member)) {
                 ValueSet includedValueSet = allValueSets.get(member);
                 if(includedValueSet == null) {
                     result.add(member);//cannot expand that which we cannot find
@@ -450,7 +243,7 @@ public class AOMUtils {
      */
     public static boolean valueSetContainsCodeOrParent(Collection<String> valueSetMembers, String code) {
         for(String value:valueSetMembers) {
-            if(AOMUtils.codesConformant(code, value)) {
+            if(AdlCodeUtils.codesConformant(code, value)) {
                 return true;
             }
         }

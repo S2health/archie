@@ -1,7 +1,6 @@
-package com.nedap.archie.aom.utils;
+package com.nedap.archie.definitions;
 
 import com.google.common.base.Joiner;
-import com.nedap.archie.definitions.AdlCodeDefinitions;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class NodeIdUtil {
     private List<Integer> codes = new ArrayList<>();;
 
     public NodeIdUtil(String nodeId) {
-        if(AOMUtils.isValidCode(nodeId) || AOMUtils.isValidADL14Code(nodeId)) {
+        if(AdlCodeUtils.isValidCode(nodeId) || AdlCodeUtils.isValidADL14Code(nodeId)) {
             String[] split = nodeId.substring(2).split("\\" + AdlCodeDefinitions.SPECIALIZATION_SEPARATOR);
             prefix = nodeId.substring(0, 2);
             for (int i = 0; i < split.length; i++) {

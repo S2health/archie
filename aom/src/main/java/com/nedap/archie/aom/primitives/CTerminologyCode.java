@@ -18,6 +18,7 @@ import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ConformanceCheckResult;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.base.terminology.TerminologyCode;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
 import org.openehr.utils.message.I18n;
 
@@ -103,7 +104,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
 
             List<String> values;
             String terminologyId = value.getTerminologyId();
-            if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AOMUtils.isValueSetCode(value.getTerminologyId())) {
+            if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AdlCodeUtils.isValueSetCode(value.getTerminologyId())) {
                 values = this.getValueSetExpanded();
             } else if (terminologyId.equalsIgnoreCase("openehr")) {
                 values = this.getOpenEHRValueSetExpanded();
@@ -254,7 +255,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
         String thisConstraint = constraint.get(0);
         String otherConstraint = otherCode.constraint.get(0);
         Archetype archetype = this.getArchetype();
-        if(AOMUtils.isValidValueSetCode(thisConstraint) && AOMUtils.isValidValueSetCode(otherConstraint)) {
+        if(AdlCodeUtils.isValidValueSetCode(thisConstraint) && AdlCodeUtils.isValidValueSetCode(otherConstraint)) {
             if (otherValueSet.isEmpty()) {
                 return ConformanceCheckResult.conforms();
             }
@@ -264,7 +265,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
                 // - reused directly
                 // - specialized
                 //this includes the value set codes
-                if (!AOMUtils.codesConformant(thisConstraint, otherConstraint)) {
+                if (!AdlCodeUtils.codesConformant(thisConstraint, otherConstraint)) {
                     return ConformanceCheckResult.fails(ErrorType.VPOV, I18n.t("child terminology constraint value set code {0} does not conform to parent constraint with value set code {1}", thisConstraint, otherConstraint));
                 }
                 for (String value : valueSet) {
@@ -284,7 +285,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
             }
             return ConformanceCheckResult.conforms();
         } else {
-            if(!AOMUtils.codesConformant(thisConstraint, otherConstraint)) {
+            if(!AdlCodeUtils.codesConformant(thisConstraint, otherConstraint)) {
                 return ConformanceCheckResult.fails(ErrorType.VPOV, I18n.t("child terminology constraint value code {0} does not conform to parent constraint with value code {1}", thisConstraint, otherConstraint));
             }
             return ConformanceCheckResult.conforms();

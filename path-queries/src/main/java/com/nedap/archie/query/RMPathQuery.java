@@ -4,6 +4,7 @@ package com.nedap.archie.query;
 import com.google.common.collect.Lists;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.definitions.AdlCodeDefinitions;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMAttributeInfo;
@@ -266,7 +267,7 @@ public class RMPathQuery {
 
             if (segment.hasIdCode()) {
                 if (matchSpecialisedNodes) {
-                    if (AOMUtils.codesConformant(archetypeNodeId, segment.getNodeId())) {
+                    if (AdlCodeUtils.codesConformant(archetypeNodeId, segment.getNodeId())) {
                         result.add(new RMObjectWithPath(object, path + buildPathConstraint(i, archetypeNodeId)));
                     }
                 } else {
@@ -308,7 +309,7 @@ public class RMPathQuery {
             String archetypeNodeId = lookup.getArchetypeNodeIdFromRMObject(o);
             if (segment.hasIdCode()) {
                 if (matchSpecialisedNodes) {
-                    if (AOMUtils.codesConformant(archetypeNodeId, segment.getNodeId())) {
+                    if (AdlCodeUtils.codesConformant(archetypeNodeId, segment.getNodeId())) {
                         return o;
                     }
                 } else {
