@@ -34,6 +34,8 @@ public class S2RmObjectValidatorTest2 {
 
     private TestUtil testUtil;
 
+    S2RmMetaModelsInitialiser s2RmMetaModelsInitialiser;
+
     private static final Logger logger = LoggerFactory.getLogger(S2RmObjectValidatorTest2.class);
 
     FullArchetypeRepository repository;
@@ -50,7 +52,7 @@ public class S2RmObjectValidatorTest2 {
         repository = ArchetypeRepositoryBuilder.parseRepository(this.getClass(), "s2-models");
         logger.info("archetypes parsed: " + repository.getAllArchetypes().size());
 
-        S2RmMetaModelsInitialiser s2RmMetaModelsInitialiser = new S2RmMetaModelsInitialiser();
+        s2RmMetaModelsInitialiser = new S2RmMetaModelsInitialiser();
         bmmReferenceModels = new MetaModels(null, s2RmMetaModelsInitialiser.getBmmRepository(), s2RmMetaModelsInitialiser.getAomProfiles());
         repository.compile(bmmReferenceModels);
 
@@ -336,7 +338,7 @@ public class S2RmObjectValidatorTest2 {
     }
 
     private OperationalTemplate createOpt(Archetype archetype) {
-        return (OperationalTemplate) new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
+        return (OperationalTemplate) new Flattener(repository, bmmReferenceModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
     }
 
     private Archetype parse(String filename) throws IOException, ADLParseException {
