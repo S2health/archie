@@ -71,7 +71,7 @@ public class FlattenerConfiguration {
     @Deprecated
     private boolean allowSpecializationAfterExclusion = true;
 
-    private FlattenerConfiguration() {
+    public FlattenerConfiguration() {
 
     }
 
@@ -85,7 +85,6 @@ public class FlattenerConfiguration {
         result.setRemoveZeroOccurrencesObjects(true);
         return result;
     }
-
 
 
     public boolean isCreateOperationalTemplate() {
