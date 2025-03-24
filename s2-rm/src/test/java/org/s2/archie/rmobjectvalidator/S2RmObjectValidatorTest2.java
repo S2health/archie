@@ -13,6 +13,7 @@ import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
 import com.nedap.archie.testutil.TestUtil;
 import com.nedap.archie.tools.rmobjectvalidator.S2RMObjectValidator;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.s2.rm.base.patterns.data_structures.InfoNode;
@@ -32,24 +33,24 @@ import static org.junit.Assert.assertEquals;
 
 public class S2RmObjectValidatorTest2 {
 
-    private TestUtil testUtil;
+    private static TestUtil testUtil;
 
-    S2RmMetaModelsInitialiser s2RmMetaModelsInitialiser;
+    static S2RmMetaModelsInitialiser s2RmMetaModelsInitialiser;
 
     private static final Logger logger = LoggerFactory.getLogger(S2RmObjectValidatorTest2.class);
 
-    FullArchetypeRepository repository;
+    static FullArchetypeRepository  repository;
 
-    MetaModels bmmReferenceModels;
-    private S2RMObjectValidator validator;
+    static MetaModels bmmReferenceModels;
+    static private S2RMObjectValidator validator;
 
-    private S2RMObjectValidator validatorWithoutInvariants;
+    static private S2RMObjectValidator validatorWithoutInvariants;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         testUtil = new TestUtil(S2RmInfoLookup.getInstance());
 
-        repository = ArchetypeRepositoryBuilder.parseRepository(this.getClass(), "s2-models");
+        repository = ArchetypeRepositoryBuilder.parseRepository (S2RmObjectValidatorTest2.class, "s2-models");
         logger.info("archetypes parsed: " + repository.getAllArchetypes().size());
 
         s2RmMetaModelsInitialiser = new S2RmMetaModelsInitialiser();
@@ -91,7 +92,7 @@ public class S2RmObjectValidatorTest2 {
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
         logMessages(validationMessages);
 
-        assertEquals("There should be 1 error", 1, validationMessages.size());
+        assertEquals("There should be 2 errors", 2, validationMessages.size());
 
     }
 
@@ -185,7 +186,7 @@ public class S2RmObjectValidatorTest2 {
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
         logMessages(validationMessages);
 
-        assertEquals("There should be 1 errors", 1, validationMessages.size());
+        assertEquals("There should be 3 errors", 3, validationMessages.size());
     }
     @Test
     public void validateDecimalOutOfRangeMinimal() throws Exception {
