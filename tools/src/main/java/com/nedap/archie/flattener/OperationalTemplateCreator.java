@@ -206,8 +206,8 @@ class OperationalTemplateCreator {
                                 // when we know the archetype that a CArchetypeRoot ref resolves to, we put it on the
                                 // filler id stack, which is used to detect cycles in archetype filler referencing
                                 fillersOnCurrentPath.push(rootArchId);
-String indent = StringUtils.repeat('x', (int) fillersOnCurrentPath.size());
-System.out.println(indent + "++++ push " + rootArchId);
+//String indent = StringUtils.repeat('x', (int) fillersOnCurrentPath.size());
+//System.out.println(indent + "++++ push " + rootArchId);
 
                                 fillArchetypeRoot (car, supplierArchetype, result, depth + 1);
 
@@ -215,7 +215,7 @@ System.out.println(indent + "++++ push " + rootArchId);
                                 fillArchetypeRootsArchetype(result, supplierArchetype.getArchetypeId().getFullId(), car, depth);
 
                                 fillersOnCurrentPath.pop();
-System.out.println(indent + "      pop " + rootArchId);
+//System.out.println(indent + "      pop " + rootArchId);
                             }
                         }
                     } else {
