@@ -3,6 +3,7 @@ package com.nedap.archie.flattener;
 import com.nedap.archie.aom.*;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.paths.PathUtil;
 import com.nedap.archie.query.AOMPathQuery;
@@ -24,17 +25,34 @@ public class CAttributeFlattener {
 
     public void flattenSingleAttribute(CComplexObject newObject, CAttribute attribute) {
         if(attribute.getDifferentialPath() != null) {
-            //this overrides a specific path
-            ArchetypeModelObject object = new AOMPathQuery(attribute.getDifferentialPath()).dontFindThroughCComplexObjectProxies().find(newObject);
-            if(object == null) {
+            //this overrides a specific path.
+            AOMPathQuery diffPath = new AOMPathQuery(attribute.getDifferentialPath());
+            List<PathSegment> diffPathSegments = diffPath.getPathSegments();
+
+            // The path might not be found due to id-code overrides at the specialization level, which won't
+            // exist in the parent. So here we get the path at the parent specialization level, which will be found
+            // if it really exists
+            int specializationLevelOfParent = attribute.getArchetype().specializationDepth()-1;
+            AOMPathQuery searchPath;
+            if (diffPath.getPathDepth() > specializationLevelOfParent) {
+                AOMPathQuery diffPathInParent = new AOMPathQuery(attribute.getDifferentialPath());
+                List<PathSegment> diffPathInParentSegments = diffPathInParent.getPathSegments();
+
+                // the following call modifies the segments of diffPathInParent
+                String pathAtSpecParentLevel = AdlCodeUtils.pathAtSpecializationLevel(diffPathInParentSegments, specializationLevelOfParent);
+                searchPath = diffPathInParent;
+            } else
+                searchPath = diffPath;
+
+            ArchetypeModelObject object = searchPath.dontFindThroughCComplexObjectProxies().find(newObject);
+
             if (object == null) {
                 //it is possible that the object points to a reference, in which case we need to clone the referenced node, then try again
                 //AOM spec paragraph 7.2: 'proxy reference targets are expanded inline if the child archetype overrides them.'
                 //also examples in ADL2 spec about internal references
                 //so find the internal references here!
-                //TODO: AOMUtils.pathAtSpecializationLevel(pathSegments.subList(0, pathSegments.size()-1), flatParent.specializationDepth());
-                CComplexObjectProxy internalReference = new AOMPathQuery(attribute.getDifferentialPath()).findAnyInternalReference(newObject);
-                if(internalReference != null) {
+                CComplexObjectProxy internalReference = diffPath.findAnyInternalReference(newObject);
+                if (internalReference != null) {
                     //in theory this can be a use node within a use node.
                     ComplexObjectProxyReplacement complexObjectProxyReplacement =
                             ComplexObjectProxyReplacement.getComplexObjectProxyReplacement(internalReference);
@@ -47,22 +65,36 @@ public class CAttributeFlattener {
                     }
                 } else {
                     //lookup the parent and try to add the last attribute if it does not exist
-                    List<PathSegment> pathSegments = new APathQuery(attribute.getDifferentialPath()).getPathSegments();
-                    String pathMinusLastNode = PathUtil.getPath(pathSegments.subList(0, pathSegments.size()-1));
+                    String pathMinusLastNode = PathUtil.getPath (diffPathSegments.subList(0, diffPathSegments.size()-1));
                     CObject parentObject = newObject.itemAtPath(pathMinusLastNode);
                     if (parentObject instanceof CComplexObject) {
                         //attribute does not exist, but does exist in RM (or it would not have passed the ArchetypeValidator, or the person using
                         //this flattener does not care
-                        CAttribute realAttribute = new CAttribute(pathSegments.get(pathSegments.size()-1).getNodeName());
+                        CAttribute realAttribute = new CAttribute (diffPathSegments.get(diffPathSegments.size()-1).getNodeName());
                         ((CComplexObject) parentObject).addAttribute(realAttribute);
                         flattenAttribute(newObject, realAttribute, attribute);
+                    } else {
+                        // path was not findable in structure
+                        System.out.println("CAttributeFlattener Error: path " + attribute.getDifferentialPath() + " overlay location not found");
                     }
-
                 }
-            }
-            else if(object instanceof CAttribute) {
+            } else if (object instanceof CAttribute) {
                 CAttribute realAttribute = (CAttribute) object;
+
+                // Now we check if we need to do a path overlay because the diff path contains specialised code(s)
+                if (diffPath.getPathDepth() > specializationLevelOfParent) {
+                    ListIterator<PathSegment> pathIterator = diffPathSegments.listIterator(diffPathSegments.size()-1);
+                    CObject objectInFlat = realAttribute.getParent();
+                    while (pathIterator.hasPrevious()) {
+                        String nodeId = pathIterator.previous().getNodeId();
+                        if (AdlCodeUtils.getSpecializationDepthFromCode(nodeId) > specializationLevelOfParent)
+                            objectInFlat.setNodeId(nodeId);
+                        objectInFlat = objectInFlat.getParent().getParent();
+                    }
+                }
+
                 flattenAttribute(newObject, realAttribute, attribute);
+
             } else if (object instanceof CObject) {
                 //TODO: what does this mean?
             }
@@ -144,7 +176,7 @@ public class CAttributeFlattener {
                             thisNodeIsExclusion = true;
                         }
 
-                        if (!thisNodeIsExclusion && excludedNodeIds.contains(AOMUtils.codeAtLevel(specializedChildCObject.getNodeId(), specializationLevelOfParent))) {
+                        if (!thisNodeIsExclusion && excludedNodeIds.contains(AdlCodeUtils.codeAtLevel(specializedChildCObject.getNodeId(), specializationLevelOfParent))) {
                             //because of this particular specialization, the parent object was excluded, so occurrences matches {0} in the specialized archetype
                             //but a modification of the parent node is done after that in the specialized archetype
                             specializedObject.setOccurrences(specializedChildCObject.getOccurrences());
@@ -249,7 +281,7 @@ public class CAttributeFlattener {
     private String findCObjectMatchingSiblingOrder(SiblingOrder siblingOrder, List<CObject> cObjectList) {
         SiblingOrder foundSiblingOrder = null;
         for(CObject object:cObjectList) {
-            if(foundSiblingOrder != null && AOMUtils.isOverriddenIdCode(object.getNodeId(), siblingOrder.getSiblingNodeId())) {
+            if(foundSiblingOrder != null && AdlCodeUtils.isOverriddenIdCode(object.getNodeId(), siblingOrder.getSiblingNodeId())) {
                 return object.getNodeId();
             }
             if(object.getSiblingOrder() != null) {
@@ -272,7 +304,7 @@ public class CAttributeFlattener {
         int matchingIndex = parent.getIndexOfChildWithNodeId(matchingParentObject.getNodeId());
         String result = matchingParentObject.getNodeId();
         for(int i = matchingIndex+1; i < parent.getChildren().size(); i++) {
-            if(AOMUtils.isOverriddenIdCode(parent.getChildren().get(i).getNodeId(), matchingParentObject.getNodeId())) {
+            if(AdlCodeUtils.isOverriddenIdCode(parent.getChildren().get(i).getNodeId(), matchingParentObject.getNodeId())) {
                 result = parent.getChildren().get(i).getNodeId();
             }
         }
