@@ -442,7 +442,9 @@ public class Flattener implements IAttributeFlattenerSupport {
      * @return
      */
     protected Flattener getNewFlattener() {
-        return new Flattener(repository, metaModels, config);
+        Flattener flattener = new Flattener(repository, metaModels, config);
+        flattener.getConfig().setCreateOperationalTemplate(false);
+        return flattener;
     }
 
     private Flattener useComplexObjectForArchetypeSlotReplacement(boolean useComplexObjectForArchetypeSlotReplacement) {
