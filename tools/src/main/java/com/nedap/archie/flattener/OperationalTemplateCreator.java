@@ -163,7 +163,7 @@ class OperationalTemplateCreator {
      * @param rootArchDef
      * @param depth
      */
-    private void fillArchetypeRootsArchetype(OperationalTemplate result, String rootArchId, CComplexObject rootArchDef, int depth) {
+    private void fillArchetypeRootsArchetype(OperationalTemplate result, String rootArchId, CComplexObject rootArchDef, int depth) throws RuntimeException {
         Stack<CObject> workList = new Stack<>();
         workList.push (rootArchDef);
 
@@ -189,7 +189,7 @@ class OperationalTemplateCreator {
                         // if we can't find the supplier archetype bail out
                         if (supplierArchetype == null) {
                             if (getConfig().isFailOnMissingUsedArchetype())
-                                throw new IllegalArgumentException("Archetype with reference :" + car.getArchetypeRef() + " not found.");
+                                throw new RuntimeException ("Archetype with reference :" + car.getArchetypeRef() + " not found.");
 
                         // don't do anything if we've hit the recursion limit. We can only check it here because we've only
                         // just worked out the resolved archetype id - the archetype ref is not reliable for this purpose
@@ -218,7 +218,7 @@ System.out.println(indent + "      pop " + rootArchId);
         }
     }
 
-    private void fillComplexObjectProxies(OperationalTemplate result) {
+    private void fillComplexObjectProxies(OperationalTemplate result) throws RuntimeException {
         if(!getConfig().isReplaceUseNode()) {
             return;
         }
