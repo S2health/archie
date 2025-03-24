@@ -13,7 +13,10 @@ import com.nedap.archie.definitions.AdlCodeUtils;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
+import org.s2.rminfo.S2RmMetaModelsInitialiser;
 import org.s2.terminology.S2TerminologyAccess;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -22,6 +25,9 @@ import java.util.Objects;
 
 class S2PrimitiveObjectConstraintHelper {
     private final boolean failOnUnknownTerminologyId;
+
+    private static final Logger logger = LoggerFactory.getLogger(S2PrimitiveObjectConstraintHelper.class);
+
 
     S2PrimitiveObjectConstraintHelper(ValidationConfiguration validationConfiguration) {
         this.failOnUnknownTerminologyId = validationConfiguration.isFailOnUnknownTerminologyId();
@@ -145,14 +151,34 @@ class S2PrimitiveObjectConstraintHelper {
                 return !failOnUnknownTerminologyId;
             }
 
+
+            String internalTerminologyValidationError = null;
+
             if(values != null && !values.isEmpty()) {
-                return value.getCodeString() != null && values.contains(value.getCodeString());
+                boolean result = value.getCodeString() != null && values.contains(value.getCodeString());
+                if(result) {
+                    return true;
+                } else {
+                    String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
+                    internalTerminologyValidationError = "ERROR: Internal terminology validation error in archetype " + archetypeId + " where terminology code" + terminologyCode + " does not contain " + value.getCodeString();
+                }
             }
 
             // s2 vset check - JCoyle
             String s2ValuesetId = getS2ValuesetId(terminologyCode);
             if(s2ValuesetId != null && !s2ValuesetId.isEmpty()) {
-                return S2TerminologyAccess.getInstance().valuesetHasMember(s2ValuesetId, value.getCodeString());
+                boolean result = S2TerminologyAccess.getInstance().valuesetHasMember(s2ValuesetId, value.getCodeString());
+                if(result) {
+                    return true;
+                } else {
+                    String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
+                    logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + "of S2ValuesetId " + s2ValuesetId + " does not contain " + value.getCodeString());
+                }
+            }
+
+            // Internal error only gets logged if external also fails
+            if(internalTerminologyValidationError != null) {
+                logger.info(internalTerminologyValidationError);
             }
 
 
