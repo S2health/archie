@@ -115,9 +115,9 @@ public class S2RMObjectValidator extends RMObjectValidatingProcessor {
     }
 
     private List<RMObjectValidationMessage> runArchetypeValidations(List<RMObjectWithPath> rmObjects, String path, CObject cobject) {
-        System.out.println("VALIDATING path " + path);
-        if (path.startsWith("/content[id0.1.1, 1]/data[id0.90.1, 1]"))
-            System.out.println("ABOUT to validate path " + path);
+//        System.out.println("VALIDATING path " + path);
+//        if (path.startsWith("/content[id0.1.1, 1]/data[id0.90.1, 1]"))
+//            System.out.println("ABOUT to validate path " + path);
 
         List<RMObjectValidationMessage> result = new ArrayList<>(rmOccurrenceValidator.validate(metaModel, rmObjects, path, cobject));
         if (rmObjects.isEmpty()) {
