@@ -21,7 +21,8 @@ public class SimpleArchetypeRepository implements ArchetypeRepository, MutableAr
 
     @Override
     public void addArchetype(Archetype archetype) {
-        archetypes.put(archetype.getArchetypeId(), archetype);
+        if (!archetypes.containsKey(archetype.getArchetypeId()))
+            archetypes.put(archetype.getArchetypeId(), archetype);
     }
 
     public List<Archetype> getAllArchetypes() {
