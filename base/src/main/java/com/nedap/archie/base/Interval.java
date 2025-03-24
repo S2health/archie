@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import java.math.BigDecimal;
 import java.time.temporal.TemporalAmount;
 import java.util.Objects;
 
@@ -152,46 +153,82 @@ public class Interval<T> extends OpenEHRBase {
     }
 
     public boolean has(T value) {
-		if (lowerUnbounded && upperUnbounded) {
+        if (lowerUnbounded && upperUnbounded) {
             return true;
         }
-        //since TemporalAmount does not implement Comparable we have to do some magic here
-        Comparable comparableValue;
-        Comparable comparableLower;
-        Comparable comparableUpper;
-		if (value instanceof TemporalAmount && lower instanceof TemporalAmount && upper instanceof TemporalAmount) {
-            //TemporalAmount is not comparable, but can always be converted to a duration that is comparable.
+
+        if (value == null) {
+            return true;
+        }
+
+        Comparable<?> comparableValue;
+        Comparable<?> comparableLower;
+        Comparable<?> comparableUpper;
+
+        if (value instanceof TemporalAmount && lower instanceof TemporalAmount && upper instanceof TemporalAmount) {
             comparableValue = toComparable(value);
             comparableLower = toComparable(lower);
             comparableUpper = toComparable(upper);
-		} else if (!(isComparable(lower) && isComparable(upper) && isComparable(value))) {
+        } else if (!(isComparable(lower) && isComparable(upper) && isComparable(value))) {
             throw new UnsupportedOperationException("subclasses of interval not implementing comparable should implement their own has method");
         } else {
-            comparableValue = (Comparable) value;
-            comparableLower = (Comparable) lower;
-            comparableUpper = (Comparable) upper;
+            comparableValue = (Comparable<?>) value;
+            comparableLower = (Comparable<?>) lower;
+            comparableUpper = (Comparable<?>) upper;
         }
 
-		if (value == null) {
-            //interval values are not concerned with cardinality, so return true if not set
+        // Numeric comparison logic
+        if (comparableValue instanceof Number && comparableLower instanceof Number && comparableUpper instanceof Number) {
+            BigDecimal valueDecimal = toBigDecimal((Number) comparableValue);
+            BigDecimal lowerDecimal = toBigDecimal((Number) comparableLower);
+            BigDecimal upperDecimal = toBigDecimal((Number) comparableUpper);
+
+            if (!lowerUnbounded) {
+                int comparedWithLower = valueDecimal.compareTo(lowerDecimal);
+                if (comparedWithLower < 0 || (!lowerIncluded && comparedWithLower == 0)) {
+                    return false;
+                }
+            }
+
+            if (!upperUnbounded) {
+                int comparedWithUpper = valueDecimal.compareTo(upperDecimal);
+                if (comparedWithUpper > 0 || (!upperIncluded && comparedWithUpper == 0)) {
+                    return false;
+                }
+            }
+
             return true;
         }
 
-		if (!lowerUnbounded) {
-            int comparedWithLower = comparableValue.compareTo(comparableLower);
+        // Fallback logic
+        if (!lowerUnbounded) {
+            int comparedWithLower = ((Comparable) comparableValue).compareTo(comparableLower);
             if (comparedWithLower < 0 || (!lowerIncluded && comparedWithLower == 0)) {
                 return false;
             }
         }
 
-		if (!upperUnbounded) {
-            int comparedWithUpper = comparableValue.compareTo(comparableUpper);
+        if (!upperUnbounded) {
+            int comparedWithUpper = ((Comparable) comparableValue).compareTo(comparableUpper);
             if (comparedWithUpper > 0 || (!upperIncluded && comparedWithUpper == 0)) {
                 return false;
             }
         }
+
         return true;
     }
+
+    // Utility method to convert Number to BigDecimal
+    private BigDecimal toBigDecimal(Number number) {
+        if (number instanceof BigDecimal) {
+            return (BigDecimal) number;
+        } else if (number instanceof Double || number instanceof Float) {
+            return BigDecimal.valueOf(number.doubleValue());
+        } else {
+            return new BigDecimal(number.longValue());
+        }
+    }
+
 
     /**
      * Get the lower value as a comparable amount. Required because some temporal amounts are not always directly comparable
