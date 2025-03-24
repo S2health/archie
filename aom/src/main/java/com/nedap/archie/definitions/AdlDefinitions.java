@@ -35,6 +35,8 @@ public class AdlDefinitions extends BasicDefinitions {
     public static final String UID = "uid";
 
     // Maximum depth of use_archetype reference graph created by a template
-    public final static int TemplateMaxDepth = 10;
+    public final static int TemplateMaxDepth = 6;
 
+    // max nesting of same archetype due to slot filling or direct use_archetype refs
+    public final static int TemplateMaxRecursionDepth = 2;
 }
