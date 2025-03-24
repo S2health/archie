@@ -27,6 +27,7 @@ public class CAttributeFlattener {
             //this overrides a specific path
             ArchetypeModelObject object = new AOMPathQuery(attribute.getDifferentialPath()).dontFindThroughCComplexObjectProxies().find(newObject);
             if(object == null) {
+            if (object == null) {
                 //it is possible that the object points to a reference, in which case we need to clone the referenced node, then try again
                 //AOM spec paragraph 7.2: 'proxy reference targets are expanded inline if the child archetype overrides them.'
                 //also examples in ADL2 spec about internal references
@@ -49,7 +50,7 @@ public class CAttributeFlattener {
                     List<PathSegment> pathSegments = new APathQuery(attribute.getDifferentialPath()).getPathSegments();
                     String pathMinusLastNode = PathUtil.getPath(pathSegments.subList(0, pathSegments.size()-1));
                     CObject parentObject = newObject.itemAtPath(pathMinusLastNode);
-                    if(parentObject != null && parentObject instanceof CComplexObject) {
+                    if (parentObject instanceof CComplexObject) {
                         //attribute does not exist, but does exist in RM (or it would not have passed the ArchetypeValidator, or the person using
                         //this flattener does not care
                         CAttribute realAttribute = new CAttribute(pathSegments.get(pathSegments.size()-1).getNodeName());
@@ -72,8 +73,8 @@ public class CAttributeFlattener {
         }
     }
 
-    public CAttribute flattenAttribute(CComplexObject root, CAttribute attributeInParent, CAttribute attributeInSpecialization) {
-        if(attributeInParent == null) {
+    public CAttribute flattenAttribute (CComplexObject root, CAttribute attributeInParent, CAttribute attributeInSpecialization) {
+        if (attributeInParent == null) {
             CAttribute childCloned = attributeInSpecialization.clone();
             root.addAttribute(childCloned);
             return childCloned;
