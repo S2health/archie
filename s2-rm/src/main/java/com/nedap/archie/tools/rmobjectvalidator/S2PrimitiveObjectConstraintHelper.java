@@ -160,7 +160,7 @@ class S2PrimitiveObjectConstraintHelper {
                     return true;
                 } else {
                     String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
-                    internalTerminologyValidationError = "ERROR: Internal terminology validation error in archetype " + archetypeId + " where terminology code" + terminologyCode + " does not contain " + value.getCodeString();
+                    internalTerminologyValidationError = "ERROR: Internal terminology validation error in archetype " + archetypeId + " where terminology code " + terminologyCode + " does not contain " + value.getCodeString();
                 }
             }
 
@@ -172,7 +172,7 @@ class S2PrimitiveObjectConstraintHelper {
                     return true;
                 } else {
                     String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
-                    logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + "of S2ValuesetId " + s2ValuesetId + " does not contain " + value.getCodeString());
+                    logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + " of S2ValuesetId " + s2ValuesetId + " does not contain " + value.getCodeString());
                 }
             }
 
