@@ -50,11 +50,11 @@ class OperationalTemplateCreator {
         result.setParentArchetypeId(override.getParentArchetypeId());
     }
 
-    public void fillSlots(OperationalTemplate archetype, int depth) { //should this be OperationalTemplate?
+    public void expandReferences(OperationalTemplate result, int depth) { //should this be OperationalTemplate?
         //TODO: closing archetype slots should be moved to AFTER including other archetypes
-        closeArchetypeSlots(archetype);
-        fillArchetypeRoots(archetype, depth);
-        fillComplexObjectProxies(archetype);
+        closeArchetypeSlots(result);
+        fillArchetypeRootsOpt(result, depth);
+        fillComplexObjectProxies(result);
     }
 
     static void expandValueSets(OperationalTemplate operationalTemplate) {

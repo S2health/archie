@@ -116,14 +116,15 @@ public class Flattener implements IAttributeFlattenerSupport {
         String parentId = toFlatten.getParentArchetypeId();
         if (parentId == null) {
             if (config.isCreateOperationalTemplate()) {
-                OperationalTemplate template = optCreator.createOperationalTemplate(toFlatten);
-                result = template;
+                // The following creates a new clone
+                OperationalTemplate opt = optCreator.createOperationalTemplate (toFlatten);
+                result = opt;
+
                 //make an operational template by just filling complex object proxies and archetype slots
-                optCreator.fillSlots(template, depth);
-                optCreator.expandValueSets((OperationalTemplate) result);
-                fillOptEmptyOccurrences(result);
-                TerminologyFlattener.filterLanguages(template, config.isRemoveLanguagesFromMetaData(), config.getLanguagesToKeep());
-                result = template;
+                optCreator.expandReferences(opt, depth);
+                optCreator.expandValueSets (opt);
+                fillOptEmptyOccurrences (opt);
+                TerminologyFlattener.filterLanguages (opt, config.isRemoveLanguagesFromMetaData(), config.getLanguagesToKeep());
             } else {
                 result = toFlatten.clone();
             }
@@ -196,9 +197,7 @@ public class Flattener implements IAttributeFlattenerSupport {
         //but be added to the rules section additionally to the base rules.
         rulesFlattener.combineRules(child, result, prefix, "", "", true /* override statements with same tag */);
         if (config.isCreateOperationalTemplate()) {
-        if(config.isCreateOperationalTemplate()) {
-            optCreator.fillSlots((OperationalTemplate) result, depth);
-
+            optCreator.expandReferences((OperationalTemplate) result, depth);
         }
         fillOptEmptyOccurrences(result);
         TerminologyFlattener.flattenTerminology(result, child);
