@@ -158,23 +158,32 @@ class OperationalTemplateCreator {
 
     /**
      *
-     * @param result
-     * @param rootArchId
-     * @param rootArchDef
-     * @param depth
+     * @param result : the OPT being built
+     * @param rootArchId : the id of the archetype sub-tree within the OPT
+     * @param archRootInOpt : archetype root point within `result` OPT
+     * @param depth : depth of chaining, used to limit non-recursive inclusion
      */
-    private void fillArchetypeRootsArchetype(OperationalTemplate result, String rootArchId, CComplexObject rootArchDef, int depth) throws RuntimeException {
+    private void fillArchetypeRootsArchetype(OperationalTemplate result, String rootArchId, CComplexObject archRootInOpt, int depth) throws RuntimeException {
+
         Stack<CObject> workList = new Stack<>();
-        workList.push (rootArchDef);
+        workList.push (archRootInOpt);
+
+        Archetype rootArchetype = flattener.getRepository().getArchetype (rootArchId);
+        if (rootArchetype == null)
+            throw new RuntimeException ("Root archetype :" + rootArchId + " not found in OPT repository (including overlays).");
+        // if the archetype is a template, get its overlays - this takes care of templates included in templates
+        else if (rootArchetype instanceof Template) {
+            Template childTemplate = (Template) rootArchetype;
+            for (TemplateOverlay overlay:childTemplate.getTemplateOverlays()) {
+                flattener.getRepository().addExtraArchetype(overlay);
+            }
+        }
 
         while (!workList.isEmpty()) {
             CObject object = workList.pop();
             for (CAttribute attribute:object.getAttributes()) {
                 List<CObject> children = attribute.getChildren();
                 for (CObject child:children) {
-//    String indent = StringUtils.repeat('x', depth);
-//    System.out.println(indent + " ====" + rootArchId + child.getPath());
-
                     // deal with CArchetypeRoot node that currently has no attributes, i.e. is empty
                     if (child instanceof CArchetypeRoot &&
                             flattener.isCreateOperationalTemplate() &&
@@ -182,9 +191,6 @@ class OperationalTemplateCreator {
                     {
                         CArchetypeRoot car = (CArchetypeRoot) child;
                         Archetype supplierArchetype = flattener.getRepository().getArchetype (car.getArchetypeRef());
-//    if (car.getNodeId().contains("id0.90.1")) {
-//        System.out.println("xxx");
-//    }
 
                         // if we can't find the supplier archetype bail out
                         if (supplierArchetype == null) {
@@ -204,6 +210,8 @@ String indent = StringUtils.repeat('x', (int) fillersOnCurrentPath.size());
 System.out.println(indent + "++++ push " + rootArchId);
 
                                 fillArchetypeRoot (car, supplierArchetype, result, depth + 1);
+
+                                // car node is now populated with flattened (copy of) supplier archetype
                                 fillArchetypeRootsArchetype(result, supplierArchetype.getArchetypeId().getFullId(), car, depth);
 
                                 fillersOnCurrentPath.pop();
@@ -256,10 +264,6 @@ System.out.println(indent + "      pop " + rootArchId);
         String newArchetypeRef = car.getArchetypeRef();
 
         String supplierArchetypeFullId = supplierArchetype.getArchetypeId().getFullId();
-
-//if (car.getNodeId().contains("id0.90.1")) {
-//    System.out.println("xxx");
-//}
 
         if (supplierArchetype instanceof TemplateOverlay){
             //we want to be able to check which archetype this is in the UI. If it's an overlay, that means retrieving the non-operational template
