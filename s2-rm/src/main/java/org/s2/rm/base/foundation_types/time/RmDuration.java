@@ -1,6 +1,8 @@
 package org.s2.rm.base.foundation_types.time;
 
 import java.time.*;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
@@ -13,7 +15,7 @@ import javax.xml.bind.annotation.*;
 */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Duration")
-public class RmDuration extends Temporal {
+public class RmDuration extends Temporal implements TemporalAmount {
   public RmDuration() {}
 
   public RmDuration(String value) {
@@ -49,5 +51,25 @@ public class RmDuration extends Temporal {
   @Override
   public String toString() {
     return "Duration";
+  }
+
+  @Override
+  public long get(TemporalUnit temporalUnit) {
+    return Duration.parse(getValue()).get(temporalUnit);
+  }
+
+  @Override
+  public List<TemporalUnit> getUnits() {
+    return Duration.parse(getValue()).getUnits();
+  }
+
+  @Override
+  public java.time.temporal.Temporal addTo(java.time.temporal.Temporal temporal) {
+    return Duration.parse(getValue()).addTo(temporal);
+  }
+
+  @Override
+  public java.time.temporal.Temporal subtractFrom(java.time.temporal.Temporal temporal) {
+    return Duration.parse(getValue()).subtractFrom(temporal);
   }
 }
