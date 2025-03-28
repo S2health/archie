@@ -427,6 +427,8 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
     public Object convertToConstraintObject(Object object, CPrimitiveObject<?, ?> cPrimitiveObject) {
         if (object instanceof RmDuration)
             return ((RmDuration) object).toDuration();
+        else if (object instanceof BigDecimal)
+            return (((BigDecimal) object).doubleValue());
         return object;
     }
 
