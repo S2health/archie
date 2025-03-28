@@ -165,10 +165,13 @@ public class Interval<T> extends OpenEHRBase {
         Comparable<?> comparableLower;
         Comparable<?> comparableUpper;
 
-        if (value instanceof TemporalAmount && lower instanceof TemporalAmount && upper instanceof TemporalAmount) {
+        int x = 0;
+
+        if (value instanceof TemporalAmount && (lower instanceof TemporalAmount || upper instanceof TemporalAmount)) {
             comparableValue = toComparable(value);
             comparableLower = toComparable(lower);
             comparableUpper = toComparable(upper);
+            x = 1;
         } else if (!(isComparable(lower) && isComparable(upper) && isComparable(value))) {
             throw new UnsupportedOperationException("subclasses of interval not implementing comparable should implement their own has method");
         } else {
@@ -178,19 +181,19 @@ public class Interval<T> extends OpenEHRBase {
         }
 
         // Numeric comparison logic
-        if (comparableValue instanceof Number && comparableLower instanceof Number && comparableUpper instanceof Number) {
+        if (comparableValue instanceof Number && (comparableLower instanceof Number || comparableUpper instanceof Number)) {
             BigDecimal valueDecimal = toBigDecimal((Number) comparableValue);
-            BigDecimal lowerDecimal = toBigDecimal((Number) comparableLower);
-            BigDecimal upperDecimal = toBigDecimal((Number) comparableUpper);
 
-            if (!lowerUnbounded) {
+            if (!lowerUnbounded && comparableLower != null) {
+                BigDecimal lowerDecimal = toBigDecimal((Number) comparableLower);
                 int comparedWithLower = valueDecimal.compareTo(lowerDecimal);
                 if (comparedWithLower < 0 || (!lowerIncluded && comparedWithLower == 0)) {
                     return false;
                 }
             }
 
-            if (!upperUnbounded) {
+            if (!upperUnbounded && comparableUpper != null) {
+                BigDecimal upperDecimal = toBigDecimal((Number) comparableUpper);
                 int comparedWithUpper = valueDecimal.compareTo(upperDecimal);
                 if (comparedWithUpper > 0 || (!upperIncluded && comparedWithUpper == 0)) {
                     return false;
