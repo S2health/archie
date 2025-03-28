@@ -414,6 +414,21 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
 
     }
 
+    /**
+     * Convert the given reference model object to the object required for the archetype constraint.
+     *
+     * for example, a CTerminologyCode can be used to check a CodePhrase or a DvCodedText. This cannot be directly checked and must be converted first.
+     *
+     * @param object
+     * @param cPrimitiveObject
+     * @return
+     */
+    @Override
+    public Object convertToConstraintObject(Object object, CPrimitiveObject<?, ?> cPrimitiveObject) {
+        if (object instanceof RmDuration)
+            return ((RmDuration) object).toDuration();
+        return object;
+    }
 
 }
 

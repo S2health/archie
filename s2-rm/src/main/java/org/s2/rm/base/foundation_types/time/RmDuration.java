@@ -72,4 +72,8 @@ public class RmDuration extends Temporal implements TemporalAmount {
   public java.time.temporal.Temporal subtractFrom(java.time.temporal.Temporal temporal) {
     return Duration.parse(getValue()).subtractFrom(temporal);
   }
+
+  public Duration toDuration() {
+    return getDurationValue();
+  }
 }
