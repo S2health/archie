@@ -152,84 +152,54 @@ public class Interval<T> extends OpenEHRBase {
         this.upperIncluded = upperIncluded;
     }
 
+
     public boolean has(T value) {
         if (lowerUnbounded && upperUnbounded) {
             return true;
         }
 
-        if (value == null) {
-            return true;
-        }
 
-        Comparable<?> comparableValue;
-        Comparable<?> comparableLower;
-        Comparable<?> comparableUpper;
-
-        int x = 0;
-
-        if (value instanceof TemporalAmount && (lower instanceof TemporalAmount || upper instanceof TemporalAmount)) {
+        //since TemporalAmount does not implement Comparable we have to do some magic here
+        Comparable comparableValue;
+        Comparable comparableLower;
+        Comparable comparableUpper;
+        if (value instanceof TemporalAmount && lower instanceof TemporalAmount && upper instanceof TemporalAmount) {
+            //TemporalAmount is not comparable, but can always be converted to a duration that is comparable.
             comparableValue = toComparable(value);
             comparableLower = toComparable(lower);
             comparableUpper = toComparable(upper);
-            x = 1;
         } else if (!(isComparable(lower) && isComparable(upper) && isComparable(value))) {
             throw new UnsupportedOperationException("subclasses of interval not implementing comparable should implement their own has method");
         } else {
-            comparableValue = (Comparable<?>) value;
-            comparableLower = (Comparable<?>) lower;
-            comparableUpper = (Comparable<?>) upper;
+            comparableValue = (Comparable) value;
+            comparableLower = (Comparable) lower;
+            comparableUpper = (Comparable) upper;
         }
 
-        // Numeric comparison logic
-        if (comparableValue instanceof Number && (comparableLower instanceof Number || comparableUpper instanceof Number)) {
-            BigDecimal valueDecimal = toBigDecimal((Number) comparableValue);
-
-            if (!lowerUnbounded && comparableLower != null) {
-                BigDecimal lowerDecimal = toBigDecimal((Number) comparableLower);
-                int comparedWithLower = valueDecimal.compareTo(lowerDecimal);
-                if (comparedWithLower < 0 || (!lowerIncluded && comparedWithLower == 0)) {
-                    return false;
-                }
-            }
-
-            if (!upperUnbounded && comparableUpper != null) {
-                BigDecimal upperDecimal = toBigDecimal((Number) comparableUpper);
-                int comparedWithUpper = valueDecimal.compareTo(upperDecimal);
-                if (comparedWithUpper > 0 || (!upperIncluded && comparedWithUpper == 0)) {
-                    return false;
-                }
-            }
-
+        if (value == null) {
+            //interval values are not concerned with cardinality, so return true if not set
             return true;
         }
 
-        // Fallback logic
+        if (value instanceof Integer && ( lower instanceof Long || upper instanceof Long )) {
+            comparableValue = (Comparable) ((Integer) value).longValue();
+        }
+
+
         if (!lowerUnbounded) {
-            int comparedWithLower = ((Comparable) comparableValue).compareTo(comparableLower);
+            int comparedWithLower = comparableValue.compareTo(comparableLower);
             if (comparedWithLower < 0 || (!lowerIncluded && comparedWithLower == 0)) {
                 return false;
             }
         }
 
         if (!upperUnbounded) {
-            int comparedWithUpper = ((Comparable) comparableValue).compareTo(comparableUpper);
+            int comparedWithUpper = comparableValue.compareTo(comparableUpper);
             if (comparedWithUpper > 0 || (!upperIncluded && comparedWithUpper == 0)) {
                 return false;
             }
         }
-
         return true;
-    }
-
-    // Utility method to convert Number to BigDecimal
-    private BigDecimal toBigDecimal(Number number) {
-        if (number instanceof BigDecimal) {
-            return (BigDecimal) number;
-        } else if (number instanceof Double || number instanceof Float) {
-            return BigDecimal.valueOf(number.doubleValue());
-        } else {
-            return new BigDecimal(number.longValue());
-        }
     }
 
 
@@ -279,7 +249,8 @@ public class Interval<T> extends OpenEHRBase {
             comparableIntervalValue = intervalValue == null ? null : IntervalDurationConverter.from((TemporalAmount) intervalValue);
         } else if (!(isComparable(intervalValue) && isComparable(value))) {
             throw new UnsupportedOperationException("subclasses of interval not implementing comparable should implement their own has method");
-        } else {
+        }
+        else {
             comparableValue = (Comparable) value;
             comparableIntervalValue = (Comparable) intervalValue;
         }

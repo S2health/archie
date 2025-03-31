@@ -36,6 +36,8 @@ public class S2RmPrimitiveObjectValidator {
         return validate_inner(rmObject, pathSoFar, cobject);
     }
 
+    //TODO:  Need this pathSoFar
+
     List<RMObjectValidationMessage> validate_inner(Object rmObject, String pathSoFar, CPrimitiveObject<?, ?> cobject) {
         List<RMObjectValidationMessage> result = new ArrayList<>();
         if (!validationHelper.isValidValue(cobject, rmObject)) {

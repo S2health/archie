@@ -131,6 +131,10 @@ class S2PrimitiveObjectConstraintHelper {
         if(terminologyCode.isConstraintRequired()) {
             if (value == null) return false;
 
+            if (value.getCodeString().equals("258856007")) {
+                System.out.println("foo");
+            }
+
             List<String> values;
             String terminologyId = value.getTerminologyId();
             if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AdlCodeUtils.isValueSetCode(value.getTerminologyId())) {

@@ -349,6 +349,8 @@ public class S2RmObjectValidatorTest2 {
     private void logMessages(List<RMObjectValidationMessage> messages) {
         if (messages != null && !messages.isEmpty()) {
             for (RMObjectValidationMessage message : messages) {
+                logger.info(message.getArchetypePath());
+                logger.info(message.getHumanReadableArchetypePath());
                 logger.info(message.getMessage());
             }
         }
