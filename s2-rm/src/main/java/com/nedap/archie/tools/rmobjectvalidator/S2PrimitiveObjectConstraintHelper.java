@@ -131,7 +131,7 @@ class S2PrimitiveObjectConstraintHelper {
         if(terminologyCode.isConstraintRequired()) {
             if (value == null) return false;
 
-            if (value.getCodeString().equals("258856007")) {
+            if (value.getCodeString().equals("165746003")) {
                 System.out.println("foo");
             }
 

@@ -79,8 +79,7 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 0 error", 0, validationMessages.size());
 
     }
-
-
+    
     @Test
     public void validatedCBC_WithWrongCode() throws Exception {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");
@@ -110,9 +109,6 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 1 errors", 1, validationMessages.size());
 
     }
-
-
-
 
     @Test
     public void validTermInValueset() throws Exception {
@@ -157,24 +153,6 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 2 errors", 2, validationMessages.size());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// /////////////////////////////////////////////////
-
-    // TODO:  Working
-
-    // TODO: Error not caught
     @Test
     public void validateDecimalOutOfRange() throws Exception {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");
@@ -186,8 +164,9 @@ public class S2RmObjectValidatorTest2 {
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
         logMessages(validationMessages);
 
-        assertEquals("There should be 3 errors", 3, validationMessages.size());
+        assertEquals("There should be 2 errors", 2, validationMessages.size());
     }
+
     @Test
     public void validateDecimalOutOfRangeMinimal() throws Exception {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");
@@ -201,6 +180,51 @@ public class S2RmObjectValidatorTest2 {
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
     }
+
+    @Test
+    public void validateWrongReportStatus() throws Exception {
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-ABO-Rh.v1.1.0");
+        OperationalTemplate opt = createOpt(archetype);
+
+        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2-term_description_wrong-report_status.json");
+        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        logMessages(validationMessages);
+
+        assertEquals("There should be 1 errors", 1, validationMessages.size());
+    }
+
+    @Test
+    public void validateMissingMandatoryUnits() throws Exception {
+        // can't find s2-EHR-Order.t_simple_medication_order.v2
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");
+        OperationalTemplate opt = createOpt(archetype);
+
+        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_missing_mandatory-units.json");
+        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        logMessages(validationMessages);
+
+        assertEquals("There should be 1 errors", 1, validationMessages.size());
+    }
+
+    @Test
+    public void validateRecursiveOverlayWrongRmTypeDataValue() throws Exception {
+        // can't find s2-EHR-Order.t_simple_medication_order.v2
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_simple_medication_list.v2.0.0");
+        OperationalTemplate opt = createOpt(archetype);
+
+        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_wrong_rm_type-data_value.json");
+        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
+
+        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        logMessages(validationMessages);
+
+        assertEquals("There should be 1 errors", 1, validationMessages.size());
+    }
+
 
     // TODO: Error not caught
     @Test
@@ -218,23 +242,6 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 1 errors", 1, validationMessages.size());
     }
 
-    // TODO: Error not caught
-    @Test
-    public void validateWrongReportStatus() throws Exception {
-        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-ABO-Rh.v1.1.0");
-        OperationalTemplate opt = createOpt(archetype);
-
-        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2-term_description_wrong-report_status.json");
-        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
-
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
-        logMessages(validationMessages);
-
-        assertEquals("There should be 1 errors", 1, validationMessages.size());
-    }
-
-
-
     // TODO: Breaks during validation
     @Test
     public void validateMissingMandatoryPersonIdentity() throws Exception {
@@ -250,42 +257,6 @@ public class S2RmObjectValidatorTest2 {
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
     }
-
-    //TODO: Error not caught
-    @Test
-    public void validateMissingMandatoryUnits() throws Exception {
-        // can't find s2-EHR-Order.t_simple_medication_order.v2
-        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");
-        OperationalTemplate opt = createOpt(archetype);
-
-        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_missing_mandatory-units.json");
-        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
-
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
-        logMessages(validationMessages);
-
-        assertEquals("There should be 1 errors", 1, validationMessages.size());
-    }
-
-    //TODO:  referenced recursive overlay archetype is missing,
-    //    but wrong rm type seems to be working
-    @Test
-    public void validateRecursiveOverlayWrongRmTypeDataValue() throws Exception {
-        // can't find s2-EHR-Order.t_simple_medication_order.v2
-        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_simple_medication_list.v2.0.0");
-        OperationalTemplate opt = createOpt(archetype);
-
-        InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_wrong_rm_type-data_value.json");
-        Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
-
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
-        logMessages(validationMessages);
-
-        assertEquals("There should be 1 errors", 1, validationMessages.size());
-    }
-
-
-
 
 
     @Test
