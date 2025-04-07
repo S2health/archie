@@ -9,22 +9,34 @@ public class S2TerminologyAccess {
 
     private static final Pattern acCodeIdPattern = Pattern.compile("\\{\\[(?<code>.+?)\\]\\}");
 
+    private static final Pattern iso6391Pattern = Pattern.compile("http://iso.org/code_sets/iso_639-1/(?<code>\\w+)");
+    private static final Pattern iso6393Pattern = Pattern.compile("http://iso.org/code_sets/iso_639-3/(?<code>\\w+)");
+    private static final Pattern iso31661alpha2Pattern = Pattern.compile("http://iso.org/code_sets/iso_3166-1-alpha2/(?<code>\\w+)");
+
     private static final Pattern s2TermIdPattern = Pattern.compile("http://s2health.org/id/(?<code>s2\\.\\w+)");
     private static final Pattern snomedTermIdPattern = Pattern.compile("http://snomed.info/id/(?<code>[0-9]+)");
     // For Loinc need to match temporary UUID codes as well.
     private static final Pattern loincTermIdPattern = Pattern.compile("http://loinc\\.org/(?<code>[0-9]+-[0-9]|[a-f0-9-]+)");
 
-    private TerminologyValuesetCache terminologyValuesetCache = new TerminologyValuesetCache();
+    private TerminologyCache terminologyCache = new TerminologyCache();
 
     private S2TerminologyAccess() {
 
     }
 
     public boolean valuesetHasMember(String valuesetId, String code) {
-        TerminologyCacheableSet vset = terminologyValuesetCache.getValueSet(valuesetId);
+        TerminologyCacheableSet vset = terminologyCache.getSet(valuesetId, TerminologySetType.VSET);
         if (vset == null) { return false; }
         else {
             return vset.getSet().hasMember(code);
+        }
+    }
+
+    public boolean codesetHasMember(String terminologyId, String code) {
+        TerminologyCacheableSet cset = terminologyCache.getSet(terminologyId, TerminologySetType.CSET);
+        if (cset == null) { return false; }
+        else {
+            return cset.getSet().hasMember(code);
         }
     }
 
@@ -65,6 +77,30 @@ public class S2TerminologyAccess {
 
     public String parseS2TerminologyURI(String uri) {
         Matcher matcher = s2TermIdPattern.matcher(uri);
+        if(matcher.matches()) {
+            return matcher.group("code");
+        }
+        return null;
+    }
+
+    public String parseIso6391TerminologyURI(String uri) {
+        Matcher matcher = iso6391Pattern.matcher(uri);
+        if(matcher.matches()) {
+            return matcher.group("code");
+        }
+        return null;
+    }
+
+    public String parseIso6393TerminologyURI(String uri) {
+        Matcher matcher = iso6393Pattern.matcher(uri);
+        if(matcher.matches()) {
+            return matcher.group("code");
+        }
+        return null;
+    }
+
+    public String parseIso31661alpha2PatternTerminologyURI(String uri) {
+        Matcher matcher = iso31661alpha2Pattern.matcher(uri);
         if(matcher.matches()) {
             return matcher.group("code");
         }

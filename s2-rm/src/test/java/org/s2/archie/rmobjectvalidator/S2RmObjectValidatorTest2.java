@@ -79,7 +79,7 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 0 error", 0, validationMessages.size());
 
     }
-    
+
     @Test
     public void validatedCBC_WithWrongCode() throws Exception {
         Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_lab_report-CBC.v1.1.0");

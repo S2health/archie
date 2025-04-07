@@ -143,10 +143,12 @@ class S2PrimitiveObjectConstraintHelper {
                 values = getOpenEHRValueSetExpanded(terminologyCode);
             } else if (terminologyId.equalsIgnoreCase("IANA_media-types")) {
                 values = getIANAMediaTypesValueSetExpanded(terminologyCode);
-            } else if (terminologyId.equalsIgnoreCase("snomed")) {
-                values = getSnomedValueSetExpanded(terminologyCode);
-            } else if (terminologyId.equalsIgnoreCase("loinc")) {
-                values = getLoincValueSetExpanded(terminologyCode);
+            } else if (terminologyId.equalsIgnoreCase("snomed") ||
+                        terminologyId.equalsIgnoreCase("loinc") ||
+                        terminologyId.equalsIgnoreCase("iso_639-1") ||
+                        terminologyId.equalsIgnoreCase("iso_3166-3") ||
+                        terminologyId.equalsIgnoreCase("iso_3166-1-alpha2")) {
+                values = getTerminologySetExpanded(terminologyCode,terminologyId);
             } else {
                 // This is not a local nor an openehr terminology.
                 // If a term binding is there, we may be able to validate, if external, we wil not be able to.
@@ -168,7 +170,7 @@ class S2PrimitiveObjectConstraintHelper {
                 }
             }
 
-            // s2 vset check - JCoyle
+            // s2 external vset check - JCoyle
             String s2ValuesetId = getS2ValuesetId(terminologyCode);
             if(s2ValuesetId != null && !s2ValuesetId.isEmpty()) {
                 boolean result = S2TerminologyAccess.getInstance().valuesetHasMember(s2ValuesetId, value.getCodeString());
@@ -177,6 +179,19 @@ class S2PrimitiveObjectConstraintHelper {
                 } else {
                     String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
                     logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + " of S2ValuesetId " + s2ValuesetId + " does not contain " + value.getCodeString());
+                }
+            }
+
+            // external cset check - JCoyle
+            System.out.println("foo");
+
+            if(terminologyId != null && (terminologyId.startsWith("iso_") || terminologyId.startsWith("iana_"))) {
+                boolean result = S2TerminologyAccess.getInstance().codesetHasMember(terminologyId, value.getCodeString());
+                if(result) {
+                    return true;
+                } else {
+                    String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
+                    logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + " of terminology " + terminologyId + " does not contain " + value.getCodeString());
                 }
             }
 
@@ -291,6 +306,42 @@ class S2PrimitiveObjectConstraintHelper {
                 String value = terminologyAccess.parseIANATerminologyURI(termBinding.toString());
                 if (value != null) {
                     result.add(value);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private List<String> getTerminologySetExpanded(CTerminologyCode terminologyCode, String terminologyId) {
+        List<String> atCodes = terminologyCode.getValueSetExpanded();
+        ArchetypeTerminology terminology = getTerminology(terminologyCode);
+        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
+        List<String> result = new ArrayList<>();
+
+        if(terminology == null) {
+            return result;
+        }
+
+        for (String atCode : atCodes) {
+            URI termBinding = terminology.getTermBinding(terminologyId, atCode);
+            if (termBinding != null) {
+                String code = null;
+
+                if(terminologyId.equals("snomed")) {
+                    code = terminologyAccess.parseSnomedTerminologyURI(termBinding.toString());
+                } else if(terminologyId.equals("loinc")) {
+                    code = terminologyAccess.parseLoincTerminologyURI(termBinding.toString());
+                }else if(terminologyId.equals("iso_639-1")) {
+                    code = terminologyAccess.parseIso6391TerminologyURI(termBinding.toString());
+                } else if(terminologyId.equals("iso_639-3")) {
+                    code = terminologyAccess.parseIso6393TerminologyURI(termBinding.toString());
+                } else if(terminologyId.equals("iso_3166-1-alpha2")) {
+                    code = terminologyAccess.parseIso31661alpha2PatternTerminologyURI(termBinding.toString());
+                }
+
+                if (code != null) {
+                    result.add(code);
                 }
             }
         }
