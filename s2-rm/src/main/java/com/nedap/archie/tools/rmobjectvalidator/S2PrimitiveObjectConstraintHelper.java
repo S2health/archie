@@ -215,7 +215,7 @@ class S2PrimitiveObjectConstraintHelper {
 
     // Tests if ac code is bound to a full code set
     private boolean hasAcBoundCodesetForTerminologyId(CTerminologyCode terminologyCode, String terminologyId) {
-        TerminologyCodeSystems systems = S2TerminologyAccess.getInstance().getTerminologyCodeSystems();
+        TerminologyCodeSystems codeSystems = S2TerminologyAccess.getInstance().getTerminologyCodeSystems();
 
         ArchetypeTerminology terminology = getTerminology(terminologyCode);
         S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
@@ -223,10 +223,8 @@ class S2PrimitiveObjectConstraintHelper {
         if(acCode.startsWith("ac")) {
             URI termBinding = terminology.getTermBinding(terminologyId, acCode);
             if(termBinding != null) {
-                for(TerminologyCodeSystem codeSystem : systems.getCodeSystems().values() ) {
-                    if(codeSystem.getTerminologyUri().equals(termBinding.toString())) {
-                        return true;
-                    }
+                if(codeSystems.hasCodeSystemURI(termBinding.toString())) {
+                    return true;
                 }
             }
         }
