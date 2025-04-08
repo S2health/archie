@@ -15,6 +15,8 @@ import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
 import org.s2.rminfo.S2RmMetaModelsInitialiser;
 import org.s2.terminology.S2TerminologyAccess;
+import org.s2.terminology.TerminologyCodeSystem;
+import org.s2.terminology.TerminologyCodeSystems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -185,13 +187,16 @@ class S2PrimitiveObjectConstraintHelper {
             // external cset check - JCoyle
             System.out.println("foo");
 
-            if(terminologyId != null && (terminologyId.startsWith("iso_") || terminologyId.startsWith("iana_"))) {
-                boolean result = S2TerminologyAccess.getInstance().codesetHasMember(terminologyId, value.getCodeString());
-                if(result) {
-                    return true;
-                } else {
-                    String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
-                    logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + " of terminology " + terminologyId + " does not contain " + value.getCodeString());
+
+            if(terminologyId != null && !terminologyId.isEmpty()) {
+                if(hasAcBoundCodesetForTerminologyId(terminologyCode, terminologyId)) {
+                    boolean result = S2TerminologyAccess.getInstance().codesetHasMember(terminologyId, value.getCodeString());
+                    if(result) {
+                        return true;
+                    } else {
+                        String archetypeId = terminologyCode.getArchetype().getArchetypeId().toString();
+                        logger.info("ERROR: External terminology validation error in archetype " + archetypeId + " where terminologyCode " + terminologyCode + " of terminology " + terminologyId + " does not contain " + value.getCodeString());
+                    }
                 }
             }
 
@@ -205,6 +210,26 @@ class S2PrimitiveObjectConstraintHelper {
             return true;
         }
 
+        return false;
+    }
+
+    // Tests if ac code is bound to a full code set
+    private boolean hasAcBoundCodesetForTerminologyId(CTerminologyCode terminologyCode, String terminologyId) {
+        TerminologyCodeSystems systems = S2TerminologyAccess.getInstance().getTerminologyCodeSystems();
+
+        ArchetypeTerminology terminology = getTerminology(terminologyCode);
+        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
+        String acCode = terminologyAccess.parseAcCode(terminologyCode.toString());
+        if(acCode.startsWith("ac")) {
+            URI termBinding = terminology.getTermBinding(terminologyId, acCode);
+            if(termBinding != null) {
+                for(TerminologyCodeSystem codeSystem : systems.getCodeSystems().values() ) {
+                    if(codeSystem.getTerminologyUri().equals(termBinding.toString())) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -244,51 +269,6 @@ class S2PrimitiveObjectConstraintHelper {
         return result;
     }
 
-    private List<String> getLoincValueSetExpanded(CTerminologyCode terminologyCode) {
-        List<String> atCodes = terminologyCode.getValueSetExpanded();
-        ArchetypeTerminology terminology = getTerminology(terminologyCode);
-        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
-        List<String> result = new ArrayList<>();
-
-        if(terminology == null) {
-            return result;
-        }
-
-        for(String atCode : atCodes) {
-            URI termBinding = terminology.getTermBinding("loinc", atCode);
-            if (termBinding != null) {
-                String code = terminologyAccess.parseLoincTerminologyURI(termBinding.toString());
-                if (code != null) {
-                    result.add(code);
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private List<String> getSnomedValueSetExpanded(CTerminologyCode terminologyCode) {
-        List<String> atCodes = terminologyCode.getValueSetExpanded();
-        ArchetypeTerminology terminology = getTerminology(terminologyCode);
-        S2TerminologyAccess terminologyAccess = S2TerminologyAccess.getInstance();
-        List<String> result = new ArrayList<>();
-
-        if(terminology == null) {
-            return result;
-        }
-
-        for(String atCode : atCodes) {
-            URI termBinding = terminology.getTermBinding("snomed", atCode);
-            if (termBinding != null) {
-                String code = terminologyAccess.parseSnomedTerminologyURI(termBinding.toString());
-                if (code != null) {
-                    result.add(code);
-                }
-            }
-        }
-
-        return result;
-    }
 
     private List<String> getIANAMediaTypesValueSetExpanded(CTerminologyCode terminologyCode) {
         List<String> atCodes = terminologyCode.getValueSetExpanded();

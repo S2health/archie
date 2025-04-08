@@ -1,11 +1,24 @@
 package org.s2.terminology;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.nedap.archie.tools.rmobjectvalidator.S2PrimitiveObjectConstraintHelper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class S2TerminologyAccess {
 
     static volatile S2TerminologyAccess instance;
+
+    private static final Logger logger = LoggerFactory.getLogger(S2TerminologyAccess.class);
+
 
     private static final Pattern acCodeIdPattern = Pattern.compile("\\{\\[(?<code>.+?)\\]\\}");
 
@@ -19,9 +32,26 @@ public class S2TerminologyAccess {
     private static final Pattern loincTermIdPattern = Pattern.compile("http://loinc\\.org/(?<code>[0-9]+-[0-9]|[a-f0-9-]+)");
 
     private TerminologyCache terminologyCache = new TerminologyCache();
+    private TerminologyCodeSystems terminologyCodeSystems = null;
 
     private S2TerminologyAccess() {
 
+    }
+
+    public TerminologyCodeSystems getTerminologyCodeSystems() {
+        if (terminologyCodeSystems == null) {
+            try {
+                terminologyCodeSystems = loadTerminologyCodeSystems();
+            } catch (IOException e) {
+                logger.error("Failed to load terminology code systems", e);
+            }
+        }
+
+        if (terminologyCodeSystems == null) {
+            terminologyCodeSystems = new TerminologyCodeSystems();
+        }
+
+        return terminologyCodeSystems;
     }
 
     public boolean valuesetHasMember(String valuesetId, String code) {
@@ -105,6 +135,18 @@ public class S2TerminologyAccess {
             return matcher.group("code");
         }
         return null;
+    }
+
+    private TerminologyCodeSystems loadTerminologyCodeSystems() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+
+        InputStream stream = getClass().getResourceAsStream("/org/s2/terminology/code_system.json");
+        if (stream == null) {
+            throw new IOException("Could not find resource.");
+        }
+
+        return objectMapper.readValue(stream, TerminologyCodeSystems.class);
     }
 
 }
