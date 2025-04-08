@@ -268,6 +268,7 @@ public class S2RmObjectValidatorTest2 {
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
         logMessages(validationMessages);
 
+        assertEquals("There should be 0 errors", 0, validationMessages.size());
     }
 
     @Test
@@ -276,13 +277,14 @@ public class S2RmObjectValidatorTest2 {
         OperationalTemplate opt = createOpt(archetype);
 
         // read in a synth data file for the above template
-        try(InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Info_node.environmental_conditions.v1.0.0.json")) {
+        try(InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Info_node.t_environmental_conditions-test.v1.0.0.json")) {
             InfoNode infoNode = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, InfoNode.class);
 
             // try to validate
             List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
             logMessages(validationMessages);
 
+            assertEquals("There should be 0 errors", 0, validationMessages.size());
         }
     }
 
@@ -296,6 +298,7 @@ public class S2RmObjectValidatorTest2 {
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
         logMessages(validationMessages);
 
+        assertEquals("There should be 0 errors", 0, validationMessages.size());
     }
 
     @Test
@@ -311,6 +314,7 @@ public class S2RmObjectValidatorTest2 {
             List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
             logMessages(validationMessages);
 
+            assertEquals("There should be 0 errors", 0, validationMessages.size());
         }
     }
 

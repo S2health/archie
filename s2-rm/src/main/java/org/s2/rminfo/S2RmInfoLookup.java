@@ -291,6 +291,10 @@ public class S2RmInfoLookup extends ReflectionModelInfoLookup {
             //this is an abstract class and cannot be created. Create InfoNode instead
             return InfoNode.class;
         }
+        else if (rmTypename.equals("Text")) {
+            //this is an abstract class and cannot be created. Create PlainText instead
+            return PlainText.class;
+        }
         else
             return getClass(rmTypename);
     }
