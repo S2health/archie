@@ -261,7 +261,8 @@ public class S2RmObjectValidatorTest2 {
 
     @Test
     public void validateCreatedDataAgainstOptSimple() throws Exception {
-        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Info_node.environmental_conditions.v1.0.0");
+        Archetype archetype = repository.getArchetype("s2-EHR-Info_node.environmental_conditions.v1.0.0");
+        OperationalTemplate opt = createOpt(archetype);
         InfoNode infoNode = (InfoNode) testUtil.constructEmptyRMObject(opt.getDefinition());
 
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
@@ -271,10 +272,11 @@ public class S2RmObjectValidatorTest2 {
 
     @Test
     public void validateSynthDataAgainstOptSimple() throws Exception {
-        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Info_node.environmental_conditions.v1.0.0");
+        Archetype archetype = repository.getArchetype("s2-EHR-Info_node.environmental_conditions.v1.0.0");
+        OperationalTemplate opt = createOpt(archetype);
 
         // read in a synth data file for the above template
-        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Info_node.environmental_conditions.v1.0.0.json")) {
+        try(InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Info_node.environmental_conditions.v1.0.0.json")) {
             InfoNode infoNode = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, InfoNode.class);
 
             // try to validate
@@ -286,7 +288,9 @@ public class S2RmObjectValidatorTest2 {
 
     @Test
     public void validateCreatedDataAgainstOptComplex() throws Exception {
-        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
+        OperationalTemplate opt = createOpt(archetype);
+
         Composition comp = (Composition) testUtil.constructEmptyRMObject(opt.getDefinition());
 
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
@@ -296,10 +300,11 @@ public class S2RmObjectValidatorTest2 {
 
     @Test
     public void validateSynthDataAgainstOptComplex() throws Exception {
-        OperationalTemplate opt = repository.getOperationalTemplate("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
+        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
+        OperationalTemplate opt = createOpt(archetype);
 
         // read in a synth data file for the above template
-        try(InputStream stream = getClass().getResourceAsStream("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1")) {
+        try(InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1.json")) {
             Composition comp = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
             // try to validate
