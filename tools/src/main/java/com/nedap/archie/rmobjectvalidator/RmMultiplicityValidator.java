@@ -2,9 +2,11 @@ package com.nedap.archie.rmobjectvalidator;
 
 import com.google.common.collect.Lists;
 import com.nedap.archie.aom.CAttribute;
+import com.nedap.archie.aom.CObject;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
 import com.nedap.archie.rminfo.ModelInfoLookup;
+import com.nedap.archie.rminfo.RMAttributeInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +29,16 @@ public class RmMultiplicityValidator {
                     String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(cardinality.getInterval().toString());
                     return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
                 }
+            } else {
+                // check BMM for cardinality
+                MultiplicityInterval interval = infoLookup.referenceModelPropMultiplicity(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
+                if(interval != null) {
+                    if(!interval.has(collectionValue.size())) {
+                        String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(interval.toString());
+                        return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
+                    }
+                }
+
             }
         } else {
             MultiplicityInterval existence = attribute.getExistence();
