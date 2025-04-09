@@ -5,6 +5,7 @@ import com.nedap.archie.adlparser.ADLParseException;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
@@ -30,7 +31,7 @@ public class ADL14ExternalTerminologyConversionTest {
             Archetype converted = result.getConversionResults().get(0).getArchetype();
             CTerminologyCode termCodeConstraint = converted.itemAtPath("/items/value/property[1]");
             String atCode = termCodeConstraint.getConstraint().get(0);
-            assertTrue("code must be a value, not a value set", AOMUtils.isValueCode(atCode));
+            assertTrue("code must be a value, not a value set", AdlCodeUtils.isValueCode(atCode));
             assertEquals("Mass", converted.getTerminology().getTermDefinition("en", atCode).getText());
             assertEquals("Mass", converted.getTerminology().getTermDefinition("en", atCode).getDescription());
 
@@ -54,7 +55,7 @@ public class ADL14ExternalTerminologyConversionTest {
 
             CTerminologyCode termCodeConstraint = converted.itemAtPath("/items/value/defining_code[1]");
             String acCode = termCodeConstraint.getConstraint().get(0);
-            assertTrue("the code should have been converted to a value set", AOMUtils.isValueSetCode(acCode));
+            assertTrue("the code should have been converted to a value set", AdlCodeUtils.isValueSetCode(acCode));
             List<String> atCodes = termCodeConstraint.getValueSetExpanded();
             assertEquals(atCodes.toString(), 2, atCodes.size());
             assertEquals(new URI("http://openehr.org/id/123"), converted.getTerminology().getTermBinding("openehr", atCodes.get(0)));

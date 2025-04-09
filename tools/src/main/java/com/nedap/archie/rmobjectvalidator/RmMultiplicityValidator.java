@@ -4,12 +4,19 @@ import com.google.common.collect.Lists;
 import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.rminfo.ModelInfoLookup;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class RmMultiplicityValidator {
+    private ModelInfoLookup infoLookup;
+
+    public RmMultiplicityValidator(ModelInfoLookup infoLookup) {
+        this.infoLookup = infoLookup;
+    }
+
     public List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
         if (attributeValue instanceof Collection) {
             Collection<?> collectionValue = (Collection<?>) attributeValue;

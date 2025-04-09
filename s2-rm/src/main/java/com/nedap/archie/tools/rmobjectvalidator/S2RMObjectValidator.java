@@ -66,7 +66,7 @@ public class S2RMObjectValidator extends RMObjectValidatingProcessor {
         rmOccurrenceValidator = new RmOccurrenceValidator();
         rmPrimitiveObjectValidator = new S2RmPrimitiveObjectValidator(validationHelper);
         rmTupleValidator = new S2RmTupleValidator(this.lookup, validationHelper, rmPrimitiveObjectValidator);
-        rmMultiplicityValidator = new RmMultiplicityValidator();
+        rmMultiplicityValidator = new RmMultiplicityValidator(lookup); // TODO: Pass in ModelInfoLookup
     }
 
     /**
@@ -86,7 +86,7 @@ public class S2RMObjectValidator extends RMObjectValidatingProcessor {
         rmOccurrenceValidator = new RmOccurrenceValidator();
         rmPrimitiveObjectValidator = new S2RmPrimitiveObjectValidator(validationHelper);
         rmTupleValidator = new S2RmTupleValidator(this.lookup, validationHelper, rmPrimitiveObjectValidator);
-        rmMultiplicityValidator = new RmMultiplicityValidator();
+        rmMultiplicityValidator = new RmMultiplicityValidator(lookup);
     }
 
     /**
