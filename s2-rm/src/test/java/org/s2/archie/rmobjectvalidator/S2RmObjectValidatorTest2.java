@@ -242,7 +242,7 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 1 errors", 1, validationMessages.size());
     }
 
-    // TODO: Breaks during validation
+    // TODO: Error not caught
     @Test
     public void validateMissingMandatoryPersonIdentity() throws Exception {
         // can't find s2-EHR-Order.t_simple_medication_order.v2
