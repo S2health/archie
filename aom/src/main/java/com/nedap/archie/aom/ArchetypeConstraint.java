@@ -49,6 +49,11 @@ public abstract class ArchetypeConstraint extends ArchetypeModelObject {
         return PathUtil.getPath(getPathSegments());
     }
 
+    @JsonIgnore // JFC
+    public final String getOptPath() {
+        return PathUtil.getOptPath(getPathSegments());
+    }
+
     private void setPath(String path){
         //setter hack for jackson, unfortunately
     }

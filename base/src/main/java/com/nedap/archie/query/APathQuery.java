@@ -71,14 +71,16 @@ public class APathQuery {
                             if (isDigit.matcher(expression).matches()) {
                                 pathSegment.setIndex(Integer.parseInt(expression));
                             } else {
-                                String nodeId;
+                                String objId;
                                 if (expression.matches("\".*\"") || expression.matches("'.*'"))
-                                    nodeId = expression.substring(1, expression.length()-1);
+                                    objId = expression.substring(1, expression.length()-1);
                                 else
-                                    nodeId = expression;
-
-                                pathSegment.setNodeId(nodeId);
-                                pathDepth = Math.max(pathDepth, AdlCodeUtils.getSpecializationDepthFromCode (nodeId));
+                                    objId = expression;
+                                if (AdlCodeUtils.isIdCode(objId)) {
+                                    pathSegment.setNodeId(objId);
+                                    pathDepth = Math.max(pathDepth, AdlCodeUtils.getSpecializationDepthFromCode(objId));
+                                } else
+                                    pathSegment.setArchetypeRef(objId);
                             }
                         }
 

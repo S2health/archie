@@ -158,8 +158,6 @@ public class OperationalTemplate extends AuthoredArchetype {
             //then remove this if.
             if(segment.hasArchetypeRef()) {
                 //this is [archetypeId] instead of [idcode]
-                return segment.getNodeId();
-            } else if(segment.getArchetypeRef() != null) {
                 return segment.getArchetypeRef();
             }
         }

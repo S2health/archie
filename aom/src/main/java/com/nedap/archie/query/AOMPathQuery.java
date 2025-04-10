@@ -204,11 +204,16 @@ public class AOMPathQuery {
     }
 
     protected ArchetypeModelObject findOneMatchingObject(CAttribute attribute, PathSegment pathSegment, boolean matchSpecializedNodes) {
-        if (pathSegment.hasIdCode() || pathSegment.hasArchetypeRef()) {
-            if(matchSpecializedNodes) {
+        if (pathSegment.hasIdCode()) {
+            if (matchSpecializedNodes)
                 return attribute.getPossiblySpecializedChild(pathSegment.getNodeId());
-            }
-            return attribute.getChild(pathSegment.getNodeId());
+            else
+                return attribute.getChild(pathSegment.getNodeId());
+        } else if (pathSegment.hasArchetypeRef()) {
+            if (matchSpecializedNodes)
+                return attribute.getPossiblySpecializedChild(pathSegment.getArchetypeRef());
+            else
+                return attribute.getChild(pathSegment.getArchetypeRef());
         } else if (pathSegment.hasNumberIndex()) {
             // APath path numbers start at 1 instead of 0
             int index = pathSegment.getIndex() - 1;

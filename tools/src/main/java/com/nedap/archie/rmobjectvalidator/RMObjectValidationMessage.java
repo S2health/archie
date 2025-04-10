@@ -28,7 +28,7 @@ public class RMObjectValidationMessage {
         this(actualPath,
                 getArchetypeId(constraint),
                 constraint == null ? null : constraint.getPath(),
-                constraint == null ? null : constraint.getLogicalPath(),
+                constraint == null ? null : constraint.getOptPath(),
                 message,
                 type);
     }

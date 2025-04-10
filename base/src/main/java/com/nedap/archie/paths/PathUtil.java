@@ -35,4 +35,34 @@ public class PathUtil {
         }
         return result.toString();
     }
+
+    public static String getOptPath(List<PathSegment> pathSegments) {
+        StringBuilder result = new StringBuilder();
+
+        if(pathSegments.isEmpty()) {
+            return "/";
+        }
+        for(PathSegment segment: pathSegments) {
+            result.append("/");
+            result.append(segment.getNodeName());
+            if(segment.getNodeId() != null && !segment.getNodeId().equals(AdlCodeDefinitions.PRIMITIVE_NODE_ID)) {
+                result.append("[");
+                result.append(segment.getNodeId());
+                if (segment.hasArchetypeRef()) {
+                    result.append(":");
+                    result.append(segment.getArchetypeRef());
+                }
+                if(segment.hasNumberIndex()) {
+                    result.append(",");
+                    result.append(segment.getIndex().toString());
+                }
+                result.append("]");
+            } else if (segment.hasNumberIndex()) {
+                result.append("[");
+                result.append(segment.getIndex());
+                result.append("]");
+            }
+        }
+        return result.toString();
+    }
 }
