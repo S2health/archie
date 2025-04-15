@@ -8,6 +8,7 @@ import com.nedap.archie.archetypevalidator.ValidationResult;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.rminfo.ReferenceModels;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
@@ -21,11 +22,11 @@ import java.util.regex.Pattern;
 import static org.junit.Assert.assertEquals;
 
 public class S2ComplexArchetypeValidatorTest {
-    private ReferenceModels models;
+    private static ReferenceModels models;
     private static InMemoryFullArchetypeRepository repository;
 
-    @Before
-    public void setup() throws Exception {
+    @BeforeClass
+    public static void setup() throws Exception {
         models = new ReferenceModels();
         models.registerModel(S2RmInfoLookup.getInstance());
         repository = new InMemoryFullArchetypeRepository();

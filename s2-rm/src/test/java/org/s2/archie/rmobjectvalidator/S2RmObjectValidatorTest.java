@@ -13,7 +13,9 @@ import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageType;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.testutil.TestUtil;
+import com.nedap.archie.tools.rmobjectvalidator.S2RMObjectValidator;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
@@ -36,20 +38,20 @@ import static org.junit.Assert.*;
 
 public class S2RmObjectValidatorTest {
 
-    private TestUtil testUtil;
-    InMemoryFullArchetypeRepository emptyRepo;
-    private RMObjectValidator validator;
+    private static TestUtil testUtil;
+    private static InMemoryFullArchetypeRepository emptyRepo;
+    private static S2RMObjectValidator validator;
 
-    private RMObjectValidator validatorWithoutInvariants;
+    private static S2RMObjectValidator validatorWithoutInvariants;
 
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
 
         testUtil = new TestUtil(S2RmInfoLookup.getInstance());
 
         emptyRepo = new InMemoryFullArchetypeRepository();
-        validator = new RMObjectValidator(S2RmInfoLookup.getInstance(), emptyRepo);
-        validatorWithoutInvariants = new RMObjectValidator(S2RmInfoLookup.getInstance(), emptyRepo,
+        validator = new S2RMObjectValidator(S2RmInfoLookup.getInstance(), emptyRepo);
+        validatorWithoutInvariants = new S2RMObjectValidator(S2RmInfoLookup.getInstance(), emptyRepo,
                 new ValidationConfiguration.Builder().validateInvariants(false).build());
     }
 

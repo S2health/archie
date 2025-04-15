@@ -38,7 +38,9 @@ public class ArchetypeValidatorTest {
     @Test
     public void validArchetype() throws Exception {
         archetype = parse("/com/nedap/archie/basic.adl");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         assertEquals(0, messages.size());
     }
@@ -46,7 +48,9 @@ public class ArchetypeValidatorTest {
     @Test
     public void validArchetypeConceptWithUnderscore() throws Exception {
         archetype = parse("basic_with_concept_underscore.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         assertEquals(0, messages.size());
     }
