@@ -24,7 +24,7 @@ public class OutsideRangeIdCodeGenerator implements IdCodeGenerator {
 
     public OutsideRangeIdCodeGenerator(Archetype archetype) {
         this.archetype = archetype;
-        this.allUsedCodes = archetype.getAllUsedCodes();
+        this.allUsedCodes = archetype.getUsedIdCodes();
         this.counter = Math.max(counter, AdlCodeUtils.getMaximumIdCode(archetype.specializationDepth(), allUsedCodes));
 
     }

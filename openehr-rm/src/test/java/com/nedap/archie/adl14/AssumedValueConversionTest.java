@@ -6,6 +6,9 @@ import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.archetypevalidator.ArchetypeValidator;
 import com.nedap.archie.archetypevalidator.ValidationResult;
+import com.nedap.archie.flattener.FullArchetypeRepository;
+import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.flattener.SimpleArchetypeRepository;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
@@ -25,9 +28,11 @@ public class AssumedValueConversionTest {
             adl14archetype = new ADL14Parser(AllMetaModelsInitialiser.getMetaModels()).parse(stream, conversionConfiguration);
         }
 
-        ADL2ConversionResultList result = converter.convert(
-                Lists.newArrayList(adl14archetype));
+        ADL2ConversionResultList result = converter.convert(Lists.newArrayList(adl14archetype));
         Archetype archetype = result.getConversionResults().get(0).getArchetype();
+
+        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
+        repository.addArchetype(archetype);
 
         CAttribute cAttribute = archetype.itemAtPath("/data[id2]/events[id3]/state[id14]/items[id15]/value[id9004]/defining_code");
         CTerminologyCode cTerminologyCode = (CTerminologyCode) cAttribute.getChildren().get(0);
@@ -35,7 +40,7 @@ public class AssumedValueConversionTest {
         assertNull(cTerminologyCode.getAssumedValue().getTerminologyId());
         assertEquals("at17", cTerminologyCode.getAssumedValue().getCodeString());
 
-        ValidationResult validationResult = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(archetype, repository);
 
         assertTrue(validationResult.toString(), validationResult.passes());
     }
