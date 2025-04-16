@@ -10,13 +10,13 @@ import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Interval;
 import com.nedap.archie.definitions.AdlCodeUtils;
+import com.nedap.archie.terminology.S2TerminologyAccess;
+import com.nedap.archie.terminology.TerminologyCodeSystems;
 import org.s2.rm.base.foundation_types.terminology.TerminologyCode;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
 import org.s2.rminfo.S2RmMetaModelsInitialiser;
-import org.s2.terminology.S2TerminologyAccess;
-import org.s2.terminology.TerminologyCodeSystem;
-import org.s2.terminology.TerminologyCodeSystems;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

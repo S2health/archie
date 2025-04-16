@@ -7,6 +7,7 @@ import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
 import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMAttributeInfo;
+import com.nedap.archie.rminfo.RMTypeInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,6 +32,10 @@ public class RmMultiplicityValidator {
                 }
             } else {
                 // check BMM for cardinality
+                RMTypeInfo typeInfo = infoLookup.getTypeInfo(attribute.getParent().getRmTypeName());
+                RMAttributeInfo attInfo = infoLookup.getAttributeInfo(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
+
+
                 MultiplicityInterval interval = infoLookup.referenceModelPropMultiplicity(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
                 if(interval != null) {
                     if(!interval.has(collectionValue.size())) {

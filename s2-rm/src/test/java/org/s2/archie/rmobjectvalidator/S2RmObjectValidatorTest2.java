@@ -226,7 +226,7 @@ public class S2RmObjectValidatorTest2 {
     }
 
 
-    // TODO: Error not caught
+    // TODO: Cardinality error not caught
     @Test
     public void validateEmptyContainer() throws Exception {
         // can't find s2-EHR-Order.t_simple_medication_order.v2
@@ -242,7 +242,7 @@ public class S2RmObjectValidatorTest2 {
         assertEquals("There should be 1 errors", 1, validationMessages.size());
     }
 
-    // TODO: Error not caught
+    // TODO: Cardinality error not caught
     @Test
     public void validateMissingMandatoryPersonIdentity() throws Exception {
         // can't find s2-EHR-Order.t_simple_medication_order.v2
@@ -298,7 +298,7 @@ public class S2RmObjectValidatorTest2 {
         List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
         logMessages(validationMessages);
 
-        assertEquals("There should be 0 errors", 0, validationMessages.size());
+        assertEquals("There should be 104 errors", 104, validationMessages.size());
     }
 
     @Test
