@@ -85,7 +85,6 @@ public class AOMPathQueryTest {
         ArchetypeModelObject archetypeModelObject = query.find(archetype.getDefinition());
         assertNotNull(archetypeModelObject);
         assertEquals("id4", ((CComplexObject) archetypeModelObject).getNodeId());
-
     }
 
 

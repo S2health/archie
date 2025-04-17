@@ -10,8 +10,14 @@ import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.creation.ExampleJsonInstanceGenerator;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
+import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.flattener.SimpleArchetypeRepository;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
+import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
+import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
+import com.nedap.archie.testutil.TestUtil;
+import org.junit.BeforeClass;
 import org.openehr.rm.composition.Observation;
 import org.openehr.rm.datastructures.Cluster;
 import org.openehr.rm.datastructures.Element;
@@ -39,6 +45,15 @@ public class FlatJsonGeneratorTest {
     private static final String BLOOD_PRESSURE_PATH = "/ckm-mirror/local/archetypes/entry/observation/openEHR-EHR-OBSERVATION.blood_pressure.v1.1.0.adls";
     private static final double EPSILON = 0.00000001d;
 
+    private static InMemoryFullArchetypeRepository repository;
+    static MetaModels metaModels;
+
+    @BeforeClass
+    public static void setup() {
+        repository = new InMemoryFullArchetypeRepository();
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+    }
     @After
     public void tearDown() {
         ArchieLanguageConfiguration.setThreadLocalDescriptiongAndMeaningLanguage(null);
@@ -211,7 +226,6 @@ public class FlatJsonGeneratorTest {
         config.setFilterNames(true);
         config.setFilterTypes(true);
         //config.getIgnoredAttributes().add(new AttributeReference("LOCATABLE", "name"));
-        MetaModels metaModels = AllMetaModelsInitialiser.getMetaModels();
         metaModels.selectModel(bloodPressureOpt);
 
         ExampleJsonInstanceGenerator exampleJsonInstanceGenerator = new ExampleJsonInstanceGenerator(metaModels, "en");
@@ -260,7 +274,6 @@ public class FlatJsonGeneratorTest {
         OperationalTemplate bloodPressureOpt = parseBloodPressure();
         FlatJsonFormatConfiguration config = FlatJsonFormatConfiguration.nedapInternalFormat();
 
-        MetaModels metaModels = AllMetaModelsInitialiser.getMetaModels();
         metaModels.selectModel(bloodPressureOpt);
 
         ExampleJsonInstanceGenerator exampleJsonInstanceGenerator = new ExampleJsonInstanceGenerator(metaModels, "en");
@@ -304,17 +317,19 @@ public class FlatJsonGeneratorTest {
 
     private OperationalTemplate parseBloodPressure() throws IOException, ADLParseException {
         try (InputStream stream = getClass().getResourceAsStream(BLOOD_PRESSURE_PATH)) {
-            Archetype bloodPressure = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
-            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
-            return (OperationalTemplate) flattener.flatten(bloodPressure,0);
+            Archetype archetype = new ADLParser(metaModels).parse(stream);
+            repository.addArchetype(archetype);
+            Flattener flattener = new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
+            return (OperationalTemplate) flattener.flatten(archetype,0);
         }
     }
 
     private OperationalTemplate parseTypeAlternatives() throws IOException, ADLParseException {
         try (InputStream stream = getClass().getResourceAsStream("openEHR-EHR-CLUSTER.element_with_two_dv_types.v1.0.0.adls")) {
-            Archetype typeAlternatives = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream);
-            Flattener flattener = new Flattener(new SimpleArchetypeRepository(), AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
-            return (OperationalTemplate) flattener.flatten(typeAlternatives,0);
+            Archetype archetype = new ADLParser(metaModels).parse(stream);
+            repository.addArchetype(archetype);
+            Flattener flattener = new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
+            return (OperationalTemplate) flattener.flatten(archetype,0);
         }
     }
 

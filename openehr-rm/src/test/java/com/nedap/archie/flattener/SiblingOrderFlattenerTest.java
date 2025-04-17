@@ -226,6 +226,7 @@ public class SiblingOrderFlattenerTest {
 
     private Archetype parseAndCreateOPT(String fileName) throws IOException, ADLParseException {
         Archetype result = parse(fileName);
+        repository.addArchetype(result);
         ReferenceModels models = new ReferenceModels();
         models.registerModel(OpenEhrRmInfoLookup.getInstance());
         ValidationResult validationResult = new ArchetypeValidator(models).validate(result, repository);
@@ -236,6 +237,7 @@ public class SiblingOrderFlattenerTest {
 
     private Archetype parseAndFlattenRemoveZeroOccurrences(String fileName) throws IOException, ADLParseException {
         Archetype result = parse(fileName);
+        repository.addArchetype(result);
         ReferenceModels models = new ReferenceModels();
         models.registerModel(OpenEhrRmInfoLookup.getInstance());
         ValidationResult validationResult = new ArchetypeValidator(models).validate(result, repository);
