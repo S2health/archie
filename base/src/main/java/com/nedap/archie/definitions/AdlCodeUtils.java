@@ -29,6 +29,10 @@ public class AdlCodeUtils {
         return code.startsWith(AdlCodeDefinitions.ID_CODE_LEADER);
     }
 
+    public static boolean isAdl14IdCode(String code) {
+        return code.startsWith(AdlCodeDefinitions.VALUE_CODE_LEADER);
+    }
+
     public static boolean isValueCode(String code) {
         return code.startsWith(AdlCodeDefinitions.VALUE_CODE_LEADER);
     }

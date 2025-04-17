@@ -76,7 +76,7 @@ public class APathQuery {
                                     objId = expression.substring(1, expression.length()-1);
                                 else
                                     objId = expression;
-                                if (AdlCodeUtils.isIdCode(objId)) {
+                                if (AdlCodeUtils.isIdCode(objId) || AdlCodeUtils.isAdl14IdCode(objId)) {
                                     pathSegment.setNodeId(objId);
                                     pathDepth = Math.max(pathDepth, AdlCodeUtils.getSpecializationDepthFromCode(objId));
                                 } else
