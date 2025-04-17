@@ -1,5 +1,9 @@
 package com.nedap.archie.rmobjectvalidator.invariants.datavalues;
 
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.datavalues.DvEHRURI;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
@@ -17,6 +21,14 @@ import static org.junit.Assert.assertEquals;
 
 public class DvEhrUriInvariantTest {
 
+    static MetaModels metaModels;
+
+    @BeforeClass
+    public static void setup() {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+    }
+
     @Test
     public void valid() {
         InvariantTestUtil.assertValid(new DvEHRURI("ehr://something/something"));
@@ -30,7 +42,8 @@ public class DvEhrUriInvariantTest {
 
     @Test
     public void invalid2() {
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), (templateId) -> null, new ValidationConfiguration.Builder().build());
+        RMObjectValidator validator = new RMObjectValidator(metaModels.getSelectedModel(),
+                (templateId) -> null, new ValidationConfiguration.Builder().build());
         List<RMObjectValidationMessage> messages = validator.validate(new DvEHRURI(""));
         assertEquals(messages.toString(), 2, messages.size());
 

@@ -7,7 +7,10 @@ import com.nedap.archie.creation.ExampleJsonInstanceGenerator;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
+import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
 import org.openehr.rm.archetyped.Archetyped;
 import org.openehr.rm.composition.Observation;
 import org.openehr.rm.composition.Section;
@@ -31,7 +34,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class ArchetypeSlotValidationTest {
-
+    private MetaModels metaModels;
     private Archetype parent;
     private Archetype included;
     private Archetype parentOfIncluded;
@@ -45,6 +48,9 @@ public class ArchetypeSlotValidationTest {
 
     @Before
     public void setup() throws IOException, ADLParseException {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+
         Archetype parent = TestUtil.parseFailOnErrors(this.getClass(),"/adl2-tests/validity/slots/openEHR-EHR-SECTION.slot_parent.v1.0.0.adls");
 
         included = TestUtil.parseFailOnErrors(this.getClass(),"/com/nedap/archie/rmobjectvalidation/openEHR-EHR-OBSERVATION.redefine_child.v1.0.0.adls");
@@ -65,7 +71,7 @@ public class ArchetypeSlotValidationTest {
         generator = new ExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
         Map<String, Object> generated = generator.generate(parentOpt);
         example = OpenEhrRmJacksonUtil.getObjectMapper().readValue(OpenEhrRmJacksonUtil.getObjectMapper().writeValueAsString(generated), Section.class);
-        rmObjectValidator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), repository, new ValidationConfiguration.Builder().build());
+        rmObjectValidator = new RMObjectValidator(metaModels.getSelectedModel(), repository, new ValidationConfiguration.Builder().build());
     }
 
     private Flattener createFlattener() {

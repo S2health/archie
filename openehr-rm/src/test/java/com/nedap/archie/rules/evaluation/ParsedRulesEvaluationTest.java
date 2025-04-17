@@ -8,7 +8,10 @@ import com.nedap.archie.creation.ExampleJsonInstanceGenerator;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.archetyped.Pathable;
 import org.openehr.rm.composition.Observation;
 import org.openehr.rm.datastructures.Cluster;
@@ -42,15 +45,19 @@ import static org.junit.Assert.*;
  */
 public abstract class ParsedRulesEvaluationTest {
 
-    ADLParser parser;
+    private static ADLParser parser;
     Archetype archetype;
+    private static TestUtil testUtil;
+    private static MetaModels metaModels;
 
-    TestUtil testUtil;
-
-    @Before
-    public void setup() {
+    @BeforeClass
+    public static void setup() {
         testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
-        parser = new ADLParser(AllMetaModelsInitialiser.getMetaModels());
+
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+
+        parser = new ADLParser(metaModels);
     }
 
     public Archetype getArchetype() {
@@ -756,7 +763,7 @@ public abstract class ParsedRulesEvaluationTest {
     }
 
     RuleEvaluation<Pathable> getRuleEvaluation() {
-        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), archetype);
+        return new RuleEvaluation<>(metaModels.getSelectedModel(), new ValidationConfiguration.Builder().build(), archetype);
     }
 
     @Test
@@ -787,7 +794,7 @@ public abstract class ParsedRulesEvaluationTest {
         Map<String, Object> exampleInstance = generator.generate(opt);
         Cluster cluster = OpenEhrRmJacksonUtil.getObjectMapper().readValue(OpenEhrRmJacksonUtil.getObjectMapper().writeValueAsString(exampleInstance), Cluster.class);
         //correct case first
-        RuleEvaluation ruleEvaluation = new RuleEvaluation(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), opt);
+        RuleEvaluation ruleEvaluation = new RuleEvaluation(metaModels.getSelectedModel(), new ValidationConfiguration.Builder().build(), opt);
         DvCodedText codedText = (DvCodedText) cluster.itemAtPath("/items[1]/items[1]/value[1]");
         codedText.setDefiningCode(new CodePhrase(new TerminologyId("local"), "at4"));
         codedText.setValue("value 1");

@@ -3,6 +3,7 @@ package com.nedap.archie.flattener.specexamples;
 import com.nedap.archie.flattener.SimpleArchetypeRepository;
 import com.nedap.archie.rminfo.MetaModels;
 import org.junit.Before;
+import org.openehr.bmm.v2.validation.BmmRepository;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
 public class FlattenerExamplesFromSpecBMMTest extends FlattenerExamplesFromSpecTest {
@@ -10,6 +11,8 @@ public class FlattenerExamplesFromSpecBMMTest extends FlattenerExamplesFromSpecT
     @Before
     public void setup() throws Exception {
         repository = new SimpleArchetypeRepository();
-        models = new MetaModels(null, AllMetaModelsInitialiser.getBmmRepository(), AllMetaModelsInitialiser.getAomProfiles());
+        models = new MetaModels(null, AllMetaModelsInitialiser.getBmmRepository(),
+                AllMetaModelsInitialiser.getAomProfiles(), AllMetaModelsInitialiser.getPrimitiveObjectConstraintHelpers());
+
     }
 }

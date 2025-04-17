@@ -14,13 +14,19 @@ import com.nedap.archie.flattener.FullArchetypeRepository;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.flattener.OperationalTemplateProvider;
 import com.nedap.archie.json.ArchieJacksonConfiguration;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
 import com.nedap.archie.json.JsonSchemaValidator;
 import com.nedap.archie.base.RMObject;
+import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
 import com.nedap.archie.test.CkmRepositoryBuilder;
 import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
+import com.nedap.archie.testutil.TestUtil;
 import com.nedap.archie.tools.json.OpenEHRRmJSONSchemaCreator;
 import jakarta.json.JsonObject;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.leadpony.justify.api.*;
 import org.openehr.rm.composition.Observation;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
@@ -57,6 +63,14 @@ public class ExampleJsonInstanceGeneratorTest {
 
     private static final OperationalTemplateProvider optProvider = new DummyOperationalTemplateProvider("archetype-slot");
 
+    static MetaModels metaModels;
+
+    @BeforeClass
+    public static void setup() {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+    }
+
     @Test
     public void bloodPressure() throws Exception {
         OperationalTemplate opt = createOPT("/ckm-mirror/local/archetypes/entry/observation/openEHR-EHR-OBSERVATION.blood_pressure.v1.1.0.adls");
@@ -84,7 +98,7 @@ public class ExampleJsonInstanceGeneratorTest {
         assertEquals("POINT_EVENT", ((Map) events.get(1)).get(TYPE_PROPERTY_NAME));
         assertEquals("INTERVAL_EVENT", ((Map) events.get(2)).get(TYPE_PROPERTY_NAME));
 
-        List<RMObjectValidationMessage> validated = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider, new ValidationConfiguration.Builder().build())
+        List<RMObjectValidationMessage> validated = new RMObjectValidator(metaModels.getSelectedModel(), optProvider, new ValidationConfiguration.Builder().build())
                 .validate(opt, OpenEhrRmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(s, Observation.class));
         assertEquals(new ArrayList<>(), validated);
 
@@ -181,7 +195,7 @@ public class ExampleJsonInstanceGeneratorTest {
                     json = mapper.writeValueAsString(example);
 
                     RMObject parsed = archieObjectMapper.readValue(json, RMObject.class);
-                    List<RMObjectValidationMessage> validated = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider, new ValidationConfiguration.Builder().build()).validate(template, parsed);
+                    List<RMObjectValidationMessage> validated = new RMObjectValidator(metaModels.getSelectedModel(), optProvider, new ValidationConfiguration.Builder().build()).validate(template, parsed);
 
                     // Ignore some validations errors caused by unsupported features in the ExampleJsonInstanceGenerator
                     validated.removeIf(m -> m.getType().equals(RMObjectValidationMessageType.ARCHETYPE_SLOT_ID_MISMATCH)); // Filling the correct archetype in the slot is not supported

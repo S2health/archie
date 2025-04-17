@@ -3,6 +3,7 @@ package com.nedap.archie.rmobjectvalidator;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.CAttributeTuple;
 import com.nedap.archie.aom.CComplexObject;
+import com.nedap.archie.archetypevalidator.OpenEhrPrimitiveObjectConstraintHelper;
 import org.openehr.rm.datavalues.quantity.DvQuantity;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.testutil.TestUtil;
@@ -20,7 +21,8 @@ public class AttributeTupleConstraintsTest {
 
     private static CAttributeTuple attributeTuple;
     
-    private final ValidationHelper helper = new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build());
+    private final ValidationHelper helper = new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), new OpenEhrPrimitiveObjectConstraintHelper(),
+            new ValidationConfiguration.Builder().build());
 
     @BeforeClass
     public static void setup() throws Exception {

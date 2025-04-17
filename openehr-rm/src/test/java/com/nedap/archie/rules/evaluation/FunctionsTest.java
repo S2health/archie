@@ -3,6 +3,9 @@ package com.nedap.archie.rules.evaluation;
 import com.nedap.archie.adlparser.ADLParser;
 import com.nedap.archie.adlparser.modelconstraints.RMConstraintImposer;
 import com.nedap.archie.aom.Archetype;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.archetyped.Locatable;
 import org.openehr.rm.composition.Observation;
 import org.openehr.rm.datastructures.Element;
@@ -25,11 +28,15 @@ import static org.junit.Assert.assertTrue;
  */
 public class FunctionsTest {
 
-    private ADLParser parser;
-    private Archetype archetype;
+    private static ADLParser parser;
+    private static Archetype archetype;
+    private static MetaModels metaModels;
 
-    @Before
+    @BeforeClass
     public void setup() {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+
         parser = new ADLParser(new RMConstraintImposer());
     }
 
@@ -60,7 +67,7 @@ public class FunctionsTest {
     }
 
     private <T> RuleEvaluation<T> getRuleEvaluation() {
-        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), archetype);
+        return new RuleEvaluation<>(metaModels.getSelectedModel(), new ValidationConfiguration.Builder().build(), archetype);
     }
 
     @Test

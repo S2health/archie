@@ -1,6 +1,13 @@
 package com.nedap.archie.rmobjectvalidator.invariants;
 
+import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.flattener.OperationalTemplateProvider;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
+import com.nedap.archie.testutil.TestUtil;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.openehr.rm.archetyped.Archetyped;
 import org.openehr.rm.archetyped.Locatable;
 import org.openehr.rm.composition.Entry;
@@ -24,8 +31,15 @@ import static org.junit.Assert.assertTrue;
 public class InvariantTestUtil {
     private static final OperationalTemplateProvider optProvider = new DummyOperationalTemplateProvider("example");
 
+    static MetaModels metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+    static {
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+    }
+
     public static void assertValid(Object object) {
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider, new ValidationConfiguration.Builder().build());
+        RMObjectValidator validator = new RMObjectValidator(metaModels.getSelectedModel(),
+                optProvider, new ValidationConfiguration.Builder().build());
+
         List<RMObjectValidationMessage> messages = validator.validate(object);
         assertTrue("object should be valid, was not: " + messages, messages.isEmpty());
     }
@@ -35,7 +49,8 @@ public class InvariantTestUtil {
     }
 
     public static void assertInvariantInvalid(Object object, String invariantName, String rmTypeName, String path) {
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), optProvider, new ValidationConfiguration.Builder().build());
+        RMObjectValidator validator = new RMObjectValidator(metaModels.getSelectedModel(),
+                optProvider, new ValidationConfiguration.Builder().build());
         List<RMObjectValidationMessage> messages = validator.validate(object);
         assertEquals(messages.toString(), 1, messages.size());
         assertEquals("Invariant " + invariantName + " failed on type " + rmTypeName, messages.get(0).getMessage());

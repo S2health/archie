@@ -1,11 +1,13 @@
 package com.nedap.archie.rules.evaluation;
 
-import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModels;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.rules.BinaryOperator;
 import com.nedap.archie.rules.Constant;
 import com.nedap.archie.rules.ExpressionType;
 import com.nedap.archie.rules.OperatorKind;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.threeten.extra.PeriodDuration;
 
@@ -19,6 +21,13 @@ import static org.junit.Assert.assertEquals;
  */
 public class BinaryOperatorTest {
 
+    private static MetaModels metaModels;
+
+    @BeforeClass
+    public static void setup() {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+    }
     @Test
     public void plus() {
         testBinaryOperator(7l, ExpressionType.INTEGER, 4l, 3l, OperatorKind.plus);
@@ -362,7 +371,7 @@ public class BinaryOperatorTest {
         Constant<?> rightConstant = new Constant<>(type, right);
         operator.addOperand(leftConstant);
         operator.addOperand(rightConstant);
-        RuleEvaluation<?> eval = new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), null);//should be archetype, not very relevant here
+        RuleEvaluation<?> eval = new RuleEvaluation<>(metaModels.getSelectedModel(), new ValidationConfiguration.Builder().build(), null);//should be archetype, not very relevant here
         assertEquals(expected, eval.evaluate(operator).getValueObjects().get(0));
     }
 

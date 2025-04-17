@@ -5,6 +5,9 @@ import com.nedap.archie.adlparser.ADLParseException;
 import com.nedap.archie.adlparser.ADLParser;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.creation.RMObjectCreator;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.archetyped.Locatable;
 import org.openehr.rm.datastructures.Cluster;
 import org.openehr.rm.datastructures.Element;
@@ -31,21 +34,33 @@ import static org.junit.Assert.assertTrue;
  */
 public class FixableAssertionsCheckerTest {
 
-    private ADLParser parser;
+    private static ADLParser parser;
     private Archetype archetype;
 
-    private TestUtil testUtil;
-    private RMObjectCreator rmObjectCreator;
+    private static RMObjectCreator rmObjectCreator;
 
-    @Before
-    public void setup() {
+    private static TestUtil testUtil;
+
+    private static MetaModels metaModels;
+
+    @BeforeClass
+    public static void setup() {
         testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
+
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+
+        parser = new ADLParser(metaModels);
+
         rmObjectCreator = new RMObjectCreator(OpenEhrRmInfoLookup.getInstance());
         parser = new ADLParser(AllMetaModelsInitialiser.getMetaModels());
+    }
+
+    @Before
+    public void setupTest() {
         ArchieLanguageConfiguration.setThreadLocalLogicalPathLanguage("en");
         ArchieLanguageConfiguration.setThreadLocalDescriptiongAndMeaningLanguage("en");
     }
-
     @After
     public void tearDown() throws Exception {
         ArchieLanguageConfiguration.setThreadLocalLogicalPathLanguage(null);
@@ -213,7 +228,7 @@ public class FixableAssertionsCheckerTest {
     }
 
     private RuleEvaluation<Locatable> getRuleEvaluation() {
-        return new RuleEvaluation<>(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build(), archetype);
+        return new RuleEvaluation<>(metaModels.getSelectedModel(), new ValidationConfiguration.Builder().build(), archetype);
     }
 
 }

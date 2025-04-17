@@ -60,7 +60,10 @@ public class CKMArchetypeValidatorTest {
 
     @Test
     public void fullCKMTestBmm() {
-        MetaModels bmmReferenceModels = new MetaModels(null, AllMetaModelsInitialiser.getBmmRepository(), AllMetaModelsInitialiser.getAomProfiles());
+        MetaModels bmmReferenceModels = new MetaModels(null,
+                AllMetaModelsInitialiser.getBmmRepository(),
+                AllMetaModelsInitialiser.getAomProfiles(),
+                null);
 
         FullArchetypeRepository repository = ArchetypeRepositoryBuilder.parseRepository(this.getClass(), "ckm-mirror");
         logger.info("archetypes parsed: " + repository.getAllArchetypes().size());

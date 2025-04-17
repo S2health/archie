@@ -2,6 +2,7 @@ package com.nedap.archie.rmobjectvalidator;
 
 import com.nedap.archie.aom.CPrimitiveObject;
 import com.nedap.archie.aom.primitives.CInteger;
+import com.nedap.archie.archetypevalidator.OpenEhrPrimitiveObjectConstraintHelper;
 import com.nedap.archie.base.Interval;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.query.RMObjectWithPath;
@@ -16,7 +17,8 @@ import static org.junit.Assert.assertEquals;
 public class RmPrimitiveObjectValidatorTest {
 
     private final RmPrimitiveObjectValidator validator = new RmPrimitiveObjectValidator(
-            new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), new ValidationConfiguration.Builder().build())
+            new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), new OpenEhrPrimitiveObjectConstraintHelper(),
+                    new ValidationConfiguration.Builder().build())
     );
 
     public static List<RMObjectValidationMessage> validate(ModelInfoLookup lookup, List<RMObjectWithPath> rmObjects, String pathSoFar, CPrimitiveObject<?, ?> cobject) {

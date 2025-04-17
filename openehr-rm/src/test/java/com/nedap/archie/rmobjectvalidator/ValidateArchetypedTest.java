@@ -6,6 +6,7 @@ import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.rminfo.MetaModel;
 import org.openehr.rm.archetyped.Archetyped;
 import org.openehr.rm.archetyped.FeederAudit;
 import org.openehr.rm.archetyped.FeederAuditDetails;
@@ -42,7 +43,8 @@ public class ValidateArchetypedTest {
         repo = new InMemoryFullArchetypeRepository();
 
         ValidationConfiguration configuration = new ValidationConfiguration.Builder().validateInvariants(false).build();
-        validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), repo, configuration);
+        validator = new RMObjectValidator(new MetaModel(OpenEhrRmInfoLookup.getInstance(), null), repo, configuration);
+
 
         elementArchetype = parse("/adl2-tests/rmobjectvalidity/openEHR-EHR-ELEMENT.element_with_required_attributes.v1.0.0.adls");
         elementOpt = createOpt(elementArchetype);

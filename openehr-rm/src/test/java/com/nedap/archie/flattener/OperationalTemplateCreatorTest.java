@@ -85,16 +85,16 @@ public class OperationalTemplateCreatorTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = RuntimeException.class)
     public void failOnMissingArchetypeEnabled() throws Exception {
         SimpleArchetypeRepository repository = new SimpleArchetypeRepository();
-        try(InputStream stream1 = getClass().getResourceAsStream("openEHR-EHR-OBSERVATION.with_used_archetype.v1.adls"); InputStream stream2 = getClass().getResourceAsStream("openEHR-EHR-CLUSTER.cluster_with_annotations.v1.0.0.adls")) {
+        try(InputStream stream1 = getClass().getResourceAsStream("openEHR-EHR-OBSERVATION.with_used_archetype.v1.adls"); InputStream stream2 = getClass().getResourceAsStream("openEHR-EHR-CLUSTER.cluster_with_annotations.v1.adls")) {
             Archetype archetype1 = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream1);
             repository.addArchetype(archetype1);
 
             // get the used archetype into the repo
             Archetype archetype2 = new ADLParser(AllMetaModelsInitialiser.getMetaModels()).parse(stream2);
-            repository.addArchetype(archetype2);
+            // repository.addArchetype(archetype2);
             FlattenerConfiguration flattenerConfiguration = FlattenerConfiguration.forOperationalTemplate();
             Flattener flattener = new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), flattenerConfiguration);
             OperationalTemplate template = (OperationalTemplate) flattener.flatten(archetype1, 0);

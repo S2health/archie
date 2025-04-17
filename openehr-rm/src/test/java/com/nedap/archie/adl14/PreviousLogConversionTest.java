@@ -8,6 +8,9 @@ import com.nedap.archie.aom.CObject;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.archetypevalidator.ArchetypeValidator;
 import com.nedap.archie.archetypevalidator.ValidationResult;
+import com.nedap.archie.flattener.FullArchetypeRepository;
+import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.openehr.utils.message.MessageDescriptor;
@@ -20,6 +23,13 @@ import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertTrue;
 
 public class PreviousLogConversionTest {
+
+    private static InMemoryFullArchetypeRepository repository;
+
+    @BeforeClass
+    public static void setup() {
+        repository = new InMemoryFullArchetypeRepository();
+    }
 
     @Test
     public void applyConsistentConversion() throws Exception {
@@ -63,7 +73,8 @@ public class PreviousLogConversionTest {
                     Lists.newArrayList(new ADL14Parser(AllMetaModelsInitialiser.getMetaModels()).parse(stream, conversionConfiguration)));
             log = result.getConversionLog();
             Archetype converted = result.getConversionResults().get(0).getArchetype();
-            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted);
+            repository.addArchetype(converted);
+            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted, repository);
             assertTrue(validated.toString(), validated.passes() );
             assertTrue(converted.getTerminology().getTermDefinitions().get("nl").containsKey("ac9000"));
             assertTrue(converted.getTerminology().getTermDefinitions().get("nl").containsKey("ac9001"));
@@ -78,8 +89,9 @@ public class PreviousLogConversionTest {
                     Lists.newArrayList(new ADL14Parser(AllMetaModelsInitialiser.getMetaModels()).parse(stream, conversionConfiguration)),
                     log);
             Archetype converted = result.getConversionResults().get(0).getArchetype();
+            repository.addArchetype(converted);
 
-            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted);
+            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted, repository);
             assertTrue(validated.toString(), validated.passes() );
             assertTrue(converted.getTerminology().getTermDefinitions().get("nl").containsKey("ac9000"));
             assertTrue(converted.getTerminology().getTermDefinitions().get("nl").containsKey("ac9001"));
@@ -101,7 +113,8 @@ public class PreviousLogConversionTest {
                     Lists.newArrayList(new ADL14Parser(AllMetaModelsInitialiser.getMetaModels()).parse(stream, conversionConfiguration)));
             log = result.getConversionLog();
             Archetype converted = result.getConversionResults().get(0).getArchetype();
-            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted);
+            repository.addArchetype(converted);
+            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted, repository);
             assertTrue(validated.toString(), validated.passes() );
              createdAtCode = log.getConversionLog("openEHR-EHR-CLUSTER.value_binding.v1").getCreatedCodes().get("[openehr::124]").getGeneratedCode();
             ArchetypeTerm termDefinition = converted.getTerminology().getTermDefinition("en", createdAtCode);
@@ -116,7 +129,8 @@ public class PreviousLogConversionTest {
                     Lists.newArrayList(new ADL14Parser(AllMetaModelsInitialiser.getMetaModels()).parse(stream, conversionConfiguration)),
                     log);
             Archetype converted = result.getConversionResults().get(0).getArchetype();
-            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted);
+            repository.addArchetype(converted);
+            ValidationResult validated = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels()).validate(converted, repository);
             assertTrue(validated.toString(), validated.passes() );
 
             ArchetypeTerm termDefinition = converted.getTerminology().getTermDefinition("en", "at9000");

@@ -8,6 +8,7 @@ import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.s2.rminfo.S2RmInfoLookup;
+import org.s2.rminfo.S2RmMetaModelsInitialiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +58,7 @@ public class S2ModelsArchetypeValidatorTest {
 
     @Test
     public void fullRepoTestBmm() {
-        MetaModels bmmReferenceModels = new MetaModels(null, AllMetaModelsInitialiser.getBmmRepository(), AllMetaModelsInitialiser.getAomProfiles());
+        MetaModels bmmReferenceModels = new S2RmMetaModelsInitialiser().getMetaModels();
 
         FullArchetypeRepository repository = ArchetypeRepositoryBuilder.parseRepository(this.getClass(), "s2-models");
         logger.info("archetypes parsed: " + repository.getAllArchetypes().size());

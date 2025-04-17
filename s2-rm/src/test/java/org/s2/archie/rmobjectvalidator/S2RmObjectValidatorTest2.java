@@ -11,11 +11,8 @@ import com.nedap.archie.rminfo.MetaModels;
 import com.nedap.archie.rmobjectvalidator.*;
 import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
 import com.nedap.archie.testutil.TestUtil;
-import com.nedap.archie.tools.rmobjectvalidator.S2RMObjectValidator;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.openehr.referencemodels.AllMetaModelsInitialiser;
 import org.s2.rm.base.patterns.data_structures.InfoNode;
 import org.s2.rm.care.composition.Composition;
 import org.s2.rm.entity.social_entity.Person;
@@ -35,16 +32,15 @@ public class S2RmObjectValidatorTest2 {
 
     private static TestUtil testUtil;
 
-    static S2RmMetaModelsInitialiser s2RmMetaModelsInitialiser;
-
     private static final Logger logger = LoggerFactory.getLogger(S2RmObjectValidatorTest2.class);
 
-    static FullArchetypeRepository  repository;
+    private static FullArchetypeRepository  repository;
 
-    static MetaModels bmmReferenceModels;
-    static private S2RMObjectValidator validator;
+    private static MetaModels metaModels;
 
-    static private S2RMObjectValidator validatorWithoutInvariants;
+    private static RMObjectValidator s2EhrValidator;
+
+    private static RMObjectValidator s2EntityValidator;
 
     @BeforeClass
     public static void setup() {
@@ -53,12 +49,15 @@ public class S2RmObjectValidatorTest2 {
         repository = ArchetypeRepositoryBuilder.parseRepository (S2RmObjectValidatorTest2.class, "s2-models");
         logger.info("archetypes parsed: " + repository.getAllArchetypes().size());
 
-        s2RmMetaModelsInitialiser = new S2RmMetaModelsInitialiser();
-        bmmReferenceModels = new MetaModels(null, s2RmMetaModelsInitialiser.getBmmRepository(), s2RmMetaModelsInitialiser.getAomProfiles());
-        repository.compile(bmmReferenceModels);
+        metaModels = new S2RmMetaModelsInitialiser().getMetaModels();
+        repository.compile(metaModels);
 
-        validator = new S2RMObjectValidator(S2RmInfoLookup.getInstance(), repository);
-        validatorWithoutInvariants = new S2RMObjectValidator(S2RmInfoLookup.getInstance(), repository,
+        metaModels.selectModel("s2", "EHR", "0.8.7");
+        s2EhrValidator = new RMObjectValidator(metaModels.getSelectedModel(), repository,
+                new ValidationConfiguration.Builder().validateInvariants(false).build());
+
+        metaModels.selectModel("s2", "ENTITY", "0.8.7");
+        s2EntityValidator = new RMObjectValidator(metaModels.getSelectedModel(), repository,
                 new ValidationConfiguration.Builder().validateInvariants(false).build());
     }
 
@@ -73,7 +72,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Composition.t_lab_report-CBC.v1.0.0.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 0 error", 0, validationMessages.size());
@@ -88,7 +87,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2-EHR-Composition.t_lab_report-CBC_wrong_code.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 2 errors", 2, validationMessages.size());
@@ -103,7 +102,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2-EHR-Composition.t_lab_report-CBC_wrong_datatype.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -118,7 +117,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Composition.t_lab_report-ABO-Rh.v1.0.0.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 0 errors", 0, validationMessages.size());
@@ -132,7 +131,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2-term_not_in_value_set-report_status.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -147,7 +146,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_missing_mandatory-category.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 2 errors", 2, validationMessages.size());
@@ -161,7 +160,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_decimal_out_of_range-lab_value.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 2 errors", 2, validationMessages.size());
@@ -175,7 +174,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_decimal_out_of_range-lab_value-minimal.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -189,7 +188,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2-term_description_wrong-report_status.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -204,7 +203,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_missing_mandatory-units.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -219,7 +218,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_wrong_rm_type-data_value.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -236,7 +235,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_empty_container-order_activities.json");
         Composition composition = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, composition);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, composition);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -252,7 +251,7 @@ public class S2RmObjectValidatorTest2 {
         InputStream stream = getClass().getResourceAsStream("/s2-test-data/fail/s2_missing_mandatory-person_identity.json");
         Person person = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Person.class);
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, person);
+        List<RMObjectValidationMessage> validationMessages = s2EntityValidator.validate(opt, person);
         logMessages(validationMessages);
 
         assertEquals("There should be 1 errors", 1, validationMessages.size());
@@ -265,7 +264,7 @@ public class S2RmObjectValidatorTest2 {
         OperationalTemplate opt = createOpt(archetype);
         InfoNode infoNode = (InfoNode) testUtil.constructEmptyRMObject(opt.getDefinition());
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, infoNode);
         logMessages(validationMessages);
 
         assertEquals("There should be 0 errors", 0, validationMessages.size());
@@ -281,7 +280,7 @@ public class S2RmObjectValidatorTest2 {
             InfoNode infoNode = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, InfoNode.class);
 
             // try to validate
-            List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, infoNode);
+            List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, infoNode);
             logMessages(validationMessages);
 
             assertEquals("There should be 0 errors", 0, validationMessages.size());
@@ -295,7 +294,7 @@ public class S2RmObjectValidatorTest2 {
 
         Composition comp = (Composition) testUtil.constructEmptyRMObject(opt.getDefinition());
 
-        List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
+        List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, comp);
         logMessages(validationMessages);
 
         assertEquals("There should be 104 errors", 104, validationMessages.size());
@@ -311,7 +310,7 @@ public class S2RmObjectValidatorTest2 {
             Composition comp = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
 
             // try to validate
-            List<RMObjectValidationMessage> validationMessages = validatorWithoutInvariants.validate(opt, comp);
+            List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, comp);
             logMessages(validationMessages);
 
             assertEquals("There should be 0 errors", 0, validationMessages.size());
@@ -319,7 +318,7 @@ public class S2RmObjectValidatorTest2 {
     }
 
     private OperationalTemplate createOpt(Archetype archetype) {
-        return (OperationalTemplate) new Flattener(repository, bmmReferenceModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
+        return (OperationalTemplate) new Flattener(repository, metaModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
     }
 
     private Archetype parse(String filename) throws IOException, ADLParseException {

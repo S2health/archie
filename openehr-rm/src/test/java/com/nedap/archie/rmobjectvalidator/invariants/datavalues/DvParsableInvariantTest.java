@@ -1,5 +1,9 @@
 package com.nedap.archie.rmobjectvalidator.invariants.datavalues;
 
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.datatypes.CodePhrase;
 import org.openehr.rm.datavalues.encapsulated.DvParsable;
 import org.openehr.rm.support.identification.TerminologyId;
@@ -16,6 +20,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DvParsableInvariantTest {
+
+    static MetaModels metaModels;
+
+    @BeforeClass
+    public static void setup() {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+    }
 
     @Test
     public void valid() {
@@ -35,7 +47,9 @@ public class DvParsableInvariantTest {
         DvParsable value = createValid();
         value.setCharset(new CodePhrase(new TerminologyId("IANA_character-sets"), "UTF-13"));
 
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), (templateId) -> null, new ValidationConfiguration.Builder().build());
+        RMObjectValidator validator = new RMObjectValidator(metaModels.getSelectedModel(),
+                (templateId) -> null, new ValidationConfiguration.Builder().build());
+
         List<RMObjectValidationMessage> messages = validator.validate(value);
 
         InvariantTestUtil.assertInvariantInvalid(value, "Charset_valid", "/");

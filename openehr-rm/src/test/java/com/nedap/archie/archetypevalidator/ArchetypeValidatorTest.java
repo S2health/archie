@@ -9,6 +9,7 @@ import com.nedap.archie.openehr.rminfo.OpenEhrTestRmInfoLookup;
 import com.nedap.archie.rminfo.ReferenceModels;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
@@ -22,13 +23,16 @@ import static org.junit.Assert.*;
  */
 public class ArchetypeValidatorTest {
 
-    private ADLParser parser;
-    private Archetype archetype;
+    private static ADLParser parser;
+    private static Archetype archetype;
 
-    private ReferenceModels models;
+    private static ReferenceModels models;
 
-    @Before
-    public void setup() {
+    private static InMemoryFullArchetypeRepository repository;
+
+    @BeforeClass
+    public static void setup() {
+        repository = new InMemoryFullArchetypeRepository();
         parser = new ADLParser();
         models = new ReferenceModels();
         models.registerModel(OpenEhrRmInfoLookup.getInstance());
@@ -38,7 +42,6 @@ public class ArchetypeValidatorTest {
     @Test
     public void validArchetype() throws Exception {
         archetype = parse("/com/nedap/archie/basic.adl");
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(archetype);
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
@@ -48,7 +51,6 @@ public class ArchetypeValidatorTest {
     @Test
     public void validArchetypeConceptWithUnderscore() throws Exception {
         archetype = parse("basic_with_concept_underscore.adls");
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(archetype);
         ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
@@ -58,7 +60,8 @@ public class ArchetypeValidatorTest {
     @Test
     public void VCARMNonExistantType() throws Exception {
         archetype = parse("/adl2-tests/validity/rm_checking/openEHR-EHR-EVALUATION.VCARM_rm_non_existent_attribute.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         System.out.println(messages);
         assertEquals(messages.toString(), 1, messages.size());
@@ -69,7 +72,6 @@ public class ArchetypeValidatorTest {
     @Test
     public void VCARMNonExistantTypeAlwaysFlatten() throws Exception {
         archetype = parse("/adl2-tests/validity/rm_checking/openEHR-EHR-EVALUATION.VCARM_rm_non_existent_attribute.v1.0.0.adls");
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(archetype);
         ArchetypeValidationSettings settings = new ArchetypeValidationSettings();
         settings.setAlwaysTryToFlatten(true);
@@ -82,7 +84,8 @@ public class ArchetypeValidatorTest {
     @Test
     public void VCORMTNonConformingType2() throws Exception {
         archetype = parse("/adl2-tests/validity/rm_checking/openEHR-EHR-OBSERVATION.VCORMT_rm_non_conforming_type2.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         System.out.println(messages);
         assertEquals(messages.toString(), 1, messages.size());
@@ -92,7 +95,8 @@ public class ArchetypeValidatorTest {
     @Test
     public void VACDFidCodeNotPresent() throws Exception {
         archetype = parse("/adl2-tests/validity/consistency/openEHR-TEST_PKG-ENTRY.VACDF_ac_code_in_definition_not_in_terminology.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         assertOneError(validationResult, ErrorType.VACDF);
 
     }
@@ -108,7 +112,8 @@ public class ArchetypeValidatorTest {
     @Test
     public void VATDFatCodeNotPresent() throws Exception {
         archetype = parse("/adl2-tests/validity/consistency/openEHR-TEST_PKG-ENTRY.VATDF_at_code_in_ordinal_not_in_terminology.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         assertOneError(validationResult, ErrorType.VATDF);
 
     }
@@ -116,7 +121,8 @@ public class ArchetypeValidatorTest {
     @Test
     public void tupleMemberSizeMismatch() throws Exception {
         archetype = parse("openEHR-EHR-CLUSTER.invalid_tuple_1.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         List<ValidationMessage> messages = validationResult.getErrors();
         System.out.println(messages);
         assertEquals(2, messages.size());
@@ -127,14 +133,16 @@ public class ArchetypeValidatorTest {
     @Test
     public void tupleMemberTypeMismatch() throws Exception {
         archetype = parse("openEHR-EHR-CLUSTER.invalid_tuple_2.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         assertOneError(validationResult, ErrorType.VCARM);
     }
 
     @Test
     public void tuplePrimitiveTypeMismatch() throws Exception {
         archetype = parse("openEHR-EHR-CLUSTER.invalid_tuple_3.v1.0.0.adls");
-        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype);
+        repository.addArchetype(archetype);
+        ValidationResult validationResult = new ArchetypeValidator(models).validate(archetype, repository);
         assertOneError(validationResult, ErrorType.VCORMT);
     }
 
@@ -147,7 +155,6 @@ public class ArchetypeValidatorTest {
         Archetype invalidChildArchetype = parse("/adl2-tests/validity/slots/openEHR-EHR-SECTION.VARXS_slot_id_mismatch.v1.0.0.adls");
         Archetype included = parse("/adl2-tests/features/specialisation/openEHR-EHR-OBSERVATION.redefine_1_value.v1.0.0.adls");
         Archetype parentOfIncluded = parse("/adl2-tests/features/specialisation/openEHR-EHR-OBSERVATION.spec_test_parent.v1.0.0.adls");
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(parent);
         repository.addArchetype(childArchetype);
         repository.addArchetype(included);
@@ -169,7 +176,6 @@ public class ArchetypeValidatorTest {
         Archetype childArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-SECTION.slot_id_correct.v1.0.0.adls");
         Archetype included = parse("/adl2-tests/features/specialisation/openEHR-EHR-OBSERVATION.redefine_1_value.v1.0.0.adls");
         Archetype parentOfIncluded = parse("/adl2-tests/features/specialisation/openEHR-EHR-OBSERVATION.spec_test_parent.v1.0.0.adls");
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(parent);
         repository.addArchetype(childArchetype);
         repository.addArchetype(included);
@@ -187,7 +193,6 @@ public class ArchetypeValidatorTest {
         Archetype incorrectChildArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-SECTION.slot_excludes_incorrect.v1.0.0.adls");
         Archetype included = parse("/adl2-tests/features/specialisation/openEHR-EHR-OBSERVATION.redefine_1_value.v1.0.0.adls");
         Archetype parentOfIncluded = parse("/adl2-tests/features/specialisation/openEHR-EHR-OBSERVATION.spec_test_parent.v1.0.0.adls");
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(parent);
         repository.addArchetype(childArchetype);
         repository.addArchetype(included);
@@ -213,7 +218,6 @@ public class ArchetypeValidatorTest {
         Archetype child = parse("/com/nedap/archie/archetypevalidator/rm_version/openEHR-EHR-CLUSTER.child.v0.0.1.adls");
         Archetype parent = parse("/com/nedap/archie/archetypevalidator/rm_version/openEHR-EHR-CLUSTER.parent.v1.1.0.adls");
         {
-            InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
             repository.addArchetype(child);
             repository.addArchetype(parent);
 
@@ -225,7 +229,6 @@ public class ArchetypeValidatorTest {
             assertTrue(validatedParent.getErrors().toString(), validatedParent.passes());
         }
         {
-            InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
             repository.addArchetype(child);
             repository.addArchetype(parent);
             
@@ -244,7 +247,6 @@ public class ArchetypeValidatorTest {
         Archetype childArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.child_redefines_mandatory_elements.v1.0.0.adls");
         Archetype grandchildArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.grandchild_redefines_mandatory_elements.v1.0.0.adls");
 
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(parentArchetype);
         repository.addArchetype(childArchetype);
         repository.addArchetype(grandchildArchetype);
@@ -264,7 +266,6 @@ public class ArchetypeValidatorTest {
         Archetype parentArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.parent_with_mandatory_elements.v1.0.0.adls");
         Archetype childArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.child_redefines_mandatory_elements_fails.v1.0.0.adls");
 
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(parentArchetype);
         repository.addArchetype(childArchetype);
 
@@ -280,7 +281,6 @@ public class ArchetypeValidatorTest {
         Archetype parentArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.parent.v1.2.0.adls");
         Archetype childArchetype = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.child_redefines_dvtext.v1.0.0.adls");
 
-        InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
         repository.addArchetype(parentArchetype);
         repository.addArchetype(childArchetype);
 
@@ -296,7 +296,6 @@ public class ArchetypeValidatorTest {
         Archetype child2 = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.infinite_loop_child2.v0.0.1.adls");
 
         {
-            InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
             repository.addArchetype(child1);
             repository.addArchetype(child2);
 
@@ -313,7 +312,6 @@ public class ArchetypeValidatorTest {
         Archetype childWithSpecializationAfterExclusion = parse("/com/nedap/archie/archetypevalidator/openEHR-EHR-CLUSTER.specialized_nodes_order.v1.0.0.adls");
 
         {
-            InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
             repository.addArchetype(parent);
             repository.addArchetype(childWithSpecializationAfterExclusion);
 
@@ -330,7 +328,6 @@ public class ArchetypeValidatorTest {
     public void incompatibleNodeIdValidationTest() throws IOException, ADLParseException {
         Archetype archetypeWithIncompatibleNodeId = parse("/adl2-tests/validity/basics/openEHR-EHR-OBSERVATION.WARN_adl14_incompatible_node_ids.v1.0.0.adls");
         {
-            InMemoryFullArchetypeRepository repository = new InMemoryFullArchetypeRepository();
             repository.addArchetype(archetypeWithIncompatibleNodeId);
             ArchetypeValidator archetypeValidator = new ArchetypeValidator(AllMetaModelsInitialiser.getMetaModels());
             ValidationResult result = archetypeValidator.validate(archetypeWithIncompatibleNodeId, repository);

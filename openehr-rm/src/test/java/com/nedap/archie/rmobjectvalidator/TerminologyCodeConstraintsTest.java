@@ -10,6 +10,8 @@ import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.aom.primitives.ConstraintStatus;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.terminology.ValueSet;
+import com.nedap.archie.archetypevalidator.OpenEhrPrimitiveObjectConstraintHelper;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.base.terminology.TerminologyCode;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
@@ -38,8 +40,8 @@ public class TerminologyCodeConstraintsTest {
 
     private Archetype archetype;
     private final ValidationConfiguration validationConfiguration = new ValidationConfiguration.Builder().build();
-    private final PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper = new PrimitiveObjectConstraintHelper(validationConfiguration);
-    private final ValidationHelper validationHelper = new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), validationConfiguration);
+    private final PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper = new OpenEhrPrimitiveObjectConstraintHelper();
+    private final ValidationHelper validationHelper = new ValidationHelper(OpenEhrRmInfoLookup.getInstance(), primitiveObjectConstraintHelper, validationConfiguration);
 
     @Before
     public void setupArchetype() {
@@ -96,7 +98,8 @@ public class TerminologyCodeConstraintsTest {
         assertTrue(primitiveObjectConstraintHelper.isValidValue(code, TerminologyCode.createFromString("[snomedct::72489423]")));
         assertTrue(primitiveObjectConstraintHelper.isValidValue(code, TerminologyCode.createFromString("[anything::atall]")));
 
-        PrimitiveObjectConstraintHelper failingHelper = new PrimitiveObjectConstraintHelper(new ValidationConfiguration.Builder().failOnUnknownTerminologyId(true).build());
+        PrimitiveObjectConstraintHelper failingHelper = new OpenEhrPrimitiveObjectConstraintHelper();
+        failingHelper.setFailOnUnknownTerminologyId(true);
         assertFalse(failingHelper.isValidValue(code, TerminologyCode.createFromString("[snomedct::72489423]")));
         assertFalse(failingHelper.isValidValue(code, TerminologyCode.createFromString("[anything::atall]")));
     }

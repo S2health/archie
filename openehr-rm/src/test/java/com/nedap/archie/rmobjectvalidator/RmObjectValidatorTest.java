@@ -8,6 +8,10 @@ import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
+import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.datastructures.Cluster;
 import org.openehr.rm.datastructures.Element;
 import org.openehr.rm.datastructures.Item;
@@ -29,20 +33,24 @@ import static org.junit.Assert.*;
 public class RmObjectValidatorTest {
 
     private TestUtil testUtil;
-    InMemoryFullArchetypeRepository emptyRepo;
+    InMemoryFullArchetypeRepository repository;
+    static MetaModels metaModels;
+
     private RMObjectValidator validator;
     private RMObjectValidator validatorWithoutInvariants;
 
 
-    @Before
+    @BeforeClass
     public void setup() {
 
         testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
+        repository = new InMemoryFullArchetypeRepository();
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
 
-        emptyRepo = new InMemoryFullArchetypeRepository();
-        validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), emptyRepo,
+        validator = new RMObjectValidator(metaModels.getSelectedModel(), repository,
                 new ValidationConfiguration.Builder().build());
-        validatorWithoutInvariants = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), emptyRepo,
+        validatorWithoutInvariants = new RMObjectValidator(metaModels.getSelectedModel(), repository,
                 new ValidationConfiguration.Builder().validateInvariants(false).build());
     }
 
@@ -86,7 +94,7 @@ public class RmObjectValidatorTest {
     }
 
     private OperationalTemplate createOpt(Archetype archetype) {
-        return (OperationalTemplate) new Flattener(emptyRepo, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate()).flatten(archetype,0);
+        return (OperationalTemplate) new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate()).flatten(archetype,0);
     }
 
     @Test
@@ -159,7 +167,8 @@ public class RmObjectValidatorTest {
         element.setArchetypeNodeId("id5");
         element.setName(new DvText("name"));
 
-        RMObjectValidator oldValidator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), emptyRepo);
+        RMObjectValidator oldValidator = new RMObjectValidator(metaModels.getSelectedModel(), repository, new ValidationConfiguration.Builder().build());
+
         List<RMObjectValidationMessage> messages = oldValidator.validate(element);
         assertEquals(messages.toString(), 1, messages.size());
 
@@ -172,7 +181,7 @@ public class RmObjectValidatorTest {
     @Test
     @Deprecated
     public void skipInvariantValidationDouble(){
-        RMObjectValidator validator = new RMObjectValidator(OpenEhrRmInfoLookup.getInstance(), emptyRepo,
+        RMObjectValidator validator = new RMObjectValidator(metaModels.getSelectedModel(), repository,
                 new ValidationConfiguration.Builder().build());
 
         IllegalStateException ex = assertThrows(IllegalStateException.class, () -> validator.setRunInvariantChecks(true));

@@ -1,5 +1,7 @@
 package com.nedap.archie.rmobjectvalidator;
 
+import com.nedap.archie.adlparser.ADLParser;
+import com.nedap.archie.adlparser.modelconstraints.RMConstraintImposer;
 import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CAttributeTuple;
 import com.nedap.archie.aom.CComplexObject;
@@ -8,7 +10,11 @@ import com.nedap.archie.aom.primitives.CReal;
 import com.nedap.archie.aom.primitives.CString;
 import com.nedap.archie.base.Interval;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.query.RMObjectWithPath;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.openehr.rm.datavalues.quantity.DvQuantity;
 import org.junit.Test;
 
@@ -18,14 +24,20 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class RmTupleValidatorTest {
-    private static final OpenEhrRmInfoLookup lookup = OpenEhrRmInfoLookup.getInstance();
+    private static RmTupleValidator validator;
+    private static MetaModels metaModels;
 
-    private final RmTupleValidator validator;
+    @BeforeClass
+    public static void setup() {
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
 
-    public RmTupleValidatorTest() {
-        ValidationHelper validationHelper = new ValidationHelper(lookup, new ValidationConfiguration.Builder().build());
+        ValidationHelper validationHelper = new ValidationHelper(metaModels.getSelectedModelInfoLookup(),
+                metaModels.getSelectedModel().getPrimitiveObjectConstraintHelper(),
+                new ValidationConfiguration.Builder().build()
+        );
         validator = new RmTupleValidator(
-                lookup,
+                metaModels.getSelectedModelInfoLookup(),
                 validationHelper,
                 new RmPrimitiveObjectValidator(validationHelper)
         );

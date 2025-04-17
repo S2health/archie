@@ -1,6 +1,8 @@
 package com.nedap.archie.rmobjectvalidator;
 
 import com.nedap.archie.aom.primitives.*;
+import com.nedap.archie.archetypevalidator.OpenEhrPrimitiveObjectConstraintHelper;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.base.Interval;
 import org.junit.Test;
 
@@ -12,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PrimitiveObjectConstraintHelperTest {
-    private final PrimitiveObjectConstraintHelper helper = new PrimitiveObjectConstraintHelper(new ValidationConfiguration.Builder().build());
+    private final PrimitiveObjectConstraintHelper helper = new OpenEhrPrimitiveObjectConstraintHelper();
     
     @Test
     public void booleanOnlyFalse() {
