@@ -32,16 +32,16 @@ import static org.junit.Assert.*;
 
 public class RmObjectValidatorTest {
 
-    private TestUtil testUtil;
-    InMemoryFullArchetypeRepository repository;
+    private static TestUtil testUtil;
+    private static InMemoryFullArchetypeRepository repository;
     static MetaModels metaModels;
 
-    private RMObjectValidator validator;
-    private RMObjectValidator validatorWithoutInvariants;
+    private static RMObjectValidator validator;
+    private static RMObjectValidator validatorWithoutInvariants;
 
 
     @BeforeClass
-    public void setup() {
+    public static void setup() {
 
         testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
         repository = new InMemoryFullArchetypeRepository();
@@ -57,6 +57,7 @@ public class RmObjectValidatorTest {
     @Test
     public void requiredAttributesShouldBePresent() throws Exception {
         Archetype archetype = parse("/adl2-tests/rmobjectvalidity/openEHR-EHR-ELEMENT.element_with_required_attributes.v1.0.0.adls");
+        repository.addArchetype(archetype);
         OperationalTemplate opt = createOpt(archetype);
 
         Element element = (Element) testUtil.constructEmptyRMObject(archetype.getDefinition());
@@ -79,6 +80,7 @@ public class RmObjectValidatorTest {
     @Test
     public void cardinalityMismatchValidation() throws Exception {
         Archetype archetype = parse("/adl2-tests/rmobjectvalidity/openEHR-EHR-ITEM_TREE.cardinality_testing.v1.0.0.adls");
+        repository.addArchetype(archetype);
         OperationalTemplate opt = createOpt(archetype);
 
         ItemTree itemTree = (ItemTree) testUtil.constructEmptyRMObject(archetype.getDefinition());
@@ -172,10 +174,8 @@ public class RmObjectValidatorTest {
         List<RMObjectValidationMessage> messages = oldValidator.validate(element);
         assertEquals(messages.toString(), 1, messages.size());
 
-        oldValidator.setRunInvariantChecks(false);
         messages = oldValidator.validate(element);
         assertEquals(messages.toString(), 0, messages.size());
-
     }
 
     @Test

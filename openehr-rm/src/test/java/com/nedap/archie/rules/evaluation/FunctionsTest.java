@@ -33,7 +33,7 @@ public class FunctionsTest {
     private static MetaModels metaModels;
 
     @BeforeClass
-    public void setup() {
+    public static void setup() {
         metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
         metaModels.selectModel("openEHR", "EHR", "1.1.0");
 

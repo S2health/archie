@@ -6,7 +6,10 @@ import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
+import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.rminfo.MetaModel;
+import com.nedap.archie.rminfo.MetaModels;
+import org.junit.BeforeClass;
 import org.openehr.rm.archetyped.Archetyped;
 import org.openehr.rm.archetyped.FeederAudit;
 import org.openehr.rm.archetyped.FeederAuditDetails;
@@ -27,36 +30,39 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ValidateArchetypedTest {
+    private static TestUtil testUtil;
+    private static InMemoryFullArchetypeRepository repository;
+    static MetaModels metaModels;
+    private static RMObjectValidator validator;
 
-    private TestUtil testUtil;
-    private InMemoryFullArchetypeRepository repo;
-    private RMObjectValidator validator;
+    @BeforeClass
+    public static void setup() {
+        testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
+        repository = new InMemoryFullArchetypeRepository();
+        metaModels = new OpenEhrRmMetaModelsInitialiser().getMetaModels();
+        metaModels.selectModel("openEHR", "EHR", "1.1.0");
+
+        validator = new RMObjectValidator(metaModels.getSelectedModel(), repository,
+                new ValidationConfiguration.Builder().build());
+    }
 
     private Archetype elementArchetype;
     private OperationalTemplate elementOpt;
     private Archetype itemTreeArchetype;
 
     @Before
-    public void setup() throws Exception {
-        testUtil = new TestUtil(OpenEhrRmInfoLookup.getInstance());
-
-        repo = new InMemoryFullArchetypeRepository();
-
-        ValidationConfiguration configuration = new ValidationConfiguration.Builder().validateInvariants(false).build();
-        validator = new RMObjectValidator(new MetaModel(OpenEhrRmInfoLookup.getInstance(), null), repo, configuration);
-
-
+    public void setupTest() throws Exception {
         elementArchetype = parse("/adl2-tests/rmobjectvalidity/openEHR-EHR-ELEMENT.element_with_required_attributes.v1.0.0.adls");
-        elementOpt = createOpt(elementArchetype);
 
-        repo.addArchetype(elementArchetype);
-        repo.setOperationalTemplate(elementOpt);
+        repository.addArchetype(elementArchetype);
+        elementOpt = createOpt(elementArchetype);
+        repository.setOperationalTemplate(elementOpt);
 
         itemTreeArchetype = parse("/adl2-tests/rmobjectvalidity/openEHR-EHR-ITEM_TREE.cardinality_testing.v1.0.0.adls");
-        OperationalTemplate itemTreeOpt = createOpt(itemTreeArchetype);
 
-        repo.addArchetype(itemTreeArchetype);
-        repo.setOperationalTemplate(itemTreeOpt);
+        repository.addArchetype(itemTreeArchetype);
+        OperationalTemplate itemTreeOpt = createOpt(itemTreeArchetype);
+        repository.setOperationalTemplate(itemTreeOpt);
     }
 
     @Test
@@ -90,7 +96,7 @@ public class ValidateArchetypedTest {
     }
 
     private OperationalTemplate createOpt(Archetype archetype) {
-        return (OperationalTemplate) new Flattener(repo, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate()).flatten(archetype,0);
+        return (OperationalTemplate) new Flattener(repository, metaModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype,0);
     }
 
     private Archetype parse(String filename) throws IOException, ADLParseException {
