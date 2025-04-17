@@ -1,9 +1,13 @@
 package com.nedap.archie.openehr.rminfo;
 
+import com.nedap.archie.archetypevalidator.OpenEhrPrimitiveObjectConstraintHelper;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.rminfo.MetaModelsInitialiser;
 import com.nedap.archie.rminfo.ReferenceModels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
 
 /**
  * Global meta-model access for openEHR RM
@@ -20,6 +24,12 @@ public class OpenEhrTestRmMetaModelsInitialiser extends MetaModelsInitialiser {
     public ReferenceModels getNativeRms() {
         ReferenceModels result = new ReferenceModels();
         result.registerModel(OpenEhrTestRmInfoLookup.getInstance(), null);
+        return result;
+    }
+    @Override
+    public HashMap<String, PrimitiveObjectConstraintHelper> getPrimitiveObjectConstraintHelpers() {
+        HashMap<String, PrimitiveObjectConstraintHelper> result = new HashMap<>();
+        result.put("openEHR", new OpenEhrPrimitiveObjectConstraintHelper());
         return result;
     }
 

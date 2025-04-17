@@ -7,6 +7,7 @@ import com.nedap.archie.aom.primitives.CString;
 import com.nedap.archie.aom.profile.AomProfile;
 import com.nedap.archie.aom.profile.AomTypeMapping;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.base.MultiplicityInterval;
 import org.openehr.bmm.core.*;
 import org.openehr.bmm.persistence.validation.BmmDefinitions;
@@ -19,22 +20,35 @@ public class MetaModel implements MetaModelInterface {
     private ModelInfoLookup selectedModel;
     private BmmModel selectedBmmModel;
     private AomProfile selectedAomProfile;
+    private PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper;
     private ObjectMapper odinInputObjectMapper;
     private ObjectMapper odinOutputObjectMapper;
     private ObjectMapper jsonObjectMapper;
 
-    public MetaModel(ModelInfoLookup selectedModel, BmmModel selectedBmmModel) {
-        this(selectedModel, selectedBmmModel, null);
+    public MetaModel(ModelInfoLookup selectedModel,
+                     BmmModel selectedBmmModel
+    ) {
+        this(selectedModel, selectedBmmModel, null, null);
     }
 
-    public MetaModel(ModelInfoLookup selectedModel, BmmModel selectedBmmModel, AomProfile selectedAomProfile) {
+    public MetaModel(ModelInfoLookup selectedModel,
+                     BmmModel selectedBmmModel,
+                     AomProfile selectedAomProfile,
+                     PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper
+    ) {
         this.selectedModel = selectedModel;
         this.selectedBmmModel = selectedBmmModel;
         this.selectedAomProfile = selectedAomProfile;
+        this.primitiveObjectConstraintHelper = primitiveObjectConstraintHelper;
     }
 
-    public MetaModel(ModelInfoLookup selectedModel, BmmModel selectedBmmModel, AomProfile selectedAomProfile, RMObjectMapperProvider provider) {
-        this(selectedModel, selectedBmmModel, selectedAomProfile);
+    public MetaModel(ModelInfoLookup selectedModel,
+                     BmmModel selectedBmmModel,
+                     AomProfile selectedAomProfile,
+                     PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper,
+                     RMObjectMapperProvider provider
+    ) {
+        this(selectedModel, selectedBmmModel, selectedAomProfile, primitiveObjectConstraintHelper);
         if(provider != null) {
             this.odinInputObjectMapper = provider.getInputOdinObjectMapper();
             this.odinOutputObjectMapper = provider.getOutputOdinObjectMapper();
@@ -53,6 +67,8 @@ public class MetaModel implements MetaModelInterface {
     public AomProfile getSelectedAomProfile() {
         return selectedAomProfile;
     }
+
+    public PrimitiveObjectConstraintHelper getPrimitiveObjectConstraintHelper() { return primitiveObjectConstraintHelper; };
 
     /**
      * Get the object mapper to use for JSON converted from ODIN to parse this model

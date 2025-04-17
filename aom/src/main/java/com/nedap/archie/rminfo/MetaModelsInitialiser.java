@@ -2,6 +2,7 @@ package com.nedap.archie.rminfo;
 
 import com.nedap.archie.aom.profile.AomProfile;
 import com.nedap.archie.aom.profile.AomProfiles;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import org.openehr.bmm.v2.persistence.odin.BmmOdinParser;
 import org.openehr.bmm.v2.validation.BmmRepository;
 import org.openehr.bmm.v2.validation.BmmSchemaConverter;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -90,16 +92,18 @@ public abstract class MetaModelsInitialiser {
     abstract public ReferenceModels getNativeRms();
 
     /**
+     * Return RM-specific primitive constraint validator object
+     * @return
+     */
+    abstract public HashMap<String, PrimitiveObjectConstraintHelper> getPrimitiveObjectConstraintHelpers();
+
+    /**
      * Returns the MetaModels loaded with all BMM, ModelInfoLookup and AOM profiles that are available.
      * Returns a new MetaModels instance every call!
      * @return
      */
     public MetaModels getMetaModels() {
-        MetaModels metaModels = new MetaModels(getNativeRms(), getBmmRepository());
-        for(AomProfile profile:getAomProfiles().getProfiles()) {
-            metaModels.getAomProfiles().add(profile);
-        }
-        return metaModels;
+        return new MetaModels(getNativeRms(), getBmmRepository(), getAomProfiles(), getPrimitiveObjectConstraintHelpers());
     }
 
     abstract public String getParentPackage();

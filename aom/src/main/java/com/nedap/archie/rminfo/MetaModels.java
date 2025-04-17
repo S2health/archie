@@ -4,12 +4,14 @@ import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.CPrimitiveObject;
 import com.nedap.archie.aom.profile.AomProfile;
 import com.nedap.archie.aom.profile.AomProfiles;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.base.MultiplicityInterval;
 import org.openehr.bmm.core.BmmModel;
 import org.openehr.bmm.persistence.validation.BmmDefinitions;
 import org.openehr.bmm.v2.validation.BmmRepository;
 import org.openehr.bmm.v2.validation.BmmValidationResult;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -37,6 +39,10 @@ public class MetaModels implements MetaModelInterface {
     private MetaModel selectedModel;
     private AomProfile selectedAomProfile;
 
+    private HashMap<String, PrimitiveObjectConstraintHelper> primitiveObjectConstraintHelpers = new HashMap<>();
+
+    private PrimitiveObjectConstraintHelper selectedPrimitiveObjectConstraintHelper;
+
     /**
      * Allows to set a specific RM version for a specific RM model, so that one is used instead of the one in the archetype
      */
@@ -49,10 +55,13 @@ public class MetaModels implements MetaModelInterface {
         aomProfiles = new AomProfiles();
     }
 
-    public MetaModels(ReferenceModels models, BmmRepository repository, AomProfiles profiles) {
+    public MetaModels(ReferenceModels models, BmmRepository repository, AomProfiles profiles,
+                      HashMap<String, PrimitiveObjectConstraintHelper> primitiveObjectConstraintHelpers
+    ) {
         this.models = models;
         this.bmmRepository = repository;
         aomProfiles = profiles;
+        this.primitiveObjectConstraintHelpers = primitiveObjectConstraintHelpers;
     }
 
     /**
@@ -130,10 +139,13 @@ public class MetaModels implements MetaModelInterface {
             this.selectedAomProfile = getAomProfileOnPublisher(rmPublisher);
         }
 
+        if (primitiveObjectConstraintHelpers != null)
+            this.selectedPrimitiveObjectConstraintHelper = primitiveObjectConstraintHelpers.get(rmPublisher);
+
         if(selectedModel == null && selectedBmmModel == null) {
             throw new ModelNotFoundException(String.format("model for %s.%s version %s not found", rmPublisher, rmPackage, rmRelease));
         }
-        this.selectedModel = new MetaModel(selectedModel, selectedBmmModel, selectedAomProfile, objectMapperProvider);
+        this.selectedModel = new MetaModel(selectedModel, selectedBmmModel, selectedAomProfile, selectedPrimitiveObjectConstraintHelper, objectMapperProvider);
 
     }
 

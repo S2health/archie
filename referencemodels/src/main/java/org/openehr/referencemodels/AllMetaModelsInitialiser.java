@@ -1,6 +1,7 @@
 package org.openehr.referencemodels;
 
 import com.nedap.archie.aom.profile.AomProfiles;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.rminfo.*;
 import org.openehr.bmm.v2.validation.BmmRepository;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -82,12 +84,20 @@ public class AllMetaModelsInitialiser {
         return result;
     }
 
+    public static HashMap<String, PrimitiveObjectConstraintHelper> getPrimitiveObjectConstraintHelpers() {
+        HashMap<String, PrimitiveObjectConstraintHelper> result = new HashMap<>();
+        for (MetaModelsInitialiser mmInitializer: getMmInitializers()) {
+            result.putAll (mmInitializer.getPrimitiveObjectConstraintHelpers());
+        }
+        return result;
+    }
+
     /**
      * Returns the MetaModels loaded with all BMM, ModelInfoLookup and AOM profiles that are available.
      * Returns a new MetaModels instance every call!
      * @return
      */
     public static MetaModels getMetaModels() {
-        return new MetaModels(getNativeRms(), getBmmRepository(), getAomProfiles());
+        return new MetaModels(getNativeRms(), getBmmRepository(), getAomProfiles(), getPrimitiveObjectConstraintHelpers());
     }
 }

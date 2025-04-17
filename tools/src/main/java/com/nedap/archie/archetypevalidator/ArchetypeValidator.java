@@ -86,11 +86,6 @@ public class ArchetypeValidator {
     }
 
 
-    public ValidationResult validate(Archetype archetype) {
-        return validate(archetype, null);
-    }
-
-
     /**
      * Validate an archetype, plus a repository of other archetypes.
      *
