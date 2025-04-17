@@ -60,7 +60,7 @@ public class RMObjectValidator extends RMObjectValidatingProcessor {
         rmOccurrenceValidator = new RmOccurrenceValidator();
         rmPrimitiveObjectValidator = new RmPrimitiveObjectValidator(validationHelper);
         rmTupleValidator = new RmTupleValidator(this.lookup, validationHelper, rmPrimitiveObjectValidator);
-        rmMultiplicityValidator = new RmMultiplicityValidator(lookup);
+        rmMultiplicityValidator = new RmMultiplicityValidator(metaModel);
     }
 
     /**

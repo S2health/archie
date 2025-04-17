@@ -5,19 +5,22 @@ import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CObject;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.rminfo.MetaModel;
 import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMAttributeInfo;
 import com.nedap.archie.rminfo.RMTypeInfo;
+import org.openehr.bmm.core.BmmContainerProperty;
+import org.openehr.bmm.core.BmmModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class RmMultiplicityValidator {
-    private ModelInfoLookup infoLookup;
+    private MetaModel metaModel;
 
-    public RmMultiplicityValidator(ModelInfoLookup infoLookup) {
-        this.infoLookup = infoLookup;
+    public RmMultiplicityValidator(MetaModel metaModel) {
+        this.metaModel = metaModel;
     }
 
     public List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
@@ -32,17 +35,17 @@ public class RmMultiplicityValidator {
                 }
             } else {
                 // check BMM for cardinality
-                RMTypeInfo typeInfo = infoLookup.getTypeInfo(attribute.getParent().getRmTypeName());
-                RMAttributeInfo attInfo = infoLookup.getAttributeInfo(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
-
-
-                MultiplicityInterval interval = infoLookup.referenceModelPropMultiplicity(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
-                if(interval != null) {
-                    if(!interval.has(collectionValue.size())) {
-                        String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(interval.toString());
-                        return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
-                    }
-                }
+//                BmmModel bmmModel = metaModel.getSelectedBmmModel();
+//                BmmContainerProperty bmmProperty = bmmModel.propertyAtPath (pathSoFar);
+//
+//
+//                MultiplicityInterval interval = infoLookup.referenceModelPropMultiplicity(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
+//                if(interval != null) {
+//                    if(!interval.has(collectionValue.size())) {
+//                        String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(interval.toString());
+//                        return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
+//                    }
+//                }
 
             }
         } else {
