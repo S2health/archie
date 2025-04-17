@@ -9,8 +9,10 @@ import com.nedap.archie.rminfo.MetaModel;
 import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMAttributeInfo;
 import com.nedap.archie.rminfo.RMTypeInfo;
+import org.openehr.bmm.core.BmmClass;
 import org.openehr.bmm.core.BmmContainerProperty;
 import org.openehr.bmm.core.BmmModel;
+import org.openehr.bmm.core.BmmProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +26,8 @@ public class RmMultiplicityValidator {
     }
 
     public List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
+
+
         if (attributeValue instanceof Collection) {
             Collection<?> collectionValue = (Collection<?>) attributeValue;
             //validate multiplicity
@@ -35,18 +39,18 @@ public class RmMultiplicityValidator {
                 }
             } else {
                 // check BMM for cardinality
-//                BmmModel bmmModel = metaModel.getSelectedBmmModel();
-//                BmmContainerProperty bmmProperty = bmmModel.propertyAtPath (pathSoFar);
-//
-//
-//                MultiplicityInterval interval = infoLookup.referenceModelPropMultiplicity(attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
-//                if(interval != null) {
-//                    if(!interval.has(collectionValue.size())) {
-//                        String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(interval.toString());
-//                        return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
-//                    }
-//                }
+                BmmModel bmmModel = metaModel.getSelectedBmmModel();
+                BmmProperty bmmProperty = bmmModel.propertyAtPath (attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
 
+                if (bmmProperty != null && bmmProperty instanceof BmmContainerProperty) {
+                    MultiplicityInterval interval = ((BmmContainerProperty)bmmProperty).getCardinality();
+                    if(interval != null) {
+                        if(!interval.has(collectionValue.size())) {
+                            String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(interval.toString());
+                            return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
+                        }
+                    }
+                }
             }
         } else {
             MultiplicityInterval existence = attribute.getExistence();
