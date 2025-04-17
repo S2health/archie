@@ -162,7 +162,7 @@ public class AOMJacksonTest {
             //System.out.println(serialized);
             assertTrue(serialized.contains("\"EXPR_BINARY_OPERATOR\""));
             assertTrue(serialized.contains("\"EXPR_ARCHETYPE_REF\""));
-            assertTrue(serialized.contains("\"operator_def\":{\"_type\":\"OPERATOR_DEF_BUILTIN\",\"identifier\":\"op_matches\"}"));
+            assertTrue(serialized.contains("\"operator\": \"matches\""));
             assertArchetypeSlot(objectMapper, serialized);
         }
     }
