@@ -28,7 +28,7 @@ import java.util.List;
 @XmlType(name="C_ATTRIBUTE", propOrder = {
         "existence",
         "differentialPath",
-        "is_multiple",
+        "multiple",
         "cardinality",
         "children"
 })
