@@ -299,7 +299,7 @@ public class S2RmObjectValidatorTest2 {
 
         assertEquals("There should be 104 errors", 104, validationMessages.size());
     }
-    
+
 
     private OperationalTemplate createOpt(Archetype archetype) {
         return (OperationalTemplate) new Flattener(repository, metaModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
