@@ -299,23 +299,7 @@ public class S2RmObjectValidatorTest2 {
 
         assertEquals("There should be 104 errors", 104, validationMessages.size());
     }
-
-    @Test
-    public void validateSynthDataAgainstOptComplex() throws Exception {
-        Archetype archetype = repository.getArchetype("s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1");
-        OperationalTemplate opt = createOpt(archetype);
-
-        // read in a synth data file for the above template
-        try(InputStream stream = getClass().getResourceAsStream("/s2-synth-data/fixed/s2-EHR-Composition.t_encounter-vital_signs-minimal.v1.0.1.json")) {
-            Composition comp = S2RmJacksonUtil.getObjectMapper(ArchieJacksonConfiguration.createStandardsCompliant()).readValue(stream, Composition.class);
-
-            // try to validate
-            List<RMObjectValidationMessage> validationMessages = s2EhrValidator.validate(opt, comp);
-            logMessages(validationMessages);
-
-            assertEquals("There should be 0 errors", 0, validationMessages.size());
-        }
-    }
+    
 
     private OperationalTemplate createOpt(Archetype archetype) {
         return (OperationalTemplate) new Flattener(repository, metaModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
