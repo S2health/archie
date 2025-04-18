@@ -40,7 +40,7 @@ public class S2RmJacksonTest {
             assertEquals("__THIS_SHOULD_BE_MODIFIED_BY_THE_TEST_::piri.ehrscape.com::1", uidMap.get("value"));
         }
     }
-    
+
      */
 
     @Test
