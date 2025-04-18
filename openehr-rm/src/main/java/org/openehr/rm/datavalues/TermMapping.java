@@ -48,9 +48,9 @@ public class TermMapping extends RMObject {
     }
 
     public TermMapping(CodePhrase target, Character match, @Nullable DvCodedText purpose) {
-        this.match = match;
-        this.purpose = purpose;
-        this.target = target;
+        setMatch(match);
+        setPurpose(purpose);
+        setTarget(target);
     }
 
     public char getMatch() {
