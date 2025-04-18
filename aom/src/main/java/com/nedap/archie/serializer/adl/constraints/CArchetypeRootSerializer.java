@@ -43,8 +43,9 @@ public class CArchetypeRootSerializer extends CComplexObjectSerializer<CArchetyp
             builder.lineComment(serializer.getTermText(cobj));
             buildAttributesAndTuples(cobj);
             builder.append("}");
+        } else {
+            builder.lineComment(serializer.getTermText(cobj));
         }
-
 
         builder.unindent();
     }
