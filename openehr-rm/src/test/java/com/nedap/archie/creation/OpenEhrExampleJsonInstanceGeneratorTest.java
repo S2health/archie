@@ -18,18 +18,14 @@ import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
 import com.nedap.archie.json.JsonSchemaValidator;
 import com.nedap.archie.base.RMObject;
-import com.nedap.archie.rminfo.MetaModel;
 import com.nedap.archie.rminfo.MetaModels;
-import com.nedap.archie.test.CkmRepositoryBuilder;
 import com.nedap.archie.testutil.ArchetypeRepositoryBuilder;
-import com.nedap.archie.testutil.TestUtil;
+import com.nedap.archie.tools.creation.OpenEhrExampleJsonInstanceGenerator;
 import com.nedap.archie.tools.json.OpenEHRRmJSONSchemaCreator;
 import jakarta.json.JsonObject;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.leadpony.justify.api.*;
 import org.openehr.rm.composition.Observation;
-import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageType;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
@@ -53,9 +49,9 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class ExampleJsonInstanceGeneratorTest {
+public class OpenEhrExampleJsonInstanceGeneratorTest {
 
-    private static Logger logger = LoggerFactory.getLogger(ExampleJsonInstanceGeneratorTest.class);
+    private static Logger logger = LoggerFactory.getLogger(OpenEhrExampleJsonInstanceGeneratorTest.class);
 
     private static final String TYPE_PROPERTY_NAME = "_type";
 
@@ -74,7 +70,7 @@ public class ExampleJsonInstanceGeneratorTest {
     @Test
     public void bloodPressure() throws Exception {
         OperationalTemplate opt = createOPT("/ckm-mirror/local/archetypes/entry/observation/openEHR-EHR-OBSERVATION.blood_pressure.v1.1.0.adls");
-        ExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
+        OpenEhrExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
 
         Map<String, Object> structure = structureGenerator.generate(opt);
         String s = serializeToJson(structure, true);
@@ -113,7 +109,7 @@ public class ExampleJsonInstanceGeneratorTest {
     public void parseBloodPressure() throws Exception {
         //check that the generated blood pressure can be parsed
         OperationalTemplate opt = createOPT("/ckm-mirror/local/archetypes/entry/observation/openEHR-EHR-OBSERVATION.blood_pressure.v1.1.0.adls");
-        ExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
+        OpenEhrExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
 
         Map<String, Object> structure = structureGenerator.generate(opt);
         String s = serializeToJson(structure, true);
@@ -141,7 +137,7 @@ public class ExampleJsonInstanceGeneratorTest {
     public void parseOrdinal() throws Exception {
         //check that the generated blood pressure can be parsed
         OperationalTemplate opt = createOPT("/adl2-tests/features/aom_structures/tuples/openEHR-EHR-OBSERVATION.ordinal_tuple.v1.0.0.adls");
-        ExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
+        OpenEhrExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
 
         Map<String, Object> structure = structureGenerator.generate(opt);
         String s = serializeToJson(structure, false);
@@ -155,7 +151,7 @@ public class ExampleJsonInstanceGeneratorTest {
     public void ordinal() throws Exception {
         //ordinal handling in openEHR RM is a bit tricky, since a CTerminologyCode maps directly to a DV_CODED_TEXT
         OperationalTemplate opt = createOPT("/adl2-tests/features/aom_structures/tuples/openEHR-EHR-OBSERVATION.ordinal_tuple.v1.0.0.adls");
-        ExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
+        OpenEhrExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
 
         Map<String, Object> structure = structureGenerator.generate(opt);
         String s = serializeToJson(structure, false);
@@ -170,7 +166,7 @@ public class ExampleJsonInstanceGeneratorTest {
      */
     @Test
     public void generateAllCKMExamples() throws Exception {
-        ExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
+        OpenEhrExampleJsonInstanceGenerator structureGenerator = createExampleJsonInstanceGenerator();
         FullArchetypeRepository repository = ArchetypeRepositoryBuilder.parseRepository(this.getClass(), "ckm-mirror");//add string regex filename fiter param here to filter files
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -260,8 +256,8 @@ public class ExampleJsonInstanceGeneratorTest {
 
     }
 
-    private ExampleJsonInstanceGenerator createExampleJsonInstanceGenerator() {
-        ExampleJsonInstanceGenerator structureGenerator = new ExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
+    private OpenEhrExampleJsonInstanceGenerator createExampleJsonInstanceGenerator() {
+        OpenEhrExampleJsonInstanceGenerator structureGenerator = new OpenEhrExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
         structureGenerator.setTypePropertyName(TYPE_PROPERTY_NAME);
         return structureGenerator;
     }

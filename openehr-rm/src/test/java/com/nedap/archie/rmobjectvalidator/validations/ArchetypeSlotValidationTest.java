@@ -3,13 +3,12 @@ package com.nedap.archie.rmobjectvalidator.validations;
 import com.nedap.archie.adlparser.ADLParseException;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.OperationalTemplate;
-import com.nedap.archie.creation.ExampleJsonInstanceGenerator;
+import com.nedap.archie.tools.creation.OpenEhrExampleJsonInstanceGenerator;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
 import com.nedap.archie.openehr.rminfo.OpenEhrRmMetaModelsInitialiser;
 import com.nedap.archie.openehr.serialisation.json.OpenEhrRmJacksonUtil;
-import com.nedap.archie.rminfo.MetaModel;
 import com.nedap.archie.rminfo.MetaModels;
 import org.openehr.rm.archetyped.Archetyped;
 import org.openehr.rm.composition.Observation;
@@ -17,7 +16,6 @@ import org.openehr.rm.composition.Section;
 import org.openehr.rm.datastructures.Element;
 import org.openehr.rm.datavalues.DvCodedText;
 import org.openehr.rm.support.identification.ArchetypeID;
-import com.nedap.archie.openehr.rminfo.OpenEhrRmInfoLookup;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessage;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidationMessageType;
 import com.nedap.archie.rmobjectvalidator.RMObjectValidator;
@@ -42,7 +40,7 @@ public class ArchetypeSlotValidationTest {
     private OperationalTemplate parentOpt;
     private OperationalTemplate includedOpt;
     private OperationalTemplate parentOfIncludedOpt;
-    private ExampleJsonInstanceGenerator generator;
+    private OpenEhrExampleJsonInstanceGenerator generator;
     private Section example;
     private RMObjectValidator rmObjectValidator;
 
@@ -68,7 +66,7 @@ public class ArchetypeSlotValidationTest {
         repository.setOperationalTemplate(includedOpt);
         repository.setOperationalTemplate(parentOfIncludedOpt);
 
-        generator = new ExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
+        generator = new OpenEhrExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
         Map<String, Object> generated = generator.generate(parentOpt);
         example = OpenEhrRmJacksonUtil.getObjectMapper().readValue(OpenEhrRmJacksonUtil.getObjectMapper().writeValueAsString(generated), Section.class);
         rmObjectValidator = new RMObjectValidator(metaModels.getSelectedModel(), repository, new ValidationConfiguration.Builder().build());

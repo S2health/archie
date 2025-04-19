@@ -1,4 +1,4 @@
-package com.nedap.archie.creation;
+package com.nedap.archie.tools.creation;
 
 import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CComplexObject;

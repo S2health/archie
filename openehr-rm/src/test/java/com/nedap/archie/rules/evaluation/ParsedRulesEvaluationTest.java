@@ -4,7 +4,7 @@ import com.nedap.archie.adlparser.ADLParseException;
 import com.nedap.archie.adlparser.ADLParser;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.OperationalTemplate;
-import com.nedap.archie.creation.ExampleJsonInstanceGenerator;
+import com.nedap.archie.tools.creation.OpenEhrExampleJsonInstanceGenerator;
 import com.nedap.archie.flattener.Flattener;
 import com.nedap.archie.flattener.FlattenerConfiguration;
 import com.nedap.archie.flattener.InMemoryFullArchetypeRepository;
@@ -28,7 +28,6 @@ import com.nedap.archie.rules.ExpressionVariable;
 import com.nedap.archie.rules.RuleStatement;
 import com.nedap.archie.rules.VariableDeclaration;
 import com.nedap.archie.testutil.TestUtil;
-import org.junit.Before;
 import org.junit.Test;
 import org.openehr.referencemodels.AllMetaModelsInitialiser;
 
@@ -790,7 +789,7 @@ public abstract class ParsedRulesEvaluationTest {
         repository.addArchetype(valueSet);
         Flattener flattener = new Flattener(repository, AllMetaModelsInitialiser.getMetaModels(), FlattenerConfiguration.forOperationalTemplate());
         OperationalTemplate opt = (OperationalTemplate) flattener.flatten(parent, 0);
-        ExampleJsonInstanceGenerator generator = new ExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
+        OpenEhrExampleJsonInstanceGenerator generator = new OpenEhrExampleJsonInstanceGenerator(AllMetaModelsInitialiser.getMetaModels(), "en");
         Map<String, Object> exampleInstance = generator.generate(opt);
         Cluster cluster = OpenEhrRmJacksonUtil.getObjectMapper().readValue(OpenEhrRmJacksonUtil.getObjectMapper().writeValueAsString(exampleInstance), Cluster.class);
         //correct case first

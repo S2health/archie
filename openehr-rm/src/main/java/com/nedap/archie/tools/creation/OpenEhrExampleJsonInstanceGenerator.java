@@ -1,4 +1,4 @@
-package com.nedap.archie.creation;
+package com.nedap.archie.tools.creation;
 
 import com.nedap.archie.aom.*;
 import com.nedap.archie.aom.primitives.*;
@@ -32,7 +32,7 @@ import java.util.function.Function;
  * This contains a tiny bit of OpenEHR RM specific code, that is to be converted to subclasses for the different RMs
  * BMM + AOP simply does nto contain enough information for this to be truly RM independent
  */
-public  class ExampleJsonInstanceGenerator {
+public  class OpenEhrExampleJsonInstanceGenerator {
 
     public static final String MISSING_TERM_IN_ARCHETYPE_FOR_LANGUAGE = "missing term in archetype for language ";
     private final String language;
@@ -48,7 +48,7 @@ public  class ExampleJsonInstanceGenerator {
 
     OpenEhrRmInstanceGenerator openEhrRmInstanceGenerator;
 
-    public ExampleJsonInstanceGenerator(MetaModels models, String language) {
+    public OpenEhrExampleJsonInstanceGenerator(MetaModels models, String language) {
         this.language = language;
         this.models = models;
         openEhrRmInstanceGenerator = new OpenEhrRmInstanceGenerator(this, typePropertyName);

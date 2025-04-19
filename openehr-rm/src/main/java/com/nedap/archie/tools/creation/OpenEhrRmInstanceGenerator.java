@@ -1,16 +1,13 @@
-package com.nedap.archie.creation;
+package com.nedap.archie.tools.creation;
 
-import com.google.common.collect.Lists;
 import com.nedap.archie.aom.ArchetypeSlot;
 import com.nedap.archie.aom.CArchetypeRoot;
 import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CComplexObject;
 import com.nedap.archie.aom.CObject;
 import com.nedap.archie.aom.CPrimitiveObject;
-import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
-import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.definitions.AdlCodeUtils;
 import org.openehr.bmm.core.BmmClass;
 import org.openehr.bmm.core.BmmProperty;
@@ -25,9 +22,9 @@ class OpenEhrRmInstanceGenerator {
 
     private final OpenEHRExampleCodePhrases exampleCodePhrases;
     private String typePropertyName;
-    private final ExampleJsonInstanceGenerator generator;
+    private final OpenEhrExampleJsonInstanceGenerator generator;
 
-    public OpenEhrRmInstanceGenerator(ExampleJsonInstanceGenerator generator, String typePropertyName) {
+    public OpenEhrRmInstanceGenerator(OpenEhrExampleJsonInstanceGenerator generator, String typePropertyName) {
         this.generator = generator;
         this.exampleCodePhrases = new OpenEHRExampleCodePhrases(typePropertyName);
         this.typePropertyName = typePropertyName;

@@ -1,12 +1,14 @@
-package com.nedap.archie.json.flat;
+package com.nedap.archie.tools.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.OperationalTemplate;
 import com.nedap.archie.base.OpenEHRBase;
-import com.nedap.archie.creation.ExampleJsonInstanceGenerator;
+import com.nedap.archie.json.flat.DuplicateKeyException;
+import com.nedap.archie.json.flat.FlatJsonFormatConfiguration;
+import com.nedap.archie.json.flat.FlatJsonGenerator;
 import com.nedap.archie.rminfo.MetaModels;
+import com.nedap.archie.tools.creation.OpenEhrExampleJsonInstanceGenerator;
 
 import java.util.Map;
 
@@ -34,9 +36,9 @@ public class FlatJsonExampleInstanceGenerator {
         if(metaModels.getSelectedModel().getJsonObjectMapper() == null) {
             throw new IllegalArgumentException("Cannot find JSON Object mapper in selected metamodel");
         }
-        ExampleJsonInstanceGenerator exampleJsonInstanceGenerator = new ExampleJsonInstanceGenerator(metaModels, language);
-        exampleJsonInstanceGenerator.setTypePropertyName("_type");
-        Map<String, Object> generatedExample = exampleJsonInstanceGenerator.generate(template);
+        OpenEhrExampleJsonInstanceGenerator openEhrExampleJsonInstanceGenerator = new OpenEhrExampleJsonInstanceGenerator(metaModels, language);
+        openEhrExampleJsonInstanceGenerator.setTypePropertyName("_type");
+        Map<String, Object> generatedExample = openEhrExampleJsonInstanceGenerator.generate(template);
         ObjectMapper objectMapper = metaModels.getSelectedModel().getJsonObjectMapper();
         String jsonRmObject = objectMapper.writeValueAsString(generatedExample);
         OpenEHRBase openEHRBase = objectMapper.readValue(jsonRmObject, OpenEHRBase.class);
