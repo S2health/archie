@@ -365,10 +365,6 @@ public class S2RmObjectValidatorTest {
         return (OperationalTemplate) new Flattener(repository, metaModels, FlattenerConfiguration.forOperationalTemplate()).flatten(archetype, 0);
     }
 
-    private Archetype parse(String filename) throws IOException, ADLParseException {
-        return TestUtil.parseFailOnErrors(this.getClass(), filename);
-    }
-
     private void logMessages(List<RMObjectValidationMessage> messages) {
         if (messages != null && !messages.isEmpty()) {
             for (RMObjectValidationMessage message : messages) {
