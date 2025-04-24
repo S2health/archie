@@ -140,7 +140,7 @@ public class S2TerminologyAccess {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 
-        InputStream stream = getClass().getResourceAsStream("/org/s2/terminology/code_system.json");
+        InputStream stream = getClass().getResourceAsStream("code_system.json");
         if (stream == null) {
             throw new IOException("Could not find resource.");
         }

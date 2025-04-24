@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TerminologyCache {
-    private static final String VSET_PATH = "/s2-terminology/value-set/";
-    private static final String CSET_PATH = "/s2-terminology/code-set/";
+    private static final String VSET_PATH = "value-set/";
+    private static final String CSET_PATH = "code-set/";
     private static final TerminologyCacheableSet MISSING_SET = new TerminologyCacheableSet(); // Marker value
 
     private final ObjectMapper objectMapper = new ObjectMapper();

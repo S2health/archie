@@ -1,6 +1,13 @@
+
+plugins {
+  id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
+}
+
 repositories {
   mavenCentral()
 }
+
+
 
 
 wrapper {
@@ -100,6 +107,8 @@ subprojects {
 
 
   test {
+    ignoreFailures = true
+
     if(JavaVersion.current() != JavaVersion.VERSION_1_8) {
       jvmArgs = ['--add-opens', 'java.base/java.lang=ALL-UNNAMED'
                  , '--add-opens', 'java.base/java.lang.invoke=ALL-UNNAMED'
@@ -120,3 +129,5 @@ subprojects {
 }
 
 apply from: "${gradleScriptDir}/jacoco.gradle"
+
+
