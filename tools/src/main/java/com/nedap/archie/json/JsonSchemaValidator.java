@@ -48,7 +48,6 @@ public class JsonSchemaValidator {
      * the serialization rules corresponding to your own different BMM file, if it is not an OpenEHR model.
      *
      * @param schemaFiles JSON schema files to materialise
-     * @param allowAdditionalProperties whether to allow additional properties in the JSON
      */
     public JsonSchemaValidator(Map<String, JsonObject> schemaFiles) {
         this.schemaFiles = schemaFiles;
