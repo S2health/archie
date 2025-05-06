@@ -3,6 +3,7 @@ package com.nedap.archie.adl14.log;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -39,7 +40,7 @@ public class ConvertedCodeResult {
     @JsonIgnore
     public String getIdCode() {
         for(String code:convertedCodes) {
-            if(AOMUtils.isIdCode(code)) {
+            if(AdlCodeUtils.isIdCode(code)) {
                 return code;
             }
         }
@@ -53,7 +54,7 @@ public class ConvertedCodeResult {
     @JsonIgnore
     public String getValueCode() {
         for(String code:convertedCodes) {
-            if(AOMUtils.isValueCode(code)) {
+            if(AdlCodeUtils.isValueCode(code)) {
                 return code;
             }
         }

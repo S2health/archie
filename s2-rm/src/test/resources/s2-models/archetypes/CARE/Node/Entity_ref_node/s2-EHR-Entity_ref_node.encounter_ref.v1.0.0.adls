@@ -1,0 +1,76 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=ca5ff9eb-15f1-4768-ab04-349001090100)
+	s2-EHR-Entity_ref_node.encounter_ref.v1.0.0
+
+specialize
+	s2-EHR-Entity_ref_node.care_process_ref.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Reference to an encounter record">
+		>
+	>
+
+definition
+	Entity_ref_node[id1.1] matches {	-- Encounter reference
+		value matches {
+			Coded_text[id0.2] matches {	-- Encounter interaction type
+				term matches {
+					Terminology_term[id0.102] matches {
+						concept matches {[ac0.1]}		-- Encounter interaction type
+					}
+				}
+			}
+		}
+		items matches {
+			Info_node[id0.3] matches {	-- Encounter identifier
+				value matches {
+					Rwe_id_ref[id0.103] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Encounter reference">
+				description = <"Reference to an encounter record">
+			>
+			["id0.2"] = <
+				text = <"Encounter interaction type">
+				description = <"Encounter interaction type">
+			>
+			["id0.3"] = <
+				text = <"Encounter identifier">
+				description = <"Encounter identifier within institution">
+			>
+			["ac0.1"] = <
+				text = <"Encounter interaction type">
+				description = <"Type of encounter interaction">
+			>
+		>
+	>
+	term_bindings = <
+		["s2"] = <
+			["ac0.1"] = <http://s2health.org/id/s2.EncounterType>
+		>
+		["loinc"] = <
+			["id0.3"] = <http://loinc.org/75519-9>
+			["id1.1"] = <http://loinc.org/a82d501b-5274-ef11-8870-6045bdc71c8b>
+			["id0.2"] = <http://loinc.org/59c3123d-048c-ef11-8872-6045bdc71c8b>
+		>
+	>
+

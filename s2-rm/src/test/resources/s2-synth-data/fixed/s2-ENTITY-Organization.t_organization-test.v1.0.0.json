@@ -1,0 +1,553 @@
+{
+  "_type": "Organization",
+  "uid": {
+    "_type": "Uuid",
+    "value": "2e3718ca-daac-4836-82cd-4ee1067a7688"
+  },
+  "archetype_node_id": "id1.1",
+  "name": "Organization",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-ENTITY-Organization.organization.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-ENTITY-Organization.t_organization-test.v1.0.0"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "Organization",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "90055-5",
+      "uri": "http://loinc.org/90055-5"
+    }
+  },
+  "identities": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id4",
+      "name": "Organization name",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Organization name",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "76469-6",
+          "uri": "http://loinc.org/76469-6"
+        }
+      },
+      "value": {
+        "_type": "Plain_text",
+        "text": "International Health Inc"
+      }
+    }
+  ],
+  "location_addresses": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id3",
+      "name": "Physical adresses",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-ENTITY-Info_node.location_address.v1.0.1"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Physical adresses",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "90052-2",
+          "uri": "http://loinc.org/90052-2"
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id2",
+          "name": "Address",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-ENTITY-Info_node.structured_address.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99952-4",
+              "uri": "http://loinc.org/99952-4"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "4596 Blandford Dr, Memphis, TN 38141"
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id2",
+              "name": "Address line",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Address line",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "106181-1",
+                  "uri": "http://loinc.org/106181-1"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "4596 Blandford Dr"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "City/Town",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "City/Town",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "68997-6",
+                  "uri": "http://loinc.org/68997-6"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "Memphis"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id4",
+              "name": "District/County",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "District/County",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "104933-7",
+                  "uri": "http://loinc.org/104933-7"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "Shelby County"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "State/Territory/Province",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "State/Territory/Province",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "99950-8",
+                  "uri": "http://loinc.org/99950-8"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "TN"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id6",
+              "name": "Postal code",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Postal code",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "99951-6",
+                  "uri": "http://loinc.org/99951-6"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "38141"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id7",
+              "name": "Country",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Country",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "99955-7",
+                  "uri": "http://loinc.org/99955-7"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Afghanistan",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Afghanistan",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "iso_3166-1-alpha2",
+                    "code_string": "AF",
+                    "uri": "http://iso.org/code_sets/iso_3166-1-alpha2/AF"
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id22",
+              "name": "Geolocation code",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Geolocation code",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "104912-1",
+                  "uri": "http://loinc.org/104912-1"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "35.0229356,-89.8411594"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id8",
+              "name": "Latitude",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Latitude",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "104966-7",
+                  "uri": "http://loinc.org/104966-7"
+                }
+              },
+              "value": {
+                "_type": "Quantity",
+                "magnitude": 35.022936,
+                "precision": 6,
+                "units": {
+                  "_type": "Coded_text",
+                  "text": "deg",
+                  "term": {
+                    "_type": "Terminology_term",
+                    "description": "deg",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "snomed",
+                      "code_string": "277255000",
+                      "uri": "http://snomed.info/id/277255000"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id9",
+              "name": "Longitude",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Longitude",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "104897-4",
+                  "uri": "http://loinc.org/104897-4"
+                }
+              },
+              "value": {
+                "_type": "Quantity",
+                "magnitude": -89.841159,
+                "precision": 6,
+                "units": {
+                  "_type": "Coded_text",
+                  "text": "deg",
+                  "term": {
+                    "_type": "Terminology_term",
+                    "description": "deg",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "snomed",
+                      "code_string": "277255000",
+                      "uri": "http://snomed.info/id/277255000"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id10",
+              "name": "Altitude",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Altitude",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "41905-1",
+                  "uri": "http://loinc.org/41905-1"
+                }
+              },
+              "value": {
+                "_type": "Quantity",
+                "magnitude": 103.0,
+                "precision": 2,
+                "units": {
+                  "_type": "Coded_text",
+                  "text": "m",
+                  "term": {
+                    "_type": "Terminology_term",
+                    "description": "m",
+                    "concept": {
+                      "_type": "Terminology_code",
+                      "terminology_id": "snomed",
+                      "code_string": "258669008",
+                      "uri": "http://snomed.info/id/258669008"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id20",
+              "name": "Map URL",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Map URL",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "104970-9",
+                  "uri": "http://loinc.org/104970-9"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "https://www.google.com/maps/place/4596+Blandford+Dr,+Memphis,+TN+38141,+USA/@35.0229356,-89.8411594,971m/data=!3m2!1e3!4b1!4m6!3m5!1s0x887f90112617cc55:0xe2481bc95a8931b4!8m2!3d35.0229356!4d-89.8385845!16s%2Fg%2F11c29_yw_8?entry=ttu&g_ep=EgoyMDI0MDgyOC4wIKXMDSoASAFQAw%3D%3D"
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id12",
+          "name": "Address purpose",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address purpose",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99958-1",
+              "uri": "http://loinc.org/99958-1"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Billing address",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Billing address",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "30761000205106",
+                "uri": "http://snomed.info/id/30761000205106"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id13",
+          "name": "Address location type",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address location type",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99957-3",
+              "uri": "http://loinc.org/99957-3"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Home address",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Home address",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "30771000205103",
+                "uri": "http://snomed.info/id/30771000205103"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "comms_addresses": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id2",
+      "name": "Communications addresses",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-ENTITY-Info_node.comms_address.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Communications addresses",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "99953-2",
+          "uri": "http://loinc.org/99953-2"
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id10",
+          "name": "Address string",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address string",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104917-0",
+              "uri": "http://loinc.org/104917-0"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "example@email.com"
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id11",
+          "name": "Communications platform",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Communications platform",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "512a53ca-db9a-ef11-8872-6045bdc71c8b",
+              "uri": "http://loinc.org/512a53ca-db9a-ef11-8872-6045bdc71c8b"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Facebook",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Facebook",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "31471000205101",
+                "uri": "http://snomed.info/id/31471000205101"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id12",
+          "name": "Communications purpose",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Communications purpose",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104911-3",
+              "uri": "http://loinc.org/104911-3"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lacinia ut sem et vestibulum. Nulla eget ligula sem. Suspendisse lobortis nibh aliquet dui molestie, ut blandit libero gravida. Sed ac nisi ac mi hendrerit condimentum in non nisl. Morbi aliquam odio in libero mollis malesuada. Nunc eu sapien odio. Nam sit amet enim a nisi mattis mollis. Pellentesque vitae sagittis ex. Praesent a interdum metus, non pharetra magna. Morbi a risus fringilla, molestie dolor eu, vestibulum diam. Morbi aliquam ex orci, sit amet vestibulum magna mollis vel. In justo ipsum, tincidunt ut convallis ut, pretium id est. Sed finibus accumsan nulla. Praesent purus turpis, maximus in pretium et, consectetur congue mi."
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id13",
+          "name": "Communication technology, e.g. phone, email etc",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Communication technology, e.g. phone, email etc",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99949-0",
+              "uri": "http://loinc.org/99949-0"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Instant message",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Instant message",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "31451000205106",
+                "uri": "http://snomed.info/id/31451000205106"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import com.nedap.archie.aom.CPrimitiveObject;
 import com.nedap.archie.aom.SiblingOrder;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.CodeRedefinitionStatus;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.rminfo.MetaModels;
 
 import java.util.LinkedHashMap;
@@ -106,7 +107,7 @@ public class LCSOrderingDiff {
                 boolean allAdds = true;
                 for(CObject cObject:cObjects) {
                     if(AOMUtils.getSpecialisationStatusFromCode(cObject.getNodeId(), specializationDepth) == CodeRedefinitionStatus.ADDED
-                        || AOMUtils.isOverriddenIdCode(cObject.getNodeId(), last.getSiblingNodeId())
+                        || AdlCodeUtils.isOverriddenIdCode(cObject.getNodeId(), last.getSiblingNodeId())
                     ) {
                         siblingOrders.remove(last);
                     }
@@ -194,9 +195,9 @@ public class LCSOrderingDiff {
 
         for(int j = i - 1; j >= 0; j--) {
             String otherNodeId = childNodeIds.get(j);
-            if (AOMUtils.getSpecializationDepthFromCode(nodeId) == childSpecializationDepth &&
-                    AOMUtils.codeExistsAtLevel(nodeId, childSpecializationDepth-1) &&
-                    AOMUtils.codeAtLevel(otherNodeId, childSpecializationDepth-1).equals(AOMUtils.codeAtLevel(nodeId, childSpecializationDepth-1))) {
+            if (AdlCodeUtils.getSpecializationDepthFromCode(nodeId) == childSpecializationDepth &&
+                    AdlCodeUtils.codeExistsAtLevel(nodeId, childSpecializationDepth-1) &&
+                    AdlCodeUtils.codeAtLevel(otherNodeId, childSpecializationDepth-1).equals(AdlCodeUtils.codeAtLevel(nodeId, childSpecializationDepth-1))) {
                 onlyTheSameParentNodeId = true;
                 firstNodeIdWithSameParent = otherNodeId;
             } else {

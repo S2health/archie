@@ -9,10 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.xml.adapters.ArchetypeTerminologyAdapter;
-import com.nedap.archie.xml.adapters.StringDictionaryUtil;
-import com.nedap.archie.xml.types.StringDictionaryItem;
 import com.nedap.archie.xml.types.XmlArchetypeTerminology;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -22,7 +21,6 @@ import javax.xml.bind.annotation.XmlType;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -160,8 +158,6 @@ public class OperationalTemplate extends AuthoredArchetype {
             //then remove this if.
             if(segment.hasArchetypeRef()) {
                 //this is [archetypeId] instead of [idcode]
-                return segment.getNodeId();
-            } else if(segment.getArchetypeRef() != null) {
                 return segment.getArchetypeRef();
             }
         }
@@ -188,7 +184,7 @@ public class OperationalTemplate extends AuthoredArchetype {
      */
     @Override
     public ArchetypeTerm getTerm(CObject object, String code, String language) {
-        boolean stripLastPartOfPath = object instanceof CArchetypeRoot && AOMUtils.isIdCode(code);
+        boolean stripLastPartOfPath = object instanceof CArchetypeRoot && AdlCodeUtils.isIdCode(code);
         ArchetypeTerm term = getTermInternal(object, code, language, stripLastPartOfPath);
         if(stripLastPartOfPath && term == null) {
             term = getTermInternal(object, code, language, false);

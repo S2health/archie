@@ -8,6 +8,7 @@ import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ConformanceCheckResult;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.rminfo.RMProperty;
 import org.openehr.utils.message.I18n;
@@ -36,7 +37,7 @@ import java.util.function.BiFunction;
 public abstract class CObject extends ArchetypeConstraint {
 
     @XmlAttribute(name="rm_type_name")
-    private String rmTypeName;
+    protected String rmTypeName;
     @XmlElement(name="occurrences")
     @Nullable
     private MultiplicityInterval occurrences;
@@ -109,6 +110,7 @@ public abstract class CObject extends ArchetypeConstraint {
     /**
      * Get the archetype term, in the defined meaning and description language
      */
+    @JsonIgnore
     public ArchetypeTerm getTerm() {
         if(nodeId == null) {
             return null;
@@ -177,7 +179,9 @@ public abstract class CObject extends ArchetypeConstraint {
         return meaning;
     }
 
+
     @Deprecated
+    @JsonIgnore
     public String getLogicalPath() {
         //TODO: this can cause name clashes. Solve them!
         //TODO: the text can contain []-characters. Replace them?
@@ -201,6 +205,7 @@ public abstract class CObject extends ArchetypeConstraint {
         return path;
     }
 
+    @JsonIgnore
     public boolean isAllowed() {
         if(occurrences == null) {
             return true;
@@ -213,6 +218,7 @@ public abstract class CObject extends ArchetypeConstraint {
         return (CAttribute) super.getParent();
     }
 
+    @JsonIgnore
     public boolean isRequired() {
         if(occurrences == null) {
             return false;
@@ -259,7 +265,7 @@ public abstract class CObject extends ArchetypeConstraint {
      * @return
      */
     public Integer specialisationDepth() {
-        return AOMUtils.getSpecializationDepthFromCode(nodeId);
+        return AdlCodeUtils.getSpecializationDepthFromCode(nodeId);
     }
 
     @Override
@@ -267,6 +273,7 @@ public abstract class CObject extends ArchetypeConstraint {
         return "CObject: " + getRmTypeName() + "[" + getNodeId() + "]";
     }
 
+    @JsonIgnore // JFC
     public boolean isProhibited() {
         return occurrences != null && occurrences.isProhibited();
     }
@@ -303,7 +310,7 @@ public abstract class CObject extends ArchetypeConstraint {
      * @return
      */
     public boolean nodeIdConformsTo(CObject other) {
-        return AOMUtils.codesConformant(this.getNodeId(), other.getNodeId());
+        return AdlCodeUtils.codesConformant(this.getNodeId(), other.getNodeId());
     }
 
     public boolean occurrencesConformsTo(CObject other) {

@@ -32,7 +32,7 @@ public abstract class BmmEffectiveType extends BmmUnitaryType {
      *
      * @return
      */
-    public BmmEffectiveType getEffectiveType() {
+    public BmmEffectiveType effectiveType() {
         return this;
     }
 

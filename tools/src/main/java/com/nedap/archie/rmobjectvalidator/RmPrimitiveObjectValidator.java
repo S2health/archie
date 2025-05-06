@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class RmPrimitiveObjectValidator {
+public class RmPrimitiveObjectValidator {
     private final ValidationHelper validationHelper;
 
     public RmPrimitiveObjectValidator(ValidationHelper validationHelper) {

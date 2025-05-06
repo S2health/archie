@@ -33,6 +33,8 @@ public class AOMPathQuery {
 
     private final List<PathSegment> pathSegments;
 
+    private int pathDepth = 0;
+
     /** If true, extend the search through C_COMPLEX_OBJECT_PROXY objects by looking up the replacement first.*/
     private final boolean findThroughCComplexObjectProxies;
 
@@ -41,6 +43,7 @@ public class AOMPathQuery {
     public AOMPathQuery(String query) {
         APathQuery apathQuery = new APathQuery(query);
         this.pathSegments = apathQuery.getPathSegments();
+        this.pathDepth = apathQuery.getPathDepth();
         findThroughCComplexObjectProxies = true;
     }
 
@@ -201,11 +204,16 @@ public class AOMPathQuery {
     }
 
     protected ArchetypeModelObject findOneMatchingObject(CAttribute attribute, PathSegment pathSegment, boolean matchSpecializedNodes) {
-        if (pathSegment.hasIdCode() || pathSegment.hasArchetypeRef()) {
-            if(matchSpecializedNodes) {
+        if (pathSegment.hasIdCode()) {
+            if (matchSpecializedNodes)
                 return attribute.getPossiblySpecializedChild(pathSegment.getNodeId());
-            }
-            return attribute.getChild(pathSegment.getNodeId());
+            else
+                return attribute.getChild(pathSegment.getNodeId());
+        } else if (pathSegment.hasArchetypeRef()) {
+            if (matchSpecializedNodes)
+                return attribute.getPossiblySpecializedChild(pathSegment.getArchetypeRef());
+            else
+                return attribute.getChild(pathSegment.getArchetypeRef());
         } else if (pathSegment.hasNumberIndex()) {
             // APath path numbers start at 1 instead of 0
             int index = pathSegment.getIndex() - 1;
@@ -227,6 +235,8 @@ public class AOMPathQuery {
     public List<PathSegment> getPathSegments() {
         return pathSegments;
     }
+
+    public int getPathDepth() { return pathDepth; };
 
 
     /**

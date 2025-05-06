@@ -4,6 +4,7 @@ import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CObject;
 import com.nedap.archie.aom.SiblingOrder;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class DiffUtil {
             }
         }
         for (CObject parentCObject : parentCObjects) {
-            if (AOMUtils.isOverriddenIdCode(specializedNodeId, parentCObject.getNodeId())) {
+            if (AdlCodeUtils.isOverriddenIdCode (specializedNodeId, parentCObject.getNodeId())) {
                 return parentCObject;
             }
         }

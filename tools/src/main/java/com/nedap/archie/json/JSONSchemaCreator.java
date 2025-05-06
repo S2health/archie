@@ -136,7 +136,7 @@ public class JSONSchemaCreator {
         JsonObjectBuilder properties = jsonFactory.createObjectBuilder();
 
         boolean atLeastOneProperty = false;
-        Map<String, BmmProperty<?>> flatProperties = bmmClass.getFlatProperties();
+        Map<String, BmmProperty<?>> flatProperties = bmmClass.flatProperties();
         for (String propertyName : flatProperties.keySet()) {
             BmmProperty<?> bmmProperty = flatProperties.get(propertyName);
             if(bmmProperty.getComputed()) {

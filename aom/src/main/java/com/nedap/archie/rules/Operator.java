@@ -16,7 +16,7 @@ public class Operator extends Expression {
 
     private String symbol;
 
-    @JsonIgnore
+    // @JsonIgnore
     public OperatorKind getOperator() {
         return operator;
     }
@@ -60,6 +60,7 @@ public class Operator extends Expression {
         this.symbol = symbol;
     }
 
+    @JsonIgnore
     public OperatorDef getOperatorDef() {
         return operator == null ? null : new OperatorDefBuiltin(operator.getIdentifier());
     }

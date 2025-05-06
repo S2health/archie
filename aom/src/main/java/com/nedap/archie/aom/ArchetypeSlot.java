@@ -1,6 +1,7 @@
 package com.nedap.archie.aom;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nedap.archie.rules.Assertion;
 
 import javax.annotation.Nullable;
@@ -17,6 +18,7 @@ import java.util.List;
         "excludes",
         "closed"
 })
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class ArchetypeSlot extends CObject {
 
     @Nullable

@@ -1,0 +1,84 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=9c533018-2b8a-402c-8474-21e1a0b741cf)
+	s2-ENTITY-Info_node.person_name_and_use.v1.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.structured_name.v1.0.1, copyright 2021 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about the name of an individual and how it is used.">
+		>
+	>
+
+definition
+	Info_node[id1] matches {	-- Name of a person and use
+		value matches {
+			Plain_text[id30] 
+		}
+		items matches {
+			Info_node[id21] matches {	-- Usage
+				value matches {
+					Coded_text[id123] matches {
+						term matches {
+							Terminology_term[id1123] matches {
+								concept matches {[ac1]}		-- Purpose of name
+							}
+						}
+					}
+				}
+			}
+			use_archetype Info_node[id20, s2-ENTITY-Info_node.person_structured_name.v1] occurrences matches {0..1} 
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Name of a person and use">
+				description = <"Discrete components of an individual's name plus valid usage.">
+			>
+			["id20"] = <
+				text = <"Structured name">
+				description = <"Elements of name">
+			>
+			["id21"] = <
+				text = <"Usage">
+				description = <"Valid usage of this name">
+			>
+			["ac1"] = <
+				text = <"Purpose of name">
+				description = <"Purpose of name, i.e. social context for use">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1"] = <http://loinc.org/97845-2>
+			["id20"] = <http://loinc.org/6afbe6fb-f59d-ef11-8872-6045bdc71c8b>
+			["id21"] = <http://loinc.org/97846-0>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.PersonNameUse>
+		>
+	>
+

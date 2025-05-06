@@ -86,11 +86,6 @@ public class ArchetypeValidator {
     }
 
 
-    public ValidationResult validate(Archetype archetype) {
-        return validate(archetype, null);
-    }
-
-
     /**
      * Validate an archetype, plus a repository of other archetypes.
      *
@@ -203,10 +198,10 @@ public class ArchetypeValidator {
 
         if(result.passes() || settings.isAlwaysTryToFlatten()) {
             try {
-                Archetype flattened = new Flattener(repository, combinedModels, flattenerConfiguration).flatten(archetype);
+                Archetype flattened = new Flattener(repository, combinedModels, flattenerConfiguration).flatten(archetype, 0);
 
                 try {
-                    OperationalTemplate operationalTemplate = (OperationalTemplate) new Flattener(repository, combinedModels).createOperationalTemplate(true).flatten(archetype);
+                    OperationalTemplate operationalTemplate = (OperationalTemplate) new Flattener(repository, combinedModels).createOperationalTemplate(true).flatten(archetype, 0);
                     extraRepository.addExtraOperationalTemplate(operationalTemplate);
                 } catch (Exception e) {
                     //this is probably an error in an included archetype, so ignore it here

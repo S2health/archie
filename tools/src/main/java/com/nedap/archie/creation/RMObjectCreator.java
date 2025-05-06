@@ -34,12 +34,16 @@ public class RMObjectCreator {
             throw new IllegalArgumentException("cannot construct RMObject because of unknown constraint name " + constraint.getRmTypeName() + " full constraint " + constraint);
         }
         try {
-            Object result = clazz.newInstance();
+            Object result = clazz.getDeclaredConstructor().newInstance();
 
             modelInfoLookup.processCreatedObject(result, constraint);
             return (T) result;
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException("error creating class " + constraint.getRmTypeName(), e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
     }
 

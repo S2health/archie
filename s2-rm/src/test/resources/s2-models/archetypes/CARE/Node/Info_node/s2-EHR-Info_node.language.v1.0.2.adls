@@ -1,0 +1,201 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; generated; uid=95e8825f-7e17-4eff-890d-fd6894249737)
+	s2-EHR-Info_node.language.v2.0.0
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health - Knowledge Engineering">
+		["organisation"] = <"S2 Health <http://www.s2health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-08-09">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["original_author"] = <"Vebjørn Arntzen, Oslo University Hospital, <varntzen@ous-hf.no>, 2017-07-06">
+		["openehr"] = <"Content adapted from openEHR archetype openEHR-EHR-CLUSTER.language.v1.0.2, copyright 2017 openEHR International <http://www.openEHR.org>">
+		["loinc"] = <"Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>">
+		["rxnorm"] = <"Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>">
+	>
+	conversion_details = <
+		["source_model"] = <"openEHR archetype openEHR-EHR-CLUSTER.language.v1.0.2 from <https://ckm.openehr.org>">
+		["tool"] = <"s2 convert openehr">
+		["date"] = <"2024-08-09">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record details about a spoken, written or symbolic system of communication.">
+			use = <"Use to record details about a spoken, written or symbolic system of communication. The context of the language details is provided by the parent archetypes within which this archetype is nested. For example:
+            - to record a patient's primary or preferred language, use this archetype within the context of Node.communication;
+            - to record the preferred or required language as part of a request for an interpreter, use Node.interpreter_requirements;
+            - to record the language used by an interpreter within the context of a clinical consultation, use this archetype within ACTION.interpretation.
+            
+            Use a separate instance of this archetype to record each language in the situation where multiple languages need to be recorded, for example Norwegian and Swahili.">
+			keywords = <"signing", "sign language", "tongue", "sign", "speaker", "spoken", "written", "proficiency", "speech", "translate", "interpret">
+			misuse = <"Not to be used to record capability and means for exchanging information with an individual - use Node.communication for this purpose.
+            
+            Not to be used to record details about a request for interpreter services - use Node.Interpreter_requirements with a suitable INSTRUCTION archetype, for example INSTRUCTION.service_request.">
+		>
+	>
+	other_contributors = <"openEHR CKM community", ...>
+
+definition
+	Info_node[id1] matches {	-- Language
+		items matches {
+			Info_node[id2] occurrences matches {1} matches {	-- Language name
+				value matches {
+					Coded_text[id102] matches {
+						term matches {
+							Terminology_term[id1002] matches {
+								concept matches {[ac2]}		-- Language
+							}
+						}
+					}
+				}
+			}
+			Info_node[id3] occurrences matches {0..1} matches {	-- Variant
+				value matches {
+					Plain_text[id103] 
+				}
+			}
+			Info_node[id4] matches {	-- Capability
+				items matches {
+					Info_node[id5] occurrences matches {1} matches {	-- Mode
+						value matches {
+							Coded_text[id105] matches {
+								term matches {
+									Terminology_term[id1005] matches {
+										concept matches {[ac1]}		-- Mode
+									}
+								}
+							}
+						}
+					}
+					Info_node[id6] occurrences matches {0..1} matches {	-- Proficiency
+						value matches {
+							Coded_text[id106] matches {
+								term matches {
+									Terminology_term[id1006] matches {
+										concept matches {[ac3]}		-- Proficiency
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			Info_node[id7] occurrences matches {0..1} matches {	-- Preferred
+				value matches {
+					Boolean_value[id107] 
+				}
+			}
+			Info_node[id10] matches {	-- Comment
+				value matches {
+					Plain_text[id110] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["ac1"] = <
+				text = <"Mode">
+				description = <"The method of communication for the specified language.">
+			>
+			["ac2"] = <
+				text = <"Language">
+				description = <"The language.">
+			>
+			["ac3"] = <
+				text = <"Proficiency">
+				description = <"Proficiency level.">
+			>
+			["at10"] = <
+				text = <"Writing">
+				description = <"A composition of letters, words, pictures or symbols is used.">
+			>
+			["at12"] = <
+				text = <"Tactile reading">
+				description = <"Interpretation of written material using touch is used.">
+			>
+			["at7"] = <
+				text = <"Speaking">
+				description = <"The voice is used.">
+			>
+			["at8"] = <
+				text = <"Signing">
+				description = <"Physical actions or gestures are used. This value is redundant if identification of the mode is a component of the 'Language name', such as 'Norwegian sign language'.">
+			>
+			["at9"] = <
+				text = <"Reading">
+				description = <"Written or printed letters, words, pictures or symbols is used.">
+			>
+			["id1"] = <
+				text = <"Language">
+				description = <"A collection of words, their pronunciation and methods for combining them, understood by a specific community and used as a form of communication.">
+			>
+			["id2"] = <
+				text = <"Language name">
+				description = <"The name of the language.">
+			>
+			["id3"] = <
+				text = <"Variant">
+				description = <"The name of the dialect or sociolect, if appropriate.">
+			>
+			["id4"] = <
+				text = <"Capability">
+				description = <"Language capability.">
+			>
+			["id5"] = <
+				text = <"Mode">
+				description = <"The method of communication for the specified language.">
+			>
+			["id6"] = <
+				text = <"Proficiency">
+				description = <"Proficiency level.">
+			>
+			["id7"] = <
+				text = <"Preferred">
+				description = <"Indicates if this language is preferred for communication.">
+			>
+			["id10"] = <
+				text = <"Comment">
+				description = <"Additional narrative about the language not captured in other fields.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id2"] = <http://loinc.org/54505-3>
+			["id5"] = <http://loinc.org/91878-9>
+			["id1"] = <http://loinc.org/104916-2>
+			["id3"] = <http://loinc.org/104930-3>
+			["id4"] = <http://loinc.org/104957-6>
+			["id10"] = <http://loinc.org/106173-8>
+			["id6"] = <http://loinc.org/7c65c8ec-b0b1-ef11-8872-6045bdc71c8b>
+			["id7"] = <http://loinc.org/7e104b40-b1b1-ef11-8872-6045bdc71c8b>
+		>
+		["iso_639-1"] = <
+			["ac2"] = <http://iso.org/code_sets/iso_639-1>
+		>
+		["s2"] = <
+			["ac1"] = <http://s2health.org/id/s2.LanguageCommunicationMode>
+			["ac3"] = <http://s2health.org/id/s2.LanguageProficiency>
+		>
+	>
+	value_sets = <
+		["ac1"] = <
+			id = <"ac1">
+			members = <"at7", "at8", "at9", "at10", "at12">
+		>
+	>
+

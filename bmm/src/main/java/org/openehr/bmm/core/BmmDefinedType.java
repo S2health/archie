@@ -21,6 +21,8 @@ package org.openehr.bmm.core;
  * Author: Thomas Beale
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Abstract meta-type for types 'defined' in a BMM model, compared to formal parameter types,
  * built-in types. See subtypes.
@@ -28,6 +30,7 @@ package org.openehr.bmm.core;
  */
 public abstract class BmmDefinedType extends BmmEffectiveType {
 
+    @JsonIgnore
     private BmmClass baseClass;
 
     protected BmmDefinedType(BmmClass baseClass) {

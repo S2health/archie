@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.ArchetypeModelObject;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.rminfo.RMProperty;
 
 
@@ -130,14 +131,14 @@ public class ArchetypeTerminology extends ArchetypeModelObject {
     }
 
     public Integer specialisationDepth() {
-        return AOMUtils.getSpecializationDepthFromCode(conceptCode);
+        return AdlCodeUtils.getSpecializationDepthFromCode(conceptCode);
     }
 
     public List<String> idCodes() {
         HashSet<String> codes = new HashSet<>();
         for(String language:getTermDefinitions().keySet()) {
             for(String code:getTermDefinitions().get(language).keySet()) {
-                if(AOMUtils.isIdCode(code)) {
+                if(AdlCodeUtils.isIdCode(code)) {
                     codes.add(code);
                 }
             }
@@ -149,7 +150,7 @@ public class ArchetypeTerminology extends ArchetypeModelObject {
         HashSet<String> codes = new HashSet<>();
         for(String language:getTermDefinitions().keySet()) {
             for(String code:getTermDefinitions().get(language).keySet()) {
-                if(AOMUtils.isValueCode(code)) {
+                if(AdlCodeUtils.isValueCode(code)) {
                     codes.add(code);
                 }
             }
@@ -161,7 +162,7 @@ public class ArchetypeTerminology extends ArchetypeModelObject {
         HashSet<String> codes = new HashSet<>();
         for(String language:getTermDefinitions().keySet()) {
             for(String code:getTermDefinitions().get(language).keySet()) {
-                if(AOMUtils.isValueSetCode(code)) {
+                if(AdlCodeUtils.isValueSetCode(code)) {
                     codes.add(code);
                 }
             }
@@ -197,7 +198,7 @@ public class ArchetypeTerminology extends ArchetypeModelObject {
     }
 
     public boolean hasIdCode(String code) {
-        return AOMUtils.isIdCode(code) && hasCode(code);
+        return AdlCodeUtils.isIdCode(code) && hasCode(code);
     }
 
     public boolean hasCodeInAllLanguages(String code) {
@@ -213,15 +214,15 @@ public class ArchetypeTerminology extends ArchetypeModelObject {
     }
 
     public boolean hasIdCodeInAllLanguages(String code) {
-        return AOMUtils.isIdCode(code) && hasCodeInAllLanguages(code);
+        return AdlCodeUtils.isIdCode(code) && hasCodeInAllLanguages(code);
     }
 
     public boolean hasValueSetCode(String code) {
-        return AOMUtils.isValueSetCode(code) && hasCode(code);
+        return AdlCodeUtils.isValueSetCode(code) && hasCode(code);
     }
 
     public boolean hasValueCode(String code) {
-        return AOMUtils.isValueCode(code) && hasCode(code);
+        return AdlCodeUtils.isValueCode(code) && hasCode(code);
     }
 }
 

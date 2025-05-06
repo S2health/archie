@@ -37,6 +37,8 @@ public class ADLRulesSerializer {
         ruleElementSerializers.put(Constant.class, new ConstantSerializer(this));
         ruleElementSerializers.put(ForAllStatement.class, new ForAllStatementSerializer(this));
         ruleElementSerializers.put(Function.class, new FunctionSerializer(this));
+        // jcoyle fix below
+        ruleElementSerializers.put(ArchetypeIdConstraint.class, new ConstraintSerializer(this));
 
     }
 
@@ -45,6 +47,7 @@ public class ADLRulesSerializer {
     }
 
     public void serializeRuleElement(RuleElement element) {
+
         RuleElementSerializer serializer = getSerializer(element);
         if (serializer != null) {
             boolean shouldSerializeParentheses = isPrecedenceOverride(element);

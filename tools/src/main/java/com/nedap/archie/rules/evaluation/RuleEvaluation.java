@@ -2,6 +2,7 @@ package com.nedap.archie.rules.evaluation;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.nedap.archie.aom.Archetype;
+import com.nedap.archie.rminfo.MetaModel;
 import com.nedap.archie.rmobjectvalidator.ValidationHelper;
 import com.nedap.archie.creation.RMObjectCreator;
 import com.nedap.archie.query.RMObjectWithPath;
@@ -45,6 +46,7 @@ public class RuleEvaluation<T> {
     private ArrayListMultimap<RuleElement, ValueList> ruleElementValues = ArrayListMultimap.create();
     private FixableAssertionsChecker fixableAssertionsChecker;
 
+    private MetaModel metaModel;
     private ModelInfoLookup modelInfoLookup;
 
     private RMObjectCreator creator;
@@ -55,17 +57,17 @@ public class RuleEvaluation<T> {
 
     private final AssertionsFixer assertionsFixer;
 
-    public RuleEvaluation(ModelInfoLookup modelInfoLookup, ValidationConfiguration validationConfiguration, Archetype archetype) {
-        this(modelInfoLookup, validationConfiguration, null, archetype);
+    public RuleEvaluation(MetaModel metaModel, ValidationConfiguration validationConfiguration, Archetype archetype) {
+        this(metaModel, validationConfiguration, null, archetype);
     }
 
     /**
-     * @deprecated Use {@link #RuleEvaluation(ModelInfoLookup, ValidationConfiguration, Archetype)} instead.
+     * @deprecated Use {@link #RuleEvaluation(MetaModel, ValidationConfiguration, Archetype)} instead.
      */
     @Deprecated
-    public RuleEvaluation(ModelInfoLookup modelInfoLookup, Archetype archetype) {
+    public RuleEvaluation(MetaModel metaModel, Archetype archetype) {
         this(
-                modelInfoLookup,
+                metaModel,
                 new ValidationConfiguration.Builder()
                         .failOnUnknownTerminologyId(com.nedap.archie.ValidationConfiguration.isFailOnUnknownTerminologyId())
                         .build(),
@@ -76,15 +78,15 @@ public class RuleEvaluation<T> {
     /**
      * Deprecated. Use the constructor without the jaxbContext for new implementations. Here to ease transition
      * to the new method.
-     * @param modelInfoLookup the model info lookup to make this rule evaluator for
+     * @param metaModel the model info lookup to make this rule evaluator for
      * @param jaxbContext the jaxb context, use for queries. If null, will use RMPahtQuery instead
      * @param archetype the archetype to evaluate rules for
-     * @deprecated Use {@link #RuleEvaluation(ModelInfoLookup, ValidationConfiguration, Archetype)} instead.
+     * @deprecated Use {@link #RuleEvaluation(MetaModel, ValidationConfiguration, Archetype)} instead.
      */
     @Deprecated
-    public RuleEvaluation(ModelInfoLookup modelInfoLookup, JAXBContext jaxbContext, Archetype archetype) {
+    public RuleEvaluation(MetaModel metaModel, JAXBContext jaxbContext, Archetype archetype) {
         this(
-                modelInfoLookup,
+                metaModel,
                 new ValidationConfiguration.Builder()
                         .failOnUnknownTerminologyId(com.nedap.archie.ValidationConfiguration.isFailOnUnknownTerminologyId())
                         .build(),
@@ -93,9 +95,10 @@ public class RuleEvaluation<T> {
         );
     }
 
-    private RuleEvaluation(ModelInfoLookup modelInfoLookup, ValidationConfiguration validationConfiguration, JAXBContext jaxbContext, Archetype archetype) {
+    private RuleEvaluation(MetaModel metaModel, ValidationConfiguration validationConfiguration, JAXBContext jaxbContext, Archetype archetype) {
+        this.metaModel = metaModel;
+        this.modelInfoLookup = metaModel.getModelInfoLookup();
         this.jaxbContext = jaxbContext;
-        this.modelInfoLookup = modelInfoLookup;
         this.creator = new RMObjectCreator(modelInfoLookup);
         this.assertionsFixer = new AssertionsFixer(this, creator);
         this.archetype = archetype;
@@ -103,7 +106,7 @@ public class RuleEvaluation<T> {
         add(new VariableDeclarationEvaluator());
         add(new ConstantEvaluator());
         add(new AssertionEvaluator());
-        add(new BinaryOperatorEvaluator(new ValidationHelper(modelInfoLookup, validationConfiguration), archetype));
+        add(new BinaryOperatorEvaluator(new ValidationHelper(modelInfoLookup, metaModel.getPrimitiveObjectConstraintHelper(), validationConfiguration), archetype));
         add(new UnaryOperatorEvaluator());
         add(new VariableReferenceEvaluator());
         add(new ModelReferenceEvaluator());

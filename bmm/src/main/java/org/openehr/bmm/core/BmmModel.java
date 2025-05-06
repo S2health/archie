@@ -180,9 +180,9 @@ public class BmmModel extends BmmPackageContainer implements IBmmSchemaCore, IBm
         String nodeName = pathSegments.get(0).getNodeName();
         if (bmmClass.hasFlatPropertyWithName (nodeName)) {
             if (pathSegments.size() == 1) {
-                result = bmmClass.getFlatProperties().get(nodeName);
+                result = bmmClass.flatProperties().get(nodeName);
             } else {
-                BmmClass bmmPropTypeClass = getClassDefinition (bmmClass.getFlatProperties().get(nodeName).getType().getEffectiveType().typeBaseName());
+                BmmClass bmmPropTypeClass = getClassDefinition (bmmClass.flatProperties().get(nodeName).getType().effectiveType().typeBaseName());
                 if (bmmPropTypeClass != null) {
                     result = propertyAtPath (bmmPropTypeClass, pathSegments.subList(1, pathSegments.size()));
                 }
@@ -291,8 +291,8 @@ public class BmmModel extends BmmPackageContainer implements IBmmSchemaCore, IBm
         BmmClass bmmClass = getClassDefinition(typeName);
         Set<String> result = new HashSet<>();
 
-        for (BmmProperty<?> bmmProperty: bmmClass.getFlatProperties().values()) {
-            List<String> ftl = bmmProperty.getType().getFlattenedTypeList();
+        for (BmmProperty<?> bmmProperty: bmmClass.flatProperties().values()) {
+            List<String> ftl = bmmProperty.getType().flattenedTypeList();
             result.addAll(ftl);
             for (String type: ftl) {
                 result.addAll(getClassDefinition(type).getImmediateDescendants());

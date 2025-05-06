@@ -1,0 +1,1432 @@
+{
+	"_type": "AUTHORED_ARCHETYPE",
+	"uid": "c153b01d-ef8d-401a-8a64-8bb881493e6a",
+	"original_language": {
+		"_type": "TERMINOLOGY_CODE",
+		"terminology_id": "ISO_639-1",
+		"code_string": "en"
+	},
+	"description": {
+		"_type": "RESOURCE_DESCRIPTION",
+		"lifecycle_state": "unmanaged",
+		"original_author": {
+			"name": "S2 Health",
+			"organisation": "S2 Health <http://www.s2health.org>",
+			"email": "models@s2health.org",
+			"date": "2024-07-26"
+		},
+		"custodian_namespace": "org.s2health",
+		"custodian_organisation": "S2 Health<http://s2health.org>",
+		"copyright": "Copyright (c) 2024 S2 Health",
+		"licence": "Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>",
+		"ip_acknowledgements": {
+			"original_author": "Ian McNicoll, freshEHR Clinical Informatics, <ian@freshehr.com>, 2015-10-21",
+			"loinc": "This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>",
+			"snomed": "Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>"
+		},
+		"details": {
+			"en": {
+				"_type": "RESOURCE_DESCRIPTION_ITEM",
+				"language": {
+					"_type": "TERMINOLOGY_CODE",
+					"terminology_id": "ISO_639-1",
+					"code_string": "en"
+				},
+				"purpose": "To record all aspects of an order of a medication, vaccine, nutritional product or other therapeutic item for an identified individual.",
+				"use": "Use to record all aspects of an order of a medication, vaccine, nutritional product or other therapeutic item for an identified individual.\n            \n            It is intended to be used for any type of medication and related order, whether prescribed by a health professional or available for purchase 'over the counter'. The scope of this medication archetype also includes orders for vaccinations, parenteral fluids or other therapeutic goods, such as bandages, nutritional products or other items that are applied or administered to have a therapeutic effect and which have a common pattern for data recording.\n            \n            This archetype is designed to be used in a number of clinical contexts, including but not limited to:\n            - a record in a clinical consultation (COMPOSITION.encounter);\n            - a written prescription by a physician, dentist, nurse practitioner, or other designated health professional for a medication or nutritional product to be dispensed and administered (within a Composition.prescription);\n            - an item in a current medication list, prescription or drug chart (within Composition.medication_list); and\n            - an item in a summary document such as transfer of care (Composition.transfer_summary) or a referral (Composition.request).\n            \n            In many cases a medication order will be simple – typically for a single medication item with uncomplicated instructions for dispensing and administration. However this archetype is also designed to allow for more complex therapeutic orders. For example:\n            \n            - a reducing dose of prednisolone over a period of weeks;\n            - titration of insulin, with dosing dependent on test results;\n            - multiple medications prescribed simultaneously as part of a single drug regimen, such as a triple therapy for peptic ulcer; and\n            - intravenous administration of medications or nutrition supplements, including parenteral nutrition.\n            \n            The archetype has therefore been designed to allow for a range of complexity, from:\n            - simple narrative instructions for orders like 'furosemide 40mg two tablets in the morning and one at lunch' to ensure compatibility with existing systems; and\n            - the amount of medication is usually represented in terms of a number and corresponding dose unit, however there can alternatively be a narrative statement to ensure compatibility with existing systems and coverage of all clinical scenarios; through to\n            - structured detail for dose, route and timing to represent a fully computable specification.\n            \n            It has also been designed so that a single medication order structure can represent:\n            - complex sequential medication orders using the same preparation strength to be supported within a single order structure; and\n            - multiple medication orders can be chained in circumstances where different medications or preparations need to be given sequentially.\n            \n            This archetype is also suitable for ordering parenteral fluids, in care settings where it is normal practice to make these 'prescribable' items. In other settings a separate 'parenteral fluid order' may be appropriate.\n            \n            SLOTs containing Node archetypes have been used to represent some of the content for three reasons:\n            - To ensure a core archetype that can be used for all the above use cases, yet allow flexibility where it is required, for example the ‘Preparation details’ SLOT where additional structured detail can be added. A candidate archetype has been suggested for Medications. It is possible that other Node archetypes may be required in future for other purposes such as complex parenteral nutrition orders;\n            - to support archetype re-use in situations where the content has been identified as being also used in other clinical contexts, in particular the paired Action.medication archetype for recording actual dispensing, administration etc; and\n            - to remove less commonly used content from the core archetype framework.\n            \n            Multiple orders can be represented as separate activities within this single archetype instance to carry tightly bound orders of different medications, for example, H. pylori therapy when this is not prescribed as a single pack.\n            \n            It should be noted that these uses subsume both the FHIR Medication Order and Medication Statement use cases. i.e this archetype is a match for both FHIR resources, used in the appropriate context.",
+				"keywords": ["medication", "order", "prescribe", "therapy", "substance", "drug", "therapeutic", "otc", "therapeutic good", "pharmaceutical", "product", "posology", "treatment", "fluid", "nutrition", "CPOE", "medicine"],
+				"misuse": "Not to be used to record the activities related to carrying out the order for medication, vaccine, nutritional product or therapeutic item, such as details about actual administration or dispensing. Use the Action.medication for this purpose.\n            \n            Not to be used to record the ordering of blood products, which involves a fundamentally different clinical process and is likely to require different supporting information Use the Order.transfusion for this purpose.\n            \n            Not to be used to record the order for insertion of implants or medical devices such as pacemakers and defibrillators. Use the Order.procedure for this purpose."
+			}
+		},
+		"other_contributors": ["openEHR CKM community"]
+	},
+	"archetype_id": {
+		"_type": "ARCHETYPE_HRID",
+		"rm_publisher": "s2",
+		"rm_package": "EHR",
+		"rm_class": "Order",
+		"concept_id": "medication_order",
+		"release_version": "5.0.0",
+		"build_count": "0"
+	},
+	"definition": {
+		"_type": "C_COMPLEX_OBJECT",
+		"rm_type_name": "Order",
+		"node_id": "id1",
+		"attributes": [
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "activities",
+				"children": [
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Activity",
+						"node_id": "id2",
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "description",
+								"children": [
+									{
+										"_type": "C_ARCHETYPE_ROOT",
+										"rm_type_name": "Entity_ref_node",
+										"node_id": "id144",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"archetype_ref": "s2-ENTITY-Entity_ref_node.medication_type_ref.v1"
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id92",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id182"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_ARCHETYPE_ROOT",
+										"rm_type_name": "Info_node",
+										"node_id": "id93",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"archetype_ref": "s2-EHR-Info_node.anatomical_location.v1"
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id95",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id184"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_ARCHETYPE_ROOT",
+										"rm_type_name": "Entity_ref_node",
+										"node_id": "id96",
+										"archetype_ref": "s2-EHR-Entity_ref_node.device_ref.v1"
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id10",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id185"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id48",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Parsable",
+														"node_id": "id186",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "formalism",
+																"children": [
+																	{
+																		"_type": "C_STRING",
+																		"rm_type_name": "STRING",
+																		"node_id": "id9999",
+																		"constraint": ["text/html", "text/plain", "text/xml"]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id174",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id187"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id175",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id188"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_ARCHETYPE_ROOT",
+										"rm_type_name": "Info_node",
+										"node_id": "id178",
+										"archetype_ref": "s2-EHR-Info_node.therapeutic_direction.v2"
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id63",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "items",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id65",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Boolean_value",
+																		"node_id": "id189"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id179",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "items",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Info_node",
+																		"node_id": "id172",
+																		"occurrences": {
+																			"lower": 0,
+																			"upper": 1
+																		},
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "value",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Text",
+																						"node_id": "id190"
+																					}
+																				]
+																			}
+																		]
+																	},
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Info_node",
+																		"node_id": "id163",
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "value",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Text",
+																						"node_id": "id191"
+																					}
+																				]
+																			}
+																		]
+																	}
+																],
+																"is_multiple": true
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id52",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "items",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Info_node",
+																		"node_id": "id131",
+																		"occurrences": {
+																			"lower": 0,
+																			"upper": 1
+																		},
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "value",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Quantity",
+																						"node_id": "id192"
+																					}
+																				]
+																			}
+																		]
+																	},
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Info_node",
+																		"node_id": "id54",
+																		"occurrences": {
+																			"lower": 0,
+																			"upper": 1
+																		},
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "value",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Duration_value",
+																						"node_id": "id193",
+																						"attributes": [
+																							{
+																								"_type": "C_ATTRIBUTE",
+																								"rm_attribute_name": "magnitude",
+																								"children": [
+																									{
+																										"_type": "C_DURATION",
+																										"rm_type_name": "DURATION",
+																										"node_id": "id9999",
+																										"constraint": [
+																											{
+																												"lower": "PT0S",
+																												"upper_unbounded": true
+																											}
+																										]
+																									}
+																								]
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																],
+																"is_multiple": true
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id151",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "items",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Info_node",
+																		"node_id": "id166",
+																		"occurrences": {
+																			"lower": 0,
+																			"upper": 1
+																		},
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "value",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Text",
+																						"node_id": "id194"
+																					}
+																				]
+																			}
+																		]
+																	},
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Info_node",
+																		"node_id": "id152",
+																		"occurrences": {
+																			"lower": 0,
+																			"upper": 1
+																		},
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "value",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Quantity",
+																						"node_id": "id195"
+																					}
+																				]
+																			}
+																		]
+																	}
+																],
+																"is_multiple": true
+															}
+														]
+													}
+												],
+												"is_multiple": true
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id45",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id196"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id106",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id197"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id108",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id198"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id19",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id199"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id149",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id200"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id180",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id201"
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id114",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "items",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id13",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Date_time_value",
+																		"node_id": "id202"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id14",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Date_time_value",
+																		"node_id": "id203"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id12",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Text",
+																		"node_id": "id204"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id17",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Text",
+																		"node_id": "id205"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id61",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Count",
+																		"node_id": "id206",
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "magnitude",
+																				"children": [
+																					{
+																						"_type": "C_INTEGER",
+																						"rm_type_name": "INTEGER",
+																						"node_id": "id9999",
+																						"constraint": [
+																							{
+																								"lower": 0,
+																								"upper_unbounded": true
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id51",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Duration_value",
+																		"node_id": "id207",
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "magnitude",
+																				"children": [
+																					{
+																						"_type": "C_DURATION",
+																						"rm_type_name": "DURATION",
+																						"node_id": "id9999",
+																						"constraint": [
+																							{
+																								"lower": "PT0S",
+																								"upper_unbounded": true
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_ARCHETYPE_ROOT",
+														"rm_type_name": "Info_node",
+														"node_id": "id113",
+														"archetype_ref": "s2-EHR-Info_node.medication_order_summary.v0"
+													}
+												],
+												"is_multiple": true
+											}
+										]
+									},
+									{
+										"_type": "C_ARCHETYPE_ROOT",
+										"rm_type_name": "Info_node",
+										"node_id": "id70",
+										"archetype_ref": "s2-EHR-Info_node.medication_authorisation.v0"
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id130",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "items",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id107",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Text",
+																		"node_id": "id208"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_ARCHETYPE_ROOT",
+														"rm_type_name": "Info_node",
+														"node_id": "id66",
+														"archetype_ref": "s2-EHR-Info_node.medication_supply_amount.v0"
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id133",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Coded_text",
+																		"node_id": "id209",
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "term",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Terminology_term",
+																						"node_id": "id216",
+																						"attributes": [
+																							{
+																								"_type": "C_ATTRIBUTE",
+																								"rm_attribute_name": "concept",
+																								"children": [
+																									{
+																										"_type": "C_TERMINOLOGY_CODE",
+																										"rm_type_name": "Terminology_code",
+																										"node_id": "id9999",
+																										"constraint": "ac1"
+																									}
+																								]
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id155",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Text",
+																		"node_id": "id210"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id140",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Text",
+																		"node_id": "id211"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id156",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Date_time_value",
+																		"node_id": "id212"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Info_node",
+														"node_id": "id162",
+														"occurrences": {
+															"lower": 0,
+															"upper": 1
+														},
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "value",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Date_time_value",
+																		"node_id": "id213"
+																	}
+																]
+															}
+														]
+													},
+													{
+														"_type": "ARCHETYPE_SLOT",
+														"rm_type_name": "Info_node",
+														"node_id": "id171",
+														"includes": [
+															{
+																"_type": "ASSERTION",
+																"expression": {
+																	"_type": "EXPR_BINARY_OPERATOR",
+																	"type": "Boolean",
+																	"operator": "matches",
+																	"left_operand": {
+																		"_type": "EXPR_ARCHETYPE_REF",
+																		"type": "String",
+																		"path": "archetype_id/value"
+																	},
+																	"right_operand": {
+																		"_type": "EXPR_ARCHETYPE_ID_CONSTRAINT",
+																		"type": "C_STRING",
+																		"item": {
+																			"_type": "C_STRING",
+																			"rm_type_name": "STRING",
+																			"node_id": "id9999",
+																			"constraint": ["/.*/"]
+																		}
+																	}
+																},
+																"type": "Boolean"
+															}
+														]
+													}
+												],
+												"is_multiple": true
+											}
+										]
+									},
+									{
+										"_type": "ARCHETYPE_SLOT",
+										"rm_type_name": "Info_node",
+										"node_id": "id167",
+										"includes": [
+											{
+												"_type": "ASSERTION",
+												"expression": {
+													"_type": "EXPR_BINARY_OPERATOR",
+													"type": "Boolean",
+													"operator": "matches",
+													"left_operand": {
+														"_type": "EXPR_ARCHETYPE_REF",
+														"type": "String",
+														"path": "archetype_id/value"
+													},
+													"right_operand": {
+														"_type": "EXPR_ARCHETYPE_ID_CONSTRAINT",
+														"type": "C_STRING",
+														"item": {
+															"_type": "C_STRING",
+															"rm_type_name": "STRING",
+															"node_id": "id9999",
+															"constraint": ["/.*/"]
+														}
+													}
+												},
+												"type": "Boolean"
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Info_node",
+										"node_id": "id168",
+										"occurrences": {
+											"lower": 0,
+											"upper": 1
+										},
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Text",
+														"node_id": "id214"
+													}
+												]
+											}
+										]
+									}
+								],
+								"cardinality": {
+									"_type": "CARDINALITY",
+									"interval": {
+										"lower": 1,
+										"upper_unbounded": true
+									}
+								},
+								"is_multiple": true
+							}
+						]
+					}
+				],
+				"is_multiple": true
+			},
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "qualifiers",
+				"children": [
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id5",
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Rwe_id_ref",
+										"node_id": "id215"
+									}
+								]
+							}
+						]
+					}
+				],
+				"is_multiple": true
+			},
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "subject",
+				"children": [
+					{
+						"_type": "C_ARCHETYPE_ROOT",
+						"rm_type_name": "Entity_ref_node",
+						"node_id": "id8000",
+						"archetype_ref": "s2-EHR-Entity_ref_node.party_ref.v1"
+					}
+				]
+			}
+		]
+	},
+	"terminology": {
+		"_type": "ARCHETYPE_TERMINOLOGY",
+		"original_language": "en",
+		"term_definitions": {
+			"en": {
+				"ac1": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Substitution direction (synthesised)",
+					"description": "Permission for substitution with a bioequivalent item. (synthesised)"
+				},
+				"at168": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Permitted",
+					"description": "Substitution of the medication with a bioequivalent medication is allowed."
+				},
+				"at169": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Not permitted",
+					"description": "Substitution of the medication with a bioequivalent medication is not allowed."
+				},
+				"id1": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Medication order",
+					"description": "An order for a medication, vaccine, nutritional product or other therapeutic item for an identified individual."
+				},
+				"id10": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Overall directions description",
+					"description": "Complete narrative description about how the ordered item is to be used."
+				},
+				"id106": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Patient information",
+					"description": "An additional instruction directed primarily at the individual/patient or carers."
+				},
+				"id107": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dispense instruction",
+					"description": "An additional instruction directed primarily at the person dispensing the ordered item."
+				},
+				"id108": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Monitoring instruction",
+					"description": "An additional instruction which gives advice on recommended or required monitoring of the ordered item."
+				},
+				"id113": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order summary",
+					"description": "Summary information about use of the ordered item, such as current status or key dates, generally used in non-prescription contexts."
+				},
+				"id114": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order details",
+					"description": "Details about the whole medication order."
+				},
+				"id12": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order start criterion",
+					"description": "A condition which, when met, requires the commencement of administration or use."
+				},
+				"id13": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order start date/time",
+					"description": "The date and optional time to commence use of the ordered item."
+				},
+				"id130": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dispense directions",
+					"description": "Directions about the dispensing of the ordered item."
+				},
+				"id131": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Maximum amount",
+					"description": "The maximum, cumulative amount of medication which should be administered within the allowed period."
+				},
+				"id133": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Substitution direction",
+					"description": "Permission for substitution with a bioequivalent item."
+				},
+				"id14": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order stop date/time",
+					"description": "The date and optional time when it is planned to cease use of the ordered item."
+				},
+				"id140": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Priority",
+					"description": "An indicator of the urgency with which the ordered item should be dispensed."
+				},
+				"id144": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Medication",
+					"description": "Structured details about the overall medication including strength, form and constituent substances."
+				},
+				"id149": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Therapeutic intent",
+					"description": "The overall therapeutic intent of the ordered item."
+				},
+				"id151": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Total daily effective dose",
+					"description": "Details about the total daily amount of the ordered item expected to be administered."
+				},
+				"id152": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Total daily amount",
+					"description": "The amount of ordered item which will be taken each day if administered as intended."
+				},
+				"id155": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Non-substitution reason",
+					"description": "The reason why an ordered item should not be substituted at dispense."
+				},
+				"id156": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dispensing start date",
+					"description": "The date from which the ordered item is permitted to be dispensed for the first time."
+				},
+				"id162": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dispensing expiry date",
+					"description": "The date after which the ordered item is no longer valid to be legally dispensed."
+				},
+				"id163": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Override reason",
+					"description": "The reason for a clinical safety or maximum dose override."
+				},
+				"id166": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Purpose",
+					"description": "Description of the reason for recording a total daily effective dose."
+				},
+				"id167": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Additional details",
+					"description": "Additional structured details about the ordered item not captured in other fields."
+				},
+				"id168": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Comment",
+					"description": "Additional narrative about the medication order not captured in other fields."
+				},
+				"id17": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order stop criterion",
+					"description": "A condition which, when met, requires the cessation of administration or use."
+				},
+				"id171": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dispense details",
+					"description": "Further details related to dispense directions."
+				},
+				"id172": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Overriden safety advice",
+					"description": "A known or recognised safety issue which applies to this subject and the ordered item, such as an allergy, drug duplication warning or contraindication. This Node is normally only recorded when this safety advice is overridden."
+				},
+				"id174": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Specific directions description",
+					"description": "A narrative description of a specific part of overall directions."
+				},
+				"id175": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dosage justification",
+					"description": "A description of the justification used to calculate a dose amount or administration rate where this is dependent on some other factor."
+				},
+				"id178": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dose and timing",
+					"description": "Details of structured dose and timing directions."
+				},
+				"id179": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Safety override",
+					"description": "Overriding of a known or recognised safety issue which applies to this subject and the ordered item, such as an allergy, drug duplication warning or contraindication."
+				},
+				"id180": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Clinician guidance",
+					"description": "Advice to future prescribers/dispensers about the ongoing, long term order."
+				},
+				"id19": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Clinical indication",
+					"description": "The clinical reason for use of the ordered item."
+				},
+				"id2": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order",
+					"description": "Details of the requested order."
+				},
+				"id45": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Additional instruction",
+					"description": "An additional instruction on how to use or store the ordered item."
+				},
+				"id48": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Parsable directions",
+					"description": "A parsable, computable text representation of the directions."
+				},
+				"id5": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Order identifier",
+					"description": "Unique identifier for the medication order."
+				},
+				"id51": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Duration of order completed",
+					"description": "The time period during which the individual/patient has already been using the ordered item as a part of the intended whole order but prior to the issuance of this order."
+				},
+				"id52": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Maximum dose",
+					"description": "Details about the maximum, cumulative dose allowed over a defined period for the ordered item."
+				},
+				"id54": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Allowed period",
+					"description": "The period of time during which the maximum dose is calculated."
+				},
+				"id61": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Administrations completed",
+					"description": "The number of administrations of the ordered item that have been completed, as part of the intended whole order but prior to the issuance of this order."
+				},
+				"id63": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Medication safety",
+					"description": "Details about medication safety for the ordered item."
+				},
+				"id65": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Exceptional safety override?",
+					"description": "Confirmation by the prescriber that the normal dose or other safety limit has been overridden due to exceptional circumstances."
+				},
+				"id66": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Dispense amount",
+					"description": "Details about the amount of the ordered item to be dispensed."
+				},
+				"id70": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Authorisation directions",
+					"description": "Details of authorisation of the ordered item, including supporting local self-administration, issue and endorsement policies."
+				},
+				"id92": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Route",
+					"description": "The route by which the ordered item is to be administered into the subject's body."
+				},
+				"id93": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Body site",
+					"description": "Description of the site of administration of the ordered item."
+				},
+				"id95": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Administration method",
+					"description": "The technique or device by which the ordered item is to be administered."
+				},
+				"id96": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Administration device",
+					"description": "Details of the medical device used to assist administration of the ordered item."
+				},
+				"id8000": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Subject",
+					"description": "Subject of order."
+				}
+			}
+		},
+		"term_bindings": {
+			"loinc": {
+				"id106": "http://loinc.org/74772-5",
+				"id13": "http://loinc.org/95895-9",
+				"id92": "http://loinc.org/71468-3",
+				"id93": "http://loinc.org/39111-0",
+				"id95": "http://loinc.org/104817-2",
+				"id66": "http://loinc.org/82767-5",
+				"id5": "http://loinc.org/104756-2",
+				"id1": "http://loinc.org/cfa8c219-f249-ef11-886e-6045bdc71c8b",
+				"id10": "http://loinc.org/104818-0",
+				"id107": "http://loinc.org/104763-8",
+				"id12": "http://loinc.org/104784-4",
+				"id131": "http://loinc.org/104822-2",
+				"id133": "http://loinc.org/104804-0",
+				"id14": "http://loinc.org/104748-9",
+				"id140": "http://loinc.org/104808-1",
+				"id144": "http://loinc.org/74078-7",
+				"id149": "http://loinc.org/104803-2",
+				"id151": "http://loinc.org/104775-2",
+				"id152": "http://loinc.org/104810-7",
+				"id155": "http://loinc.org/104703-4",
+				"id156": "http://loinc.org/106197-7",
+				"id162": "http://loinc.org/104791-9",
+				"id163": "http://loinc.org/104777-8",
+				"id167": "http://loinc.org/46696-1",
+				"id168": "http://loinc.org/106173-8",
+				"id17": "http://loinc.org/104746-3",
+				"id171": "http://loinc.org/46696-1",
+				"id172": "http://loinc.org/104725-7",
+				"id174": "http://loinc.org/104792-7",
+				"id175": "http://loinc.org/104809-9",
+				"id178": "http://loinc.org/57833-6",
+				"id179": "http://loinc.org/104707-5",
+				"id180": "http://loinc.org/104736-4",
+				"id19": "http://loinc.org/104720-8",
+				"id45": "http://loinc.org/104796-8",
+				"id48": "http://loinc.org/104818-0",
+				"id51": "http://loinc.org/104787-7",
+				"id52": "http://loinc.org/104778-6",
+				"id54": "http://loinc.org/104790-1",
+				"id65": "http://loinc.org/104729-9",
+				"id70": "http://loinc.org/71573-0",
+				"id96": "http://loinc.org/82307-0",
+				"id108": "http://loinc.org/78fbdb06-6982-ef11-8870-6045bdc71c8b",
+				"id113": "http://loinc.org/8fc58633-6982-ef11-8870-6045bdc71c8b",
+				"id114": "http://loinc.org/ee02613c-6982-ef11-8870-6045bdc71c8b",
+				"id130": "http://loinc.org/fcb29648-6982-ef11-8870-6045bdc71c8b",
+				"id166": "http://loinc.org/72d04cf1-6882-ef11-8870-6045bdc71c8b",
+				"id61": "http://loinc.org/61b18a29-6982-ef11-8870-6045bdc71c8b",
+				"id63": "http://loinc.org/d98767fb-6882-ef11-8870-6045bdc71c8b",
+				"id2": "http://loinc.org/c372922c-e68b-ef11-8872-6045bdc71c8b",
+				"id8000": "http://loinc.org/106184-5"
+			},
+			"s2": {
+				"ac1": "http://s2health.org/id/s2.SubstitutionDirection"
+			}
+		},
+		"value_sets": {
+			"ac1": {
+				"_type": "VALUE_SET",
+				"id": "ac1",
+				"members": ["at168", "at169"]
+			}
+		}
+	},
+	"adl_version": "2.1.0",
+	"rm_release": "0.8.7",
+	"is_generated": true
+}

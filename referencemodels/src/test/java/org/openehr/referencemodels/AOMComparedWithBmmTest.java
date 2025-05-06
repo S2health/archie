@@ -3,13 +3,11 @@ package org.openehr.referencemodels;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Sets;
 import com.nedap.archie.rminfo.ArchieAOMInfoLookup;
-import com.nedap.archie.rminfo.ArchieRMInfoLookup;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openehr.bmm.core.BmmClass;
 import org.openehr.bmm.core.BmmModel;
 import org.openehr.bmm.v2.persistence.PBmmSchema;
-import org.openehr.bmm.v2.persistence.jackson.BmmJacksonUtil;
 import org.openehr.bmm.v2.persistence.odin.BmmOdinParser;
 import org.openehr.bmm.v2.validation.BmmRepository;
 import org.openehr.bmm.v2.validation.BmmSchemaConverter;
@@ -90,7 +88,7 @@ public class AOMComparedWithBmmTest {
 
         for(ModelDifference difference:compared) {
             BmmClass classDefinition = model.getClassDefinition(difference.getClassName());
-            if(classDefinition == null || classDefinition.getPackagePath() == null || !classDefinition.getPackagePath().contains("org.openehr.base.expression")) {
+            if(classDefinition == null || classDefinition.packagePath() == null || !classDefinition.packagePath().contains("org.openehr.base.expression")) {
                 if (!knownDifferences.contains(difference)) {
                     foundErrors.add(difference);
                 }

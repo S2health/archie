@@ -30,7 +30,7 @@ import java.util.List;
  *
  * Created by cnanjo on 4/11/16.
  */
-public abstract class BmmType extends BmmEntity {
+public abstract class BmmType {
 
     /**
      * Returns the formal string form of the type as per UML.
@@ -45,7 +45,7 @@ public abstract class BmmType extends BmmEntity {
      *
      * @return
      */
-    public String getTypeSignature() {
+    public String typeSignature() {
         return getTypeName();
     }
 
@@ -55,20 +55,20 @@ public abstract class BmmType extends BmmEntity {
      *
      * @return
      */
-    public abstract BmmEffectiveType getEffectiveType();
+    public abstract BmmEffectiveType effectiveType();
 
     /**
      * Returns the effective unitary type, i.e. abstracting away any containers.
      *
      * @return
      */
-    public abstract BmmUnitaryType getUnitaryType();
+    public abstract BmmUnitaryType unitaryType();
 
     /**
      * Returns the completely flattened list of type names, flattening out all generic parameters.
      * @return
      */
-    public abstract List<String> getFlattenedTypeList();
+    public abstract List<String> flattenedTypeList();
 
     public abstract String toDisplayString();
 

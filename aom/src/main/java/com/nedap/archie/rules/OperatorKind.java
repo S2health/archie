@@ -12,64 +12,64 @@ import java.util.Set;
  * Created by pieter.bos on 27/10/15.
  */
 public enum OperatorKind {
-    @JsonProperty(value="op_eq")
+    @JsonProperty(value="eq")
     @JsonAlias("eq")
     eq("op_eq", "="),
-    @JsonProperty(value="op_ne")
+    @JsonProperty(value="ne")
     @JsonAlias("ne")
     ne("op_ne", "!=", "≠"),
-    @JsonProperty(value="op_le")
+    @JsonProperty(value="le")
     @JsonAlias("le")
     le("op_le", "<=", "≤"),
-    @JsonProperty(value="op_lt")
+    @JsonProperty(value="lt")
     @JsonAlias("lt")
     lt("op_lt", "<"),
-    @JsonProperty(value="op_ge")
+    @JsonProperty(value="ge")
     @JsonAlias("ge")
     ge("op_ge", ">=", "≥"),
-    @JsonProperty(value="op_gt")
+    @JsonProperty(value="gt")
     @JsonAlias("gt")
     gt("op_gt", ">"),
-    @JsonProperty(value="op_matches")
+    @JsonProperty(value="matches")
     @JsonAlias("matches")
     matches("op_matches", "matches", "∈", "is_in"),
-    @JsonProperty(value="op_not")
+    @JsonProperty(value="not")
     @JsonAlias("not")
     not("op_not", "not", "!", "∼", "¬"),
-    @JsonProperty(value="op_and")
+    @JsonProperty(value="and")
     @JsonAlias("and")
     and("op_and", "and", "∧"),
-    @JsonProperty(value="op_or")
+    @JsonProperty(value="or")
     @JsonAlias("or")
     or("op_or", "or", "∨"),
-    @JsonProperty(value="op_xor")
+    @JsonProperty(value="xor")
     @JsonAlias("xor")
     xor("op_xor", "xor", "⊻"),
-    @JsonProperty(value="op_implies")
+    @JsonProperty(value="implies")
     @JsonAlias("implies")
     implies("op_implies", "implies", "⇒"),
-    @JsonProperty(value="op_for_all")
+    @JsonProperty(value="for_all")
     @JsonAlias("for_all")
     for_all("op_for_all", "for_all", "∀", "every"),
-    @JsonProperty(value="op_exists")
+    @JsonProperty(value="exists")
     @JsonAlias("exists")
     exists("op_exists", "exists" ,"∃"),
-    @JsonProperty(value="op_plus")
+    @JsonProperty(value="plus")
     @JsonAlias("plus")
     plus("op_plus", "+"),
-    @JsonProperty(value="op_minus")
+    @JsonProperty(value="minus")
     @JsonAlias("minus")
     minus("op_minus", "-"),
-    @JsonProperty(value="op_multiply")
+    @JsonProperty(value="multiply")
     @JsonAlias("multiply")
     multiply("op_multiply", "*"),
-    @JsonProperty(value="op_divide")
+    @JsonProperty(value="divide")
     @JsonAlias("divide")
     divide("op_divide", "/"),
-    @JsonProperty(value="op_modulo")
+    @JsonProperty(value="modulo")
     @JsonAlias("modulo")
     modulo("op_modulo", "%"),
-    @JsonProperty(value="op_exponent")
+    @JsonProperty(value="exponent")
     @JsonAlias("exponent")
     exponent("op_exponent", "^");
 

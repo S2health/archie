@@ -39,50 +39,28 @@ public class RMObjectValidator extends RMObjectValidatingProcessor {
     private final RmTupleValidator rmTupleValidator;
     private final RmMultiplicityValidator rmMultiplicityValidator;
 
-    /**
-     * Creates an RM Object Validator with the given ModelInfoLook class, and the given OperationalTemplateProvider
-     * The ModelInfoLookup is used for model access, and model specific constructions.
-     * The OperationalTemplateProvider is used to retrieve other referenced archetypes in case of ArchetypeSlots.
-     * @param lookup
-     * @param provider
-     * @deprecated Use {@link #RMObjectValidator(ModelInfoLookup, OperationalTemplateProvider, ValidationConfiguration)} instead.
-     */
-    @Deprecated
-    public RMObjectValidator(ModelInfoLookup lookup, OperationalTemplateProvider provider) {
-        this.lookup = lookup;
-        this.metaModel = new MetaModel(lookup, null);
-        constraintImposer = new ReflectionConstraintImposer(lookup);
-        this.operationalTemplateProvider = provider;
-
-        this.validationConfiguration = null; // Leave this null to indicate that no ValidationConfiguration was provided
-        ValidationConfiguration dummyValidationConfiguration = new ValidationConfiguration.Builder()
-                .failOnUnknownTerminologyId(com.nedap.archie.ValidationConfiguration.isFailOnUnknownTerminologyId())
-                .build();
-        ValidationHelper validationHelper = new ValidationHelper(this.lookup, dummyValidationConfiguration);
-        rmOccurrenceValidator = new RmOccurrenceValidator();
-        rmPrimitiveObjectValidator = new RmPrimitiveObjectValidator(validationHelper);
-        rmTupleValidator = new RmTupleValidator(this.lookup, validationHelper, rmPrimitiveObjectValidator);
-        rmMultiplicityValidator = new RmMultiplicityValidator();
-    }
 
     /**
      * Creates an RM Object Validator with the given ModelInfoLook class, and the given OperationalTemplateProvider
      * The ModelInfoLookup is used for model access, and model specific constructions.
      * The OperationalTemplateProvider is used to retrieve other referenced archetypes in case of ArchetypeSlots.
      */
-    public RMObjectValidator(ModelInfoLookup lookup, OperationalTemplateProvider provider, ValidationConfiguration validationConfiguration) {
-        this.lookup = lookup;
-        this.metaModel = new MetaModel(lookup, null);
+    public RMObjectValidator(MetaModel metaModel, OperationalTemplateProvider provider, ValidationConfiguration validationConfiguration) {
+        if (metaModel.getPrimitiveObjectConstraintHelper() == null)
+            throw new RuntimeException("MetaModel instance without PrimitiveObjectConstraintHelper cannot be used for RM Object validation");
+
+        this.metaModel = metaModel;
+        this.lookup = metaModel.getModelInfoLookup();
         constraintImposer = new ReflectionConstraintImposer(lookup);
         this.operationalTemplateProvider = provider;
 
         this.validationConfiguration = validationConfiguration;
-        ValidationHelper validationHelper = new ValidationHelper(this.lookup, validationConfiguration);
+        ValidationHelper validationHelper = new ValidationHelper(this.lookup, this.metaModel.getPrimitiveObjectConstraintHelper(), validationConfiguration);
         validateInvariants = validationConfiguration.isValidateInvariants();
         rmOccurrenceValidator = new RmOccurrenceValidator();
         rmPrimitiveObjectValidator = new RmPrimitiveObjectValidator(validationHelper);
         rmTupleValidator = new RmTupleValidator(this.lookup, validationHelper, rmPrimitiveObjectValidator);
-        rmMultiplicityValidator = new RmMultiplicityValidator();
+        rmMultiplicityValidator = new RmMultiplicityValidator(metaModel);
     }
 
     /**
@@ -198,7 +176,7 @@ public class RMObjectValidator extends RMObjectValidatingProcessor {
 
             Object object = objectWithPath.getObject();
 
-            String archetypeId =  metaModel.getSelectedModel().getArchetypeIdFromArchetypedRmObject(object);
+            String archetypeId =  metaModel.getModelInfoLookup().getArchetypeIdFromArchetypedRmObject(object);
 
             if(archetypeId != null) {
                 if(!AOMUtils.archetypeRefMatchesSlotExpression(archetypeId, slot)) {

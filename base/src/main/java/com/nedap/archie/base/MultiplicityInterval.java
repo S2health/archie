@@ -75,19 +75,23 @@ public class MultiplicityInterval extends Interval<Integer> implements Serializa
         result.setUpperUnbounded(true);
         return result;
     }
-    
+
+    @JsonIgnore
     public boolean isOpen() {
         return Integer.valueOf(0).equals(getLower()) && isUpperUnbounded() && isLowerIncluded();
     }
 
+    @JsonIgnore
     public boolean isOptional() {
         return Integer.valueOf(0).equals(getLower()) && Integer.valueOf(1).equals(getUpper()) && !isUpperUnbounded() && isLowerIncluded() && isUpperIncluded();
     }
 
+    @JsonIgnore
     public boolean isMandatory() {
         return !isLowerUnbounded() && getLower() >= 1 ;
     }
 
+    @JsonIgnore
     public boolean isProhibited() {
         return Integer.valueOf(0).equals(getLower()) && Integer.valueOf(0).equals(getUpper()) && !isUpperUnbounded();
     }
@@ -165,4 +169,34 @@ public class MultiplicityInterval extends Interval<Integer> implements Serializa
         }
         return result.toString();
     }
+
+    @Override
+    //@JsonIgnore
+    public boolean isLowerUnbounded() {
+        return super.isLowerUnbounded();
+    }
+
+    @Override
+    //@JsonIgnore
+    public boolean isUpperUnbounded() {
+        return super.isUpperUnbounded();
+    }
+
+    @Override
+    //@JsonIgnore
+    public boolean isLowerIncluded() {
+        return super.isLowerIncluded();
+    }
+
+    @Override
+    //@JsonIgnore
+    public boolean isUpperIncluded() {
+        return super.isUpperIncluded();
+    }
+
+
+
+
+
+
 }

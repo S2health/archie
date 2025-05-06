@@ -4,6 +4,7 @@ import com.nedap.archie.aom.Archetype;
 import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class TerminologyDifferentiator {
             Map<String, URI> bindings = termBindings.get(bindingKey);
             Set<String> termBindingsToRemove = new HashSet<>();
             for(String termCode: bindings.keySet()) {
-                if(AOMUtils.getSpecializationDepthFromCode(termCode) < result.specializationDepth()) {
+                if(AdlCodeUtils.getSpecializationDepthFromCode(termCode) < result.specializationDepth()) {
                     termBindingsToRemove.add(termCode);
                 }
             }
@@ -75,7 +76,7 @@ public class TerminologyDifferentiator {
         Map<String, ValueSet> valueSets = result.getTerminology().getValueSets();
         Set<String> valueSetsToRemove = new HashSet<>();
         for(String valueSetCode: valueSets.keySet()) {
-            if(AOMUtils.getSpecializationDepthFromCode(valueSetCode) < result.specializationDepth()) {
+            if(AdlCodeUtils.getSpecializationDepthFromCode(valueSetCode) < result.specializationDepth()) {
                 valueSetsToRemove.add(valueSetCode);
             }
         }
@@ -92,7 +93,7 @@ public class TerminologyDifferentiator {
             Map<String, ArchetypeTerm> terms = termDefinitions.get(language);
             Set<String> termsToDelete = new HashSet<>();
             for(String termCode:terms.keySet()) {
-                if(AOMUtils.getSpecializationDepthFromCode(termCode) < result.specializationDepth()) {
+                if(AdlCodeUtils.getSpecializationDepthFromCode(termCode) < result.specializationDepth()) {
                     termsToDelete.add(termCode);
                 }
             }

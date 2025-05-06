@@ -28,30 +28,16 @@ import java.io.Serializable;
 /**
  * Created by cnanjo on 4/11/16.
  */
-public class BmmProperty<T extends BmmType> extends BmmModelElement implements Serializable {
+public class BmmProperty<T extends BmmType> extends BmmFeature<T> implements Serializable {
 
 	public static final String P_BMM_GENERIC_PROPERTY = "P_BMM_GENERIC_PROPERTY";
 	public static final String P_BMM_CONTAINER_PROPERTY = "P_BMM_CONTAINER_PROPERTY";
 
-	/**
-	 * Name of this property in the model.
-	 */
-	private String name;
-
-	/**
-	 * True if this property is mandatory in its class.
-	 */
-	private boolean isMandatory;
 
 	/**
 	 * True if this property is computed rather than stored in objects of this class.
 	 */
 	private boolean isComputed;
-
-	/**
-	 * Formal type of this property.
-	 */
-	private T type;
 
 	/**
 	 * True if this property is marked with info model 'im_runtime' property.
@@ -64,59 +50,18 @@ public class BmmProperty<T extends BmmType> extends BmmModelElement implements S
 	private boolean isImInfrastructure;
 
 	public BmmProperty(String aName, T aType, String aDocumentation, boolean isMandatoryFlag, boolean isComputedFlag) {
-		name = aName;
-		type = aType;
-		setDocumentation(aDocumentation);
-		isMandatory = isMandatoryFlag;
+		super (aName, aType, isMandatoryFlag, aDocumentation);
 		isComputed = isComputedFlag;
 	}
 
 	public BmmProperty(BmmProperty<T> other) {
-		name = other.name;
-		type = other.type;
-		setDocumentation(other.getDocumentation());
-		isMandatory = other.isMandatory;
-		isComputed = other.isComputed;
-		isImInfrastructure = other.isImInfrastructure;
-		isImRuntime = other.isImRuntime;
+		super (other.getName(), other.getType(), other.getMandatory(), other.getDocumentation());
+		isComputed = other.getComputed();
+		isImInfrastructure = other.getImInfrastructure();
+		isImRuntime = other.getImRuntime();
 	}
 
 	public BmmProperty() {
-	}
-
-	/**
-	 * Returns the name of this property in the model.
-	 *
-	 * @return
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the name of this property in the model.
-	 *
-	 * @param name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Returns true if this property is mandatory in its class.
-	 *
-	 * @return
-	 */
-	public boolean getMandatory() {
-		return isMandatory;
-	}
-
-	/**
-	 * Set to true if this property is mandatory in its class.
-	 * @param mandatory
-	 */
-	public void setMandatory(boolean mandatory) {
-		this.isMandatory = mandatory;
 	}
 
 	/**
@@ -135,24 +80,6 @@ public class BmmProperty<T extends BmmType> extends BmmModelElement implements S
 	 */
 	public void setComputed(boolean computed) {
 		isComputed = computed;
-	}
-
-	/**
-	 * Returns the formal type of this property.
-	 *
-	 * @return
-	 */
-	public T getType() {
-		return type;
-	}
-
-	/**
-	 * Sets the formal type of this property.
-	 *
-	 * @param type
-	 */
-	public void setType(T type) {
-		this.type = type;
 	}
 
 	/**
@@ -198,7 +125,7 @@ public class BmmProperty<T extends BmmType> extends BmmModelElement implements S
 	 * @return
 	 */
 	public static boolean isContainerType(String bmmType) {
-		return bmmType.equals(BmmType.P_BMM_CONTAINER_TYPE) || bmmType.equals(BmmType.BMM_CONTAINER_TYPE);
+		return bmmType.equals(BmmEntity.P_BMM_CONTAINER_TYPE) || bmmType.equals(BmmEntity.BMM_CONTAINER_TYPE);
 	}
 
 	/**
@@ -206,7 +133,7 @@ public class BmmProperty<T extends BmmType> extends BmmModelElement implements S
 	 *
 	 * @return
 	 */
-	public MultiplicityInterval getExistence() {
+	public MultiplicityInterval existence() {
 		MultiplicityInterval result;
 		if (isMandatory) {
 			result = MultiplicityInterval.createMandatory();
@@ -221,7 +148,7 @@ public class BmmProperty<T extends BmmType> extends BmmModelElement implements S
 	 *
 	 * @return
 	 */
-	public String getDisplayName() {
+	public String displayName() {
 		throw new UnsupportedOperationException("Not implemented yet"); // TODO To be implemented
 	}
 

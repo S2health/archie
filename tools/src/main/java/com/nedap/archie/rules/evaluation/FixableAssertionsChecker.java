@@ -3,6 +3,7 @@ package com.nedap.archie.rules.evaluation;
 import com.google.common.collect.ArrayListMultimap;
 import com.nedap.archie.aom.CPrimitiveObject;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.query.RMObjectWithPath;
 import com.nedap.archie.rules.BinaryOperator;
 import com.nedap.archie.rules.Constraint;
@@ -143,7 +144,7 @@ class FixableAssertionsChecker {
             switch(object.getClass().getSimpleName()) {
                 case "CTerminologyCode": {
                     String constraint = (String) constraints.get(0);
-                    if (AOMUtils.isValueCode(constraint)) {
+                    if (AdlCodeUtils.isValueCode(constraint)) {
                         valueList.addValue(constraint, Collections.emptyList());
                         String path = resolveModelReference(pathToSet);
                         if (path.endsWith("symbol")) { // different for DV_CODED_TEXT and DV_CODEPHRASE
@@ -154,7 +155,7 @@ class FixableAssertionsChecker {
                             path = path + "/code_string";
                         }
                         setPathsToValues(assertionResult, path, valueList);
-                    } else if (AOMUtils.isValueSetCode(constraint)) {
+                    } else if (AdlCodeUtils.isValueSetCode(constraint)) {
                         String path = resolveModelReference(pathToSet);
                         assertionResult.constrainPathToValueSet(path, constraint);
                     }

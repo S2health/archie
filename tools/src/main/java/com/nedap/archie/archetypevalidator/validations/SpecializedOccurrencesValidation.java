@@ -5,7 +5,8 @@ import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CObject;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ConformanceCheckResult;
-import com.nedap.archie.aom.utils.NodeIdUtil;
+import com.nedap.archie.definitions.AdlCodeUtils;
+import com.nedap.archie.definitions.NodeIdUtil;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.archetypevalidator.ValidatingVisitor;
 import com.nedap.archie.base.MultiplicityInterval;
@@ -31,7 +32,7 @@ public class SpecializedOccurrencesValidation extends ValidatingVisitor {
         }
         // validate specialised nodes
         if (checkSpecializedNodeHasMatchingPathInParent(cObject)) {
-            String flatPath = AOMUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
+            String flatPath = AdlCodeUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
             CObject parentCObject = getCObject(flatParent.itemAtPath(flatPath));
             if (parentCObject == null) {
                 return;
@@ -64,10 +65,10 @@ public class SpecializedOccurrencesValidation extends ValidatingVisitor {
     private boolean checkSpecializedNodeHasMatchingPathInParent(CObject cObject) {
         boolean result = false;
         if (cObject.isRootNode() || !cObject.getParent().isSecondOrderConstrained()) {
-            if (AOMUtils.getSpecializationDepthFromCode(cObject.getNodeId()) <= flatParent.specializationDepth()
+            if (AdlCodeUtils.getSpecializationDepthFromCode(cObject.getNodeId()) <= flatParent.specializationDepth()
                     || new NodeIdUtil(cObject.getNodeId()).isRedefined()) {
-                if (!AOMUtils.isPhantomPathAtLevel(cObject.getPathSegments(), flatParent.specializationDepth())) {
-                    String flatPath = AOMUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
+                if (!AdlCodeUtils.isPhantomPathAtLevel(cObject.getPathSegments(), flatParent.specializationDepth())) {
+                    String flatPath = AdlCodeUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
                     CObject parentCObject = getCObject(flatParent.itemAtPath(flatPath));
                     result = parentCObject != null;
                 }
@@ -84,7 +85,10 @@ public class SpecializedOccurrencesValidation extends ValidatingVisitor {
         MultiplicityInterval parentNodeOccurrences = parentCObject.effectiveOccurrences(combinedModels::referenceModelPropMultiplicity);
         MultiplicityInterval childNodeOccurrences = childCObject.effectiveOccurrences(combinedModels::referenceModelPropMultiplicity);
 
-        if(parentCObject.getNodeId().equals(childCObject.getNodeId()) && parentNodeOccurrences.equals(childNodeOccurrences)) {
+        if(parentCObject.getNodeId().equals(childCObject.getNodeId()) &&
+                parentNodeOccurrences == null? childNodeOccurrences == null:
+                parentNodeOccurrences.equals(childNodeOccurrences))
+        {
             //this is the parent node appearing in the flattened child archetype without change in occurrence. That is guaranteed to be valid
             return ConformanceCheckResult.conforms();
         }

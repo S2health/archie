@@ -8,10 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.bind.Binder;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import javax.xml.bind.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,7 +31,7 @@ import java.util.List;
 public class RMQueryContext {
 
     private final XPathFactory xPathFactory;
-    private final ModelInfoLookup modelInfoLooup;
+    private final ModelInfoLookup modelInfoLookup;
     private Binder<Node> binder;
     private Document domForQueries;
     private Object rootNode;
@@ -55,7 +52,7 @@ public class RMQueryContext {
     public RMQueryContext(ModelInfoLookup lookup, Object rootNode, JAXBContext jaxbContext) {
         try {
             this.rootNode = rootNode;
-            this.modelInfoLooup = lookup;
+            this.modelInfoLookup = lookup;
             this.binder = jaxbContext.createBinder();
             domForQueries = createBlankDOMDocument(true);
 
@@ -129,7 +126,7 @@ public class RMQueryContext {
                 logger.error("trying to get a node without a parent");
                 return null;
             }
-            RMAttributeInfo attributeInfo = modelInfoLooup.getAttributeInfo(parent.getClass(), nodeName);
+            RMAttributeInfo attributeInfo = modelInfoLookup.getAttributeInfo(parent.getClass(), nodeName);
             try {
                 return (T) attributeInfo.getGetMethod().invoke(parent);
             } catch (IllegalAccessException | InvocationTargetException e) {

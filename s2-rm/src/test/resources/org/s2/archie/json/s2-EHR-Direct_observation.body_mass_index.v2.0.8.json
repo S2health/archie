@@ -1,0 +1,566 @@
+{
+	"_type": "AUTHORED_ARCHETYPE",
+	"uid": "0bead8c2-089c-477a-b1bc-8199c72a2763",
+	"original_language": {
+		"_type": "TERMINOLOGY_CODE",
+		"terminology_id": "iso_639-1",
+		"code_string": "en"
+	},
+	"description": {
+		"_type": "RESOURCE_DESCRIPTION",
+		"lifecycle_state": "unmanaged",
+		"original_author": {
+			"name": "S2 Health - Knowledge Engineering",
+			"organisation": "S2 Health <http://www.s2health.org>",
+			"email": "models@s2health.org",
+			"date": "2024-08-09"
+		},
+		"original_namespace": "org.openehr",
+		"custodian_namespace": "org.s2health",
+		"custodian_organisation": "S2 Health <http://s2health.org>",
+		"copyright": "Copyright (c) 2024 S2 Health",
+		"licence": "Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>",
+		"ip_acknowledgements": {
+			"original_author": "Sam Heard, Ocean Informatics, <sam.heard@oceaninformatics.com>, 2006-03-26",
+			"openehr": "Content adapted from openEHR archetype openEHR-EHR-OBSERVATION.body_mass_index.v2.0.6, copyright 2006 openEHR International <http://www.openEHR.org>",
+			"loinc": "Content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>",
+			"snomed": "Content from SNOMED CT® is copyright © 2007 SNOMED International <http://snomed.org>",
+			"rxnorm": "Content from RxNorm is used Courtesy of the U.S. National Library of Medicine <http://www.nlm.nih.gov/>"
+		},
+		"conversion_details": {
+			"source_model": "openEHR archetype openEHR-EHR-OBSERVATION.body_mass_index.v2.0.6 from <https://ckm.openehr.org>",
+			"tool": "s2 convert openehr",
+			"date": "2024-08-09"
+		},
+		"details": {
+			"en": {
+				"_type": "RESOURCE_DESCRIPTION_ITEM",
+				"language": {
+					"_type": "TERMINOLOGY_CODE",
+					"terminology_id": "iso_639-1",
+					"code_string": "en"
+				},
+				"purpose": "To record the Body Mass Index (BMI) of an individual.",
+				"use": "Use to record the Body Mass Index of both adults and children.\n            \n            Use to enter the Body Mass Index either manually (ie calculated and directly entered by the clinician), or automatically (ie calculation and entry is done automatically by a software application, based on separate height and weight measurements).\n            \n            Formulas: Body Mass Index is commonly calculated as weight (kg) / [height (m) squared]. This is the assumed formula unless otherwise specified in the Formula Node within Protocol. Alternatively estimate Body Mass Index using pounds and inches: weight (lb) / [height (in) squared] x 703 (with ounces (oz) and fractions changed to decimal values).\n            \n            In some situations the Body Mass Index formula is corrected eg for use in amputees - this specific formula can be recorded as part of the protocol.  Alternatively the common Body Mass Index calculation can be used with amputees and similar injuries or disabilities if using adjusted height and/or adjusted weight, as appropriate, rather than actual height and weight.   See openEHR-EHR-OBSERVATION.height-adjusted and openEHR-EHR-OBSERVATION.body_weight-adjusted.\n            \n            See WHO reference re adjusting height/length for Body Mass Index in paediatrics. \n            \n            In children and teens, BMI needs to be assessed using age-related reference charts.",
+				"keywords": ["obesity", "index", "body mass", "BMI", "anorexia", "Quetelet", "malnutrition", "failure to thrive", "bulimia"],
+				"misuse": "Not intended to record information regarding Body Mass Index percentiles - use the OBSERVATION.child_growth archetype for this purpose."
+			}
+		},
+		"other_contributors": ["openEHR CKM community"]
+	},
+	"artefact_type": "archetype",
+	"archetype_id": {
+		"_type": "ARCHETYPE_HRID",
+		"physical_id": "s2-EHR-Direct_observation.body_mass_index.v2.0.8",
+		"rm_publisher": "s2",
+		"rm_package": "EHR",
+		"rm_class": "Direct_observation",
+		"concept_id": "body_mass_index",
+		"release_version": "2.0.8",
+		"version_status": "",
+		"build_count": "0"
+	},
+	"definition": {
+		"_type": "C_COMPLEX_OBJECT",
+		"rm_type_name": "Direct_observation",
+		"node_id": "id1",
+		"attributes": [
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "data",
+				"children": [
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id5",
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Measured<Quantity>",
+										"node_id": "id29",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Quantity",
+														"node_id": "id23",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "magnitude",
+																"children": [
+																	{
+																		"_type": "C_REAL",
+																		"rm_type_name": "Decimal",
+																		"node_id": "id9999",
+																		"constraint": [
+																			{
+																				"lower": 0.0,
+																				"upper": 1000.0,
+																				"upper_included": false
+																			}
+																		]
+																	}
+																]
+															},
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "units",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Coded_text",
+																		"node_id": "id25",
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "term",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Terminology_term",
+																						"node_id": "id24",
+																						"attributes": [
+																							{
+																								"_type": "C_ATTRIBUTE",
+																								"rm_attribute_name": "concept",
+																								"children": [
+																									{
+																										"_type": "C_TERMINOLOGY_CODE",
+																										"rm_type_name": "Terminology_code",
+																										"node_id": "id9999",
+																										"constraint": "at10"
+																									}
+																								]
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															},
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "precision",
+																"children": [
+																	{
+																		"_type": "C_INTEGER",
+																		"rm_type_name": "INTEGER",
+																		"node_id": "id9999",
+																		"constraint": [
+																			{
+																				"lower": 1,
+																				"upper": 1
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									},
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Measured<Quantity>",
+										"node_id": "id30",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "value",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Quantity",
+														"node_id": "id26",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "magnitude",
+																"children": [
+																	{
+																		"_type": "C_REAL",
+																		"rm_type_name": "Decimal",
+																		"node_id": "id9999",
+																		"constraint": [
+																			{
+																				"lower": 0.0,
+																				"upper": 1000.0,
+																				"upper_included": false
+																			}
+																		]
+																	}
+																]
+															},
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "units",
+																"children": [
+																	{
+																		"_type": "C_COMPLEX_OBJECT",
+																		"rm_type_name": "Coded_text",
+																		"node_id": "id28",
+																		"attributes": [
+																			{
+																				"_type": "C_ATTRIBUTE",
+																				"rm_attribute_name": "term",
+																				"children": [
+																					{
+																						"_type": "C_COMPLEX_OBJECT",
+																						"rm_type_name": "Terminology_term",
+																						"node_id": "id27",
+																						"attributes": [
+																							{
+																								"_type": "C_ATTRIBUTE",
+																								"rm_attribute_name": "concept",
+																								"children": [
+																									{
+																										"_type": "C_TERMINOLOGY_CODE",
+																										"rm_type_name": "Terminology_code",
+																										"node_id": "id9999",
+																										"constraint": "at11"
+																									}
+																								]
+																							}
+																						]
+																					}
+																				]
+																			}
+																		]
+																	}
+																]
+															},
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "precision",
+																"children": [
+																	{
+																		"_type": "C_INTEGER",
+																		"rm_type_name": "INTEGER",
+																		"node_id": "id9999",
+																		"constraint": [
+																			{
+																				"lower": 1,
+																				"upper": 1
+																			}
+																		]
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id14",
+						"occurrences": {
+							"lower": 0,
+							"upper": 1
+						},
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Text",
+										"node_id": "id18"
+									}
+								]
+							}
+						]
+					},
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id13",
+						"occurrences": {
+							"lower": 0,
+							"upper": 1
+						},
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Text",
+										"node_id": "id19"
+									}
+								]
+							}
+						]
+					}
+				],
+				"cardinality": {
+					"_type": "CARDINALITY",
+					"interval": {
+						"lower": 1,
+						"upper_unbounded": true
+					}
+				},
+				"is_multiple": true
+			},
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "state",
+				"children": [
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id12",
+						"occurrences": {
+							"lower": 0,
+							"upper": 1
+						},
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Text",
+										"node_id": "id20"
+									}
+								]
+							}
+						]
+					}
+				],
+				"is_multiple": true
+			},
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "qualifiers",
+				"children": [
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id7",
+						"occurrences": {
+							"lower": 0,
+							"upper": 1
+						},
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Coded_text",
+										"node_id": "id21",
+										"attributes": [
+											{
+												"_type": "C_ATTRIBUTE",
+												"rm_attribute_name": "term",
+												"children": [
+													{
+														"_type": "C_COMPLEX_OBJECT",
+														"rm_type_name": "Terminology_term",
+														"node_id": "id31",
+														"attributes": [
+															{
+																"_type": "C_ATTRIBUTE",
+																"rm_attribute_name": "concept",
+																"children": [
+																	{
+																		"_type": "C_TERMINOLOGY_CODE",
+																		"rm_type_name": "Terminology_code",
+																		"node_id": "id9999",
+																		"constraint": "ac1"
+																	}
+																]
+															}
+														]
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"_type": "C_COMPLEX_OBJECT",
+						"rm_type_name": "Info_node",
+						"node_id": "id11",
+						"occurrences": {
+							"lower": 0,
+							"upper": 1
+						},
+						"attributes": [
+							{
+								"_type": "C_ATTRIBUTE",
+								"rm_attribute_name": "value",
+								"children": [
+									{
+										"_type": "C_COMPLEX_OBJECT",
+										"rm_type_name": "Text",
+										"node_id": "id22"
+									}
+								]
+							}
+						]
+					}
+				],
+				"is_multiple": true
+			},
+			{
+				"_type": "C_ATTRIBUTE",
+				"rm_attribute_name": "subject",
+				"children": [
+					{
+						"_type": "C_ARCHETYPE_ROOT",
+						"rm_type_name": "Entity_ref_node",
+						"node_id": "id8000",
+						"archetype_ref": "s2-EHR-Entity_ref_node.party_ref.v1"
+					}
+				]
+			}
+		]
+	},
+	"terminology": {
+		"_type": "ARCHETYPE_TERMINOLOGY",
+		"original_language": "en",
+		"term_definitions": {
+			"en": {
+				"ac1": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Method (synthesised)",
+					"description": "The method of entering the body mass index. (synthesised)"
+				},
+				"at10": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "kg/m2",
+					"description": "Kg per square meters unit."
+				},
+				"at11": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "[lb_av]/[in_i]2",
+					"description": "Pounds per sq inch unit"
+				},
+				"at7": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Automatic entry",
+					"description": "Body Mass Index calculated and entered automatically without user intervention."
+				},
+				"at8": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Direct entry",
+					"description": "Body Mass Index calculated and entered directly by user."
+				},
+				"at9": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Mass per area",
+					"description": "Mass per area"
+				},
+				"id1": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Body mass index",
+					"description": "Calculated measurement which compares a person's weight and height."
+				},
+				"id11": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Formula",
+					"description": "Formula used to derive the body mass index."
+				},
+				"id12": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Confounding factors",
+					"description": "Narrative description of any issues or factors that may impact on the calculation."
+				},
+				"id13": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Comment",
+					"description": "Additional narrative about the calculation, not captured in other fields."
+				},
+				"id14": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Clinical interpretation",
+					"description": "Single word, phrase or brief description that represents the clinical meaning and significance of the body mass index."
+				},
+				"id3": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Any event",
+					"description": "Default, unspecified point in time or interval event which may be explicitly defined in a template or at run-time."
+				},
+				"id5": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Body mass index",
+					"description": "Index describing ratio of weight to height."
+				},
+				"id7": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Method",
+					"description": "The method of entering the body mass index."
+				},
+				"id8000": {
+					"_type": "ARCHETYPE_TERM",
+					"text": "Subject",
+					"description": "Subject of observation."
+				}
+			}
+		},
+		"term_bindings": {
+			"snomed": {
+				"id5": "http://snomed.info/id/60621009",
+				"at10": "http://snomed.info/id/258896009",
+				"at11": "http://snomed.info/id/259015003"
+			},
+			"loinc": {
+				"id5": "http://loinc.org/59574-4",
+				"id14": "http://loinc.org/64110-0",
+				"id1": "http://loinc.org/59574-4",
+				"id12": "http://loinc.org/106176-1",
+				"id13": "http://loinc.org/106173-8",
+				"id7": "http://loinc.org/106191-0",
+				"id11": "http://loinc.org/97a5406b-6882-ef11-8870-6045bdc71c8b",
+				"id8000": "http://loinc.org/106184-5"
+			},
+			"openehr": {
+				"at9": "http://openehr.org/id/349"
+			},
+			"ucum": {
+				"at10": "http://ucum.org/id/kg%2Fm2",
+				"at11": "http://ucum.org/id/%5Blb_av%5D%2F%5Bin_i%5D2"
+			},
+			"s2": {
+				"ac1": "http://s2health.org/id/s2.ReportMethod"
+			}
+		},
+		"value_sets": {
+			"ac1": {
+				"_type": "VALUE_SET",
+				"id": "ac1",
+				"members": ["at7", "at8"]
+			}
+		}
+	},
+	"adl_version": "2.1.0",
+	"rm_release": "0.8.6",
+	"is_generated": true
+}

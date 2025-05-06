@@ -7,6 +7,7 @@ import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.archetypevalidator.ValidatingVisitor;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import org.openehr.utils.message.I18n;
 
 import static com.nedap.archie.aom.utils.AOMUtils.parentIsMultiple;
@@ -23,7 +24,7 @@ public class CodeValidation extends ValidatingVisitor {
             validate((CTerminologyCode) cObject);
         }
         String nodeId = cObject.getNodeId();
-        int codeSpecializationDepth = AOMUtils.getSpecializationDepthFromCode(nodeId);
+        int codeSpecializationDepth = AdlCodeUtils.getSpecializationDepthFromCode(nodeId);
         int archetypeSpecializationDepth = archetype.specializationDepth();
         if(codeSpecializationDepth > archetypeSpecializationDepth) {
             addMessageWithPath(ErrorType.VTSD, cObject.path(),
@@ -43,8 +44,8 @@ public class CodeValidation extends ValidatingVisitor {
         int archetypeSpecializationDepth = archetype.specializationDepth();
 
         for(String constraint:cTerminologyCode.getConstraint()) {
-            if(AOMUtils.isValueSetCode(constraint)) {
-                int codeSpecializationDepth = AOMUtils.getSpecializationDepthFromCode(constraint);
+            if(AdlCodeUtils.isValueSetCode(constraint)) {
+                int codeSpecializationDepth = AdlCodeUtils.getSpecializationDepthFromCode(constraint);
                 if(codeSpecializationDepth > archetypeSpecializationDepth) {
                     addMessageWithPath(ErrorType.VATCD, cTerminologyCode.path(), I18n.t("Code {0} from the C_TERMINOLOGY_CODE constraint has specialization depth {1}, but this must be no greater than {2}",
                             constraint, codeSpecializationDepth, archetypeSpecializationDepth));
@@ -66,8 +67,8 @@ public class CodeValidation extends ValidatingVisitor {
                 }
 
 
-            } else if (AOMUtils.isValueCode(constraint)) {
-                int codeSpecializationDepth = AOMUtils.getSpecializationDepthFromCode(constraint);
+            } else if (AdlCodeUtils.isValueCode(constraint)) {
+                int codeSpecializationDepth = AdlCodeUtils.getSpecializationDepthFromCode(constraint);
                 if(codeSpecializationDepth > archetypeSpecializationDepth) {
                     addMessageWithPath(ErrorType.VATCD, cTerminologyCode.path(), I18n.t("Code {0} from the C_TERMINOLOGY_CODE constraint has specialization depth {1}, but this must be no greater than {2}",
                             constraint, codeSpecializationDepth, archetypeSpecializationDepth));

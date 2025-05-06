@@ -1,0 +1,166 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7)
+	s2-EHR-Composition.care_plan.v0.0.3
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@GraphiteHealth.io>">
+		["organisation"] = <"Graphite Health <http://www.GraphiteHealth.io>">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2023 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at http://loinc.org/terms-of-use">
+		["snomedct"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Care plan">
+		>
+	>
+
+definition
+	Composition[id1] matches {	-- Care plan
+		code matches {
+			Terminology_term[id10] matches {	-- Actions
+				concept matches {[at1]}
+			}
+		}
+		category matches {
+			Terminology_term[id900] matches {
+				concept matches {[at2]}
+				description matches {"Persistent"}
+			}
+		}
+		author matches {
+			use_archetype Entity_ref_node[id21, s2-EHR-Entity_ref_node.healthcare_professional_ref.v1] 
+		}
+		content matches {
+			Section[id2] occurrences matches {1} matches {	-- Primary problem
+				items matches {
+					use_archetype Assessment[id12, s2-EHR-Assessment.problem_diagnosis.v1] 
+				}
+			}
+			Section[id3] occurrences matches {0..1} matches {	-- Related problems
+				items matches {
+					use_archetype Assessment[id12, s2-EHR-Assessment.problem_diagnosis.v1] 
+				}
+			}
+			Section[id4] occurrences matches {0..1} matches {	-- Goals
+				items matches {
+					use_archetype Assessment[id14, s2-EHR-Assessment.goal.v1] 
+				}
+			}
+			Section[id5] occurrences matches {0..1} 	-- Plan description
+			Section[id6] occurrences matches {0..1} matches {	-- Interventions
+				items matches {
+					Section[id7] occurrences matches {0..*} matches {	-- Intervention
+						items matches {
+							use_archetype Order[id8, s2-EHR-Order.medication_order.v5] 
+							allow_archetype Assessment[id9] occurrences matches {0..*} 	-- Targets
+							use_archetype Action[id10, s2-EHR-Action.medication.v1] 
+						}
+					}
+				}
+			}
+			Section[id11] occurrences matches {1} 	-- Monitoring
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Care plan">
+				description = <"Generic care plan">
+			>
+			["id2"] = <
+				text = <"Primary problem">
+				description = <"-">
+			>
+			["id3"] = <
+				text = <"Related problems">
+				description = <"-">
+			>
+			["id4"] = <
+				text = <"Goals">
+				description = <"-">
+			>
+			["id14"] = <
+				text = <"Goal">
+				description = <"-">
+			>
+			["id5"] = <
+				text = <"Plan description">
+				description = <"-">
+			>
+			["id6"] = <
+				text = <"Interventions">
+				description = <"-">
+			>
+			["id7"] = <
+				text = <"Intervention">
+				description = <"-">
+			>
+			["id8"] = <
+				text = <"Orders">
+				description = <"One or more orders that are intended to produce a single effect">
+			>
+			["id9"] = <
+				text = <"Targets">
+				description = <"-">
+			>
+			["id10"] = <
+				text = <"Actions">
+				description = <"-">
+			>
+			["id11"] = <
+				text = <"Monitoring">
+				description = <"-">
+			>
+			["id12"] = <
+				text = <"Problem / diagnoses">
+				description = <"-">
+			>
+			["id21"] = <
+				text = <"Author">
+				description = <"Authoring healthcare professional">
+			>
+			["at1"] = <
+				text = <"Care Plan">
+				description = <"Is-about code for this Composition - Care Plan">
+			>
+			["at2"] = <
+				text = <"Persistent">
+				description = <"Persistent Composition category">
+			>
+		>
+	>
+	term_bindings = <
+		["openehr"] = <
+			["at2"] = <http://openehr.org/id/431>
+		>
+		["loinc"] = <
+			["id1"] = <http://loinc.org/56851-9>
+			["id10"] = <http://loinc.org/e8b31e31-6682-ef11-8870-6045bdc71c8b>
+			["id11"] = <http://loinc.org/08a63943-6682-ef11-8870-6045bdc71c8b>
+			["id12"] = <http://loinc.org/c71dfbec-6582-ef11-8870-6045bdc71c8b>
+			["id14"] = <http://loinc.org/b90d46e3-6682-ef11-8870-6045bdc71c8b>
+			["id2"] = <http://loinc.org/67492-9>
+			["id3"] = <http://loinc.org/69542-9>
+			["id4"] = <http://loinc.org/bc7f4b0f-6682-ef11-8870-6045bdc71c8b>
+			["id5"] = <http://loinc.org/95235e1b-6682-ef11-8870-6045bdc71c8b>
+			["id6"] = <http://loinc.org/77b10e3b-6682-ef11-8870-6045bdc71c8b>
+			["id7"] = <http://loinc.org/29300-1>
+			["id9"] = <http://loinc.org/8e647228-6682-ef11-8870-6045bdc71c8b>
+			["id21"] = <http://loinc.org/52457-9>
+			["id8"] = <http://loinc.org/cfa8c219-f249-ef11-886e-6045bdc71c8b>
+		>
+	>
+

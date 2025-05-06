@@ -2,12 +2,13 @@ package com.nedap.archie.flattener;
 
 import com.nedap.archie.adlparser.modelconstraints.ReflectionConstraintImposer;
 import com.nedap.archie.aom.*;
-import com.nedap.archie.aom.utils.ArchetypeParsePostProcesser;
+import com.nedap.archie.aom.utils.ArchetypeParsePostProcessor;
 import com.nedap.archie.rminfo.MetaModels;
 import com.nedap.archie.rminfo.ReferenceModels;
 import org.openehr.bmm.v2.validation.BmmRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -22,6 +23,7 @@ import static com.nedap.archie.flattener.FlattenerUtil.getPossiblyOverridenValue
 public class Flattener implements IAttributeFlattenerSupport {
 
     private final MetaModels metaModels;
+
     //to be able to store Template Overlays transparently during flattening
     private OverridingArchetypeRepository repository;
 
@@ -66,7 +68,7 @@ public class Flattener implements IAttributeFlattenerSupport {
      */
     public Flattener createOperationalTemplate(boolean makeTemplate) {
         config.setCreateOperationalTemplate(makeTemplate);
-        if(makeTemplate) {
+        if (makeTemplate) {
             config.setRemoveZeroOccurrencesObjects(true);
         }
         return this;
@@ -101,24 +103,29 @@ public class Flattener implements IAttributeFlattenerSupport {
     }
 
     public Archetype flatten(Archetype toFlatten) {
-        if(parent != null) {
+        return flatten(toFlatten, 0);
+    }
+
+    public Archetype flatten (Archetype toFlatten, int depth) {
+        if (parent != null) {
             throw new IllegalStateException("You've used this flattener before - single use instance, please create a new one!");
         }
 
         metaModels.selectModel(toFlatten);
 
-        //validate that we can legally flatten first
+        // ------------------ non-specialised archetype ---------------
         String parentId = toFlatten.getParentArchetypeId();
-        if(parentId == null) {
-            if(config.isCreateOperationalTemplate()) {
-                OperationalTemplate template = optCreator.createOperationalTemplate(toFlatten);
-                result = template;
+        if (parentId == null) {
+            if (config.isCreateOperationalTemplate()) {
+                // The following creates a new clone
+                OperationalTemplate opt = optCreator.createOperationalTemplate (toFlatten);
+                result = opt;
+
                 //make an operational template by just filling complex object proxies and archetype slots
-                optCreator.fillSlots(template);
-                optCreator.expandValueSets((OperationalTemplate) result);
-                fillOptEmptyOccurrences(result);
-                TerminologyFlattener.filterLanguages(template, config.isRemoveLanguagesFromMetaData(), config.getLanguagesToKeep());
-                result = template;
+                optCreator.expandReferences(opt, depth);
+                optCreator.expandValueSets (opt);
+                fillOptEmptyOccurrences (opt);
+                TerminologyFlattener.filterLanguages (opt, config.isRemoveLanguagesFromMetaData(), config.getLanguagesToKeep());
             } else {
                 result = toFlatten.clone();
             }
@@ -128,38 +135,39 @@ public class Flattener implements IAttributeFlattenerSupport {
             return result;
         }
 
+        // ------------------ specialised archetype ---------------
         this.parent = repository.getArchetype(toFlatten.getParentArchetypeId());
-        if(parent == null) {
+        if (parent == null) {
             throw new IllegalArgumentException("parent archetype not found in repository: " + toFlatten.getParentArchetypeId());
         }
-        this.child = toFlatten.clone();//just to be sure, so we don't have to copy more things deeper down
+        this.child = toFlatten.clone(); //just to be sure, so we don't have to copy more things deeper down
 
-
-        if(child instanceof Template) {
+        // if the archetype is a template, get its overlays
+        if (child instanceof Template) {
             Template childTemplate = (Template) child;
-            for(TemplateOverlay overlay:childTemplate.getTemplateOverlays()) {
+            for (TemplateOverlay overlay:childTemplate.getTemplateOverlays()) {
                 //we'll flatten them later when we need them, otherwise, you run into problems with archetypes
                 //not yet added to repository while we already need them
                 repository.addExtraArchetype(overlay);
             }
         }
 
-        if(parent.getParentArchetypeId() != null) {
+        if (parent.getParentArchetypeId() != null) {
             //parent needs flattening first
             Flattener parentFlattener = getNewFlattenerForParent();
-            parent = parentFlattener.flatten(parent);
+            parent = parentFlattener.flatten (parent, 0);
+            
             // Add the template overlays from the parents (if any) to the repository,
             // so template overlays specializing other template overlays can be flattened.
             parentFlattener.getRepository().getExtraArchetypes().forEach(
                     a -> repository.addExtraArchetype(a)
             );
         }
-
-
+        
         this.result = null;
-        if(config.isCreateOperationalTemplate()) {
-            result = optCreator.createOperationalTemplate(parent);
-            optCreator.overrideArchetypeId(result, child);
+        if (config.isCreateOperationalTemplate()) {
+            result = optCreator.createOperationalTemplate (parent);
+            optCreator.overrideArchetypeId (result, child);
         } else {
             result = child.clone();
 
@@ -168,18 +176,18 @@ public class Flattener implements IAttributeFlattenerSupport {
             // for this flattener to work correctly. I would not write it this way when creating another flattener, but
             //it's the way it is :)
             //parent needs to be cloned because this updates references to parent archetype as well
-            result.setDefinition(clonedParent.getDefinition());
-            result.setTerminology(clonedParent.getTerminology());
-            result.setRules(clonedParent.getRules());
+            result.setDefinition (clonedParent.getDefinition());
+            result.setTerminology (clonedParent.getTerminology());
+            result.setRules (clonedParent.getRules());
         }
         annotationsAndOverlaysFlattener.flattenAnnotations(parent, child, result);
         annotationsAndOverlaysFlattener.flattenRmOverlay(parent, child, result);
 
         //1. redefine structure
         //2. fill archetype slots if we are creating an operational template
-        flattenDefinition(result, child);
+        flattenDefinition (result, child);
 
-        if(config.isCreateOperationalTemplate() && config.isRemoveZeroOccurrencesObjects()) {
+        if (config.isCreateOperationalTemplate() && config.isRemoveZeroOccurrencesObjects()) {
             optCreator.removeZeroOccurrencesConstraints(result);
         } else {
             prohibitZeroOccurrencesConstraints(result);
@@ -189,14 +197,13 @@ public class Flattener implements IAttributeFlattenerSupport {
         //Use empty tagPrefix here. If not empty, overridden rules in specialized archetype will not overwrite base rules,
         //but be added to the rules section additionally to the base rules.
         rulesFlattener.combineRules(child, result, prefix, "", "", true /* override statements with same tag */);
-        if(config.isCreateOperationalTemplate()) {
-            optCreator.fillSlots((OperationalTemplate) result);
-
+        if (config.isCreateOperationalTemplate()) {
+            optCreator.expandReferences((OperationalTemplate) result, depth);
         }
         fillOptEmptyOccurrences(result);
         TerminologyFlattener.flattenTerminology(result, child);
 
-        if(config.isCreateOperationalTemplate()) {
+        if (config.isCreateOperationalTemplate()) {
             optCreator.expandValueSets((OperationalTemplate) result);
             TerminologyFlattener.filterLanguages((OperationalTemplate) result, config.isRemoveLanguagesFromMetaData(), config.getLanguagesToKeep());
         }
@@ -207,20 +214,25 @@ public class Flattener implements IAttributeFlattenerSupport {
         result.setOriginalLanguage(child.getOriginalLanguage());
         result.setTranslations(child.getTranslations());
 
-        if(child instanceof Template && !config.isCreateOperationalTemplate()) {
+        // if we are not making an OPT, but are flattening a template, we need to
+        // preserve any template overlays from the child being flattening to the
+        // output structure, each in their flattened form.
+        if (child instanceof Template && !config.isCreateOperationalTemplate()) {
             Template resultTemplate = (Template) result;
             resultTemplate.setTemplateOverlays(new ArrayList<>());
             Template childTemplate = (Template) child;
+
             //we need to add the flattened template overlays. For operational template these have been added to the archetype structure, so not needed
-            for(TemplateOverlay overlay:((Template) child).getTemplateOverlays()){
-                TemplateOverlay flatOverlay = (TemplateOverlay) getNewFlattener().flatten(overlay);
+            for (TemplateOverlay overlay:((Template) child).getTemplateOverlays()){
+                TemplateOverlay flatOverlay = (TemplateOverlay) getNewFlattener().flatten(overlay, 0);
                 ResourceDescription description = (ResourceDescription) result.getDescription().clone();
+
                 //not sure whether to do this or to implement these methods using the owningTemplate param.
                 //in many cases you do want this information...
                 flatOverlay.setDescription(description);
                 flatOverlay.setOriginalLanguage(result.getOriginalLanguage());
                 flatOverlay.setTranslationList(result.getTranslationList());
-                ArchetypeParsePostProcesser.fixArchetype(flatOverlay);
+                ArchetypeParsePostProcessor.fixArchetype(flatOverlay);
                 resultTemplate.getTemplateOverlays().add(flatOverlay);
             }
         }
@@ -230,7 +242,7 @@ public class Flattener implements IAttributeFlattenerSupport {
         result.setDifferential(false);//mark this archetype as being flat
         result.setGenerated(true);
 
-        ArchetypeParsePostProcesser.fixArchetype(result);
+        ArchetypeParsePostProcessor.fixArchetype(result);
 
         //set the single/multiple attributes correctly
         new ReflectionConstraintImposer(metaModels.getSelectedModel())
@@ -240,7 +252,7 @@ public class Flattener implements IAttributeFlattenerSupport {
     }
 
     private void fillOptEmptyOccurrences(Archetype result) {
-        if(config.isCreateOperationalTemplate() && config.isFillEmptyOccurrences()) {
+        if (config.isCreateOperationalTemplate() && config.isFillEmptyOccurrences()) {
             optCreator.fillEmptyOccurrences(result);
         }
     }
@@ -252,7 +264,7 @@ public class Flattener implements IAttributeFlattenerSupport {
         while(!workList.isEmpty()) {
             CObject object = workList.pop();
             for(CAttribute attribute:object.getAttributes()) {
-                if(attribute.getExistence() != null && attribute.getExistence().getUpper() == 0 && !attribute.getExistence().isUpperUnbounded()) {
+                if (attribute.getExistence() != null && attribute.getExistence().getUpper() == 0 && !attribute.getExistence().isUpperUnbounded()) {
                     // Remove children, but do not remove attribute itself to make sure it stays prohibited
                     FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, attribute.getChildren());
                     attribute.setChildren(new ArrayList<>());
@@ -260,11 +272,11 @@ public class Flattener implements IAttributeFlattenerSupport {
                     List<CObject> objectsToRemove = new ArrayList<>();
                     for (CObject child : attribute.getChildren()) {
                         if (!child.isAllowed()) {
-                            FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, List.of(child));
-                            if(child instanceof CComplexObject) {
+                            FlattenerUtil.removeAnnotationsForArchetypeConstraints(archetype, Collections.singletonList(child));
+                            if (child instanceof CComplexObject) {
                                 ((CComplexObject) child).setAttributes(new ArrayList<>());
                             }
-                            if(config.isRemoveZeroOccurrencesObjects()) {
+                            if (config.isRemoveZeroOccurrencesObjects()) {
                                 objectsToRemove.add(child);
                             }
                         } else {
@@ -296,13 +308,12 @@ public class Flattener implements IAttributeFlattenerSupport {
     private void flattenDefinition(Archetype parent, Archetype specialized) {
         parent.setArchetypeId(specialized.getArchetypeId()); //TODO: override all metadata?
         createSpecializeCObject(null, parent.getDefinition(), specialized.getDefinition());
-
     }
 
 
     @Override
     public CObject createSpecializeCObject(CAttribute attribute, CObject parent, CObject specialized) {
-        if(parent == null) {
+        if (parent == null) {
             return specialized;//TODO: clone?
         }
         CObject newObject = cloneSpecializedObject(attribute, parent, specialized);
@@ -321,10 +332,10 @@ public class Flattener implements IAttributeFlattenerSupport {
     private void specializeContent(CObject parent, CObject specialized, CObject newObject) {
 
         if (parent instanceof CComplexObject) {
-            if(((CComplexObject) parent).isAnyAllowed() && specialized instanceof CComplexObjectProxy) {
+            if (((CComplexObject) parent).isAnyAllowed() && specialized instanceof CComplexObjectProxy) {
                 //you can replace an any allowed node with a CComplexObjectProxy. No content will need to be specialized, just merge it in
             }
-            else if(!(specialized instanceof CComplexObject)) {
+            else if (!(specialized instanceof CComplexObject)) {
                 //this is the specs. The ADL workbench allows an ARCHETYPE_SLOT to override a C_ARCHETYPE_ROOT without errors. Filed as https://openehr.atlassian.net/projects/AWBPR/issues/AWBPR-72
                 throw new IllegalArgumentException(String.format("cannot override complex object %s (%s) with non-complex object %s (%s)", parent.path(), parent.getClass().getSimpleName(), specialized.path(), specialized.getClass().getSimpleName()));
             } else {
@@ -332,9 +343,9 @@ public class Flattener implements IAttributeFlattenerSupport {
             }
         }
         else if (newObject instanceof ArchetypeSlot) {//archetypeslot is NOT a complex object. It's replacement can be
-            if(specialized instanceof ArchetypeSlot) {
+            if (specialized instanceof ArchetypeSlot) {
                 flattenArchetypeSlot((ArchetypeSlot) newObject, (ArchetypeSlot) specialized);
-            } else if(specialized instanceof CArchetypeRoot) {
+            } else if (specialized instanceof CArchetypeRoot) {
                 //TODO: handle as if this is a template overlay, but inline. Probably needed in the fillArchetypeRoot method, not here?
             } else {
                 throw new IllegalArgumentException("Can only replace an archetype slot with an archetype root or another archetype slot, not with a " + newObject.getClass());
@@ -349,18 +360,18 @@ public class Flattener implements IAttributeFlattenerSupport {
 
     private CObject cloneSpecializedObject(CAttribute attribute, CObject parent, CObject specialized) {
         CObject newObject;
-        if(attribute == null) {
+        if (attribute == null) {
             //root of archetype. don't clone anything.. alternative: make a mock attribute at the root
             newObject = parent;
         } else {
             newObject = (CObject) parent.clone();
         }
-        if(newObject instanceof ArchetypeSlot && specialized instanceof CArchetypeRoot) {
+        if (newObject instanceof ArchetypeSlot && specialized instanceof CArchetypeRoot) {
             newObject = (CObject) specialized.clone();
-            if(newObject.getOccurrences() == null && parent.getOccurrences() != null) {
+            if (newObject.getOccurrences() == null && parent.getOccurrences() != null) {
                 newObject.setOccurrences(parent.getOccurrences());
             }
-            if(newObject.getDeprecated() == null && parent.getDeprecated() != null) {
+            if (newObject.getDeprecated() == null && parent.getDeprecated() != null) {
                 newObject.setDeprecated(parent.getDeprecated());
             }
         }
@@ -368,7 +379,7 @@ public class Flattener implements IAttributeFlattenerSupport {
     }
 
     private void flattenArchetypeSlot(ArchetypeSlot parent, ArchetypeSlot specialized) {
-        if(specialized.isClosed()) {
+        if (specialized.isClosed()) {
             parent.setClosed(true);
         }
         parent.setIncludes(getPossiblyOverridenListValue(parent.getIncludes(), specialized.getIncludes()));
@@ -388,12 +399,12 @@ public class Flattener implements IAttributeFlattenerSupport {
      */
     private void flattenCComplexObject(CComplexObject newObject, CComplexObject specialized) {
 
-        if(specialized instanceof CArchetypeRoot && newObject instanceof CArchetypeRoot) {
+        if (specialized instanceof CArchetypeRoot && newObject instanceof CArchetypeRoot) {
             //cloneSpecializedObject() will already have handled the case where the parent is an ARCHETYPE_SLOT
             //and the child is a C_ARCHETYPE_ROOT by cloning the child instead of the parent
             //handle redefinition of CArchetypeRoots here.
             CArchetypeRoot specializedArchetypeRoot = (CArchetypeRoot) specialized;
-            if(specializedArchetypeRoot.getArchetypeRef() != null) {
+            if (specializedArchetypeRoot.getArchetypeRef() != null) {
                 CArchetypeRoot newArchetypeRoot = (CArchetypeRoot) newObject;
                 newArchetypeRoot.setArchetypeRef(specializedArchetypeRoot.getArchetypeRef());
             }
@@ -416,7 +427,7 @@ public class Flattener implements IAttributeFlattenerSupport {
     protected Flattener getNewFlattenerForParent() {
         Flattener result = new Flattener(repository, metaModels, config)
                 .createOperationalTemplate(false); //do not create operational template except at the end.
-        if(config.isRemoveZeroOccurrencesInParents()) {
+        if (config.isRemoveZeroOccurrencesInParents()) {
             //remove all zero occurrences objects EXCEPT in the top level archetype
             //so that you can see that things have been removed that you can still edit - but not others
             result.removeZeroOccurrencesConstraints(true);
@@ -432,7 +443,9 @@ public class Flattener implements IAttributeFlattenerSupport {
      * @return
      */
     protected Flattener getNewFlattener() {
-        return new Flattener(repository, metaModels, config);
+        Flattener flattener = new Flattener(repository, metaModels, config);
+        flattener.getConfig().setCreateOperationalTemplate(false);
+        return flattener;
     }
 
     private Flattener useComplexObjectForArchetypeSlotReplacement(boolean useComplexObjectForArchetypeSlotReplacement) {
@@ -455,7 +468,7 @@ public class Flattener implements IAttributeFlattenerSupport {
     }
 
 
-    public boolean getCreateOperationalTemplate() {
+    public boolean isCreateOperationalTemplate() {
         return config.isCreateOperationalTemplate();
     }
 

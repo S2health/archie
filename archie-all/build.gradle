@@ -1,8 +1,44 @@
 description = "Combined dependency for the entire archie library"
 
+apply plugin: 'com.gradleup.shadow'
+
+shadowJar {
+    archiveBaseName.set('archie-all')
+    archiveClassifier.set('')
+    archiveVersion.set(project.version)
+
+    // Only pull in these specific submodules — compiled classes and resources
+    from(project(":i18n").sourceSets["main"].output)
+    from(project(":utils").sourceSets["main"].output)
+    from(project(":grammars").sourceSets["main"].output)
+    from(project(":base").sourceSets["main"].output)
+    from(project(":odin").sourceSets["main"].output)
+    from(project(":aom").sourceSets["main"].output)
+    from(project(":archie-utils").sourceSets["main"].output)
+    from(project(":bmm").sourceSets["main"].output)
+    from(project(":openehr-rm").sourceSets["main"].output)
+    from(project(":openehr-terminology").sourceSets["main"].output)
+    from(project(":path-queries").sourceSets["main"].output)
+    from(project(":s2-rm").sourceSets["main"].output)
+    from(project(":tools").sourceSets["main"].output)
+    from(project(":referencemodels").sourceSets["main"].output)
+
+
+    // Block *all* dependencies (external and internal)
+    dependencies {
+        exclude(dependency ('.*:.*:.*'))
+//        exclude {
+//            it.moduleGroup != "org.s2health.archie"
+//        }
+    }
+}
+
+
+
 dependencies {
     api project(':aom')
     api project(':openehr-rm')
+    api project(':s2-rm')
     api project(':archie-utils')
     api project(':tools')
     api project(':referencemodels')

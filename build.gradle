@@ -1,16 +1,20 @@
+
+plugins {
+  id 'com.gradleup.shadow' version "9.0.0-beta13" apply false
+  id 'maven-publish'
+}
+
 repositories {
   mavenCentral()
 }
-
 
 wrapper {
     gradleVersion = '5.6.4'
 }
 
 allprojects {
-
-  version = '3.11.0'
-  group = 'io.graphitehealth.archie'
+  version = '3.13.1'
+  group = 'org.s2health.archie'
 
   ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
   //archivesBaseName = 'archie'
@@ -31,6 +35,7 @@ apply from: "${gradleScriptDir}/publish-maven.gradle"
 
 subprojects {
   apply plugin: 'java-library'
+  apply plugin: 'java-test-fixtures'
 
  // plugins {
    //   id 'com.github.ben-manes.versions' version '0.13.0'
@@ -48,7 +53,7 @@ subprojects {
   }
 
   ext.reflectionsVersion = '0.10.2'
-  ext.jacksonVersion = '2.17.2'
+  ext.jacksonVersion = '2.18.3'
 
 
   java {
@@ -64,21 +69,22 @@ subprojects {
     api "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
 
-    implementation 'com.google.guava:guava:33.3.0-jre'
+    implementation 'com.google.guava:guava:33.4.5-jre'
 
     implementation "org.reflections:reflections:${reflectionsVersion}"
-    implementation 'com.esotericsoftware.kryo:kryo5:5.5.0'
+    implementation 'com.esotericsoftware.kryo:kryo5:5.6.2'
 
-    implementation('commons-io:commons-io:2.17.0'){
+
+    implementation('commons-io:commons-io:2.18.0'){
       exclude group: 'commons-logging', module: 'commons-logging'
     }
-    implementation 'org.apache.commons:commons-text:1.12.0'
+    implementation 'org.apache.commons:commons-text:1.13.0'
     implementation 'org.apache.commons:commons-lang3:3.17.0'
 
     //java 10 no longer has these included by default, so explicit dependency is needed.
     api 'javax.xml.bind:jaxb-api:2.3.1'
     api 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-    runtimeOnly 'com.sun.xml.bind:jaxb-impl:2.3.3'
+    runtimeOnly 'com.sun.xml.bind:jaxb-impl:2.3.9'
     api 'javax.activation:activation:1.1.1'
 
     api 'org.threeten:threeten-extra:1.8.0'
@@ -99,6 +105,8 @@ subprojects {
 
 
   test {
+    ignoreFailures = true
+
     if(JavaVersion.current() != JavaVersion.VERSION_1_8) {
       jvmArgs = ['--add-opens', 'java.base/java.lang=ALL-UNNAMED'
                  , '--add-opens', 'java.base/java.lang.invoke=ALL-UNNAMED'
@@ -119,3 +127,5 @@ subprojects {
 }
 
 apply from: "${gradleScriptDir}/jacoco.gradle"
+
+

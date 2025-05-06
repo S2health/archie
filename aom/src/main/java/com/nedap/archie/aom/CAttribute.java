@@ -1,11 +1,10 @@
 package com.nedap.archie.aom;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
-import com.nedap.archie.definitions.AdlCodeDefinitions;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.query.APathQuery;
 import com.nedap.archie.rminfo.RMProperty;
@@ -23,7 +22,8 @@ import java.util.List;
 /**
  * Created by pieter.bos on 15/10/15.
  */
-@JsonPropertyOrder({"@type", "rm_attribute_name", "path", "logical_path", "differential_path", "multiple", "mandatory", "existence", "cardinality", "children"})
+@JsonInclude(JsonInclude.Include.NON_DEFAULT) //JFC Experiment
+@JsonPropertyOrder({"_type", "rm_attribute_name", "path", "logical_path", "differential_path", "is_multiple", "mandatory", "existence", "cardinality", "children"})
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name="C_ATTRIBUTE", propOrder = {
         "existence",
@@ -32,7 +32,6 @@ import java.util.List;
         "cardinality",
         "children"
 })
-
 public class CAttribute extends ArchetypeConstraint {
 
     @XmlAttribute(name="rm_attribute_name")
@@ -83,10 +82,12 @@ public class CAttribute extends ArchetypeConstraint {
         this.differentialPath = differentialPath;
     }
 
+    @JsonProperty("is_multiple")
     public boolean isMultiple() {
         return multiple;
     }
 
+    @JsonProperty("is_multiple")
     public void setMultiple(boolean multiple) {
         this.multiple = multiple;
     }
@@ -114,7 +115,7 @@ public class CAttribute extends ArchetypeConstraint {
             return result;
         }
         for(CObject child:children) {
-            if(nodeId.equals(child.getNodeId()) || AOMUtils.codesConformant(child.getNodeId(), nodeId)) {
+            if(nodeId.equals(child.getNodeId()) || AdlCodeUtils.codesConformant(child.getNodeId(), nodeId)) {
                 return child;
             } else if(child instanceof CArchetypeRoot) {
                 //TODO: Should we look for specialized archetype roots as well? :)
@@ -359,6 +360,7 @@ public class CAttribute extends ArchetypeConstraint {
         return !multiple;
     }
 
+    @JsonIgnore
     public boolean isMandatory() {
         if(existence != null) {
             return existence.isMandatory();
@@ -370,7 +372,7 @@ public class CAttribute extends ArchetypeConstraint {
         return children.isEmpty() && !isProhibited();
     }
 
-
+    @JsonIgnore
     public boolean isProhibited() {
         if(existence != null) {
             return existence.isProhibited();

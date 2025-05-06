@@ -102,8 +102,8 @@ public class BmmContainerType extends BmmType {
      * @return base class name
      */
     @Override
-    public List<String> getFlattenedTypeList() {
-        return baseType.getFlattenedTypeList();
+    public List<String> flattenedTypeList() {
+        return baseType.flattenedTypeList();
     }
 
     /**
@@ -111,8 +111,8 @@ public class BmmContainerType extends BmmType {
      *
      * @return
      */
-    public BmmEffectiveType getEffectiveType() {
-        return baseType.getEffectiveType();
+    public BmmEffectiveType effectiveType() {
+        return baseType.effectiveType();
     }
 
     /**
@@ -121,7 +121,7 @@ public class BmmContainerType extends BmmType {
      * @return
      */
     @Override
-    public BmmUnitaryType getUnitaryType() {
+    public BmmUnitaryType unitaryType() {
         return baseType;
     }
 

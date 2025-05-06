@@ -3,6 +3,7 @@ package com.nedap.archie.serializer.adl.constraints;
 
 import com.nedap.archie.aom.primitives.CTerminologyCode;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.serializer.adl.ADLDefinitionSerializer;
 
 /**
@@ -51,7 +52,7 @@ public class CTerminologyCodeSerializer extends ConstraintSerializer<CTerminolog
     public String getSimpleCommentText(CTerminologyCode cobj) {
         if (!cobj.getConstraint().isEmpty()) {
             String constraint = cobj.getConstraint().get(0);
-            if(AOMUtils.isValueSetCode(constraint) || AOMUtils.isValueCode(constraint)) {
+            if(AdlCodeUtils.isValueSetCode(constraint) || AdlCodeUtils.isValueCode(constraint)) {
                 return serializer.getTermText(cobj, constraint);
             }
         }

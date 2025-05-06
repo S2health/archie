@@ -5,7 +5,9 @@ import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlDefinitions;
 import com.nedap.archie.query.ComplexObjectProxyReplacement;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
@@ -49,11 +51,11 @@ class OperationalTemplateCreator {
         result.setParentArchetypeId(override.getParentArchetypeId());
     }
 
-    public void fillSlots(OperationalTemplate archetype) { //should this be OperationalTemplate?
+    public void expandReferences(OperationalTemplate result, int depth) { //should this be OperationalTemplate?
         //TODO: closing archetype slots should be moved to AFTER including other archetypes
-        closeArchetypeSlots(archetype);
-        fillArchetypeRoots(archetype);
-        fillComplexObjectProxies(archetype);
+        closeArchetypeSlots(result);
+        fillArchetypeRootsOpt(result, depth);
+        fillComplexObjectProxies(result);
     }
 
     static void expandValueSets(OperationalTemplate operationalTemplate) {
@@ -137,26 +139,94 @@ class OperationalTemplateCreator {
         }
     }
 
-    private void fillArchetypeRoots(OperationalTemplate result) {
-        if(!getConfig().isFillArchetypeRoots()) {
+    /**
+     * Fill all CArchetypeRoot nodes within result OPT with copies of the archetypes or templates they refer to
+     * @param result outer OPT
+     * @param depth depth of archetype chaining through CArchetypeRoots; used to prevent over-deep filling
+     */
+    private void fillArchetypeRootsOpt (OperationalTemplate result, int depth) {
+        if (!getConfig().isFillArchetypeRoots()) {
             return;
         }
+
+        // initialise the stack used to detect cyclic archetype inclusion, i.e. use_archetype statements
+        // that cause direct or indirect reference cycles
+        fillersOnCurrentPath = new Stack<>();
+
+        fillArchetypeRootsArchetype(result, result.getArchetypeId().getFullId(), result.getDefinition(), depth);
+    }
+
+    /**
+     *
+     * @param result : the OPT being built
+     * @param rootArchId : the id of the archetype sub-tree within the OPT
+     * @param archRootInOpt : archetype root point within `result` OPT
+     * @param depth : depth of chaining, used to limit non-recursive inclusion
+     */
+    private void fillArchetypeRootsArchetype(OperationalTemplate result, String rootArchId, CComplexObject archRootInOpt, int depth) throws RuntimeException {
+
         Stack<CObject> workList = new Stack<>();
-        workList.push(result.getDefinition());
-        while(!workList.isEmpty()) {
+        workList.push (archRootInOpt);
+
+        Archetype rootArchetype = flattener.getRepository().getArchetype (rootArchId);
+        if (rootArchetype == null)
+            throw new RuntimeException ("Root archetype :" + rootArchId + " not found in OPT repository (including overlays).");
+        // if the archetype is a template, get its overlays - this takes care of templates included in templates
+        else if (rootArchetype instanceof Template) {
+            Template childTemplate = (Template) rootArchetype;
+            for (TemplateOverlay overlay:childTemplate.getTemplateOverlays()) {
+                flattener.getRepository().addExtraArchetype(overlay);
+            }
+        }
+
+        while (!workList.isEmpty()) {
             CObject object = workList.pop();
-            for(CAttribute attribute:object.getAttributes()) {
-                for(CObject child:attribute.getChildren()) {
-                    if(child instanceof CArchetypeRoot) { //use_archetype
-                        fillArchetypeRoot((CArchetypeRoot) child, result);
+            for (CAttribute attribute:object.getAttributes()) {
+                List<CObject> children = attribute.getChildren();
+                for (CObject child:children) {
+                    // deal with CArchetypeRoot node that currently has no attributes, i.e. is empty
+                    if (child instanceof CArchetypeRoot &&
+                            flattener.isCreateOperationalTemplate() &&
+                            (child.getAttributes() == null || child.getAttributes().isEmpty()))
+                    {
+                        CArchetypeRoot car = (CArchetypeRoot) child;
+                        Archetype supplierArchetype = flattener.getRepository().getArchetype (car.getArchetypeRef());
+
+                        // if we can't find the supplier archetype bail out
+                        if (supplierArchetype == null) {
+                            if (getConfig().isFailOnMissingUsedArchetype())
+                                throw new RuntimeException ("Archetype with reference :" + car.getArchetypeRef() + " not found.");
+
+                        // don't do anything if we've hit the recursion limit. We can only check it here because we've only
+                        // just worked out the resolved archetype id - the archetype ref is not reliable for this purpose
+                        } else {
+                            if (fillersOnCurrentPathCount(supplierArchetype.getArchetypeId().getFullId())
+                                    <= AdlDefinitions.TemplateMaxRecursionDepth && depth < AdlDefinitions.TemplateMaxDepth)
+                            {
+                                // when we know the archetype that a CArchetypeRoot ref resolves to, we put it on the
+                                // filler id stack, which is used to detect cycles in archetype filler referencing
+                                fillersOnCurrentPath.push(rootArchId);
+//String indent = StringUtils.repeat('x', (int) fillersOnCurrentPath.size());
+//System.out.println(indent + "++++ push " + rootArchId);
+
+                                fillArchetypeRoot (car, supplierArchetype, result, depth + 1);
+
+                                // car node is now populated with flattened (copy of) supplier archetype
+                                fillArchetypeRootsArchetype(result, supplierArchetype.getArchetypeId().getFullId(), car, depth);
+
+                                fillersOnCurrentPath.pop();
+//System.out.println(indent + "      pop " + rootArchId);
+                            }
+                        }
+                    } else {
+                        workList.push(child);
                     }
-                    workList.push(child);
                 }
             }
         }
     }
 
-    private void fillComplexObjectProxies(OperationalTemplate result) {
+    private void fillComplexObjectProxies(OperationalTemplate result) throws RuntimeException {
         if(!getConfig().isReplaceUseNode()) {
             return;
         }
@@ -187,81 +257,80 @@ class OperationalTemplateCreator {
     }
 
     /**
-     * Only fillArchetypeRoot if this is not done yet
+     * Fill archetype root car, within result, with (a clone of) supplier archetype
      */
-    private void fillArchetypeRoot(CArchetypeRoot root, OperationalTemplate result) {
-        if(flattener.getCreateOperationalTemplate() && ( root.getAttributes() == null || root.getAttributes().isEmpty()) ) {
-            String archetypeRef = root.getArchetypeRef();
-            String newArchetypeRef = archetypeRef;
-            OverridingArchetypeRepository repository = flattener.getRepository();
+    private void fillArchetypeRoot(CArchetypeRoot car, Archetype supplierArchetype, OperationalTemplate result, int depth) {
 
-            Archetype archetype = repository.getArchetype(archetypeRef);
-            if(archetype instanceof TemplateOverlay){
-                //we want to be able to check which archetype this is in the UI. If it's an overlay, that means retrieving the non-operational template
-                //which is a hassle.
-                //That's a problem. Is this the way to fix is?
-                newArchetypeRef = archetype.getParentArchetypeId();
-            }
-            if (archetype == null) {
-                if(getConfig().isFailOnMissingUsedArchetype()) {
-                    throw new IllegalArgumentException("Archetype with reference :" + archetypeRef + " not found.");
-                } else {
-                    //just skip, as a form of graceful degradation.
-                    return;
-                }
-            }
-            archetype = flattener.getNewFlattener().flatten(archetype);
+        String newArchetypeRef = car.getArchetypeRef();
 
-            //
-            CComplexObject rootToFill = root;
-            if(flattener.isUseComplexObjectForArchetypeSlotReplacement()) {
-                rootToFill = archetype.getDefinition();
-                root.getParent().replaceChild(root.getNodeId(), rootToFill);
-            } else {
-                rootToFill.setAttributes(archetype.getDefinition().getAttributes());
-                rootToFill.setAttributeTuples(archetype.getDefinition().getAttributeTuples());
-                rootToFill.setDefaultValue(archetype.getDefinition().getDefaultValue());
-            }
-            String newNodeId = archetype.getArchetypeId().getFullId();
+        String supplierArchetypeFullId = supplierArchetype.getArchetypeId().getFullId();
 
-            ArchetypeTerminology terminology = archetype.getTerminology();
-
-            //The node id will be replaced from "id1" to something like "openEHR-EHR-COMPOSITION.template_overlay.v1.0.0
-            //so store it in the terminology as well
-            Map<String, Map<String, ArchetypeTerm>> termDefinitions = terminology.getTermDefinitions();
-
-            for(String language: termDefinitions.keySet()) {
-                Map<String, ArchetypeTerm> translations = termDefinitions.get(language);
-                translations.put(newNodeId, TerminologyFlattener.getTerm(terminology.getTermDefinitions(), language, archetype.getDefinition().getNodeId()));
-            }
-
-            //rootToFill.setNodeId(newNodeId);
-            if(!flattener.isUseComplexObjectForArchetypeSlotReplacement()) {
-                root.setArchetypeRef(newNodeId);
-            }
-
-            //todo: should we filter this?
-            if(archetype instanceof OperationalTemplate) {
-                OperationalTemplate template = (OperationalTemplate) archetype;
-                //add all the component terminologies, otherwise we lose translation
-                for(String subarchetypeId:template.getComponentTerminologies().keySet()) {
-                    result.addComponentTerminology(subarchetypeId, template.getComponentTerminologies().get(subarchetypeId));
-                }
-            }
-
-            result.addComponentTerminology(newNodeId, terminology);
-
-            String prefix = archetype.getArchetypeId().getConceptId() + "_";
-            flattener.getRulesFlattener().combineRules(archetype, root.getArchetype(), prefix, prefix, rootToFill.getPath(), false);
-            flattener.getAnnotationsAndOverlaysFlattener().addAnnotationsWithPathPrefix(rootToFill.getPath(), archetype, result);
-            flattener.getAnnotationsAndOverlaysFlattener().addVisibilityWithPathPrefix(rootToFill.getPath(), archetype, result);
-            //todo: do we have to put something in the terminology extracts?
-            //templateResult.addTerminologyExtract(child.getNodeId(), archetype.getTerminology().);
+        if (supplierArchetype instanceof TemplateOverlay){
+            //we want to be able to check which archetype this is in the UI. If it's an overlay, that means retrieving the non-operational template
+            //which is a hassle.
+            //That's a problem. Is this the way to fix is?
+            newArchetypeRef = supplierArchetype.getParentArchetypeId();
         }
 
+        // The following creates a new clone
+        Archetype supplierArchetypeFlattened = flattener.getNewFlattener().flatten (supplierArchetype, depth);
+
+        //
+        CComplexObject carToFill = car;
+        if (flattener.isUseComplexObjectForArchetypeSlotReplacement()) {
+            carToFill = supplierArchetypeFlattened.getDefinition();
+            car.getParent().replaceChild (car.getNodeId(), carToFill);
+        } else {
+            carToFill.setAttributes (supplierArchetypeFlattened.getDefinition().getAttributes());
+            carToFill.setAttributeTuples (supplierArchetypeFlattened.getDefinition().getAttributeTuples());
+            carToFill.setDefaultValue (supplierArchetypeFlattened.getDefinition().getDefaultValue());
+        }
+
+        ArchetypeTerminology terminology = supplierArchetypeFlattened.getTerminology();
+
+        //The node id will be replaced from "id1" to something like "openEHR-EHR-COMPOSITION.template_overlay.v1.0.0
+        //so store it in the terminology as well
+        Map<String, Map<String, ArchetypeTerm>> termDefinitions = terminology.getTermDefinitions();
+
+        for (String language: termDefinitions.keySet()) {
+            Map<String, ArchetypeTerm> translations = termDefinitions.get(language);
+            translations.put(supplierArchetypeFullId, TerminologyFlattener.getTerm(terminology.getTermDefinitions(), language, supplierArchetypeFlattened.getDefinition().getNodeId()));
+        }
+
+        //rootToFill.setNodeId(newNodeId);
+        if (!flattener.isUseComplexObjectForArchetypeSlotReplacement()) {
+            car.setArchetypeRef (supplierArchetypeFullId);
+        }
+
+        //todo: should we filter this?
+        if (supplierArchetypeFlattened instanceof OperationalTemplate) {
+            OperationalTemplate template = (OperationalTemplate) supplierArchetypeFlattened;
+            //add all the component terminologies, otherwise we lose translation
+            for (String subarchetypeId:template.getComponentTerminologies().keySet()) {
+                result.addComponentTerminology(subarchetypeId, template.getComponentTerminologies().get(subarchetypeId));
+            }
+        }
+
+        result.addComponentTerminology(supplierArchetypeFullId, terminology);
+
+        String prefix = supplierArchetypeFlattened.getArchetypeId().getConceptId() + "_";
+        flattener.getRulesFlattener().combineRules(supplierArchetypeFlattened, car.getArchetype(), prefix, prefix, carToFill.getPath(), false);
+        flattener.getAnnotationsAndOverlaysFlattener().addAnnotationsWithPathPrefix(carToFill.getPath(), supplierArchetypeFlattened, result);
+        flattener.getAnnotationsAndOverlaysFlattener().addVisibilityWithPathPrefix(carToFill.getPath(), supplierArchetypeFlattened, result);
+        //todo: do we have to put something in the terminology extracts?
+        //templateResult.addTerminologyExtract(child.getNodeId(), archetype.getTerminology().);
     }
 
     private FlattenerConfiguration getConfig() {
         return flattener.getConfiguration();
     }
+
+    private Stack<String> fillersOnCurrentPath = new Stack<>();
+
+    public long fillersOnCurrentPathCount(String archetypeId) {
+        return fillersOnCurrentPath.stream()
+                .filter(str -> str.equals(archetypeId))
+                .count();
+    }
+
 }

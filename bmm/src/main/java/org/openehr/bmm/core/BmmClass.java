@@ -21,6 +21,7 @@ package org.openehr.bmm.core;
  * Author: Claude Nanjo
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.openehr.bmm.persistence.validation.BmmDefinitions;
 
 import java.io.Serializable;
@@ -34,12 +35,8 @@ import java.util.Map;
  * <p>
  * Created by cnanjo on 4/11/16.
  */
-public abstract class BmmClass extends BmmEntity implements Serializable {
-
-    /**
-     * Name of this class. Note that unlike UML, names of classes are just the root name, even if the class is generic.
-     */
-    private String name;
+@JsonIgnoreProperties({"ancestors", "immediateDescendants", "bmmPackage", "bmmModel"})
+public abstract class BmmClass extends BmmModelElement implements Serializable {
 
     /**
      * List of immediate inheritance parents.
@@ -57,9 +54,19 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
     private BmmModel bmmModel;
 
     /**
-     * List of attributes defined in this class.
+     * List of properties defined in this class.
      */
     private Map<String, BmmProperty<?>> properties = new LinkedHashMap<>();
+
+    /**
+     * List of functions defined in this class.
+     */
+    private Map<String, BmmFunction<?>> functions = new LinkedHashMap<>();
+
+    /**
+     * List of invariants defined in this class.
+     */
+    private Map<String, BmmAssertion> invariants = new LinkedHashMap<>();
 
     /**
      * Reference to original source schema defining this class. Useful for UI tools to determine which original schema
@@ -98,29 +105,11 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
     }
 
     /**
-     * Returns the name of this class. Note that unlike UML, names of classes are just the root name, even if the class is generic.
-     *
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
      * Returns a type object corresponding to this class.
      *
      * @return
      */
-    public abstract BmmDefinedType getType();
-
-    /**
-     * Sets the name of this class. Note that unlike UML, names of classes are just the root name, even if the class is generic.
-     *
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+    public abstract BmmDefinedType generateType();
 
     /**
      * Returns the list of immediate inheritance parents.
@@ -179,10 +168,10 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
     /**
      * Flat list of properties defined in this class and ancestors
      */
-    public Map<String, BmmProperty<?>> getFlatProperties() {
+    public Map<String, BmmProperty<?>> flatProperties() {
         Map<String, BmmProperty<?>> result = new LinkedHashMap<>();
         getAncestors().forEach( (ancestorName, ancestor) -> {
-            result.putAll(ancestor.getBaseClass().getFlatProperties());
+            result.putAll(ancestor.getBaseClass().flatProperties());
         });
         result.putAll(properties);
         return result;
@@ -204,6 +193,30 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
      */
     public void addProperty(BmmProperty<?> property) {
         properties.put(property.getName(), property);
+    }
+
+    /**
+     * Sets the list of attributes defined in this class.
+     **/
+    public Map<String, BmmFunction<?>> getFunctions() {
+        return functions;
+    }
+    /**
+     * Sets the list of attributes defined in this class.
+     *
+     * @param functions
+     */
+    public void setFunctions(Map<String, BmmFunction<?>> functions) {
+        this.functions = functions;
+    }
+
+    /**
+     * Method adds property to class.
+     *
+     * @param function
+     */
+    public void addFunction(BmmFunction<?> function) {
+        functions.put(function.getName(), function);
     }
 
     /**
@@ -374,7 +387,7 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
      *
      * @return
      */
-    public String getPackagePath() {
+    public String packagePath() {
         return bmmPackage == null ? null : bmmPackage.getPath();
     }
 
@@ -384,7 +397,7 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
      *
      * @return
      */
-    public String getClassPath() {
+    public String classPath() {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
@@ -405,7 +418,7 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
     }
 
     public String effectivePropertyType (String propertyName) {
-        BmmProperty<?> property = getFlatProperties().get(propertyName);
+        BmmProperty<?> property = flatProperties().get(propertyName);
         return property == null ? BmmDefinitions.UNKNOWN_TYPE_NAME : property.getType().getTypeName();
     }
 
@@ -448,10 +461,22 @@ public abstract class BmmClass extends BmmEntity implements Serializable {
      * @return
      */
     public Boolean hasFlatPropertyWithName(String propertyName) {
-        return getFlatProperties().containsKey(propertyName);
+        return flatProperties().containsKey(propertyName);
     }
 
     public String toString() {
         return name;
+    }
+
+    public Map<String, BmmAssertion> getInvariants() {
+        return invariants;
+    }
+
+    public void setInvariants(Map<String, BmmAssertion> invariants) {
+        this.invariants = invariants;
+    }
+
+    public void addInvariant(BmmAssertion invariant) {
+        invariants.put(invariant.getTag(), invariant);
     }
 }

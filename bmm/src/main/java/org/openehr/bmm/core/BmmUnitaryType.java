@@ -32,7 +32,7 @@ public abstract class BmmUnitaryType extends BmmType {
      *
      * @return
      */
-    public BmmUnitaryType getUnitaryType() {
+    public BmmUnitaryType unitaryType() {
         return this;
     }
 

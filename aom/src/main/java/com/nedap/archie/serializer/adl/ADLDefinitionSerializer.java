@@ -8,6 +8,7 @@ import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.OpenEHRBase;
 import com.nedap.archie.base.terminology.TerminologyCode;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.rminfo.RMObjectMapperProvider;
 import com.nedap.archie.serializer.adl.constraints.*;
 
@@ -83,7 +84,7 @@ public class ADLDefinitionSerializer {
                 Archetype flatParent = flatArchetypeProvider.apply(archetype.getParentArchetypeId());
                 if(flatParent != null && flatParent.getTerminology() != null) {
                     ArchetypeTerminology terminology = flatParent.getTerminology();
-                    String nodeId = AOMUtils.codeAtLevel(cobj.getNodeId(), flatParent.specializationDepth());
+                    String nodeId = AdlCodeUtils.codeAtLevel(cobj.getNodeId(), flatParent.specializationDepth());
                     term = terminology.getTermDefinition(originalLanguage, nodeId);
                 }
             }

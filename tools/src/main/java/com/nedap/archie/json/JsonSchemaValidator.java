@@ -16,7 +16,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,20 +47,10 @@ public class JsonSchemaValidator {
      * The JSON Schema complies to the JSON format that the OpenEHR project uses. This may very well be different from
      * the serialization rules corresponding to your own different BMM file, if it is not an OpenEHR model.
      *
-     * @param bmmModel the model to create the JSON Schema for
-     * @param allowAdditionalProperties whether to allow additional properties in the JSON
+     * @param schemaFiles JSON schema files to materialise
      */
-    public JsonSchemaValidator(BmmModel bmmModel, boolean allowAdditionalProperties) {
-        schemaFiles = new LinkedHashMap<>();
-        new OpenEHRRmJSONSchemaCreator()
-                .allowAdditionalProperties(allowAdditionalProperties)
-                .withBaseUri("http://something/")
-                //the validator can actually handle a schema split in multiple files, but
-                //Justify's implementation is not perfect, causing some extra memory use that might be better to avoid.
-                .splitInMultipleFiles(false)
-                .withFullReferences(true)
-                .create(bmmModel)
-                .forEach( (uri, schema) -> schemaFiles.put(uri.getId(), schema));
+    public JsonSchemaValidator(Map<String, JsonObject> schemaFiles) {
+        this.schemaFiles = schemaFiles;
         //The first entry in schemaFiles is guaranteed to be the main schema by the JSONSchemaCreator.
         JsonObject schemaJson = schemaFiles.values().iterator().next();
 

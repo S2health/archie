@@ -1,6 +1,10 @@
 package com.nedap.archie.aom.primitives;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.nedap.archie.ArchieLanguageConfiguration;
 import com.nedap.archie.ValidationConfiguration;
 import com.nedap.archie.aom.Archetype;
@@ -14,6 +18,7 @@ import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ConformanceCheckResult;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.base.terminology.TerminologyCode;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.terminology.OpenEHRTerminologyAccess;
 import org.openehr.utils.message.I18n;
 
@@ -22,6 +27,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +60,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
     }
 
     @Override
+    @JsonSerialize(using = SingleOrArraySerializer.class)
     public List<String> getConstraint() {
         return this.constraint;
     }
@@ -81,6 +88,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
         return getEffectiveConstraintStatus() == ConstraintStatus.REQUIRED;
     }
 
+    @JsonIgnore
     public ConstraintStatus getEffectiveConstraintStatus() {
         return constraintStatus == null ? ConstraintStatus.REQUIRED : constraintStatus;
     }
@@ -96,7 +104,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
 
             List<String> values;
             String terminologyId = value.getTerminologyId();
-            if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AOMUtils.isValueSetCode(value.getTerminologyId())) {
+            if (terminologyId == null || terminologyId.equalsIgnoreCase("local") || AdlCodeUtils.isValueSetCode(value.getTerminologyId())) {
                 values = this.getValueSetExpanded();
             } else if (terminologyId.equalsIgnoreCase("openehr")) {
                 values = this.getOpenEHRValueSetExpanded();
@@ -126,6 +134,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
      *
      * @return
      */
+    @JsonIgnore
     public List<TerminologyCodeWithArchetypeTerm> getTerms() {
         List<TerminologyCodeWithArchetypeTerm> result = new ArrayList<>();
         Archetype archetype = getArchetype();
@@ -246,7 +255,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
         String thisConstraint = constraint.get(0);
         String otherConstraint = otherCode.constraint.get(0);
         Archetype archetype = this.getArchetype();
-        if(AOMUtils.isValidValueSetCode(thisConstraint) && AOMUtils.isValidValueSetCode(otherConstraint)) {
+        if(AdlCodeUtils.isValidValueSetCode(thisConstraint) && AdlCodeUtils.isValidValueSetCode(otherConstraint)) {
             if (otherValueSet.isEmpty()) {
                 return ConformanceCheckResult.conforms();
             }
@@ -256,7 +265,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
                 // - reused directly
                 // - specialized
                 //this includes the value set codes
-                if (!AOMUtils.codesConformant(thisConstraint, otherConstraint)) {
+                if (!AdlCodeUtils.codesConformant(thisConstraint, otherConstraint)) {
                     return ConformanceCheckResult.fails(ErrorType.VPOV, I18n.t("child terminology constraint value set code {0} does not conform to parent constraint with value set code {1}", thisConstraint, otherConstraint));
                 }
                 for (String value : valueSet) {
@@ -276,7 +285,7 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
             }
             return ConformanceCheckResult.conforms();
         } else {
-            if(!AOMUtils.codesConformant(thisConstraint, otherConstraint)) {
+            if(!AdlCodeUtils.codesConformant(thisConstraint, otherConstraint)) {
                 return ConformanceCheckResult.fails(ErrorType.VPOV, I18n.t("child terminology constraint value code {0} does not conform to parent constraint with value code {1}", thisConstraint, otherConstraint));
             }
             return ConformanceCheckResult.conforms();
@@ -297,6 +306,27 @@ public class CTerminologyCode extends CPrimitiveObject<String, TerminologyCode> 
         }
         result.append("]}");
         return result.toString();
+    }
+
+    public static class SingleOrArraySerializer extends JsonSerializer<List<String>> {
+        public SingleOrArraySerializer() {
+            super();
+        }
+
+        @Override
+        public void serialize(List<String> value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            if (value != null && value.size() == 1) {
+                gen.writeString(value.get(0));
+            } else {
+                gen.writeStartArray();
+                if (value != null) {
+                    for (String item : value) {
+                        gen.writeString(item);
+                    }
+                }
+                gen.writeEndArray();
+            }
+        }
     }
 
 }

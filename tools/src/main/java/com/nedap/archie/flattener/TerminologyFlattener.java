@@ -7,6 +7,7 @@ import com.nedap.archie.aom.terminology.ArchetypeTerm;
 import com.nedap.archie.aom.terminology.ArchetypeTerminology;
 import com.nedap.archie.aom.terminology.ValueSet;
 import com.nedap.archie.aom.utils.AOMUtils;
+import com.nedap.archie.definitions.AdlCodeUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +68,7 @@ public class TerminologyFlattener {
 
     private static ValueSet findMatchingValueSet(Map<String, ValueSet> resultValueSets, String specializedId) {
         return resultValueSets.values().stream()
-                .filter((valueSet) -> AOMUtils.isOverriddenIdCode(specializedId, valueSet.getId()))
+                .filter((valueSet) -> AdlCodeUtils.isOverriddenIdCode(specializedId, valueSet.getId()))
                 .findAny().orElse(null);
     }
 

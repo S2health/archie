@@ -4,13 +4,25 @@ import com.google.common.collect.Lists;
 import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.rminfo.MetaModel;
+import org.openehr.bmm.core.BmmContainerProperty;
+import org.openehr.bmm.core.BmmModel;
+import org.openehr.bmm.core.BmmProperty;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-class RmMultiplicityValidator {
-    List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
+public class RmMultiplicityValidator {
+    private MetaModel metaModel;
+
+    public RmMultiplicityValidator(MetaModel metaModel) {
+        this.metaModel = metaModel;
+    }
+
+    public List<RMObjectValidationMessage> validate(CAttribute attribute, String pathSoFar, Object attributeValue) {
+
+
         if (attributeValue instanceof Collection) {
             Collection<?> collectionValue = (Collection<?>) attributeValue;
             //validate multiplicity
@@ -19,6 +31,20 @@ class RmMultiplicityValidator {
                 if (!cardinality.getInterval().has(collectionValue.size())) {
                     String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(cardinality.getInterval().toString());
                     return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
+                }
+            } else {
+                // check BMM for cardinality
+                BmmModel bmmModel = metaModel.getBmmModel();
+                BmmProperty bmmProperty = bmmModel.propertyAtPath (attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
+
+                if (bmmProperty != null && bmmProperty instanceof BmmContainerProperty) {
+                    MultiplicityInterval interval = ((BmmContainerProperty)bmmProperty).getCardinality();
+                    if(interval != null) {
+                        if(!interval.has(collectionValue.size())) {
+                            String message = RMObjectValidationMessageIds.rm_CARDINALITY_MISMATCH.getMessage(interval.toString());
+                            return Lists.newArrayList(new RMObjectValidationMessage(attribute, pathSoFar, message, RMObjectValidationMessageType.CARDINALITY_MISMATCH));
+                        }
+                    }
                 }
             }
         } else {

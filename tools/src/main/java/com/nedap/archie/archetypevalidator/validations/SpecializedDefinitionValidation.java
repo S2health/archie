@@ -4,7 +4,8 @@ import com.google.common.base.Joiner;
 import com.nedap.archie.aom.*;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.aom.utils.ConformanceCheckResult;
-import com.nedap.archie.aom.utils.NodeIdUtil;
+import com.nedap.archie.definitions.AdlCodeUtils;
+import com.nedap.archie.definitions.NodeIdUtil;
 import com.nedap.archie.aom.utils.CodeRedefinitionStatus;
 import com.nedap.archie.archetypevalidator.ErrorType;
 import com.nedap.archie.archetypevalidator.ValidatingVisitor;
@@ -50,7 +51,7 @@ public class SpecializedDefinitionValidation extends ValidatingVisitor {
     }
 
     private void checkSpecializedNode(CObject cObject) {
-        String flatPath = AOMUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
+        String flatPath = AdlCodeUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
         CObject parentCObject = getCObject(flatParent.itemAtPath(flatPath));
         boolean passed = true;
         if(parentCObject == null) {
@@ -128,7 +129,7 @@ public class SpecializedDefinitionValidation extends ValidatingVisitor {
             thisNodeIsExclusion = true;
         }
 
-        if (!thisNodeIsExclusion && excludedNodeIds.contains(AOMUtils.codeAtLevel(cObject.getNodeId(), AOMUtils.getSpecializationDepthFromCode(parentCObject.getArchetype().getDefinition().getNodeId())))) {
+        if (!thisNodeIsExclusion && excludedNodeIds.contains(AdlCodeUtils.codeAtLevel(cObject.getNodeId(), AdlCodeUtils.getSpecializationDepthFromCode(parentCObject.getArchetype().getDefinition().getNodeId())))) {
             addWarningWithPath(ErrorType.OTHER, cObject.path(),
                     I18n.t("Object with node id {0} should be specialized before excluding the parent node", cObject.getNodeId()));
         }
@@ -238,7 +239,7 @@ public class SpecializedDefinitionValidation extends ValidatingVisitor {
             addMessageWithPath(ErrorType.VARXR, root.path(),
                     I18n.t("Use_archetype references archetype id {0}, but no archetype was found", root.getArchetypeRef()));
             return false;
-        } else if (AOMUtils.getSpecializationDepthFromCode(root.getNodeId()) != archetype.specializationDepth()) {
+        } else if (AdlCodeUtils.getSpecializationDepthFromCode(root.getNodeId()) != archetype.specializationDepth()) {
             addMessageWithPath(ErrorType.VARXID, root.getPath(),
                     I18n.t("Node ID {0} specialization depth does not conform to the archetype specialization depth {1}", root.getNodeId(), archetype.specializationDepth()));
             return false;
@@ -276,10 +277,10 @@ public class SpecializedDefinitionValidation extends ValidatingVisitor {
     private boolean checkSpecializedNodeHasMatchingPathInParent(CObject cObject) {
         boolean result = false;
         if(cObject.isRootNode() || !cObject.getParent().isSecondOrderConstrained()) {
-            if(AOMUtils.getSpecializationDepthFromCode(cObject.getNodeId()) <= flatParent.specializationDepth()
+            if(AdlCodeUtils.getSpecializationDepthFromCode(cObject.getNodeId()) <= flatParent.specializationDepth()
                     || new NodeIdUtil(cObject.getNodeId()).isRedefined()) {
-                if(!AOMUtils.isPhantomPathAtLevel(cObject.getPathSegments(), flatParent.specializationDepth())) {
-                    String flatPath = AOMUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
+                if(!AdlCodeUtils.isPhantomPathAtLevel(cObject.getPathSegments(), flatParent.specializationDepth())) {
+                    String flatPath = AdlCodeUtils.pathAtSpecializationLevel(cObject.getPathSegments(), flatParent.specializationDepth());
                     CObject parentCObject = getCObject(flatParent.itemAtPath(flatPath));
                     result = parentCObject != null;
                     if(parentCObject != null) {
@@ -307,11 +308,11 @@ public class SpecializedDefinitionValidation extends ValidatingVisitor {
                 //special checks if it is a non-overlay node...
                 //- if it has a sibling order, check that the sibling order refers to a valid node in the flat ancestor.
                 if(cObject.getSiblingOrder() != null) {
-                    CAttribute parentAttribute = flatParent.itemAtPath(AOMUtils.pathAtSpecializationLevel(cObject.getParent().getPathSegments(), flatParent.specializationDepth()));
+                    CAttribute parentAttribute = flatParent.itemAtPath(AdlCodeUtils.pathAtSpecializationLevel(cObject.getParent().getPathSegments(), flatParent.specializationDepth()));
                     if(parentAttribute != null) { //null check is handled by VDIFP
                         //TODO: although this is a bit strange, nodeid could be unspecialized, parent can be specialized
                         CObject child = parentAttribute.getChild(cObject.getSiblingOrder().getSiblingNodeId());
-                        CObject child2 = parentAttribute.getChild(AOMUtils.codeAtLevel(cObject.getSiblingOrder().getSiblingNodeId(), flatParent.specializationDepth()));
+                        CObject child2 = parentAttribute.getChild(AdlCodeUtils.codeAtLevel(cObject.getSiblingOrder().getSiblingNodeId(), flatParent.specializationDepth()));
                         if (child == null && child2 == null) {
                             addMessageWithPath(ErrorType.VSSM, cObject.path(),
                                 I18n.t("Sibling order {0} refers to missing node id", cObject.getSiblingOrder()));

@@ -5,6 +5,7 @@ import com.nedap.archie.aom.*;
 import com.nedap.archie.aom.utils.AOMUtils;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
+import com.nedap.archie.definitions.AdlCodeUtils;
 import com.nedap.archie.query.ComplexObjectProxyReplacement;
 
 import javax.annotation.Nullable;
@@ -223,7 +224,7 @@ public class ConstraintDifferentiator {
             }
             return null;
         } else {
-            String codeAtParentLevel = AOMUtils.codeAtLevel(cObjectInChild.getNodeId(), flatParent.specializationDepth());
+            String codeAtParentLevel = AdlCodeUtils.codeAtLevel(cObjectInChild.getNodeId(), flatParent.specializationDepth());
             return attributeInParent.getChild(codeAtParentLevel);
         }
     }

@@ -1,0 +1,75 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=5fb2a3b8-5d92-4b30-9788-f04f44f1ef6f)
+	s2-EHR-Entity_ref_node.healthcare_professional_ref.v1.0.0
+
+specialize
+	s2-EHR-Entity_ref_node.party_ref.v1
+
+language
+	original_language = <[iso_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"Thomas Beale <thomas.beale@S2health.org>">
+		["organisation"] = <"S2 Health <http://www.S2health.org>">
+	>
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"Reference to a healthcare professional">
+		>
+	>
+
+definition
+	Entity_ref_node[id1.1] matches {	-- Healthcare professional
+		items matches {
+			Info_node[id0.2] occurrences matches {0..1} matches {	-- Name
+				value matches {
+					Plain_text[id0.102] 
+				}
+			}
+			Info_node[id0.3] matches {	-- Professional capacity
+				value matches {
+					Plain_text[id0.103] 
+				}
+			}
+			Info_node[id0.4] matches {	-- Professional registration
+				value matches {
+					Rwe_id_ref[id0.104] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1.1"] = <
+				text = <"Healthcare professional">
+				description = <"Reference to a healthcare professional">
+			>
+			["id0.2"] = <
+				text = <"Name">
+				description = <"The unstructured name for the individual.">
+			>
+			["id0.3"] = <
+				text = <"Professional capacity">
+				description = <"Professional capacity.">
+			>
+			["id0.4"] = <
+				text = <"Professional registration">
+				description = <"Professional registration">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id1.1"] = <http://loinc.org/52457-9>
+			["id0.2"] = <http://loinc.org/52458-7>
+			["id0.3"] = <http://loinc.org/74571-1>
+			["id0.4"] = <http://loinc.org/255e5533-a685-ef11-8870-6045bdc71c8b>
+		>
+	>
+

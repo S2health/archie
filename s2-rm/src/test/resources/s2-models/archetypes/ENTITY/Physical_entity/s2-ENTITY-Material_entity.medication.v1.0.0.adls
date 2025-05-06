@@ -1,0 +1,72 @@
+archetype (adl_version=2.1.0; rm_release=0.8.7; uid=8134090a-2985-4efa-a945-395421818552)
+	s2-ENTITY-Material_entity.medication.v1.0.0
+
+language
+	original_language = <[ISO_639-1::en]>
+
+description
+	lifecycle_state = <"unmanaged">
+	original_author = <
+		["name"] = <"S2 Health">
+		["organisation"] = <"S2 Health <http://www.s2Health.org>">
+		["email"] = <"models@s2health.org">
+		["date"] = <"2024-07-26">
+	>
+	custodian_namespace = <"org.s2health">
+	custodian_organisation = <"S2 Health <http://s2health.org>">
+	copyright = <"Copyright (c) 2024 S2 Health">
+	licence = <"Creative Commons CC-BY 4.0 unported <http://creativecommons.org/>">
+	ip_acknowledgements = <
+		["loinc"] = <"This content from LOINC® is copyright © 1995 Regenstrief Institute, Inc. and the LOINC Committee, and available at no cost under the license at <http://loinc.org/terms-of-use>">
+		["snomed"] = <"Content from SNOMED CT® is copyright © 2007 IHTSDO <ihtsdo.org>">
+	>
+	details = <
+		["en"] = <
+			language = <[iso_639-1::en]>
+			purpose = <"To record an instance of medication, i.e. particular package, lot or other inventory unit.">
+			use = <"Use to record inventory of medication.">
+			keywords = <"medication", "inventory", "substance", "drug", "therapeutic", "formulation", "medicine">
+		>
+	>
+
+definition
+	Material_entity[id1] matches {	-- Medication description
+		lot_information matches {
+			Info_node[id2] matches {	-- Batch ID
+				value matches {
+					Rwe_id_ref[id100] 
+				}
+			}
+			Info_node[id4] occurrences matches {0..1} matches {	-- Expiry
+				value matches {
+					Date_time_value[id169] 
+				}
+			}
+		}
+	}
+
+terminology
+	term_definitions = <
+		["en"] = <
+			["id1"] = <
+				text = <"Medication inventory">
+				description = <"Description of a medication inventory item.">
+			>
+			["id2"] = <
+				text = <"Batch ID">
+				description = <"The identifier assigned to the production batch by the manufacturer during production.">
+			>
+			["id4"] = <
+				text = <"Expiry">
+				description = <"The expiry date and/or time of the medication or medication component, as given by the manufacturer or individual preparing the mixture.">
+			>
+		>
+	>
+	term_bindings = <
+		["loinc"] = <
+			["id4"] = <http://loinc.org/74066-2>
+			["id1"] = <http://loinc.org/74078-7>
+			["id2"] = <http://loinc.org/74714-7>
+		>
+	>
+

@@ -26,7 +26,7 @@ package org.openehr.bmm.core;
  *
  * Created by cnanjo on 4/11/16.
  */
-public abstract class BmmEntity extends BmmModelElement {
+public class BmmEntity extends BmmModelElement {
 
     public static final String BMM_SIMPLE_TYPE = "BMM_SIMPLE_TYPE";
     public static final String BMM_SIMPLE_TYPE_OPEN = "BMM_SIMPLE_TYPE_OPEN";

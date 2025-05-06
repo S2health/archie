@@ -1,0 +1,220 @@
+{
+  "_type": "Billing_encounter",
+  "uid": {
+    "_type": "Uuid",
+    "value": "9a66cb14-3aed-48b6-81e5-92870d599c42"
+  },
+  "archetype_node_id": "id1.1",
+  "name": "Test encounter template",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-ADMIN-Billing_encounter.encounter_general.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-ADMIN-Billing_encounter.t_encounter_general-test.v1.0.0"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "Test encounter template",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "a82d501b-5274-ef11-8870-6045bdc71c8b",
+      "uri": "http://loinc.org/a82d501b-5274-ef11-8870-6045bdc71c8b"
+    }
+  },
+  "other_details": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id4",
+      "name": "Planned end time",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Planned end time",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "106180-3",
+          "uri": "http://loinc.org/106180-3"
+        }
+      },
+      "value": {
+        "_type": "Date_time_value",
+        "magnitude": "1945-08-09T20:00:00.000"
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id5",
+      "name": "Duration",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Duration",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "73980-5",
+          "uri": "http://loinc.org/73980-5"
+        }
+      },
+      "value": {
+        "_type": "Duration_value",
+        "magnitude": "PT15H"
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id8",
+      "name": "Incoming referral id",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Incoming referral id",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "93ff9f33-5274-ef11-8870-6045bdc71c8b",
+          "uri": "http://loinc.org/93ff9f33-5274-ef11-8870-6045bdc71c8b"
+        }
+      },
+      "value": {
+        "_type": "Rwe_id_ref",
+        "id": "ccd08260-b8c7-4ba6-a3bd-7c965ad866ab"
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id9",
+      "name": "Readmission flag",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Readmission flag",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "c385d443-5274-ef11-8870-6045bdc71c8b",
+          "uri": "http://loinc.org/c385d443-5274-ef11-8870-6045bdc71c8b"
+        }
+      },
+      "value": {
+        "_type": "Boolean_value",
+        "value": false,
+        "true_term": {
+          "_type": "Terminology_term",
+          "description": "True (qualifier value)",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "31874001",
+            "uri": "http://snomed.info/id/31874001"
+          }
+        },
+        "false_term": {
+          "_type": "Terminology_term",
+          "description": "False (qualifier value)",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "64100000",
+            "uri": "http://snomed.info/id/64100000"
+          }
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id19",
+      "name": "Discharge disposition",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Discharge disposition",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "55128-3",
+          "uri": "http://loinc.org/55128-3"
+        }
+      },
+      "value": {
+        "_type": "Coded_text",
+        "text": "Discharge to sheltered housing",
+        "term": {
+          "_type": "Terminology_term",
+          "description": "Discharge to sheltered housing",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "306697004",
+            "uri": "http://snomed.info/id/306697004"
+          }
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id20",
+      "name": "Admit medications list",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Admit medications list",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "9ff0f853-5274-ef11-8870-6045bdc71c8b",
+          "uri": "http://loinc.org/9ff0f853-5274-ef11-8870-6045bdc71c8b"
+        }
+      },
+      "value": {
+        "_type": "Coded_text",
+        "text": "Acetaminophen",
+        "term": {
+          "_type": "Terminology_term",
+          "description": "Acetaminophen",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "387517004",
+            "uri": "http://snomed.info/id/387517004"
+          }
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id21",
+      "name": "Discharge orders",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Discharge orders",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "52428-0",
+          "uri": "http://loinc.org/52428-0"
+        }
+      },
+      "value": {
+        "_type": "Coded_text",
+        "text": "Penicillin",
+        "term": {
+          "_type": "Terminology_term",
+          "description": "Penicillin",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "764146007",
+            "uri": "http://snomed.info/id/764146007"
+          }
+        }
+      }
+    }
+  ],
+  "identifier": {
+    "_type": "Rwe_id_ref",
+    "id": "4c53da23-bd9d-4ae1-a4a1-c58ca6330962"
+  }
+}

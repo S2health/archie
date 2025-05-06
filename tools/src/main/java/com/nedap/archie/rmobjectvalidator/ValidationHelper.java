@@ -4,6 +4,7 @@ import com.nedap.archie.aom.CAttribute;
 import com.nedap.archie.aom.CAttributeTuple;
 import com.nedap.archie.aom.CPrimitiveObject;
 import com.nedap.archie.aom.CPrimitiveTuple;
+import com.nedap.archie.archetypevalidator.PrimitiveObjectConstraintHelper;
 import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rminfo.RMAttributeInfo;
 
@@ -17,9 +18,9 @@ public class ValidationHelper {
     private final ModelInfoLookup lookup;
     private final PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper;
 
-    public ValidationHelper(ModelInfoLookup lookup, ValidationConfiguration validationConfiguration) {
+    public ValidationHelper(ModelInfoLookup lookup, PrimitiveObjectConstraintHelper primitiveObjectConstraintHelper, ValidationConfiguration validationConfiguration) {
         this.lookup = lookup;
-        this.primitiveObjectConstraintHelper = new PrimitiveObjectConstraintHelper(validationConfiguration);
+        this.primitiveObjectConstraintHelper = primitiveObjectConstraintHelper;
     }
 
     /**

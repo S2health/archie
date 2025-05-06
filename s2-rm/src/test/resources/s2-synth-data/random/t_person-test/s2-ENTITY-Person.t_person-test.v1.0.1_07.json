@@ -1,0 +1,775 @@
+{
+  "_type": "Person",
+  "uid": {
+    "_type": "Uuid",
+    "value": "1bb5d3ab-53bb-41ed-8c59-8dc8dce80e82"
+  },
+  "archetype_node_id": "id1.1",
+  "name": "Person",
+  "archetype_details": {
+    "_type": "Archetyped",
+    "archetype_id": {
+      "_type": "Archetype_id",
+      "value": "s2-ENTITY-Person.person.v1"
+    },
+    "template_id": {
+      "_type": "Archetype_id",
+      "value": "s2-ENTITY-Person.t_person-test.v1.0.1"
+    },
+    "rm_version": "0.8.7"
+  },
+  "code": {
+    "_type": "Terminology_term",
+    "description": "Person",
+    "concept": {
+      "_type": "Terminology_code",
+      "terminology_id": "loinc",
+      "code_string": "104976-6",
+      "uri": "http://loinc.org/104976-6"
+    }
+  },
+  "other_details": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id9",
+      "name": "Place of birth",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Place of birth",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "21842-0",
+          "uri": "http://loinc.org/21842-0"
+        }
+      },
+      "value": {
+        "_type": "Plain_text",
+        "text": "Bartlett"
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id12",
+      "name": "Sex",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Sex",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "46098-0",
+          "uri": "http://loinc.org/46098-0"
+        }
+      },
+      "value": {
+        "_type": "Plain_text",
+        "text": "Two-spirit"
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id14",
+      "name": "Deceased",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Deceased",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "104923-8",
+          "uri": "http://loinc.org/104923-8"
+        }
+      },
+      "value": {
+        "_type": "Boolean_value",
+        "value": false,
+        "true_term": {
+          "_type": "Terminology_term",
+          "description": "True (qualifier value)",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "31874001",
+            "uri": "http://snomed.info/id/31874001"
+          }
+        },
+        "false_term": {
+          "_type": "Terminology_term",
+          "description": "False (qualifier value)",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "64100000",
+            "uri": "http://snomed.info/id/64100000"
+          }
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id15",
+      "name": "Administrative gender",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Administrative gender",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "76691-5",
+          "uri": "http://loinc.org/76691-5"
+        }
+      },
+      "value": {
+        "_type": "Coded_text",
+        "text": "Transgender male",
+        "term": {
+          "_type": "Terminology_term",
+          "description": "Transgender male",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "1332083003",
+            "uri": "http://snomed.info/id/1332083003"
+          }
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id10",
+      "name": "Photo",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Photo",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "72170-4",
+          "uri": "http://loinc.org/72170-4"
+        }
+      },
+      "value": {
+        "_type": "Multimedia",
+        "media_type": {
+          "_type": "Terminology_code",
+          "terminology_id": "iana_media-types",
+          "code_string": "application/vnd.oasis.opendocument.spreadsheet",
+          "uri": "http://iana.org/code_sets/media-types/application/vnd.oasis.opendocument.spreadsheet"
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id21",
+      "name": "Ethnicity",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Ethnicity",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "80908-7",
+          "uri": "http://loinc.org/80908-7"
+        }
+      },
+      "value": {
+        "_type": "Coded_text",
+        "text": "Hispanic, white",
+        "term": {
+          "_type": "Terminology_term",
+          "description": "Hispanic, white",
+          "concept": {
+            "_type": "Terminology_code",
+            "terminology_id": "snomed",
+            "code_string": "414412005",
+            "uri": "http://snomed.info/id/414412005"
+          }
+        }
+      }
+    },
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id11",
+      "name": "Comment",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Comment",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "48767-8",
+          "uri": "http://loinc.org/48767-8"
+        }
+      },
+      "value": {
+        "_type": "Plain_text",
+        "text": "Provident sed incidunt molestiae explicabo. Aliquam odit perspiciatis voluptatem sunt. Id molestias id eaque est."
+      }
+    }
+  ],
+  "identifiers": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id30",
+      "name": "External identifier description",
+      "code": {
+        "_type": "Terminology_term",
+        "description": "External identifier description",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "ca6778ff-1fb4-ef11-8872-6045bdc71c8b",
+          "uri": "http://loinc.org/ca6778ff-1fb4-ef11-8872-6045bdc71c8b"
+        }
+      },
+      "value": {
+        "_type": "Plain_text",
+        "text": "Acme Medical Identifier"
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id130",
+          "name": "Identifier",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Identifier",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106193-6",
+              "uri": "http://loinc.org/106193-6"
+            }
+          },
+          "value": {
+            "_type": "Rwe_id_ref",
+            "id": "19214d12-0624-4e94-a038-ead95036a889"
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id131",
+          "name": "Comment",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Comment",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106173-8",
+              "uri": "http://loinc.org/106173-8"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Minima dolor exercitationem ducimus facilis. Quisquam architecto rerum quidem et. Similique voluptatibus dolores quia quos."
+          }
+        }
+      ]
+    }
+  ],
+  "identities": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id7",
+      "name": "Person identity",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-ENTITY-Info_node.person_name_and_use.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Person identity",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "97845-2",
+          "uri": "http://loinc.org/97845-2"
+        }
+      },
+      "value": {
+        "_type": "Plain_text",
+        "text": "Dr. Carissa Mohr Sr."
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id21",
+          "name": "Usage",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Usage",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "97846-0",
+              "uri": "http://loinc.org/97846-0"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Anonymous ",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Anonymous ",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "30051000205106",
+                "uri": "http://snomed.info/id/30051000205106"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id20",
+          "name": "Structured name",
+          "archetype_details": {
+            "_type": "Archetyped",
+            "archetype_id": {
+              "_type": "Archetype_id",
+              "value": "s2-ENTITY-Info_node.person_structured_name.v1.0.0"
+            },
+            "rm_version": "0.8.7"
+          },
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Structured name",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "6afbe6fb-f59d-ef11-8872-6045bdc71c8b",
+              "uri": "http://loinc.org/6afbe6fb-f59d-ef11-8872-6045bdc71c8b"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Miss Yolanda Botsford DVM"
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id2",
+              "name": "Title",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Title",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "97849-4",
+                  "uri": "http://loinc.org/97849-4"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "Dr."
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id3",
+              "name": "Given name",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Given name",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "97848-6",
+                  "uri": "http://loinc.org/97848-6"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "Jayda"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id6",
+              "name": "Family name",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Family name",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "97847-8",
+                  "uri": "http://loinc.org/97847-8"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "Anderson"
+              }
+            },
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id7",
+              "name": "Suffix",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Suffix",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "97850-2",
+                  "uri": "http://loinc.org/97850-2"
+                }
+              },
+              "value": {
+                "_type": "Plain_text",
+                "text": "MD"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "location_addresses": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id6",
+      "name": "Physical address",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-ENTITY-Info_node.location_address.v1.0.1"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Physical address",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "99953-2",
+          "uri": "http://loinc.org/99953-2"
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id12",
+          "name": "Address purpose",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address purpose",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99958-1",
+              "uri": "http://loinc.org/99958-1"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Incorrect address",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Incorrect address",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "30781000205101",
+                "uri": "http://snomed.info/id/30781000205101"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id13",
+          "name": "Address location type",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address location type",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99957-3",
+              "uri": "http://loinc.org/99957-3"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Post office box",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Post office box",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "30751000205108",
+                "uri": "http://snomed.info/id/30751000205108"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "comms_addresses": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id2",
+      "name": "Comms addresses",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-ENTITY-Info_node.comms_address.v1.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Comms addresses",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "104902-2",
+          "uri": "http://loinc.org/104902-2"
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id10",
+          "name": "Address string",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Address string",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104917-0",
+              "uri": "http://loinc.org/104917-0"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "circuitWillis@yahoo.com"
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id11",
+          "name": "Communications platform",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Communications platform",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "512a53ca-db9a-ef11-8872-6045bdc71c8b",
+              "uri": "http://loinc.org/512a53ca-db9a-ef11-8872-6045bdc71c8b"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Facebook",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Facebook",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "31471000205101",
+                "uri": "http://snomed.info/id/31471000205101"
+              }
+            }
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id12",
+          "name": "Communications purpose",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Communications purpose",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104911-3",
+              "uri": "http://loinc.org/104911-3"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Est nisi labore reprehenderit qui. Ea tenetur aut corrupti sit. Asperiores quisquam saepe recusandae assumenda."
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id13",
+          "name": "Communication technology, e.g. phone, email etc",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Communication technology, e.g. phone, email etc",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "99949-0",
+              "uri": "http://loinc.org/99949-0"
+            }
+          },
+          "value": {
+            "_type": "Coded_text",
+            "text": "Instant message",
+            "term": {
+              "_type": "Terminology_term",
+              "description": "Instant message",
+              "concept": {
+                "_type": "Terminology_code",
+                "terminology_id": "snomed",
+                "code_string": "31451000205106",
+                "uri": "http://snomed.info/id/31451000205106"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "_type": "Info_node",
+      "archetype_node_id": "id4",
+      "name": "Language description",
+      "archetype_details": {
+        "_type": "Archetyped",
+        "archetype_id": {
+          "_type": "Archetype_id",
+          "value": "s2-EHR-Info_node.language.v2.0.0"
+        },
+        "rm_version": "0.8.7"
+      },
+      "code": {
+        "_type": "Terminology_term",
+        "description": "Language description",
+        "concept": {
+          "_type": "Terminology_code",
+          "terminology_id": "loinc",
+          "code_string": "104916-2",
+          "uri": "http://loinc.org/104916-2"
+        }
+      },
+      "items": [
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id2",
+          "name": "Language name",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Language name",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "54505-3",
+              "uri": "http://loinc.org/54505-3"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Algeria"
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id3",
+          "name": "Variant",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Variant",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104930-3",
+              "uri": "http://loinc.org/104930-3"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Placeat natus quas nobis enim. Dolore veniam sed impedit ipsum. Totam laudantium et beatae iste."
+          }
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id4",
+          "name": "Capability",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Capability",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "104957-6",
+              "uri": "http://loinc.org/104957-6"
+            }
+          },
+          "items": [
+            {
+              "_type": "Info_node",
+              "archetype_node_id": "id5",
+              "name": "Mode",
+              "code": {
+                "_type": "Terminology_term",
+                "description": "Mode",
+                "concept": {
+                  "_type": "Terminology_code",
+                  "terminology_id": "loinc",
+                  "code_string": "91878-9",
+                  "uri": "http://loinc.org/91878-9"
+                }
+              },
+              "value": {
+                "_type": "Coded_text",
+                "text": "Tactile reading",
+                "term": {
+                  "_type": "Terminology_term",
+                  "description": "Tactile reading",
+                  "concept": {
+                    "_type": "Terminology_code",
+                    "terminology_id": "snomed",
+                    "code_string": "31781000205106",
+                    "uri": "http://snomed.info/id/31781000205106"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "_type": "Info_node",
+          "archetype_node_id": "id10",
+          "name": "Comment",
+          "code": {
+            "_type": "Terminology_term",
+            "description": "Comment",
+            "concept": {
+              "_type": "Terminology_code",
+              "terminology_id": "loinc",
+              "code_string": "106173-8",
+              "uri": "http://loinc.org/106173-8"
+            }
+          },
+          "value": {
+            "_type": "Plain_text",
+            "text": "Dolores autem sed odit minus. Est enim non vitae at. Porro temporibus cum impedit sit."
+          }
+        }
+      ]
+    }
+  ]
+}

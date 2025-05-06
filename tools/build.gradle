@@ -8,12 +8,18 @@ dependencies {
   api project(':path-queries')
   api project(':utils')
   api project(':openehr-terminology')
-  testImplementation project(':openehr-rm')
+  //implementation project(path: ':referencemodels')
+
   testImplementation project(':archie-utils')
   testImplementation project(':i18n')
   testImplementation project(':test-rm')
-  testImplementation project(':referencemodels')
+  //testImplementation project(':referencemodels')
 
   api 'org.leadpony.justify:justify:3.1.0'
   api 'org.glassfish:jakarta.json:2.0.1:module'
+
+  testFixturesImplementation 'com.google.guava:guava:33.0.0-jre'
+  testFixturesImplementation "org.reflections:reflections:${reflectionsVersion}"
+  testFixturesImplementation 'junit:junit:4.+'
+  //testFixturesImplementation project(':referencemodels')
 }
