@@ -225,7 +225,7 @@ public class PrimitivesConstraintParser extends BaseTreeWalker {
         if(metaModels !=null) {
             MetaModel metaModel = metaModels.getSelectedModel();
             if (metaModel != null) {
-                cPrimObj.setRmTypeName(metaModel.getSelectedModel().getNamingStrategy().getTypeNameForCPrimitiveType(CTerminologyCode.class));
+                cPrimObj.setRmTypeName(metaModel.getModelInfoLookup().getNamingStrategy().getTypeNameForCPrimitiveType(CTerminologyCode.class));
             }
         }
     }

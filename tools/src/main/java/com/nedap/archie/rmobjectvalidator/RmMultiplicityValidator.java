@@ -2,14 +2,9 @@ package com.nedap.archie.rmobjectvalidator;
 
 import com.google.common.collect.Lists;
 import com.nedap.archie.aom.CAttribute;
-import com.nedap.archie.aom.CObject;
 import com.nedap.archie.base.Cardinality;
 import com.nedap.archie.base.MultiplicityInterval;
 import com.nedap.archie.rminfo.MetaModel;
-import com.nedap.archie.rminfo.ModelInfoLookup;
-import com.nedap.archie.rminfo.RMAttributeInfo;
-import com.nedap.archie.rminfo.RMTypeInfo;
-import org.openehr.bmm.core.BmmClass;
 import org.openehr.bmm.core.BmmContainerProperty;
 import org.openehr.bmm.core.BmmModel;
 import org.openehr.bmm.core.BmmProperty;
@@ -39,7 +34,7 @@ public class RmMultiplicityValidator {
                 }
             } else {
                 // check BMM for cardinality
-                BmmModel bmmModel = metaModel.getSelectedBmmModel();
+                BmmModel bmmModel = metaModel.getBmmModel();
                 BmmProperty bmmProperty = bmmModel.propertyAtPath (attribute.getParent().getRmTypeName(), attribute.getRmAttributeName());
 
                 if (bmmProperty != null && bmmProperty instanceof BmmContainerProperty) {

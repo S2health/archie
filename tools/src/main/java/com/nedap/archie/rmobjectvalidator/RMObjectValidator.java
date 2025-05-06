@@ -50,7 +50,7 @@ public class RMObjectValidator extends RMObjectValidatingProcessor {
             throw new RuntimeException("MetaModel instance without PrimitiveObjectConstraintHelper cannot be used for RM Object validation");
 
         this.metaModel = metaModel;
-        this.lookup = metaModel.getSelectedModel();
+        this.lookup = metaModel.getModelInfoLookup();
         constraintImposer = new ReflectionConstraintImposer(lookup);
         this.operationalTemplateProvider = provider;
 
@@ -176,7 +176,7 @@ public class RMObjectValidator extends RMObjectValidatingProcessor {
 
             Object object = objectWithPath.getObject();
 
-            String archetypeId =  metaModel.getSelectedModel().getArchetypeIdFromArchetypedRmObject(object);
+            String archetypeId =  metaModel.getModelInfoLookup().getArchetypeIdFromArchetypedRmObject(object);
 
             if(archetypeId != null) {
                 if(!AOMUtils.archetypeRefMatchesSlotExpression(archetypeId, slot)) {

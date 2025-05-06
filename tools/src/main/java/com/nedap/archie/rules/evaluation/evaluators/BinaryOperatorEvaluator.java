@@ -10,7 +10,6 @@ import com.nedap.archie.paths.PathSegment;
 import com.nedap.archie.query.AOMPathQuery;
 import com.nedap.archie.query.APathQuery;
 import com.nedap.archie.rminfo.MetaModel;
-import com.nedap.archie.rminfo.ModelInfoLookup;
 import com.nedap.archie.rmobjectvalidator.ValidationConfiguration;
 import com.nedap.archie.rmobjectvalidator.ValidationHelper;
 import com.nedap.archie.rules.BinaryOperator;
@@ -56,7 +55,7 @@ public class BinaryOperatorEvaluator implements Evaluator<BinaryOperator> {
         ValidationConfiguration configuration = new ValidationConfiguration.Builder()
                 .failOnUnknownTerminologyId(com.nedap.archie.ValidationConfiguration.isFailOnUnknownTerminologyId())
                 .build();
-        this.validationHelper = new ValidationHelper(metaModel.getSelectedModel(), metaModel.getPrimitiveObjectConstraintHelper(), configuration);
+        this.validationHelper = new ValidationHelper(metaModel.getModelInfoLookup(), metaModel.getPrimitiveObjectConstraintHelper(), configuration);
         this.archetype = archetype;
     }
 
