@@ -57,7 +57,7 @@ public class BmmSimpleType extends BmmDefinedType implements Serializable {
      * @return base class name
      */
     @Override
-    public List<String> getFlattenedTypeList() {
+    public List<String> flattenedTypeList() {
         ArrayList<String> result = new ArrayList<>();
         result.add(getBaseClass().getName());
         return result;

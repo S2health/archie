@@ -34,11 +34,6 @@ import java.util.Map;
  */
 public class BmmPackage extends BmmPackageContainer implements Serializable {
 
-    /**
-     * Name of this package. This name may be qualified if it is a top-level package.
-     *
-     */
-    private String name;
 
     /**
      * Classes listed as being in this package.
@@ -70,23 +65,6 @@ public class BmmPackage extends BmmPackageContainer implements Serializable {
      */
     public BmmPackage(String name) {
         this();
-        this.name = name;
-    }
-
-    /**
-     * Returns the name of this package. This name may be qualified if it is a top-level package.
-     * @return
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the name of this package. This name may be qualified if it is a top-level package.
-     *
-     * @param name
-     */
-    public void setName(String name) {
         this.name = name;
     }
 

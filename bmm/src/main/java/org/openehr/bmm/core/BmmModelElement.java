@@ -31,9 +31,32 @@ import java.io.Serializable;
 public abstract class BmmModelElement implements Serializable {
 
     /**
+     * Name of this element. Note that unlike UML, names of classes are just the root name, even if the class is generic.
+     */
+    protected String name;
+
+    /**
      * Optional documentation of this element.
      */
-    private String documentation;
+    protected String documentation;
+
+    /**
+     * Returns the name of this property in the model.
+     *
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of this property in the model.
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Method returns the documentation associated with this element.

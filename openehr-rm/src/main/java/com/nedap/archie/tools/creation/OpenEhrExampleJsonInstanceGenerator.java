@@ -238,7 +238,7 @@ public  class OpenEhrExampleJsonInstanceGenerator {
                 BmmClass descendantClassDefinition = bmm.getClassDefinition(descendant);
                 if(!descendantClassDefinition.isAbstract()) {
                     //TODO: should we return generics here? for now left out
-                    return BmmDefinitions.typeNameToClassKey(descendantClassDefinition.getType().getTypeName());
+                    return BmmDefinitions.typeNameToClassKey(descendantClassDefinition.generateType().getTypeName());
                 }
 
             }
@@ -249,11 +249,11 @@ public  class OpenEhrExampleJsonInstanceGenerator {
     }
 
     private void addRequiredPropertiesFromBmm(Map<String, Object> result, BmmClass classDefinition) {
-        Map<String, BmmProperty<?>> properties = classDefinition.getFlatProperties();
+        Map<String, BmmProperty<?>> properties = classDefinition.flatProperties();
         //add all mandatory properties from the RM
         for (BmmProperty<?> property : properties.values()) {
             if (property.getMandatory() && !result.containsKey(property.getName())) {
-                Map<String, Object> potentialCodePhrase = openEhrRmInstanceGenerator.getOpenEHRCodedTextOrCodePhrase(classDefinition.getType().typeBaseName(), property.getName());
+                Map<String, Object> potentialCodePhrase = openEhrRmInstanceGenerator.getOpenEHRCodedTextOrCodePhrase(classDefinition.generateType().typeBaseName(), property.getName());
                 if(potentialCodePhrase != null) {
                     result.put(property.getName(), potentialCodePhrase);
                 } else if(property.getName().equalsIgnoreCase("archetype_node_id")) {
@@ -284,7 +284,7 @@ public  class OpenEhrExampleJsonInstanceGenerator {
             }
             result.put(property.getName(), children);
         } else if (type instanceof BmmParameterType) {
-            result.put(property.getName(), createExampleFromTypeName(type.getEffectiveType().getTypeName()));
+            result.put(property.getName(), createExampleFromTypeName(type.effectiveType().getTypeName()));
         } else if (type instanceof BmmDefinedType) {
             BmmClass propertyClass = ((BmmDefinedType)type).getBaseClass();
             if (propertyClass instanceof BmmEnumerationInteger) {

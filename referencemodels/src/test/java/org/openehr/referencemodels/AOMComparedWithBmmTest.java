@@ -88,7 +88,7 @@ public class AOMComparedWithBmmTest {
 
         for(ModelDifference difference:compared) {
             BmmClass classDefinition = model.getClassDefinition(difference.getClassName());
-            if(classDefinition == null || classDefinition.getPackagePath() == null || !classDefinition.getPackagePath().contains("org.openehr.base.expression")) {
+            if(classDefinition == null || classDefinition.packagePath() == null || !classDefinition.packagePath().contains("org.openehr.base.expression")) {
                 if (!knownDifferences.contains(difference)) {
                     foundErrors.add(difference);
                 }

@@ -1,5 +1,6 @@
 package org.openehr.bmm.v2.persistence.jackson;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
@@ -51,6 +52,12 @@ public class BmmJacksonUtil {
      * @param objectMapper
      */
     public static void configureObjectMapper(ObjectMapper objectMapper) {
+        // don't output null fields
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
+        // don't output empty objects or arrays
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         //keywords = <"value"> is indistinguishable from keywords = <"value1", "value2">
         objectMapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);

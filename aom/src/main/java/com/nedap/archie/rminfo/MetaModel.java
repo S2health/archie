@@ -165,7 +165,7 @@ public class MetaModel implements MetaModelInterface {
             }
 
             BmmProperty<?> bmmProperty = classDefinition.flatProperties().get(attributeName);
-            return !bmmProperty.getMandatory() || (bmmProperty.getExistence() != null && !bmmProperty.getExistence().isMandatory());
+            return !bmmProperty.getMandatory() || (bmmProperty.existence() != null && !bmmProperty.existence().isMandatory());
         }
         else {
             return modelInfoLookup.getAttributeInfo(typeId, attributeName).isNullable();

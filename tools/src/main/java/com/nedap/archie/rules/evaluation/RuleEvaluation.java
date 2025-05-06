@@ -2,7 +2,6 @@ package com.nedap.archie.rules.evaluation;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.nedap.archie.aom.Archetype;
-import com.nedap.archie.flattener.OperationalTemplateProvider;
 import com.nedap.archie.rminfo.MetaModel;
 import com.nedap.archie.rmobjectvalidator.ValidationHelper;
 import com.nedap.archie.creation.RMObjectCreator;
@@ -98,7 +97,7 @@ public class RuleEvaluation<T> {
 
     private RuleEvaluation(MetaModel metaModel, ValidationConfiguration validationConfiguration, JAXBContext jaxbContext, Archetype archetype) {
         this.metaModel = metaModel;
-        this.modelInfoLookup = metaModel.getSelectedModel();
+        this.modelInfoLookup = metaModel.getModelInfoLookup();
         this.jaxbContext = jaxbContext;
         this.creator = new RMObjectCreator(modelInfoLookup);
         this.assertionsFixer = new AssertionsFixer(this, creator);

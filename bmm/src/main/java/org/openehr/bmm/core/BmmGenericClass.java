@@ -135,7 +135,7 @@ public class BmmGenericClass extends BmmClass implements Serializable {
      * @return
      */
     @Override
-    public BmmGenericType getType() {
+    public BmmGenericType generateType() {
         BmmGenericType result = new BmmGenericType(this);
         genericParameters.forEach((paramName, param) -> {
             result.addGenericParameter(param);

@@ -31,7 +31,7 @@ public class PBmmIndexedContainerType extends PBmmContainerType {
             BmmType containedBmmType = containedType.createBmmType(processor, classDefinition);
             if (containedBmmType instanceof BmmUnitaryType) {
                 return new BmmIndexedContainerType((BmmUnitaryType) containedBmmType,
-                        ((BmmSimpleClass) indexClassDef).getType(),
+                        ((BmmSimpleClass) indexClassDef).generateType(),
                         (BmmGenericClass) containerClassDef);
             }
         }

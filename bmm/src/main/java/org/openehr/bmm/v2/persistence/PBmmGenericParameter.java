@@ -37,7 +37,7 @@ public final class PBmmGenericParameter extends PBmmBase {
     public BmmParameterType createBmmGenericParameter (BmmClassProcessor processor) {
         if (conformsToType != null) {
             BmmClass confTypeClassDef = processor.getClassDefinition(conformsToType);
-            return new BmmParameterType (name, confTypeClassDef.getType(), processor.getAnyTypeDefinition());
+            return new BmmParameterType (name, confTypeClassDef.generateType(), processor.getAnyTypeDefinition());
         }
         else {
             return new BmmParameterType(name, processor.getAnyTypeDefinition());

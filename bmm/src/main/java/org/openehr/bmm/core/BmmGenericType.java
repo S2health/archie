@@ -103,10 +103,10 @@ public class BmmGenericType extends BmmDefinedType implements Serializable {
      *
      * @return
      */
-    public String getTypeSignature() {
+    public String typeSignature() {
         return getBaseClass().getName() +
                 BmmDefinitions.GENERIC_LEFT_DELIMITER +
-                genericParameters.stream().map(t -> t.getTypeSignature()).collect(Collectors.joining(BmmDefinitions.GENERIC_SEPARATOR.toString())) +
+                genericParameters.stream().map(t -> t.typeSignature()).collect(Collectors.joining(BmmDefinitions.GENERIC_SEPARATOR.toString())) +
                 BmmDefinitions.GENERIC_RIGHT_DELIMITER;
     }
 
@@ -116,11 +116,11 @@ public class BmmGenericType extends BmmDefinedType implements Serializable {
      * @return
      */
     @Override
-    public List<String> getFlattenedTypeList() {
+    public List<String> flattenedTypeList() {
         ArrayList<String> result = new ArrayList<>();
         result.add(getBaseClass().getName());
         for (BmmType g : genericParameters) {
-            result.addAll(g.getFlattenedTypeList());
+            result.addAll(g.flattenedTypeList());
         }
         return result;
     }

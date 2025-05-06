@@ -71,7 +71,7 @@ class OpenEhrRmInstanceGenerator {
             if(classDefinition == null) {
                 return null;
             }
-            BmmProperty<?> property = classDefinition.getFlatProperties().get(parentAttribute.getRmAttributeName());
+            BmmProperty<?> property = classDefinition.flatProperties().get(parentAttribute.getRmAttributeName());
             if(property == null) {
                 return null;
             }
@@ -100,7 +100,7 @@ class OpenEhrRmInstanceGenerator {
      */
     public void addAdditionalPropertiesAtBegin(BmmClass classDefinition, Map<String, Object> result, CObject cObject) {
 
-        if (classDefinition.getType().getTypeName().equalsIgnoreCase("LOCATABLE") || classDefinition.findAllAncestors().contains("LOCATABLE")) {
+        if (classDefinition.generateType().getTypeName().equalsIgnoreCase("LOCATABLE") || classDefinition.findAllAncestors().contains("LOCATABLE")) {
 
             Map<String, Object> name = new LinkedHashMap<>();
             name.put(typePropertyName, "DV_TEXT");
@@ -145,7 +145,7 @@ class OpenEhrRmInstanceGenerator {
     }
 
     public void addAdditionalPropertiesAtEnd(BmmClass classDefinition, Map<String, Object> result, CObject cObject) {
-        String rmTypeName = classDefinition.getType().getBaseClass().getName();
+        String rmTypeName = classDefinition.generateType().getBaseClass().getName();
         switch (rmTypeName.toUpperCase()) {
             case "DV_CODED_TEXT":
                 fixCodedText(result, cObject);

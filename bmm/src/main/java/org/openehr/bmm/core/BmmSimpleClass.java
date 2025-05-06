@@ -41,7 +41,7 @@ public class BmmSimpleClass extends BmmClass {
      * @return
      */
     @Override
-    public BmmSimpleType getType() {
+    public BmmSimpleType generateType() {
         return new BmmSimpleType(this);
     }
 

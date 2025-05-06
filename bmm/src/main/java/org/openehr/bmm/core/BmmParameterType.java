@@ -153,7 +153,7 @@ public class BmmParameterType extends BmmUnitaryType implements Serializable {
      * @return
      */
     @Override
-    public BmmEffectiveType getEffectiveType() {
+    public BmmEffectiveType effectiveType() {
         BmmEffectiveType confType = flattenedConformsToType();
         if (confType != null) {
             return confType;
@@ -168,7 +168,7 @@ public class BmmParameterType extends BmmUnitaryType implements Serializable {
      * @return
      */
     @Override
-    public String getTypeSignature() {
+    public String typeSignature() {
         StringBuilder builder = new StringBuilder();
         builder.append (name);
         BmmEffectiveType confType = flattenedConformsToType();
@@ -184,11 +184,11 @@ public class BmmParameterType extends BmmUnitaryType implements Serializable {
      * @return base class name
      */
     @Override
-    public List<String> getFlattenedTypeList() {
+    public List<String> flattenedTypeList() {
         ArrayList<String> result = new ArrayList<>();
         BmmEffectiveType confType = flattenedConformsToType();
         if (confType != null) {
-            result.addAll(confType.getFlattenedTypeList());
+            result.addAll(confType.flattenedTypeList());
         } else {
             result.add(BasicDefinitions.ANY_TYPE);
         }

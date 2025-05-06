@@ -1,7 +1,6 @@
 package org.openehr.bmm.v2.persistence.converters;
 
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openehr.bmm.core.*;
@@ -12,7 +11,6 @@ import org.openehr.bmm.v2.validation.BmmRepository;
 import org.openehr.bmm.v2.validation.BmmSchemaConverter;
 import org.openehr.bmm.v2.validation.BmmValidationResult;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -99,7 +97,7 @@ public class ConversionTest {
     public void generateGenericParametersTest() throws Exception {
         BmmModel bmmModel = repo1.getModel("openehr_base_1.1.0").getModel();
         BmmClass bmmClass = bmmModel.getClassDefinition("RESOURCE_DESCRIPTION_ITEM");
-        BmmGenericType hashContentType = (BmmGenericType) bmmClass.getFlatProperties().get("original_resource_uri").getType().getEffectiveType();
+        BmmGenericType hashContentType = (BmmGenericType) bmmClass.flatProperties().get("original_resource_uri").getType().effectiveType();
         assertEquals(2, hashContentType.getGenericParameters().size());
         assertEquals("Hash<String,String>", hashContentType.toDisplayString());
     }
@@ -118,7 +116,7 @@ public class ConversionTest {
     public void generateGenericParametersTest2() throws Exception {
         BmmModel bmmModel = repo1.getModel("openehr_adltest_1.0.0").getModel();
         BmmClass bmmClass = bmmModel.getClassDefinition("SOME_TYPE");
-        BmmGenericType genericType = (BmmGenericType) bmmClass.getFlatProperties().get("qty_interval_attr_1").getType().getEffectiveType();
+        BmmGenericType genericType = (BmmGenericType) bmmClass.flatProperties().get("qty_interval_attr_1").getType().effectiveType();
         assertEquals(1, genericType.getGenericParameters().size());
         assertEquals("DV_INTERVAL<DV_QUANTITY>", genericType.toDisplayString());
     }
@@ -139,7 +137,7 @@ public class ConversionTest {
     public void generateIndexedContainerTest() throws Exception {
         BmmModel bmmModel = repo1.getModel("openehr_base_1.1.0").getModel();
         BmmClass bmmClass = bmmModel.getClassDefinition("RESOURCE_DESCRIPTION_ITEM");
-        BmmIndexedContainerType hashType = (BmmIndexedContainerType) bmmClass.getFlatProperties().get("other_details").getType();
+        BmmIndexedContainerType hashType = (BmmIndexedContainerType) bmmClass.flatProperties().get("other_details").getType();
 
         BmmSimpleType hashIndexType = hashType.getIndexType();
         assertEquals(hashIndexType.getTypeName(), "String");
@@ -161,7 +159,7 @@ public class ConversionTest {
     public void aomParseAndConvertTest() throws Exception {
         BmmModel bmmModel = repo2.getModel("openehr_aom_2.0.6").getModel();
         BmmClass bmmClass = bmmModel.getClassDefinition("RESOURCE_DESCRIPTION_ITEM");
-        BmmGenericType hashContentType = (BmmGenericType) bmmClass.getFlatProperties().get("original_resource_uri").getType().getEffectiveType();
+        BmmGenericType hashContentType = (BmmGenericType) bmmClass.flatProperties().get("original_resource_uri").getType().effectiveType();
         assertEquals(2, hashContentType.getGenericParameters().size());
         assertEquals("Hash<String,Uri>", hashContentType.toDisplayString());//this is not according to spec perhaps, but it is how the Archie AOM is implemented, and this is a direct conversion
     }
